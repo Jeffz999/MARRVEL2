@@ -2,4 +2,34 @@ repos:
     - repo: https://github.com/gitleaks/gitleaks
       rev: v8.24.2 # Use the latest version
       hooks:
-          - id: gitleaks 
+          - id: gitleaks
+
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.5.0
+      hooks:
+          - id: trailing-whitespace
+          - id: end-of-file-fixer
+          - id: check-yaml
+
+    - repo: local
+      hooks:
+          - id: prettier
+            name: Prettier
+            entry: bash -c 'npx prettier --write "$@"' --
+            language: system
+            files: \.(js|ts|html|json|scss|css|md)$
+            pass_filenames: true
+
+          - id: eslint-client
+            name: ESLint Client
+            entry: bash -c 'cd client && npx eslint --fix "$@"' --
+            language: system
+            files: ^client/.*\.(js|ts|html)$
+            pass_filenames: true
+
+          - id: eslint-server
+            name: ESLint Server
+            entry: bash -c 'cd server && npx eslint --fix "$@"' --
+            language: system
+            files: ^server/.*\.js$
+            pass_filenames: true
