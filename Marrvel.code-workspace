@@ -1,0 +1,36 @@
+{
+  "folders": [
+    {
+      "name": "Client (Frontend)",
+      "path": "client"
+    },
+    {
+      "name": "Server (Backend)",
+      "path": "server"
+    },
+    {
+      "name": "Dev Mongo (DB)",
+      "path": "dev-db"
+    },
+    {
+      "name": "Project Root (Global Files)",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.DS_Store": true,
+      "**/node_modules": true,
+      "**/dist": true
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "eslint.workingDirectories": [
+      "./client",
+      "./server"
+    ]
+  }
+}

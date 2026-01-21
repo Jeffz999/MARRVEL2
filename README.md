@@ -1,5 +1,8 @@
 # MARRVEL
 
+## About / Goal:
+"MARRVEL (Model organism Aggregated Resources for Rare Variant ExpLoration) aims to facilitate the use of public genetic resources to prioritize rare human gene variants for study in model organisms. To facilitate the search process and gather all the data in a simple display we extract data from human data bases (OMIM, ExAC, ClinVar, Geno2MP, DGV, and DECIPHER) for efficient variant prioritization. The protein sequences for eight organisms (S. cerevisiae, S. pombe, C. elegans, D. melanogaster, D. rerio, M. musculus, R. norvegicus, and H. sapiens) are aligned with highlighted protein domain information via collaboration with DIOPT. The key biological and genetic features are then extracted from existing model organism databases (SGD, PomBase, WormBase, FlyBase, ZFIN, MGI, and RGD)."
+
 ## Install / Prepare to Run
 1. Create the credential files below:
     * app/config/aws/{environment}.json

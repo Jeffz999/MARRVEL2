@@ -41,3 +41,13 @@ testem.log
 /typings
 /key
 **/*.pem
+
+# dev
+dev-db
+
+#docs
+documentation/
+
+# pixi environments
+.pixi/*
+!.pixi/config.toml
