@@ -1,23 +1,30 @@
-import { Directive, ElementRef, OnChanges, input, inject } from '@angular/core';
+import { Directive, ElementRef, input, inject, computed, effect } from "@angular/core";
 
-@Directive({ selector: '[appUnit]', })
-export class UnitDirective implements OnChanges {
-	private el = inject(ElementRef);
+@Directive({
+    selector: "[appUnit]",
+})
+export class UnitDirective {
+    private el = inject(ElementRef);
 
-	readonly count = input<number>(undefined);
-	readonly unit = input<string>(undefined);
-	readonly plural = input<string>(undefined);
+    readonly count = input<number>(0);
+    readonly unit = input<string>("");
+    readonly plural = input<string>("");
 
-	ngOnChanges() {
-		this.plural = this.plural() || this.unit() + 's';
-		this.count = this.count() || 0;
-		const unit = this.unit();
-  if (!unit || unit === '') {
-			this.el.nativeElement.innerHTML = '' + this.count();
-		} else if (this.count() >= 2) {
-			this.el.nativeElement.innerHTML = `${this.count()} ${this.plural()}`;
-		} else {
-			this.el.nativeElement.innerHTML = `${this.count()} ${unit}`;
-		}
-	}
+    private derivedPlural = computed(() => this.plural() || this.unit() + "s");
+
+    constructor() {
+        effect(() => {
+            const count = this.count();
+            const unit = this.unit();
+            const plural = this.derivedPlural();
+
+            if (!unit || unit === "") {
+                this.el.nativeElement.innerHTML = "" + count;
+            } else if (count >= 2) {
+                this.el.nativeElement.innerHTML = `${count} ${plural}`;
+            } else {
+                this.el.nativeElement.innerHTML = `${count} ${unit}`;
+            }
+        });
+    }
 }
