@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnChanges, ViewChild, AfterViewInit, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
@@ -35,7 +35,7 @@ import { NgIf } from '@angular/common';
     ],
 })
 export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
-	@Input() data: any[] | null;
+	readonly data = input<any[] | null>(undefined);
 	phenotypes: object = {};
 
 	affectedProfiles = 0;
@@ -86,8 +86,8 @@ export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 	}
 
 	ngOnChanges() {
-		this.dataSource = new MatTableDataSource(this.data);
-		for (const profile of this.data) {
+		this.dataSource = new MatTableDataSource(this.data());
+		for (const profile of this.data()) {
 			if (profile.affectedStatus === 'affected') {
 				this.affectedProfiles += 1;
 			}
@@ -121,7 +121,7 @@ export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 
 	countPhenotypes() {
 		const phenotypes = {};
-		for (const hpoProfile of this.data) {
+		for (const hpoProfile of this.data()) {
 			if (this.showOnlyAffected && hpoProfile.affectedStatus !== 'affected') {
 				continue;
 			}

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 
 @Component({
@@ -8,9 +8,9 @@ import { NgIf, NgClass } from '@angular/common';
     imports: [NgIf, NgClass],
 })
 export class GnomADGeneVisualComponent implements OnInit {
-	@Input() oeLower;
-	@Input() oeUpper;
-	@Input() oe;
+	readonly oeLower = input(undefined);
+	readonly oeUpper = input(undefined);
+	readonly oe = input(undefined);
 
 	constructor() {}
 

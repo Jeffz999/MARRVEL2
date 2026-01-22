@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, OnChanges, input } from '@angular/core';
 import { MatMiniFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
@@ -9,12 +9,12 @@ import { MatIcon } from '@angular/material/icon';
     imports: [MatMiniFabButton, MatIcon],
 })
 export class ScrollTopButtonComponent implements OnChanges {
-	@Input() right = '12px';
+	readonly right = input('12px');
 
 	constructor() {}
 
 	ngOnChanges() {
-		window.document.getElementById('scroll-to-top').style['right'] = this.right;
+		window.document.getElementById('scroll-to-top').style['right'] = this.right();
 	}
 
 	scrollToTop() {

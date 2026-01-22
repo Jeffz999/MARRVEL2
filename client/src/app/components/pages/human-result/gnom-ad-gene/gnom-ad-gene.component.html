@@ -6,20 +6,20 @@
 	<span class="d-table-cell pl-2">
 		<span>
 			The LoF o/e (loss-of-function observed/expected) score for
-			{{ gene.symbol }} is {{ toFixed(data.lof.oe, 2) }}.
+			{{ gene().symbol }} is {{ toFixed(data.lof.oe, 2) }}.
 		</span>
 
 		<span *ngIf="data.lof.oeUpper >= 0.35">
 			<br />
 			Since the upper bound of the confidence interval of LoF o/e score is above 0.35,
-			{{ gene.symbol }} is tolerant of LoF alleles. The loss of one copy of {{ gene.symbol }} is
+			{{ gene().symbol }} is tolerant of LoF alleles. The loss of one copy of {{ gene().symbol }} is
 			<strong>likely not lethal</strong> in humans.
 		</span>
 
 		<span *ngIf="data.lof.oeUpper < 0.35">
 			<br />
 			Since the upper bound of the confidence interval of LoF o/e score is equal to or below 0.35,
-			{{ gene.symbol }} is intolerant of LoF alleles.
+			{{ gene().symbol }} is intolerant of LoF alleles.
 		</span>
 	</span>
 </p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
@@ -29,7 +29,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     ],
 })
 export class AgrExpressionComponent implements OnInit {
-	@Input() gene: HumanGene;
+	readonly gene = input<HumanGene>(undefined);
 
 	loading = true;
 	data;
@@ -44,7 +44,7 @@ export class AgrExpressionComponent implements OnInit {
 
 	ngOnInit() {
 		this.api
-			.getAgrExpByEntrezId(this.gene.entrezId)
+			.getAgrExpByEntrezId(this.gene().entrezId)
 			.pipe(take(1))
 			.subscribe(
 				(res) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -26,8 +26,8 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class DgvComponent implements OnInit {
-	@Input() variant: Variant;
-	@Input() gene: HumanGene;
+	readonly variant = input<Variant>(undefined);
+	readonly gene = input<HumanGene>(undefined);
 
 	searchBy = 'gene';
 	data: DGVData[] | null = null;
@@ -40,23 +40,25 @@ export class DgvComponent implements OnInit {
 	constructor(private api: ApiService) {}
 
 	ngOnInit() {
-		if (this.gene && this.gene.entrezId) {
+		const gene = this.gene();
+  if (gene && gene.entrezId) {
 			if (this.searchBy === 'gene') {
 				this.loading = true;
 				this.data = null;
 				this.api
-					.getDGVByEntrezId(this.gene.entrezId)
+					.getDGVByEntrezId(gene.entrezId)
 					.pipe(take(1))
 					.subscribe((res) => {
-						this.tableTitle = `Copy Number Variation In Control Population of ${this.gene.symbol} from DGV`;
+						this.tableTitle = `Copy Number Variation In Control Population of ${this.gene().symbol} from DGV`;
 						this.data = this.processGeno2MPData(res);
 						this.lossCount = this.getLossCount(this.data);
 						this.loading = false;
 					});
 			}
 		}
-		if (this.variant && this.variant.chr) {
-			if (!this.gene && this.searchBy === 'gene') {
+		const variant = this.variant();
+  if (variant && variant.chr) {
+			if (!gene && this.searchBy === 'gene') {
 				this.searchBy = 'variant';
 			}
 
@@ -64,10 +66,10 @@ export class DgvComponent implements OnInit {
 				this.loading = true;
 				this.data = null;
 				this.api
-					.getDGVByVariant(this.variant)
+					.getDGVByVariant(variant)
 					.pipe(take(1))
 					.subscribe((res) => {
-						this.tableTitle = `Copy Number Variation In Control Population of ${this.variant.chr}:${this.variant.pos} from DGV`;
+						this.tableTitle = `Copy Number Variation In Control Population of ${this.variant().chr}:${this.variant().pos} from DGV`;
 						this.data = this.processGeno2MPData(res);
 						this.lossCount = this.getLossCount(this.data);
 						this.loading = false;

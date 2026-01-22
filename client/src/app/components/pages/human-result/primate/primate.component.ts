@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { PrimateData } from 'src/app/interfaces/data';
@@ -30,8 +30,8 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class PrimateComponent implements OnInit {
-	@Input() variant: Variant;
-	@Input() gene: HumanGene;
+	readonly variant = input<Variant>(undefined);
+	readonly gene = input<HumanGene>(undefined);
 
 	searchBy = 'variant';
 
@@ -43,9 +43,10 @@ export class PrimateComponent implements OnInit {
 	constructor(private apiService: ApiService) {}
 
 	ngOnInit() {
-		if (this.variant) {
+		const variant = this.variant();
+  if (variant) {
 			this.loading = true;
-			this.apiService.getPrimateByVariant(this.variant).subscribe(
+			this.apiService.getPrimateByVariant(variant).subscribe(
 				(res: PrimateData) => {
 					this.data = res;
 					this.loading = false;
@@ -57,14 +58,15 @@ export class PrimateComponent implements OnInit {
 				},
 			);
 		} else {
-			this.searchBy = this.gene ? 'gene' : 'variant';
+			this.searchBy = this.gene() ? 'gene' : 'variant';
 			this.data = null;
 			this.loading = false;
 		}
 
-		if (this.gene) {
+		const gene = this.gene();
+  if (gene) {
 			this.geneLoading = true;
-			this.apiService.getPrimateByGene(this.gene).subscribe(
+			this.apiService.getPrimateByGene(gene).subscribe(
 				(res) => {
 					this.dataByGene = (res || []).map((e: PrimateData) => {
 						return {

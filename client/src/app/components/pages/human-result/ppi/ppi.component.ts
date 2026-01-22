@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { MatSliderChange, MatSlider, MatSliderThumb } from '@angular/material/slider';
 
@@ -64,8 +64,8 @@ const WARN_COLOR = '#e5893e';
     ],
 })
 export class PpiComponent implements OnInit, AfterViewInit {
-	@Input() gene: HumanGene;
-	@Input() data;
+	readonly gene = input<HumanGene>(undefined);
+	readonly data = input(undefined);
 	cy: any;
 
 	evidences;
@@ -85,7 +85,7 @@ export class PpiComponent implements OnInit, AfterViewInit {
 	constructor() {}
 
 	ngOnInit(): void {
-		this.evidenceRange = Array.from(new Set(this.data.map((x) => x.evidences?.length || 0)))
+		this.evidenceRange = Array.from(new Set(this.data().map((x) => x.evidences?.length || 0)))
 			.filter((val: number) => val > 0)
 			.sort((a: number, b: number) => a - b);
 		this.eviMin = this.evidenceRange[0];
@@ -120,7 +120,8 @@ export class PpiComponent implements OnInit, AfterViewInit {
 		this.cy.remove('edge');
 		this.cy.remove('node');
 
-		if (!this.cy.getElementById(this.gene.symbol).isNode()) {
+		const gene = this.gene();
+  if (!this.cy.getElementById(this.gene().symbol).isNode()) {
 			// adding present gene
 			this.cy.add([
 				{
@@ -129,27 +130,27 @@ export class PpiComponent implements OnInit, AfterViewInit {
 						...NODE_CONFIG,
 						color: PRIMARY_COLOR,
 					},
-					data: { id: this.gene.symbol, name: this.gene.symbol },
+					data: { id: gene.symbol, name: gene.symbol },
 				},
 			]);
 		}
 
-		for (const edge of this.data) {
+		for (const edge of this.data()) {
 			if (!edge.evidences?.length) {
 				continue;
 			}
 			// Skip self edge
-			if (edge.interactor.symbol === this.gene.symbol) {
+			if (edge.interactor.symbol === gene.symbol) {
 				continue;
 			}
-			const edgeId = `${this.gene.symbol}||${edge.interactor.symbol}`;
+			const edgeId = `${gene.symbol}||${edge.interactor.symbol}`;
 			if (edge.evidences?.length >= this.eviThreshold) {
 				this.addEdge(edge);
 			}
 		}
-		for (const edge of this.data) {
+		for (const edge of this.data()) {
 			if (
-				edge.interactor.symbol === this.gene.symbol ||
+				edge.interactor.symbol === gene.symbol ||
 				edge.evidences?.length < this.eviThreshold ||
 				!edge.interactor.ppis?.length
 			) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs/operators';
 
@@ -32,8 +32,8 @@ import { BasicDatatableComponent } from '../../../../basic-datatable/basic-datat
     ],
 })
 export class DecipherDiseaseComponent implements OnInit {
-	@Input() gene: HumanGene;
-	@Input() variant: Variant;
+	readonly gene = input<HumanGene>(undefined);
+	readonly variant = input<Variant>(undefined);
 
 	loading = false;
 	data = null;
@@ -58,9 +58,10 @@ export class DecipherDiseaseComponent implements OnInit {
 
 	getData() {
 		this.loading = true;
-		const task = this.variant
-			? this.api.getDECIPHERDiseaseByVariant(this.variant)
-			: this.api.getDECIPHERDiseaseByGenomLoc(this.gene.chr, this.gene.hg19Start, this.gene.hg19Stop);
+		const variant = this.variant();
+  const task = variant
+			? this.api.getDECIPHERDiseaseByVariant(variant)
+			: this.api.getDECIPHERDiseaseByGenomLoc(this.gene().chr, this.gene().hg19Start, this.gene().hg19Stop);
 		task.pipe(take(1)).subscribe(
 			(res) => {
 				this.setData(res);
@@ -77,18 +78,19 @@ export class DecipherDiseaseComponent implements OnInit {
 
 	setTableTitle() {
 		this.tableTitle = `Detailed Information of `;
-		if (this.variant) {
+		const variant = this.variant();
+  if (variant) {
 			if (this.showSnvs) {
-				this.tableTitle += `Single-Nucleotide Variant ${this.variant.chr}:${this.variant.pos} ${this.variant.ref}>${this.variant.alt}`;
+				this.tableTitle += `Single-Nucleotide Variant ${variant.chr}:${variant.pos} ${variant.ref}>${variant.alt}`;
 				if (this.showCnvs) {
 					this.tableTitle += ' and ';
 				}
 			}
 			if (this.showCnvs) {
-				this.tableTitle += `Copy-Number Variants Contain ${this.variant.chr}:${this.variant.pos}`;
+				this.tableTitle += `Copy-Number Variants Contain ${variant.chr}:${variant.pos}`;
 			}
 		} else {
-			this.tableTitle += `variants on ${this.gene.symbol} (${this.gene.chr}:${this.gene.hg19Start}-${this.gene.hg19Stop})`;
+			this.tableTitle += `variants on ${this.gene().symbol} (${this.gene().chr}:${this.gene().hg19Start}-${this.gene().hg19Stop})`;
 		}
 	}
 

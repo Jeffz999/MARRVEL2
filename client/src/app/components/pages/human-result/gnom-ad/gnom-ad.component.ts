@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -21,7 +21,7 @@ import { UnitDirective } from '../../../../directives/unit.directive';
     ],
 })
 export class GnomADComponent implements OnInit {
-	@Input() variant: Variant;
+	readonly variant = input<Variant>(undefined);
 
 	loading = false;
 	data: GnomADVariantData;
@@ -31,10 +31,11 @@ export class GnomADComponent implements OnInit {
 	constructor(private api: ApiService) {}
 
 	ngOnInit() {
-		if (this.variant) {
+		const variant = this.variant();
+  if (variant) {
 			this.loading = true;
 			this.api
-				.getGnomADVaraint(this.variant)
+				.getGnomADVaraint(variant)
 				.pipe(take(1))
 				.subscribe((res) => {
 					this.data = res;

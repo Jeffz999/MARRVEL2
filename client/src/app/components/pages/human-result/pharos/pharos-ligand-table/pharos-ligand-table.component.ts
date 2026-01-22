@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import { NgIf, NgFor } from '@angular/common';
@@ -30,7 +30,7 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewInit {
-	@Input() ligands;
+	readonly ligands = input(undefined);
 
 	displayedColumns: string[] = ['name', 'structure', 'targetProperties', 'extLink'];
 	dataSource = new MatTableDataSource<any>();
@@ -46,7 +46,7 @@ export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewI
 
 	ngOnInit() {
 		this.dataSource = new MatTableDataSource(
-			this.ligands.map((ligand) => {
+			this.ligands().map((ligand) => {
 				if (!ligand.targetProperties.length) {
 					ligand.targetProperties = ligand.targetProperties != null ? [ligand.targetProperties] : [];
 				}

@@ -1,13 +1,13 @@
-<h3>Reported Alleles From ClinVar ({{ data.length }} Alleles)</h3>
+<h3>Reported Alleles From ClinVar ({{ data().length }} Alleles)</h3>
 
 <div class="d-flex justfy-contents-between align-items-end">
 	<mat-slide-toggle
 		class="flex-grow-1"
-		*ngIf="variant"
+		*ngIf="variant()"
 		[(ngModel)]="showMatchingVarsFirst"
 		color="primary"
 		(change)="sort.sortChange.emit()"
-		>Show variants contain {{ variant.chr }}:{{ variant.pos }} first</mat-slide-toggle
+		>Show variants contain {{ variant().chr }}:{{ variant().pos }} first</mat-slide-toggle
 	>
 	<mat-form-field appearance="fill" class="no-hint">
 		<mat-icon matPrefix class="icon-18px align-middle mr-1">search</mat-icon>
@@ -38,7 +38,7 @@
 		<td mat-cell *matCellDef="let element">
 			<span
 				[ngClass]="{
-					'text-highlight': variant && element.start <= variant.pos && variant.pos <= element.stop,
+					'text-highlight': variant() && element.start <= variant().pos && variant().pos <= element.stop,
 				}"
 			>
 				{{ element.start }}{{ element.start && element.stop && element.start !== element.stop ? '-' : ''

@@ -1,4 +1,4 @@
-<h4>{{ methodName }}</h4>
+<h4>{{ methodName() }}</h4>
 <!--sup>
   <mat-icon
     [matTooltip]="methodTooltip"
@@ -6,19 +6,19 @@
 </sup-->
 <span
 	class="text-underline-dashed pred-score"
-	*ngIf="score"
-	[ngClass]="getColorBin(minValue, maxValue, score)"
-	[matTooltip]="scoreTooltip"
+	*ngIf="score()"
+	[ngClass]="getColorBin(minValue(), maxValue(), score())"
+	[matTooltip]="scoreTooltip()"
 >
-	{{ score }}
+	{{ score() }}
 </span>
 <span
 	class="text-underline-dashed pred-prediction"
-	*ngIf="prediction"
-	[ngClass]="predictionColorClass[prediction]"
-	[matTooltip]="scoreTooltip"
+	*ngIf="prediction()"
+	[ngClass]="predictionColorClass()[prediction()]"
+	[matTooltip]="scoreTooltip()"
 >
-	{{ prediction }}
+	{{ prediction() }}
 </span>
 <span class="label">Rank score:</span>
-<app-rankscore-visual [rankscore]="rankscore"></app-rankscore-visual>
+<app-rankscore-visual [rankscore]="rankscore()"></app-rankscore-visual>

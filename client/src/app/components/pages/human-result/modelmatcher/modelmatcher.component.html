@@ -5,7 +5,7 @@
 <a
 	class="mb-0 d-inline-block ml-3 align-middle"
 	[attr.href]="
-		'https://www.modelmatcher.net:8443/search?symbol=' + gene.symbol + '&taxonId=9606&orthologTaxonId=&iSearch=true'
+		'https://www.modelmatcher.net:8443/search?symbol=' + gene().symbol + '&taxonId=9606&orthologTaxonId=&iSearch=true'
 	"
 	target="_blank"
 >
@@ -23,7 +23,7 @@
 		There {{ data.length > 1 ? 'are' : 'is' }}
 		<strong appUnit [count]="data.length" unit="scientist match" plural="scientist matches"></strong>
 		with experience in
-		<strong>{{ gene.symbol }}</strong>
+		<strong>{{ gene().symbol }}</strong>
 	</span>
 </p>
 
@@ -31,7 +31,7 @@
 	<mat-progress-bar mode="indeterminate" class="w-100" *ngIf="loading && data"></mat-progress-bar>
 
 	<p class="text-muted my-0" *ngIf="!loading && (!data || data.length === 0)">
-		No scientists are currently registered for the gene {{ gene.symbol }}
+		No scientists are currently registered for the gene {{ gene().symbol }}
 	</p>
 
 	<ng-container *ngIf="!loading && data && data.length">

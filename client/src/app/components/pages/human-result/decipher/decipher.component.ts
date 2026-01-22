@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -26,8 +26,8 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class DECIPHERComponent implements OnInit {
-	@Input() gene: HumanGene;
-	@Input() variant: Variant;
+	readonly gene = input<HumanGene>(undefined);
+	readonly variant = input<Variant>(undefined);
 
 	loading = false;
 	data: DECIPHERData[] | null;
@@ -42,9 +42,10 @@ export class DECIPHERComponent implements OnInit {
 
 	requestData() {
 		this.loading = true;
-		const task = this.gene
-			? this.api.getDECIPHERByGenomLoc(this.gene.chr, this.gene.hg19Start, this.gene.hg19Stop)
-			: this.api.getDECIPHERByVariant(this.variant);
+		const gene = this.gene();
+  const task = gene
+			? this.api.getDECIPHERByGenomLoc(gene.chr, gene.hg19Start, gene.hg19Stop)
+			: this.api.getDECIPHERByVariant(this.variant());
 		task.pipe(take(1)).subscribe((res: DECIPHERData[]) => {
 			if (res && res.length) {
 				this.delCount = 0;

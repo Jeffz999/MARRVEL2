@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { NgIf } from '@angular/common';
     imports: [NgIf],
 })
 export class RankscoreVisualComponent implements OnInit {
-	@Input() rankscore: number;
+	readonly rankscore = input<number>(undefined);
 
 	constructor() {}
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     ],
 })
 export class DioptAlignmentComponent implements OnInit {
-	@Input() gene: Gene;
+	readonly gene = input<Gene>(undefined);
 	data = null;
 	domainData = null;
 	loading = true;
@@ -72,10 +72,11 @@ export class DioptAlignmentComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		if (this.gene && this.gene.entrezId) {
+		const gene = this.gene();
+  if (gene && gene.entrezId) {
 			this.loading = true;
 			this.api
-				.getAlignmentByEntrezId(this.gene.entrezId)
+				.getAlignmentByEntrezId(gene.entrezId)
 				.pipe(take(1))
 				.subscribe(
 					(res) => {

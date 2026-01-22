@@ -3,16 +3,16 @@
 		<h3 class="m-0 d-inline-block align-middle">DECIPHER (Disease)</h3>
 		<a
 			class="m-0 d-inline-block ml-3 align-middle"
-			*ngIf="gene || variant"
+			*ngIf="gene() || variant()"
 			[attr.href]="
-				variant
+				variant()
 					? 'https://www.deciphergenomics.org/search?q=grch37%3A' +
-						variant.chr +
+						variant().chr +
 						'%3A' +
-						variant.pos +
+						variant().pos +
 						'-' +
-						variant.pos
-					: 'https://www.deciphergenomics.org/gene/' + gene.symbol + '/patient-overlap/snvs'
+						variant().pos
+					: 'https://www.deciphergenomics.org/gene/' + gene().symbol + '/patient-overlap/snvs'
 			"
 			target="_blank"
 		>
@@ -47,8 +47,8 @@
 	<div class="col-12 mt-3">
 		<h4 class="my-0">
 			Phenotypes Represented that Involve
-			<span *ngIf="variant">Chr{{ variant.chr }}:{{ variant.pos }}</span>
-			<span *ngIf="!variant && gene">{{ gene.symbol }}</span>
+			<span *ngIf="variant()">Chr{{ variant().chr }}:{{ variant().pos }}</span>
+			<span *ngIf="!variant() && gene()">{{ gene().symbol }}</span>
 		</h4>
 	</div>
 

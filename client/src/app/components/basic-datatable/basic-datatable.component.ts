@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnChanges, ViewChild, AfterViewInit, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -43,26 +43,26 @@ import { HighlightSearch } from '../../highlight';
     ],
 })
 export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit {
-	@Input() data: any[] | null;
-	@Input() title: string;
-	@Input() unit: string;
-	@Input() loading: boolean | null = null;
+	readonly data = input<any[] | null>(undefined);
+	readonly title = input<string>(undefined);
+	readonly unit = input<string>(undefined);
+	readonly loading = input<boolean | null>(null);
 
-	@Input() sortActive: string;
-	@Input() sortDirection = 'asc';
-	@Input() displayedColumns: string[];
-	@Input() columnNames: string[];
+	readonly sortActive = input<string>(undefined);
+	readonly sortDirection = input('asc');
+	readonly displayedColumns = input<string[]>(undefined);
+	readonly columnNames = input<string[]>(undefined);
 	dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
 	filtersColumns: string[] = [];
 	showFilters = false;
 	filtersToApply = {};
 
-	@Input() url: boolean[];
-	@Input() urlPrefixes: string[] = [];
-	@Input() urlPostfixes: string[] = [];
+	readonly url = input<boolean[]>(undefined);
+	readonly urlPrefixes = input<string[]>([]);
+	readonly urlPostfixes = input<string[]>([]);
 
-	@Input() types: boolean[];
+	readonly types = input<boolean[]>(undefined);
 
 	@ViewChild(MatSort) sort: MatSort;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
@@ -72,7 +72,7 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
 	initFilters() {
 		this.filtersToApply = {};
 		this.filtersColumns = [];
-		for (const colName of this.displayedColumns) {
+		for (const colName of this.displayedColumns()) {
 			this.filtersColumns.push(colName + 'Filter');
 		}
 		this.dataSource.filterPredicate = (data, filter) => {
@@ -98,7 +98,7 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
 	ngOnInit() {}
 
 	ngOnChanges() {
-		this.dataSource = new MatTableDataSource(this.data);
+		this.dataSource = new MatTableDataSource(this.data());
 		this.initFilters();
 		this.dataSource.sort = this.sort;
 		this.dataSource.paginator = this.paginator;

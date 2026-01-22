@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
@@ -31,8 +31,8 @@ import { ClinvarVariantsTableComponent } from './clinvar-variants-table/clinvar-
     ],
 })
 export class ClinvarComponent implements OnInit {
-	@Input() gene: HumanGene;
-	@Input() variant: Variant;
+	readonly gene = input<HumanGene>(undefined);
+	readonly variant = input<Variant>(undefined);
 
 	urlSearchTerm: string;
 
@@ -49,17 +49,18 @@ export class ClinvarComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		if (this.gene) {
-			if (this.gene.hgncId) {
-				this.urlSearchTerm = this.gene.hgncId + '%5BHGNC+identifier+for+human+gene%5D';
+		const gene = this.gene();
+  if (gene) {
+			if (gene.hgncId) {
+				this.urlSearchTerm = gene.hgncId + '%5BHGNC+identifier+for+human+gene%5D';
 			} else {
-				this.urlSearchTerm = this.gene.symbol + '%5Bgene%5D';
+				this.urlSearchTerm = gene.symbol + '%5Bgene%5D';
 			}
 		}
 
 		this.loading = true;
 		this.api
-			.getClinVarByEntrezId(this.gene.entrezId)
+			.getClinVarByEntrezId(gene.entrezId)
 			.pipe(take(1))
 			.subscribe((res) => {
 				this.significance = {

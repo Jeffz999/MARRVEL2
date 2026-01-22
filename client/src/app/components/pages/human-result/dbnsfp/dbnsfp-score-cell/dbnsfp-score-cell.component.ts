@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RankscoreVisualComponent } from '../rankscore-visual/rankscore-visual.component';
@@ -15,15 +15,15 @@ import { RankscoreVisualComponent } from '../rankscore-visual/rankscore-visual.c
     ],
 })
 export class DbnsfpScoreCellComponent implements OnInit {
-	@Input() methodName: string;
-	@Input() methodTooltip: string;
-	@Input() scoreTooltip: string;
-	@Input() score: number;
-	@Input() prediction: string;
-	@Input() predictionColorClass: object;
-	@Input() rankscore: number;
-	@Input() minValue: number;
-	@Input() maxValue: number;
+	readonly methodName = input<string>(undefined);
+	readonly methodTooltip = input<string>(undefined);
+	readonly scoreTooltip = input<string>(undefined);
+	readonly score = input<number>(undefined);
+	readonly prediction = input<string>(undefined);
+	readonly predictionColorClass = input<object>(undefined);
+	readonly rankscore = input<number>(undefined);
+	readonly minValue = input<number>(undefined);
+	readonly maxValue = input<number>(undefined);
 
 	constructor() {}
 

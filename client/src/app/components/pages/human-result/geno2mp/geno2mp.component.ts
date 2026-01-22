@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges, OnInit } from '@angular/core';
+import { Component, SimpleChanges, OnInit, input } from '@angular/core';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { take } from 'rxjs/operators';
 
@@ -41,8 +41,8 @@ import { Geno2mpVariantTableComponent } from './geno2mp-variant-table/geno2mp-va
     ],
 })
 export class Geno2mpComponent implements OnInit {
-	@Input() variant: Variant | null;
-	@Input() gene: HumanGene | null;
+	readonly variant = input<Variant | null>(undefined);
+	readonly gene = input<HumanGene | null>(undefined);
 
 	searchBy = 'gene';
 
@@ -75,12 +75,14 @@ export class Geno2mpComponent implements OnInit {
 	constructor(private api: ApiService) {}
 
 	ngOnInit() {
-		this.searchBy = this.variant && this.variant.chr ? 'variant' : 'gene';
+		const variant = this.variant();
+  this.searchBy = variant && variant.chr ? 'variant' : 'gene';
 
-		if (this.gene) {
+		const gene = this.gene();
+  if (gene) {
 			this.loading = true;
 			this.api
-				.getGeno2MPByGeneEntrezId(this.gene.entrezId)
+				.getGeno2MPByGeneEntrezId(gene.entrezId)
 				.pipe(take(1))
 				.subscribe((res: Geno2MPResult[]) => {
 					res = res || [];
@@ -98,10 +100,11 @@ export class Geno2mpComponent implements OnInit {
 				});
 		}
 
-		if (this.variant && this.variant.chr) {
+		const variantValue = this.variant();
+  if (variantValue && variantValue.chr) {
 			this.loading = true;
 			this.api
-				.getGeno2MPByVariant(this.variant)
+				.getGeno2MPByVariant(variantValue)
 				.pipe(take(1))
 				.subscribe((res: Geno2MPResult) => {
 					if (res && res.hpoProfiles) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 import { HumanGene } from '../../../../interfaces/gene';
 import { Animations } from '../../../../animations';
@@ -23,8 +23,8 @@ import { NgFor, NgIf, NgClass } from '@angular/common';
     ],
 })
 export class PhenotypesComponent implements OnInit {
-	@Input() gene: HumanGene;
-	@Input() orthologs;
+	readonly gene = input<HumanGene>(undefined);
+	readonly orthologs = input(undefined);
 
 	phenotypes = {};
 	showOnlyBest = true;
@@ -40,11 +40,12 @@ export class PhenotypesComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {
-		if (this.gene) {
-			this.phenotypes[9606] = this.phenotypes[9606] || [{ gene: this.gene, bestScore: true, phenotypes: null }];
-			if (this.gene.phenotypes && this.gene.phenotypes.length && this.gene.phenotypes[0].id) {
+		const gene = this.gene();
+  if (gene) {
+			this.phenotypes[9606] = this.phenotypes[9606] || [{ gene: gene, bestScore: true, phenotypes: null }];
+			if (gene.phenotypes && gene.phenotypes.length && gene.phenotypes[0].id) {
 				this.phenotypes[9606][0].phenotypes = {};
-				for (const phenotype of this.gene.phenotypes) {
+				for (const phenotype of gene.phenotypes) {
 					if (phenotype.ontology && phenotype.ontology.categories && phenotype.ontology.categories.length) {
 						for (const cat of phenotype.ontology.categories) {
 							const catName = cat.name;
@@ -61,8 +62,9 @@ export class PhenotypesComponent implements OnInit {
 			}
 		}
 
-		if (this.orthologs && this.orthologs.length) {
-			for (const ortholog of this.orthologs) {
+		const orthologs = this.orthologs();
+  if (orthologs && orthologs.length) {
+			for (const ortholog of orthologs) {
 				let relExists = false;
 				const taxonId = ortholog['taxonId2'];
 				ortholog.gene2 = ortholog.gene2 || {};

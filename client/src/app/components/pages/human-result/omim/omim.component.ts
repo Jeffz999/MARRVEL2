@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { Animations } from './../../../../animations';
 import { NgIf, NgClass } from '@angular/common';
@@ -24,9 +24,9 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class OmimComponent {
-	@Input() gene;
-	@Input() loading;
-	@Input() data;
+	readonly gene = input(undefined);
+	readonly loading = input(undefined);
+	readonly data = input(undefined);
 
 	constructor() {}
 }

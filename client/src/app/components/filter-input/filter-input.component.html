@@ -3,7 +3,7 @@
 	<input
 		class="filter-input d-table-cell"
 		#inputBox
-		placeholder="{{ placeholder }}"
+		placeholder="{{ placeholder() }}"
 		(keyup)="onKeyup($event)"
 		(blur)="isFocused = false"
 		(focus)="isFocused = true"

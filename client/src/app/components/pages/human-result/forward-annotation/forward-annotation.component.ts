@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { Animations } from 'src/app/animations';
 import { Variant } from 'src/app/interfaces/variant';
 import { ApiService } from 'src/app/services/api.service';
@@ -34,14 +34,14 @@ interface TransVarForwardAnnotResult {
     imports: [NgIf, NgFor],
 })
 export class ForwardAnnotationComponent implements OnInit {
-	@Input() variant: Variant;
+	readonly variant = input<Variant>(undefined);
 	candidates;
 
 	constructor(private apiService: ApiService) {}
 
 	ngOnInit(): void {
 		this.candidates = undefined;
-		this.apiService.getForwardAnnotByVariant(this.variant).subscribe(
+		this.apiService.getForwardAnnotByVariant(this.variant()).subscribe(
 			(res: TransVarForwardAnnotResult) => {
 				// Candidates are by transcripts: gather transcript IDs and if it is Ensembl canonical by annotations for display reason
 				const trptsByAnnot = {};

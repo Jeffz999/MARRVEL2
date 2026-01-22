@@ -69,8 +69,8 @@
 
 <mat-paginator
 	class="w-100"
-	*ngIf="ligands.length > 5"
-	[pageSizeOptions]="[5, 10, 20, ligands.length]"
+	*ngIf="ligands().length > 5"
+	[pageSizeOptions]="[5, 10, 20, ligands().length]"
 	showFirstLastButtons
 	[pageSize]="5"
 ></mat-paginator>

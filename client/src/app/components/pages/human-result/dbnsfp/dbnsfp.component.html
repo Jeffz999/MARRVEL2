@@ -1,8 +1,8 @@
 <div class="row mb-3">
 	<div class="col-12">
 		<h3 class="d-inline-block align-middle">
-			Variant Functional Prediction Scores of Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{
-				variant.alt
+			Variant Functional Prediction Scores of Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{
+				variant().alt
 			}}
 			from dbNSFP
 		</h3>
@@ -15,9 +15,9 @@
 			</div>
 
 			<span class="d-table-cell pl-2">
-				For Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}, the average dbNSFP
-				rank score is {{ rankAverage.toFixed(3) }}. This means that Chr{{ variant.chr }}:{{ variant.pos }}
-				{{ variant.ref }}&gt;{{ variant.alt }} is
+				For Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}, the average dbNSFP
+				rank score is {{ rankAverage.toFixed(3) }}. This means that Chr{{ variant().chr }}:{{ variant().pos }}
+				{{ variant().ref }}&gt;{{ variant().alt }} is
 				<strong
 					>more likely to be damaging than {{ (rankAverage * 100).toFixed(1) }}% of all possible coding
 					variants</strong
@@ -30,7 +30,7 @@
 <div class="row" *ngIf="!loading && !data">
 	<div class="col-12">
 		<p class="m-0">
-			No data found for Chr{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+			No data found for Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}
 		</p>
 	</div>
 </div>

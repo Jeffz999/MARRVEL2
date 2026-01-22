@@ -1,7 +1,7 @@
 <div class="d-table w-100">
 	<div class="d-table-cell">
 		<h4>
-			Gene-Phenotype Relationships ({{ showOnlyAffected ? affectedProfiles : data.length }} Affected{{
+			Gene-Phenotype Relationships ({{ showOnlyAffected ? affectedProfiles : data().length }} Affected{{
 				!showOnlyAffected ? ' and Related' : ''
 			}})
 		</h4>
@@ -22,7 +22,7 @@
 	</div>
 </div>
 
-<div class="mt-3" *ngIf="data && data.length">
+<div class="mt-3" *ngIf="data() && data().length">
 	<table
 		class="w-100"
 		mat-table
@@ -76,13 +76,13 @@
 	</table>
 
 	<mat-paginator
-		*ngIf="data.length > 5"
-		[length]="data.length || 0"
+		*ngIf="data().length > 5"
+		[length]="data().length || 0"
 		[pageSizeOptions]="[5, 10, 20]"
 		[pageSize]="10"
 	></mat-paginator>
 </div>
 
-<div *ngIf="data && !data.length">
+<div *ngIf="data() && !data().length">
 	<p>No HPO profile found</p>
 </div>

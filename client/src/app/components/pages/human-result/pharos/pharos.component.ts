@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
@@ -30,7 +30,7 @@ import { PharosLigandTableComponent } from './pharos-ligand-table/pharos-ligand-
     ],
 })
 export class PharosComponent implements OnInit {
-	@Input() gene: HumanGene;
+	readonly gene = input<HumanGene>(undefined);
 
 	loading = false;
 	data;
@@ -46,7 +46,7 @@ export class PharosComponent implements OnInit {
 
 	ngOnInit() {
 		this.loading = true;
-		this.api.getPharosTargetsByEntrezId(this.gene.entrezId).subscribe(
+		this.api.getPharosTargetsByEntrezId(this.gene().entrezId).subscribe(
 			(res) => {
 				this.data = res;
 				this.loading = false;

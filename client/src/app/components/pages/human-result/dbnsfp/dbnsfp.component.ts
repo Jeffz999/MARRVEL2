@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { Variant } from './../../../../interfaces/variant';
@@ -25,7 +25,7 @@ import { RankscoreVisualComponent } from './rankscore-visual/rankscore-visual.co
     ],
 })
 export class DbnsfpComponent implements OnInit {
-	@Input() variant: Variant;
+	readonly variant = input<Variant>(undefined);
 
 	loading = false;
 	data: DbNSFPData;
@@ -61,7 +61,7 @@ export class DbnsfpComponent implements OnInit {
 	ngOnInit() {
 		this.loading = true;
 		this.api
-			.getDbNSFP(this.variant)
+			.getDbNSFP(this.variant())
 			.pipe(take(1))
 			.subscribe((res) => {
 				this.calcAvgRankscore(res);

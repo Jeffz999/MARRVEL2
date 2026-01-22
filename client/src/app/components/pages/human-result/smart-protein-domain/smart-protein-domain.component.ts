@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -35,7 +35,7 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
-	@Input() gene!: HumanGene;
+	readonly gene = input.required<HumanGene>();
 
 	loading = true;
 	data: SmartDomain[] | null;
@@ -52,7 +52,7 @@ export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 	constructor(private apiService: ApiService) {}
 
 	ngOnInit(): void {
-		this.apiService.getSmartDomain(this.gene).subscribe({
+		this.apiService.getSmartDomain(this.gene()).subscribe({
 			next: (res: SmartDomain[]) => {
 				this.data = res.filter((e) => e.type !== 'INTRON');
 				this.initTable(this.data);

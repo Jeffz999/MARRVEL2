@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Output, EventEmitter, ViewChild, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -28,7 +28,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     ],
 })
 export class ProteinDomainComponent implements OnInit, AfterViewInit {
-	@Input() data: DomainData[];
+	readonly data = input<DomainData[]>(undefined);
 
 	@Output() highlight: EventEmitter<any> = new EventEmitter();
 
@@ -40,7 +40,7 @@ export class ProteinDomainComponent implements OnInit, AfterViewInit {
 	constructor() {}
 
 	ngOnInit() {
-		this.dataSource = new MatTableDataSource(this.data);
+		this.dataSource = new MatTableDataSource(this.data());
 	}
 	ngAfterViewInit() {
 		this.initTableAcc();

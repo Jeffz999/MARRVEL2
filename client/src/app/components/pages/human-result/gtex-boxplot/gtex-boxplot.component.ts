@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
@@ -26,7 +26,7 @@ import { MatRipple } from '@angular/material/core';
     ],
 })
 export class GtexBoxplotComponent implements OnInit {
-	@Input() gene: HumanGene;
+	readonly gene = input<HumanGene>(undefined);
 	points: Point[];
 
 	boxplot: GroupedBoxplot;
@@ -41,7 +41,7 @@ export class GtexBoxplotComponent implements OnInit {
 
 	ngOnInit() {
 		this.api
-			.getGtexByEntrezId(this.gene.entrezId)
+			.getGtexByEntrezId(this.gene().entrezId)
 			.pipe(take(1))
 			.subscribe((res) => {
 				this.points = this.parseData(res['data']);

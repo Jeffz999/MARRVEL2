@@ -1,12 +1,12 @@
 import {
-	Component,
-	OnInit,
-	AfterViewInit,
-	ViewEncapsulation,
-	ViewChild,
-	ElementRef,
-	Renderer2,
-	Input,
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewEncapsulation,
+  ViewChild,
+  ElementRef,
+  Renderer2,
+  input
 } from '@angular/core';
 import * as molstar from 'molstar/build/viewer/molstar';
 
@@ -17,7 +17,7 @@ import * as molstar from 'molstar/build/viewer/molstar';
     encapsulation: ViewEncapsulation.None,
 })
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
-	@Input() uniprotId: string;
+	readonly uniprotId = input<string>(undefined);
 	viewer;
 	@ViewChild('molstarViewer', { static: true }) molstarViewer: ElementRef;
 
@@ -33,7 +33,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
 		);
 
 		this.initViwer();
-		const url = `https://alphafold.ebi.ac.uk/files/AF-${this.uniprotId}-F1-model_v1.cif`;
+		const url = `https://alphafold.ebi.ac.uk/files/AF-${this.uniprotId()}-F1-model_v1.cif`;
 		this.viewer.loadStructureFromUrl(url);
 	}
 

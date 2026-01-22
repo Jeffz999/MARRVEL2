@@ -14,14 +14,14 @@
 	<span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle"> Beta </span>
 </h3>
 
-<mat-form-field appearance="fill" style="margin-bottom: -1.25em" *ngIf="variant && gene" class="mt-3">
+<mat-form-field appearance="fill" style="margin-bottom: -1.25em" *ngIf="variant() && gene()" class="mt-3">
 	<mat-label>Search by</mat-label>
 	<mat-select [(value)]="searchBy">
-		<mat-option value="gene" *ngIf="gene">
-			{{ gene.symbol }}
+		<mat-option value="gene" *ngIf="gene()">
+			{{ gene().symbol }}
 		</mat-option>
 		<mat-option value="variant">
-			{{ variant.chr }}:{{ variant.pos }} {{ variant.ref }}&gt;{{ variant.alt }}
+			{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}
 		</mat-option>
 	</mat-select>
 </mat-form-field>
@@ -33,11 +33,11 @@
 		>
 
 		<span class="d-table-cell pl-2">
-			<span *ngIf="variant && data && data.alleleNum">
-				Allele frequency of the Rhesus macaque variant that corresponds to human Chr{{ variant.chr }}:{{
-					variant.pos
+			<span *ngIf="variant() && data && data.alleleNum">
+				Allele frequency of the Rhesus macaque variant that corresponds to human Chr{{ variant().chr }}:{{
+					variant().pos
 				}}
-				{{ variant.ref }}&gt;{{ variant.alt }} is
+				{{ variant().ref }}&gt;{{ variant().alt }} is
 				<strong>{{ data.alleleFreq.toFixed(6) }} (1/{{ data.alleleNum }})</strong> in HGSC cohort.
 			</span>
 		</span>
@@ -76,7 +76,7 @@
 	</table>
 </div>
 
-<div class="w-100" *ngIf="gene && searchBy === 'gene'" [@toggle]>
+<div class="w-100" *ngIf="gene() && searchBy === 'gene'" [@toggle]>
 	<p class="mt-3 mb-0 d-table" *ngIf="!geneLoading">
 		<mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
 			>insert_comment</mat-icon
@@ -85,7 +85,7 @@
 		<span class="d-table-cell pl-2">
 			<span>
 				There are <strong>{{ dataByGene.length }} alleles</strong> reported in HGSC cohort associated with
-				<strong>{{ gene.symbol }}</strong
+				<strong>{{ gene().symbol }}</strong
 				>.
 			</span>
 		</span>

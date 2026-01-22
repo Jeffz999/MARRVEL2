@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
@@ -25,8 +25,8 @@ import { MatTooltip } from '@angular/material/tooltip';
     ],
 })
 export class OrthologsComponent implements OnInit {
-	@Input() gene: HumanGene;
-	@Input() data: DIOPTOrtholog[];
+	readonly gene = input<HumanGene>(undefined);
+	readonly data = input<DIOPTOrtholog[]>(undefined);
 	showOnlyBest = true;
 	taxonIdToOrthologs = {
 		10090: [],
@@ -43,8 +43,9 @@ export class OrthologsComponent implements OnInit {
 	constructor() {}
 
 	ngOnInit() {
-		if (this.data && this.data.length) {
-			for (const row of this.data) {
+		const data = this.data();
+  if (data && data.length) {
+			for (const row of data) {
 				this.taxonIdToOrthologs[row.taxonId2].push(row);
 			}
 			for (const taxonId of TAXONIDS) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
@@ -19,7 +19,7 @@ import { GnomADGeneVisualComponent } from './gnom-ad-gene-visual/gnom-ad-gene-vi
     ],
 })
 export class GnomADGeneComponent implements OnInit {
-	@Input() gene: HumanGene;
+	readonly gene = input<HumanGene>(undefined);
 
 	loading = false;
 	data: GnomADGeneSummary;
@@ -27,9 +27,10 @@ export class GnomADGeneComponent implements OnInit {
 	constructor(private api: ApiService) {}
 
 	ngOnInit() {
-		if (this.gene && this.gene.entrezId) {
+		const gene = this.gene();
+  if (gene && gene.entrezId) {
 			this.loading = true;
-			this.api.getGnomADGeneByEntrezId(this.gene.entrezId).subscribe((res) => {
+			this.api.getGnomADGeneByEntrezId(gene.entrezId).subscribe((res) => {
 				this.data = res;
 				this.loading = false;
 			});

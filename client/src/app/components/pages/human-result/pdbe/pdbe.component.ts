@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -15,14 +15,14 @@ import { MatTooltip } from '@angular/material/tooltip';
     ],
 })
 export class PdbeComponent implements OnInit {
-	@Input() entrezId;
+	readonly entrezId = input(undefined);
 	loading = true;
 	data;
 
 	constructor(private apiService: ApiService) {}
 
 	ngOnInit(): void {
-		this.apiService.getPdbeSummaryByEntrezId(this.entrezId).subscribe(
+		this.apiService.getPdbeSummaryByEntrezId(this.entrezId()).subscribe(
 			(res) => {
 				this.loading = false;
 				this.data = res;

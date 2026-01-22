@@ -1,4 +1,4 @@
-<div class="row" *ngIf="data && data.length">
+<div class="row" *ngIf="data() && data().length">
 	<div class="col-12">
 		<p class="mt-0"><strong># HPO profiles of selected variants:</strong> {{ hpoProfiles }}</p>
 		<table
@@ -81,7 +81,7 @@
 		<mat-paginator
 			#geno2mpGenePaginator
 			id="geno2mpGenePaginator"
-			[length]="data.length || 0"
+			[length]="data().length || 0"
 			[pageSizeOptions]="[5, 10, 20]"
 			[pageSize]="10"
 		></mat-paginator>

@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, input } from '@angular/core';
 
 import { CAT_TO_ICON } from '../../../../../category';
 import { NgFor, NgClass } from '@angular/common';
@@ -18,7 +18,7 @@ export class Geno2mpPhenotypePictogramComponent implements OnChanges {
 	categories = Object.keys(CAT_TO_ICON);
 	catToIcon = CAT_TO_ICON;
 
-	@Input() categoryStatus: object = {};
+	readonly categoryStatus = input<object>({});
 
 	constructor() {}
 

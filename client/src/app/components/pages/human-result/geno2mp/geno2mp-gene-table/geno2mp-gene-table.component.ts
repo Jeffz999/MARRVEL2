@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, OnChanges, ViewChild, AfterViewInit, SimpleChanges, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -28,11 +28,11 @@ import { NgIf } from '@angular/common';
     ],
 })
 export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
-	@Input() data: any[] | null;
-	@Input() showNonCoding = false;
-	@Input() showSynonymous = false;
-	@Input() showMissense = false;
-	@Input() showNonsense = true;
+	readonly data = input<any[] | null>(undefined);
+	readonly showNonCoding = input(false);
+	readonly showSynonymous = input(false);
+	readonly showMissense = input(false);
+	readonly showNonsense = input(true);
 
 	displayedColumns = ['hg19Chr', 'hg19Pos', 'ref', 'alt', 'nHpoProfiles', 'homCount', 'hetCount', 'funcAnno'];
 	dataSource: MatTableDataSource<Geno2MPResult> = new MatTableDataSource();
@@ -61,13 +61,13 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 		}
 
 		if (changes.showNonCoding) {
-			this.categoriesVisible['Non-Coding'] = this.showNonCoding;
+			this.categoriesVisible['Non-Coding'] = this.showNonCoding();
 
 			this.sumHpos();
 			this.dataSource.filter = ' ';
 		}
 		if (changes.showSynonymous) {
-			this.categoriesVisible['Synonymous/Unknown'] = this.showSynonymous;
+			this.categoriesVisible['Synonymous/Unknown'] = this.showSynonymous();
 
 			this.sumHpos();
 			this.dataSource.filter = ' ';
@@ -79,7 +79,7 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 			this.dataSource.filter = ' ';
 		}
 		if (changes.showNonsense) {
-			this.categoriesVisible['Splice/Frameshift/Nonsense/Stop Loss'] = this.showNonsense;
+			this.categoriesVisible['Splice/Frameshift/Nonsense/Stop Loss'] = this.showNonsense();
 
 			this.sumHpos();
 			this.dataSource.filter = ' ';
@@ -88,7 +88,7 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 
 	sumHpos() {
 		this.hpoProfiles = 0;
-		for (const e of this.data) {
+		for (const e of this.data()) {
 			if (this.categoriesVisible[e.category]) {
 				this.hpoProfiles += e.nHpoProfiles;
 			}
@@ -96,7 +96,7 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 	}
 
 	initDataTable() {
-		this.dataSource = new MatTableDataSource(this.data);
+		this.dataSource = new MatTableDataSource(this.data());
 		this.initFilters();
 		this.dataSource.sort = this.sort;
 		this.dataSource.paginator = this.paginator;

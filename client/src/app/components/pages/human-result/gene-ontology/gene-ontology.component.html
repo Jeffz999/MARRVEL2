@@ -24,10 +24,10 @@
 			</div>
 			<div class="ribbon-cell ribbon-gene-symbol-cell">
 				<a
-					href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:{{ gene.hgncId }}"
+					href="https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:{{ gene().hgncId }}"
 					target="_blank"
 				>
-					{{ gene.symbol }}
+					{{ gene().symbol }}
 				</a>
 			</div>
 		</div>
@@ -86,7 +86,7 @@
 						selected: selected && selected.orgName === 'human' && selected.goId === goId,
 					}"
 					[matTooltip]="
-						gene.symbol +
+						gene().symbol +
 						'-' +
 						goIdToName[goId]['name'] +
 						': ' +
@@ -157,7 +157,7 @@
 		{{ goIdToName[selected.goId].name }}
 	</h4>
 	<h4 *ngIf="selected && selected.orgName === 'human'">
-		Gene Ontology Associated with {{ gene.symbol }} Related to
+		Gene Ontology Associated with {{ gene().symbol }} Related to
 		{{ goIdToName[selected.goId].name }}
 	</h4>
 	<table class="w-100 mt-3" mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDirection="asc">

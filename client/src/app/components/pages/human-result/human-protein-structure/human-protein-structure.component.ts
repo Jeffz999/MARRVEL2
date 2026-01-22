@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, input } from '@angular/core';
 import { ProteinViewerComponent } from '../../../protein-viewer/protein-viewer.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { ProteinViewerComponent } from '../../../protein-viewer/protein-viewer.c
     imports: [ProteinViewerComponent],
 })
 export class HumanProteinStructureComponent implements OnInit {
-	@Input() uniprotId: string;
+	readonly uniprotId = input<string>(undefined);
 
 	constructor() {}
 

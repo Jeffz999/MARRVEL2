@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, input } from '@angular/core';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -41,9 +41,9 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
-	@Input() gene: HumanGene;
-	@Input() variant: Variant;
-	@Input() data: ClinVarVarinat[];
+	readonly gene = input<HumanGene>(undefined);
+	readonly variant = input<Variant>(undefined);
+	readonly data = input<ClinVarVarinat[]>(undefined);
 
 	showSearch = false;
 	showMatchingVarsFirst = true;
@@ -64,18 +64,21 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 	}
 
 	initTable() {
-		this.dataSource = new MatTableDataSource(this.data);
+		this.dataSource = new MatTableDataSource(this.data());
 		this.dataSource.sort = this.sort;
 		this.dataSource.sortData = (data, sort: MatSort) => {
 			return data.sort((a, b) => {
-				const aMatching = this.variant && a.start <= this.variant.pos && this.variant.pos <= a.stop;
-				const bMatching = this.variant && b.start <= this.variant.pos && this.variant.pos <= b.stop;
-				if (this.variant) {
+				const variant = this.variant();
+    const aMatching = variant && a.start <= variant.pos && variant.pos <= a.stop;
+				const variantValue = this.variant();
+    const bMatching = variantValue && b.start <= variantValue.pos && variantValue.pos <= b.stop;
+				const variantVal = this.variant();
+    if (variantVal) {
 					// Exact match
-					if (a.start === a.stop && a.start === this.variant.pos) {
+					if (a.start === a.stop && a.start === variantVal.pos) {
 						return -1;
 					}
-					if (b.start === b.stop && b.start === this.variant.pos) {
+					if (b.start === b.stop && b.start === variantVal.pos) {
 						return 1;
 					}
 					// Includes the location

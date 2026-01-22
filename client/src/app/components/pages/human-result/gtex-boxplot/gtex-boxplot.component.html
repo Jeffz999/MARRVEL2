@@ -1,5 +1,5 @@
-<h3 class="my-0 d-inline-block">Human Expression of {{ gene ? gene.symbol : '' }} from GTEx</h3>
-<a *ngIf="gene" class="d-inline-block" [attr.href]="'https://gtexportal.org/home/gene/' + gene.symbol" target="_blank">
+<h3 class="my-0 d-inline-block">Human Expression of {{ gene() ? gene().symbol : '' }} from GTEx</h3>
+<a *ngIf="gene()" class="d-inline-block" [attr.href]="'https://gtexportal.org/home/gene/' + gene().symbol" target="_blank">
 	<button mat-button color="primary">
 		<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
 		More on GTEx

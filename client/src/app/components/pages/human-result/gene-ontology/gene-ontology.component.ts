@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -56,8 +56,8 @@ const NAMESPACE_TO_GOID = {
     ],
 })
 export class GeneOntologyComponent implements OnInit, AfterViewInit {
-	@Input() gene: HumanGene;
-	@Input() orthologs;
+	readonly gene = input<HumanGene>(undefined);
+	readonly orthologs = input(undefined);
 
 	gos = null;
 	categoryGoIds = AGR_SLIM_IDS;
@@ -89,11 +89,12 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 		this.dataSource.sort = this.sort;
 	}
 	ngOnInit() {
-		if (this.gene) {
+		const gene = this.gene();
+  if (gene) {
 			this.gos = this.gos || {};
 			this.gos['human'] = { gos: {} };
-			if (this.gene.gos) {
-				for (const go of this.gene.gos) {
+			if (gene.gos) {
+				for (const go of gene.gos) {
 					if (go.eviCode in EXP_EVICODES && go.ontology) {
 						const slimGoId = go.ontology.agrSlimGoId || NAMESPACE_TO_GOID[go.ontology.namespace];
 						if (slimGoId) {
@@ -104,11 +105,12 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 				}
 			}
 		}
-		if (this.orthologs && this.orthologs.length) {
+		const orthologs = this.orthologs();
+  if (orthologs && orthologs.length) {
 			this.visHeight = 200;
 			this.visHeightOnlyBest = 200;
 			this.gos = this.gos || {};
-			for (const ortholog of this.orthologs) {
+			for (const ortholog of orthologs) {
 				if (!(ortholog.taxonId2 in TAXONID_TO_NAME)) {
 					continue;
 				}
