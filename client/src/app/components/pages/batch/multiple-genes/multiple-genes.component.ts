@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Observable, forkJoin } from 'rxjs';
 import { take, first } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../../navbar/navbar.component';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { MultipleGeneBoxComponent } from '../../../multiple-gene-box/multiple-gene-box.component';
@@ -23,21 +23,24 @@ import { MatTooltip } from '@angular/material/tooltip';
     styleUrls: ['./multiple-genes.component.scss'],
     animations: [Animations.toggleInOut],
     imports: [
-        NavbarComponent,
-        NgIf,
-        MatRadioGroup,
-        FormsModule,
-        MatRadioButton,
-        MultipleGeneBoxComponent,
-        MatIcon,
-        MatProgressBar,
-        MatPaginator,
-        NgClass,
-        MatTooltip,
-        NgFor,
-    ],
+    NavbarComponent,
+    NgIf,
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    MultipleGeneBoxComponent,
+    MatIcon,
+    MatProgressBar,
+    MatPaginator,
+    MatTooltip,
+    NgFor
+],
 })
 export class MultipleGenesComponent implements OnInit {
+	private api = inject(ApiService);
+	private sanitizer = inject(DomSanitizer);
+	private router = inject(Router);
+
 	genes;
 	loading = false;
 	data;
@@ -55,12 +58,6 @@ export class MultipleGenesComponent implements OnInit {
 	wholeGenesPrepared = 0;
 
 	selectedInputType = 'multigenes';
-
-	constructor(
-		private api: ApiService,
-		private sanitizer: DomSanitizer,
-		private router: Router,
-	) {}
 
 	ngOnInit() {
 		this.gFrom = 0;

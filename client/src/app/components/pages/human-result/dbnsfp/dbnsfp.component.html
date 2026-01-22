@@ -74,10 +74,9 @@
 						<span class="text-muted" *ngIf="!hasScoreData(scoreConfig)">NA</span>
 					</td>
 					<td class="mat-cell">
-						<app-rankscore-visual
-							*ngIf="hasScoreData(scoreConfig)"
+						<app-rankscore-visual *ngIf="hasScoreData(scoreConfig)"
 							[rankscore]="getRankScore(scoreConfig)"
-						></app-rankscore-visual>
+						 />
 					</td>
 				</tr>
 			</tbody>

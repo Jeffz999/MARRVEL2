@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 
@@ -17,15 +17,13 @@ import { NgIf, NgFor } from '@angular/common';
     ],
 })
 export class ReverseAnnotationCandidatesComponent implements OnInit {
+	private route = inject(ActivatedRoute);
+	private api = inject(ApiService);
+
 	protein: string;
 
 	loading = true;
 	data;
-
-	constructor(
-		private route: ActivatedRoute,
-		private api: ApiService,
-	) {}
 
 	ngOnInit() {
 		this.route.params.subscribe((param) => {

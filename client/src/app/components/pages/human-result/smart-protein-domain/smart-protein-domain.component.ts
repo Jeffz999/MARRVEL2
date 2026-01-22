@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, input, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, input, viewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -6,7 +6,7 @@ import { ProteinDomainPlot } from '../../../../d3/protein-domain-plot';
 import { SmartDomain } from '../../../../interfaces/data';
 import { HumanGene } from '../../../../interfaces/gene';
 import { ApiService } from '../../../../services/api.service';
-import { NgIf, NgClass } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
@@ -15,26 +15,27 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './smart-protein-domain.component.html',
     styleUrls: ['./smart-protein-domain.component.scss'],
     imports: [
-        NgIf,
-        MatButton,
-        MatIcon,
-        NgClass,
-        MatTable,
-        MatSort,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatSortHeader,
-        MatCellDef,
-        MatCell,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        MatPaginator,
-    ],
+    NgIf,
+    MatButton,
+    MatIcon,
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatSortHeader,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatPaginator
+],
 })
 export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
+	private apiService = inject(ApiService);
+
 	readonly gene = input.required<HumanGene>();
 
 	loading = true;
@@ -48,8 +49,6 @@ export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 	plot: ProteinDomainPlot;
 	readonly domainPlotContainer = viewChild<ElementRef>('domainPlotContainer');
 	zoomRatio = 1;
-
-	constructor(private apiService: ApiService) {}
 
 	ngOnInit(): void {
 		this.apiService.getSmartDomain(this.gene()).subscribe({

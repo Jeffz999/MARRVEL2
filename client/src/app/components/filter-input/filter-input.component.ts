@@ -1,12 +1,12 @@
 import { Component, OnInit, ElementRef, input, viewChild, output } from '@angular/core';
-import { NgClass } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
     selector: 'app-filter-input',
     templateUrl: './filter-input.component.html',
     styleUrls: ['./filter-input.component.scss'],
-    imports: [NgClass, MatIcon],
+    imports: [MatIcon],
 })
 export class FilterInputComponent implements OnInit {
 	readonly placeholder = input<string>(undefined);

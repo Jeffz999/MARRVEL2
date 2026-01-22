@@ -57,8 +57,7 @@
 
 <div class="row mt-2" *ngIf="!loading && data && data.length">
 	<div class="col-12">
-		<app-basic-datatable
-			[title]="tableTitle"
+		<app-basic-datatable [title]="tableTitle"
 			[data]="data"
 			[displayedColumns]="[
 				'hg19Chr',
@@ -106,7 +105,7 @@
 			[types]="['int', 'int', 'int', 'int', '', '', 'float', 'int', 'int', 'int', 'url', '']"
 			sortActive="size"
 			sortDirection="desc"
-		></app-basic-datatable>
+		 />
 	</div>
 </div>
 

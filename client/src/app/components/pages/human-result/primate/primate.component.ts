@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { PrimateData } from 'src/app/interfaces/data';
@@ -30,6 +30,8 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class PrimateComponent implements OnInit {
+	private apiService = inject(ApiService);
+
 	readonly variant = input<Variant>(undefined);
 	readonly gene = input<HumanGene>(undefined);
 
@@ -39,8 +41,6 @@ export class PrimateComponent implements OnInit {
 	data: PrimateData;
 	geneLoading = true;
 	dataByGene: any[];
-
-	constructor(private apiService: ApiService) {}
 
 	ngOnInit() {
 		const variant = this.variant();

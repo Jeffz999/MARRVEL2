@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
@@ -6,7 +6,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { Point } from 'src/app/d3/interfaces';
 import { GroupedBoxplot } from 'src/app/d3/grouped-boxplot';
-import { NgIf, NgFor, NgStyle, NgClass } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
@@ -16,16 +16,16 @@ import { MatRipple } from '@angular/material/core';
     templateUrl: './gtex-boxplot.component.html',
     styleUrls: ['./gtex-boxplot.component.scss'],
     imports: [
-        NgIf,
-        MatButton,
-        MatIcon,
-        MatRipple,
-        NgFor,
-        NgStyle,
-        NgClass,
-    ],
+    NgIf,
+    MatButton,
+    MatIcon,
+    MatRipple,
+    NgFor
+],
 })
 export class GtexBoxplotComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly gene = input<HumanGene>(undefined);
 	points: Point[];
 
@@ -36,8 +36,6 @@ export class GtexBoxplotComponent implements OnInit {
 	organs;
 	organLabelColors;
 	organVisibility = [];
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		this.api

@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
@@ -33,6 +33,9 @@ import { FormsModule } from '@angular/forms';
     ],
 })
 export class DioptAlignmentComponent implements OnInit {
+	private api = inject(ApiService);
+	private sanitizer = inject(DomSanitizer);
+
 	readonly gene = input<Gene>(undefined);
 	data = null;
 	domainData = null;
@@ -65,11 +68,6 @@ export class DioptAlignmentComponent implements OnInit {
 		sc: false,
 		sp: false,
 	};
-
-	constructor(
-		private api: ApiService,
-		private sanitizer: DomSanitizer,
-	) {}
 
 	ngOnInit() {
 		const gene = this.gene();

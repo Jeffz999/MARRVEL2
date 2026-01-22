@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { SearchService } from '../../../services/search.service';
@@ -19,18 +19,16 @@ import { NgIf, NgFor } from '@angular/common';
     ],
 })
 export class HumanSearchComponent implements OnInit {
+	private route = inject(ActivatedRoute);
+	private router = inject(Router);
+	private searchSvc = inject(SearchService);
+	private geneSvc = inject(GeneService);
+
 	keyword?: string;
 	genes?: HumanGene[];
 	loading = false;
 	error = false;
 	urlPostfix = '';
-
-	constructor(
-		private route: ActivatedRoute,
-		private router: Router,
-		private searchSvc: SearchService,
-		private geneSvc: GeneService,
-	) {}
 
 	ngOnInit(): void {
 		this.route.queryParams.subscribe((params) => {

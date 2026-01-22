@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -28,9 +28,11 @@ const COMPARE = (a: any, b: any, aSmall: number, bSmall: number, abTie: number |
 	providedIn: 'root',
 })
 export class ModelmatcherService {
+	private http = inject(HttpClient);
+
 	taxonIdToOrder;
 
-	constructor(private http: HttpClient) {
+	constructor() {
 		this.taxonIdToOrder = { 9606: 0 };
 		for (let i = 0; i < TAXONIDS.length; ++i) {
 			this.taxonIdToOrder[TAXONIDS[i]] = i + 1;

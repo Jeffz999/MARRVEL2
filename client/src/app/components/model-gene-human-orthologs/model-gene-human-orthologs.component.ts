@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { take } from 'rxjs/operators';
 
@@ -23,6 +23,9 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class ModelGeneHumanOrthologsComponent implements OnInit {
+	private route = inject(ActivatedRoute);
+	private api = inject(ApiService);
+
 	entrezId: number | null;
 
 	loading = true;
@@ -60,11 +63,6 @@ export class ModelGeneHumanOrthologsComponent implements OnInit {
 		4896: 11,
 		8364: 13,
 	};
-
-	constructor(
-		private route: ActivatedRoute,
-		private api: ApiService,
-	) {}
 
 	ngOnInit() {
 		this.route.params.subscribe((param) => {

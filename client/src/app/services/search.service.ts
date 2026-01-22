@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { HumanGene } from '../interfaces/gene';
@@ -7,7 +7,8 @@ import { HumanGene } from '../interfaces/gene';
 	providedIn: 'root',
 })
 export class SearchService {
-	constructor(private router: Router) {}
+	private router = inject(Router);
+
 
 	redirect(
 		inputType?: 'gene' | 'protein',

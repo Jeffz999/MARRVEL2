@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  ViewEncapsulation,
-  ElementRef,
-  Renderer2,
-  input,
-  viewChild
-} from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, ElementRef, Renderer2, input, viewChild, inject } from '@angular/core';
 import * as molstar from 'molstar/build/viewer/molstar';
 
 @Component({
@@ -17,11 +8,11 @@ import * as molstar from 'molstar/build/viewer/molstar';
     encapsulation: ViewEncapsulation.None,
 })
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
+	private renderer = inject(Renderer2);
+
 	readonly uniprotId = input<string>(undefined);
 	viewer;
 	readonly molstarViewer = viewChild<ElementRef>('molstarViewer');
-
-	constructor(private renderer: Renderer2) {}
 
 	ngOnInit() {}
 

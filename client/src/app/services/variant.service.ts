@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -12,7 +12,8 @@ import { LiftoverResponse } from '../interfaces/liftover';
 	providedIn: 'root',
 })
 export class VariantService {
-	constructor(private http: HttpClient) {}
+	private http = inject(HttpClient);
+
 
 	parse(variantInput) {
 		const hgvsMatch = new RegExp('^[0-9a-zA-Z_\.]+:c\.[0-9]+(A|C|G|T)+>(A|C|G|T)+$').exec(variantInput);

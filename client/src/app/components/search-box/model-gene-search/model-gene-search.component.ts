@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, viewChild, output } from '@angular/core';
+import { Component, OnInit, ElementRef, viewChild, output, inject } from '@angular/core';
 import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipGrid, MatChipRow, MatChipRemove, MatChipInput } from '@angular/material/chips';
@@ -35,6 +35,8 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class ModelGeneSearchComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly geneSelected = output<Gene>();
 
 	taxonId = '7227';
@@ -45,8 +47,6 @@ export class ModelGeneSearchComponent implements OnInit {
 	geneSuggestion = [];
 	readonly geneInput = viewChild<ElementRef<HTMLInputElement>>('geneInput');
 	readonly matAutocomplete = viewChild<MatAutocomplete>('auto');
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {}
 

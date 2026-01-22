@@ -1,5 +1,5 @@
 import { ApiService } from './../../services/api.service';
-import { Component, OnInit, output } from '@angular/core';
+import { Component, OnInit, output, inject } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Animations } from 'src/app/animations';
@@ -31,6 +31,9 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     ],
 })
 export class VcfUploadBoxComponent implements OnInit {
+	private api = inject(ApiService);
+	private router = inject(Router);
+
 	selectedInputType = 'vcf';
 
 	file: File | null = null;
@@ -40,11 +43,9 @@ export class VcfUploadBoxComponent implements OnInit {
 
 	readonly dataChange = output<any>();
 
-	constructor(
-		fb: UntypedFormBuilder,
-		private api: ApiService,
-		private router: Router,
-	) {
+	constructor() {
+		const fb = inject(UntypedFormBuilder);
+
 		this.fileFormGroup = fb.group({
 			fileDisp: new UntypedFormControl('', (c: UntypedFormControl) => {
 				return c.value ? null : { valid: false };

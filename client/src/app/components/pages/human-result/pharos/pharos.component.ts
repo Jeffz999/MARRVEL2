@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
@@ -30,6 +30,8 @@ import { PharosLigandTableComponent } from './pharos-ligand-table/pharos-ligand-
     ],
 })
 export class PharosComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly gene = input<HumanGene>(undefined);
 
 	loading = false;
@@ -41,8 +43,6 @@ export class PharosComponent implements OnInit {
 		Tchem: 'This target has at least one CHEMBL compound',
 		Tclin: 'This target has at least one approved drug',
 	};
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		this.loading = true;

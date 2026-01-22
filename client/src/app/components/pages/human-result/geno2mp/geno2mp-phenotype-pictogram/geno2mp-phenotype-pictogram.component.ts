@@ -1,7 +1,7 @@
 import { Component, OnChanges, SimpleChanges, input } from '@angular/core';
 
 import { CAT_TO_ICON } from '../../../../../category';
-import { NgFor, NgClass } from '@angular/common';
+import { NgFor } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
@@ -9,10 +9,9 @@ import { MatTooltip } from '@angular/material/tooltip';
     templateUrl: './geno2mp-phenotype-pictogram.component.html',
     styleUrls: ['./geno2mp-phenotype-pictogram.component.scss'],
     imports: [
-        NgFor,
-        NgClass,
-        MatTooltip,
-    ],
+    NgFor,
+    MatTooltip
+],
 })
 export class Geno2mpPhenotypePictogramComponent implements OnChanges {
 	categories = Object.keys(CAT_TO_ICON);

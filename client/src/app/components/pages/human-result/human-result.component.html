@@ -3,10 +3,10 @@
 <div class="d-flex" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh">
 	<div
 		class="sidenav-content flex-grow-1 flex-column d-flex"
-		[ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
+		[class]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
 	>
 		<div>
-			<app-navbar showSearch="true" showMenuButton="true"></app-navbar>
+			<app-navbar showSearch="true" showMenuButton="true" />
 		</div>
 		<div class="flex-grow-1" style="overflow-x: hidden; overflow-y: auto">
 			<div id="TOP"></div>
@@ -194,7 +194,7 @@
 						</h4>
 					</div>
 					<div class="col-12" *ngIf="variant">
-						<app-forward-annotation [variant]="variant"></app-forward-annotation>
+						<app-forward-annotation [variant]="variant" />
 					</div>
 
 					<div class="col-12 mt-3" *ngIf="gene && gene.entrezSummary" [@toggle]>
@@ -206,9 +206,9 @@
 
 				<!-- OMIM starts -->
 				<div class="row section mt-5" id="OMIM" *ngIf="geneLoading || gene" [@toggle]>
-					<div class="col-12" [ngClass]="{ skeleton: omimLoading }">
+					<div class="col-12" [class.skeleton]="omimLoading">
 						<h2 class="mb-1 text-uppercase">Disease Data</h2>
-						<app-omim *ngIf="gene" [gene]="gene" [loading]="omimLoading" [data]="omimData"></app-omim>
+						<app-omim *ngIf="gene" [gene]="gene" [loading]="omimLoading" [data]="omimData" />
 					</div>
 				</div>
 				<!-- OMIM ends -->
@@ -217,7 +217,7 @@
 				<div class="row section mt-5" id="DbNSFP" *ngIf="!geneLoading && variant" [@toggle]>
 					<div class="col-12">
 						<h2 class="mb-1 text-uppercase">Disease Data</h2>
-						<app-dbnsfp [variant]="variant"></app-dbnsfp>
+						<app-dbnsfp [variant]="variant" />
 					</div>
 				</div>
 				<!-- dbNSFP ends -->
@@ -226,7 +226,7 @@
 				<div class="row section mt-5" id="ClinVar" *ngIf="!geneLoading && gene" [@toggle]>
 					<div class="col-12">
 						<h2 class="mb-1 text-uppercase">Disease Data</h2>
-						<app-clinvar [gene]="gene" [variant]="variant"></app-clinvar>
+						<app-clinvar [gene]="gene" [variant]="variant" />
 					</div>
 				</div>
 				<!-- ClinVar ends -->
@@ -235,7 +235,7 @@
 				<div class="row section mt-5" id="Geno2MP" *ngIf="!geneLoading" [@toggle]>
 					<div class="col-12">
 						<h2 class="mb-1 text-uppercase">Disease Data</h2>
-						<app-geno2mp [gene]="gene" [variant]="variant"></app-geno2mp>
+						<app-geno2mp [gene]="gene" [variant]="variant" />
 					</div>
 				</div>
 				<!-- Geno2MP ends -->
@@ -244,12 +244,12 @@
 				<div class="row section mt-5" id="DECIPHER" *ngIf="!geneLoading" [@toggle]>
 					<div class="col-12">
 						<h2 class="mb-1 text-uppercase">Disease Data</h2>
-						<app-decipher-disease [gene]="gene" [variant]="variant"></app-decipher-disease>
+						<app-decipher-disease [gene]="gene" [variant]="variant" />
 					</div>
 				</div>
 				<!-- DECIPHER ends -->
 
-				<mat-divider class="mt-5"></mat-divider>
+				<mat-divider class="mt-5" />
 
 				<!-- gnomAD starts -->
 				<div class="row section mt-5" id="GnomAD">
@@ -276,7 +276,7 @@
 								More on gnomAD
 							</button>
 						</a>
-						<app-gnom-ad [variant]="variant"></app-gnom-ad>
+						<app-gnom-ad [variant]="variant" />
 					</div>
 
 					<!-- gnomAD gene -->
@@ -295,7 +295,7 @@
 								More on gnomAD
 							</button>
 						</a>
-						<app-gnom-ad-gene [gene]="gene"></app-gnom-ad-gene>
+						<app-gnom-ad-gene [gene]="gene" />
 					</div>
 				</div>
 				<!-- gnomAD ends -->
@@ -304,7 +304,7 @@
 				<div class="row section mt-5" id="DGV" *ngIf="!geneLoading && gene" [@toggle]>
 					<div class="col-12">
 						<h2 class="mb-1 text-uppercase">Control Data</h2>
-						<app-dgv *ngIf="gene" [gene]="gene"></app-dgv>
+						<app-dgv *ngIf="gene" [gene]="gene" />
 					</div>
 				</div>
 				<!-- DGV ends -->
@@ -313,7 +313,7 @@
 				<div class="row section mt-5" id="DECIPHER-Control" *ngIf="!geneLoading && gene" [@toggle]>
 					<div class="col-12">
 						<h2 class="mb-1 text-uppercase">Control Data</h2>
-						<app-decipher [variant]="variant" [gene]="gene"></app-decipher>
+						<app-decipher [variant]="variant" [gene]="gene" />
 					</div>
 				</div>
 				<!-- DECIPHER Control ends -->
@@ -321,18 +321,18 @@
 				<!-- DIOPT Ortholog starts -->
 				<div class="row section" id="orthologs">
 					<div class="col-12 mt-5" *ngIf="!geneLoading && gene && !orthologsLoading" [@toggle]>
-						<app-orthologs [gene]="gene" [data]="orthologs"></app-orthologs>
+						<app-orthologs [gene]="gene" [data]="orthologs" />
 					</div>
 				</div>
 				<!-- DIOPT Ortholog ends -->
 
 				<div class="row section mt-5" id="expression" *ngIf="!geneLoading && gene" [@toggle]>
 					<div class="col-12">
-						<app-gtex-boxplot [gene]="gene"></app-gtex-boxplot>
+						<app-gtex-boxplot [gene]="gene" />
 					</div>
 
 					<div class="col-12 mt-5">
-						<app-agr-expression [gene]="gene"></app-agr-expression>
+						<app-agr-expression [gene]="gene" />
 					</div>
 				</div>
 
@@ -343,7 +343,7 @@
 					[@toggle]
 				>
 					<div class="col-12">
-						<app-phenotypes [gene]="gene" [orthologs]="orthologs"></app-phenotypes>
+						<app-phenotypes [gene]="gene" [orthologs]="orthologs" />
 					</div>
 				</div>
 
@@ -355,13 +355,13 @@
 				>
 					<div class="col-12">
 						<h3 class="m-0">Gene Ontology</h3>
-						<app-gene-ontology [gene]="gene" [orthologs]="orthologs" *ngIf="gene"></app-gene-ontology>
+						<app-gene-ontology [gene]="gene" [orthologs]="orthologs" *ngIf="gene" />
 					</div>
 				</div>
 
 				<div class="row section mt-5" id="primate" [@toggle]>
 					<div class="col-12">
-						<app-primate [variant]="variant" [gene]="gene" *ngIf="!geneLoading"></app-primate>
+						<app-primate [variant]="variant" [gene]="gene" *ngIf="!geneLoading" />
 					</div>
 				</div>
 
@@ -369,13 +369,13 @@
 					<div class="row section mt-5" id="alignment">
 						<!-- SMART Domain starts -->
 						<div class="col-12">
-							<app-smart-protein-domain [gene]="gene"></app-smart-protein-domain>
+							<app-smart-protein-domain [gene]="gene" />
 						</div>
 						<!-- SMART Domain ends -->
 
 						<!-- Alignment starts -->
 						<div class="col-12 mt-5" *ngIf="!smallScreen">
-							<app-diopt-alignment [gene]="gene"></app-diopt-alignment>
+							<app-diopt-alignment [gene]="gene" />
 						</div>
 					</div>
 					<!-- Alignment ends -->
@@ -389,12 +389,11 @@
 									Beta
 								</span>
 							</h3>
-							<mat-progress-bar mode="indeterminate" class="w-100" *ngIf="ppiLoading"></mat-progress-bar>
-							<app-ppi
-								[gene]="gene"
+							<mat-progress-bar mode="indeterminate" class="w-100" *ngIf="ppiLoading" />
+							<app-ppi [gene]="gene"
 								[data]="ppiData"
 								*ngIf="!ppiLoading && ppiData && ppiData.length"
-							></app-ppi>
+							 />
 							<p *ngIf="!ppiLoading && (!ppiData || !ppiData.length)">
 								No protein interaction data available
 							</p>
@@ -409,7 +408,7 @@
 						</div>
 
 						<div class="col-12 mt-3">
-							<app-pdbe [entrezId]="gene.entrezId"></app-pdbe>
+							<app-pdbe [entrezId]="gene.entrezId" />
 						</div>
 
 						<!-- Alphafold starts -->
@@ -434,10 +433,9 @@
 						</div>
 
 						<div class="col-12 mt-3">
-							<app-human-protein-structure
-								*ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
+							<app-human-protein-structure *ngIf="gene.uniprotKBId && gene.uniprotKBId.length"
 								[uniprotId]="gene.uniprotKBId"
-							></app-human-protein-structure>
+							 />
 
 							<p *ngIf="!gene.uniprotKBId || !gene.uniprotKBId.length">No protein structure available</p>
 						</div>
@@ -448,7 +446,7 @@
 					<!-- Pharos starts -->
 					<div class="row section mt-5" id="pharos">
 						<div class="col-12">
-							<app-pharos [gene]="gene"></app-pharos>
+							<app-pharos [gene]="gene" />
 						</div>
 					</div>
 					<!-- pharos control ends -->
@@ -456,7 +454,7 @@
 					<!-- Collaboration starts -->
 					<div class="row section mt-5" id="modelmatcher">
 						<div class="col-12">
-							<app-modelmatcher [gene]="gene" *ngIf="!geneLoading"></app-modelmatcher>
+							<app-modelmatcher [gene]="gene" *ngIf="!geneLoading" />
 						</div>
 					</div>
 					<!-- Collaboration ends -->
@@ -466,17 +464,16 @@
 	</div>
 	<div
 		class="sidenav-container"
-		[ngClass]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
+		[class]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
 		*ngIf="!smallScreen"
 	>
-		<app-sidenav
-			[variant]="variantString"
+		<app-sidenav [variant]="variantString"
 			[gene]="gene"
 			[sidenavOpened]="sidenavOpened"
 			(change)="toggleSidenav($event)"
 			[smallScreen]="smallScreen"
-		></app-sidenav>
+		 />
 	</div>
 </div>
 
-<app-scroll-top-button [right]="sidenavOpened ? '262px' : '84px'"></app-scroll-top-button>
+<app-scroll-top-button [right]="sidenavOpened ? '262px' : '84px'" />

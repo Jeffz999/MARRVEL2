@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEventType, HttpResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
@@ -13,7 +13,8 @@ import { GnomADVariantData } from '../interfaces/data';
 	providedIn: 'root',
 })
 export class ApiService {
-	constructor(private http: HttpClient) {}
+	private http = inject(HttpClient);
+
 
 	getGenesBySymbolPrefix(taxonId: number, prefix: string): Observable<any> {
 		prefix = prefix.replace(/\s+/g, ' ');

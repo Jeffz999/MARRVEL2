@@ -18,7 +18,7 @@
 
 <div class="row mt-3">
 	<div class="col-12">
-		<app-geno2mp-phenotype-pictogram [categoryStatus]="phenotypes"></app-geno2mp-phenotype-pictogram>
+		<app-geno2mp-phenotype-pictogram [categoryStatus]="phenotypes" />
 	</div>
 </div>
 
@@ -75,12 +75,11 @@
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
 
-	<mat-paginator
-		*ngIf="data().length > 5"
+	<mat-paginator *ngIf="data().length > 5"
 		[length]="data().length || 0"
 		[pageSizeOptions]="[5, 10, 20]"
 		[pageSize]="10"
-	></mat-paginator>
+	 />
 </div>
 
 <div *ngIf="data() && !data().length">

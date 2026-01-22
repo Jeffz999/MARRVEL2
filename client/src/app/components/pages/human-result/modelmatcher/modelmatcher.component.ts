@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, input } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, input, inject } from '@angular/core';
 
 import { ModelmatcherService } from '../../../../services/modelmatcher.service';
 
@@ -28,13 +28,13 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     ],
 })
 export class ModelmatcherComponent implements OnChanges {
+	private mmSvc = inject(ModelmatcherService);
+
 	readonly gene = input.required<HumanGene>();
 	data?: ModelMatcherData[];
 	loading = true;
 
 	taxonIdToInfo = TAXONID_TO_INFO;
-
-	constructor(private mmSvc: ModelmatcherService) {}
 
 	ngOnChanges(changes: SimpleChanges): void {
 		if (changes.gene.previousValue !== changes.gene.currentValue) {

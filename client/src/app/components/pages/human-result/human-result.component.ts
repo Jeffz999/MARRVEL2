@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -12,7 +12,7 @@ import { Variant } from '../../../interfaces/variant';
 import { Animations } from 'src/app/animations';
 import { MatSelectChange, MatSelect, MatOption } from '@angular/material/select';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { MatFormField, MatLabel } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
@@ -51,46 +51,50 @@ import { ScrollTopButtonComponent } from '../../scroll-top-button/scroll-top-but
     styleUrls: ['./human-result.component.scss'],
     animations: [Animations.fadeInOut, Animations.toggleInOut],
     imports: [
-        NgIf,
-        NgClass,
-        NavbarComponent,
-        MatFormField,
-        MatLabel,
-        MatSelect,
-        NgFor,
-        MatOption,
-        MatButton,
-        MatIcon,
-        ForwardAnnotationComponent,
-        OmimComponent,
-        DbnsfpComponent,
-        ClinvarComponent,
-        Geno2mpComponent,
-        DecipherDiseaseComponent,
-        MatDivider,
-        GnomADComponent,
-        GnomADGeneComponent,
-        DgvComponent,
-        DECIPHERComponent,
-        OrthologsComponent,
-        GtexBoxplotComponent,
-        AgrExpressionComponent,
-        PhenotypesComponent,
-        GeneOntologyComponent,
-        PrimateComponent,
-        SmartProteinDomainComponent,
-        DioptAlignmentComponent,
-        MatProgressBar,
-        PpiComponent,
-        PdbeComponent,
-        HumanProteinStructureComponent,
-        PharosComponent,
-        ModelmatcherComponent,
-        SidenavComponent,
-        ScrollTopButtonComponent,
-    ],
+    NgIf,
+    NavbarComponent,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    NgFor,
+    MatOption,
+    MatButton,
+    MatIcon,
+    ForwardAnnotationComponent,
+    OmimComponent,
+    DbnsfpComponent,
+    ClinvarComponent,
+    Geno2mpComponent,
+    DecipherDiseaseComponent,
+    MatDivider,
+    GnomADComponent,
+    GnomADGeneComponent,
+    DgvComponent,
+    DECIPHERComponent,
+    OrthologsComponent,
+    GtexBoxplotComponent,
+    AgrExpressionComponent,
+    PhenotypesComponent,
+    GeneOntologyComponent,
+    PrimateComponent,
+    SmartProteinDomainComponent,
+    DioptAlignmentComponent,
+    MatProgressBar,
+    PpiComponent,
+    PdbeComponent,
+    HumanProteinStructureComponent,
+    PharosComponent,
+    ModelmatcherComponent,
+    SidenavComponent,
+    ScrollTopButtonComponent
+],
 })
 export class HumanResultComponent implements OnInit, AfterViewInit {
+	private route = inject(ActivatedRoute);
+	private api = inject(ApiService);
+	private variantService = inject(VariantService);
+	private cdr = inject(ChangeDetectorRef);
+
 	geneLoading = true;
 	sidenavOpened = true;
 	smallScreen = false;
@@ -118,13 +122,6 @@ export class HumanResultComponent implements OnInit, AfterViewInit {
 
 	ppiLoading = true;
 	ppiData;
-
-	constructor(
-		private route: ActivatedRoute,
-		private api: ApiService,
-		private variantService: VariantService,
-		private cdr: ChangeDetectorRef,
-	) {}
 
 	ngOnInit() {
 		this.geneLoading = true;

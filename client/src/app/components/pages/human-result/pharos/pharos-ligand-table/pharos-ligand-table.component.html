@@ -67,10 +67,9 @@
 	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<mat-paginator
-	class="w-100"
+<mat-paginator class="w-100"
 	*ngIf="ligands().length > 5"
 	[pageSizeOptions]="[5, 10, 20, ligands().length]"
 	showFirstLastButtons
 	[pageSize]="5"
-></mat-paginator>
+ />

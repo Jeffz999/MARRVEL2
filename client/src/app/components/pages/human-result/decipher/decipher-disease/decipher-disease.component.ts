@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs/operators';
 
@@ -32,6 +32,8 @@ import { BasicDatatableComponent } from '../../../../basic-datatable/basic-datat
     ],
 })
 export class DecipherDiseaseComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly gene = input<HumanGene>(undefined);
 	readonly variant = input<Variant>(undefined);
 
@@ -49,8 +51,6 @@ export class DecipherDiseaseComponent implements OnInit {
 
 	categories = CATEGORIES;
 	categoryNameToCounts = null;
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		this.getData();

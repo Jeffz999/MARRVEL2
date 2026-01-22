@@ -1,4 +1,4 @@
-<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading" />
 <ng-container *ngIf="!loading">
 	<div class="row">
 		<div class="col-12">
@@ -101,11 +101,10 @@
 			</button>
 
 			<div class="mt-2" [@toggle]="alleleVisible">
-				<app-clinvar-variants-table
-					[gene]="gene()"
+				<app-clinvar-variants-table [gene]="gene()"
 					[variant]="variant()"
 					[data]="data"
-				></app-clinvar-variants-table>
+				 />
 			</div>
 		</div>
 	</div>

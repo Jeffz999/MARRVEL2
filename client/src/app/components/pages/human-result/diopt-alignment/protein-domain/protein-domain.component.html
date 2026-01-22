@@ -47,9 +47,8 @@
 	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<mat-paginator
-	class="protein-domain"
+<mat-paginator class="protein-domain"
 	[pageSizeOptions]="[5, 10, 20, data().length]"
 	[pageSize]="10"
 	[length]="data().length || 0"
-></mat-paginator>
+ />

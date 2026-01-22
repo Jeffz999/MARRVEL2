@@ -20,10 +20,10 @@
 		<div class="legend" (click)="toggleOrgan(idx)">
 			<div
 				class="mr-2 legend-color"
-				[ngStyle]="{ 'background-color': organLabelColors[idx] }"
-				[ngClass]="{ hidden: !organVisibility[idx] }"
+				[style.background-color]="organLabelColors[idx]"
+				[class.hidden]="!organVisibility[idx]"
 			></div>
-			<div class="legend-label" [ngClass]="{ hidden: !organVisibility[idx] }">
+			<div class="legend-label" [class.hidden]="!organVisibility[idx]">
 				{{ organ }}
 			</div>
 		</div>

@@ -6,7 +6,7 @@ import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeader
 import { HumanGene } from '../../../../../interfaces/gene';
 import { Variant } from '../../../../../interfaces/variant';
 import { ClinVarVarinat } from '../../../../../interfaces/data';
-import { NgIf, NgClass } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatFormField, MatPrefix, MatInput } from '@angular/material/input';
@@ -17,28 +17,27 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './clinvar-variants-table.component.html',
     styleUrls: ['./clinvar-variants-table.component.scss'],
     imports: [
-        NgIf,
-        MatSlideToggle,
-        FormsModule,
-        MatFormField,
-        MatIcon,
-        MatPrefix,
-        MatInput,
-        MatTable,
-        MatSort,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatSortHeader,
-        MatCellDef,
-        MatCell,
-        NgClass,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        MatPaginator,
-    ],
+    NgIf,
+    MatSlideToggle,
+    FormsModule,
+    MatFormField,
+    MatIcon,
+    MatPrefix,
+    MatInput,
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatSortHeader,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatPaginator
+],
 })
 export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 	readonly gene = input<HumanGene>(undefined);

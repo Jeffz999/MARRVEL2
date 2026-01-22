@@ -12,7 +12,7 @@
 </a>
 
 <div class="w-100" #domainPlotContainer>
-	<div class="w-100" [ngClass]="{ 'd-none': loading || !data || !data.length }">
+	<div class="w-100" [class.d-none]="loading || !data || !data.length">
 		<div class="w-100 mb-2 d-block mat-button-group">
 			<button matButton="outlined" color="primary" class="mr-2" (click)="zoom(0.1)">
 				<mat-icon class="mx-auto">add</mat-icon>
@@ -35,7 +35,7 @@
 	matSort
 	matSortActive="start"
 	matSortDirection="asc"
-	[ngClass]="{ 'd-none': loading || !data }"
+	[class.d-none]="loading || !data"
 >
 	<ng-container matColumnDef="name">
 		<th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
@@ -63,9 +63,8 @@
 	<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
-<mat-paginator
-	[pageSizeOptions]="[5, 10, 20, dataSource.data.length]"
+<mat-paginator [pageSizeOptions]="[5, 10, 20, dataSource.data.length]"
 	[pageSize]="5"
 	[length]="dataSource.data.length || 0"
-	[ngClass]="{ 'd-none': loading || !data }"
-></mat-paginator>
+	[class.d-none]="loading || !data"
+ />

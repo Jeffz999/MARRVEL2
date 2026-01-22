@@ -59,7 +59,7 @@
 					<div class="ribbon-cell ribbon-diopt-best-cell">
 						<span
 							*ngIf="taxonIdToInfo[taxonId].maxScore"
-							[ngClass]="{ 'text-bold-blue': aGenePheno.bestScore }"
+							[class.text-bold-blue]="aGenePheno.bestScore"
 						>
 							{{ aGenePheno.bestScore ? 'Y' : 'N' }}
 						</span>
@@ -96,7 +96,7 @@
 				<img
 					class="w-100"
 					src="/assets/icons/{{ catNameToIcon[cat.name] }}.svg"
-					[ngClass]="{ accent: mouseoverCat === cat.name }"
+					[class.accent]="mouseoverCat === cat.name"
 					[matTooltip]="cat.name"
 					(mouseenter)="selectCategory(null, null, cat.name, true)"
 				/>
@@ -119,7 +119,7 @@
 							"
 							[matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
 							(click)="selectCategory(taxonId, idx, cat.name)"
-							[ngClass]="{
+							[class]="{
 								mouseover: cat.name === mouseoverCat,
 								selected:
 									selected &&
@@ -137,7 +137,7 @@
 								!aGenePheno.phenotypes[cat.name] ||
 								!aGenePheno.phenotypes[cat.name].length
 							"
-							[ngClass]="{
+							[class]="{
 								mouseover: cat.name === mouseoverCat,
 								'bg-gray': !aGenePheno.phenotypes,
 							}"
@@ -162,7 +162,7 @@
 							"
 							[matTooltip]="aGenePheno.impcPhenotypes[cat.name].length + ' phenotypes'"
 							(click)="selectCategory(taxonId, idx, cat.name, false, true)"
-							[ngClass]="{
+							[class]="{
 								mouseover: cat.name === mouseoverCat,
 								selected:
 									selected &&
@@ -180,7 +180,7 @@
 								!aGenePheno.impcPhenotypes[cat.name] ||
 								!aGenePheno.impcPhenotypes[cat.name].length
 							"
-							[ngClass]="{
+							[class]="{
 								mouseover: cat.name === mouseoverCat,
 								'bg-gray': !aGenePheno.impcPhenotypes,
 							}"

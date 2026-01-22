@@ -14,7 +14,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
-import { NgStyle, NgClass, NgFor } from '@angular/common';
+import { NgFor } from '@angular/common';
 
 const PRIMARY_COLOR = '#7bd0cc';
 const WARN_COLOR = '#e5893e';
@@ -50,18 +50,16 @@ const WARN_COLOR = '#e5893e';
         ]),
     ],
     imports: [
-        MatIconButton,
-        MatTooltip,
-        MatIcon,
-        MatMenuTrigger,
-        MatMenu,
-        FormsModule,
-        MatSlider,
-        MatSliderThumb,
-        NgStyle,
-        NgClass,
-        NgFor,
-    ],
+    MatIconButton,
+    MatTooltip,
+    MatIcon,
+    MatMenuTrigger,
+    MatMenu,
+    FormsModule,
+    MatSlider,
+    MatSliderThumb,
+    NgFor
+],
 })
 export class PpiComponent implements OnInit, AfterViewInit {
 	readonly gene = input<HumanGene>(undefined);

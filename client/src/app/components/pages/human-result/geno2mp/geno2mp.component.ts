@@ -1,4 +1,4 @@
-import { Component, SimpleChanges, OnInit, input } from '@angular/core';
+import { Component, SimpleChanges, OnInit, input, inject } from '@angular/core';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { take } from 'rxjs/operators';
 
@@ -41,6 +41,8 @@ import { Geno2mpVariantTableComponent } from './geno2mp-variant-table/geno2mp-va
     ],
 })
 export class Geno2mpComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly variant = input<Variant | null>(undefined);
 	readonly gene = input<HumanGene | null>(undefined);
 
@@ -71,8 +73,6 @@ export class Geno2mpComponent implements OnInit {
 		'Missense/Other Indel': true,
 		'Splice/Frameshift/Nonsense/Stop Loss': true,
 	};
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		const variant = this.variant();

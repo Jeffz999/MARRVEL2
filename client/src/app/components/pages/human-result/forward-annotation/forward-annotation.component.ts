@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { Animations } from 'src/app/animations';
 import { Variant } from 'src/app/interfaces/variant';
 import { ApiService } from 'src/app/services/api.service';
@@ -34,10 +34,10 @@ interface TransVarForwardAnnotResult {
     imports: [NgIf, NgFor],
 })
 export class ForwardAnnotationComponent implements OnInit {
+	private apiService = inject(ApiService);
+
 	readonly variant = input<Variant>(undefined);
 	candidates;
-
-	constructor(private apiService: ApiService) {}
 
 	ngOnInit(): void {
 		this.candidates = undefined;

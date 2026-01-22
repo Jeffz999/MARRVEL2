@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -21,14 +21,14 @@ import { UnitDirective } from '../../../../directives/unit.directive';
     ],
 })
 export class GnomADComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly variant = input<Variant>(undefined);
 
 	loading = false;
 	data: GnomADVariantData;
 	alleleCount?: number;
 	homCount?: number;
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		const variant = this.variant();

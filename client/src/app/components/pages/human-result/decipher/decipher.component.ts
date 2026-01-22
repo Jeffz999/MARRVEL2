@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -26,6 +26,8 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class DECIPHERComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly gene = input<HumanGene>(undefined);
 	readonly variant = input<Variant>(undefined);
 
@@ -33,8 +35,6 @@ export class DECIPHERComponent implements OnInit {
 	data: DECIPHERData[] | null;
 
 	delCount: number | null = null;
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		this.requestData();

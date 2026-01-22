@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Inject, input, viewChild } from "@angular/core";
+import { Component, OnInit, ElementRef, input, viewChild, inject } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
@@ -13,7 +13,7 @@ import { SearchService } from "../../services/search.service";
 import { Animations } from "src/app/animations";
 
 import { Gene, HumanGene } from "src/app/interfaces/gene";
-import { NgClass, NgIf, NgFor } from "@angular/common";
+import { NgIf, NgFor } from "@angular/common";
 import { MatRadioGroup, MatRadioButton } from "@angular/material/radio";
 import { MatFormField, MatLabel, MatInput, MatHint, MatError } from "@angular/material/input";
 import { MatIcon } from "@angular/material/icon";
@@ -26,10 +26,9 @@ import { MatButton } from "@angular/material/button";
     templateUrl: "youtube-dialog.html",
 })
 export class YoutubeDialogComponent {
-    constructor(
-        public dialogRef: MatDialogRef<YoutubeDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any,
-    ) {}
+    dialogRef = inject<MatDialogRef<YoutubeDialogComponent>>(MatDialogRef);
+    data = inject(MAT_DIALOG_DATA);
+
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -42,32 +41,39 @@ export class YoutubeDialogComponent {
     styleUrls: ["./search-box.component.scss"],
     animations: [Animations.toggleInOut],
     imports: [
-        NgClass,
-        MatRadioGroup,
-        FormsModule,
-        MatRadioButton,
-        NgIf,
-        MatFormField,
-        MatLabel,
-        MatChipGrid,
-        MatChipRow,
-        MatChipRemove,
-        MatIcon,
-        MatInput,
-        MatAutocompleteTrigger,
-        MatChipInput,
-        ReactiveFormsModule,
-        MatHint,
-        MatAutocomplete,
-        NgFor,
-        MatOption,
-        ModelGeneSearchComponent,
-        MatSelect,
-        MatError,
-        MatButton,
-    ],
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatChipGrid,
+    MatChipRow,
+    MatChipRemove,
+    MatIcon,
+    MatInput,
+    MatAutocompleteTrigger,
+    MatChipInput,
+    ReactiveFormsModule,
+    MatHint,
+    MatAutocomplete,
+    NgFor,
+    MatOption,
+    ModelGeneSearchComponent,
+    MatSelect,
+    MatError,
+    MatButton
+],
 })
 export class SearchBoxComponent implements OnInit {
+    private router = inject(Router);
+    private route = inject(ActivatedRoute);
+    private api = inject(ApiService);
+    private geneSvc = inject(GeneService);
+    private searchSvc = inject(SearchService);
+    dialog = inject(MatDialog);
+    private sanitizer = inject(DomSanitizer);
+
     readonly compact = input(false);
 
     selectedInputType = "gene";
@@ -105,16 +111,6 @@ export class SearchBoxComponent implements OnInit {
     geneSuggestion = [];
     readonly geneInput = viewChild<ElementRef<HTMLInputElement>>("geneInput");
     readonly matAutocomplete = viewChild<MatAutocomplete>("auto");
-
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private api: ApiService,
-        private geneSvc: GeneService,
-        private searchSvc: SearchService,
-        public dialog: MatDialog,
-        private sanitizer: DomSanitizer,
-    ) {}
 
     ngOnInit() {
         this.route.url.subscribe((url) => {

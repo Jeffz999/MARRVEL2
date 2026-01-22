@@ -16,7 +16,7 @@
 		stroke-width="1"
 		stroke="#000"
 		*ngIf="oe() <= 1"
-		[ngClass]="{
+		[class]="{
 			'fill-white': oe() >= 0.6,
 			'fill-yellow': 0.4 <= oe() && oe() < 0.6,
 			'fill-orange': 0.2 <= oe() && oe() < 0.4,
@@ -28,7 +28,7 @@
 		stroke-width="1"
 		stroke="#000"
 		*ngIf="oe() > 1"
-		[ngClass]="{
+		[class]="{
 			'fill-white': oe() >= 0.6,
 			'fill-yellow': 0.4 <= oe() && oe() < 0.6,
 			'fill-orange': 0.2 <= oe() && oe() < 0.4,

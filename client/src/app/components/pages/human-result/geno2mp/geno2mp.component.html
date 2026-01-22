@@ -66,13 +66,12 @@
 
 		<!-- Geno2MP - Gene: variants -->
 		<div class="col-12 mt-3">
-			<app-geno2mp-gene-table
-				[data]="geneData"
+			<app-geno2mp-gene-table [data]="geneData"
 				[showMissense]="varCategoriesVisible['Missense/Other Indel']"
 				[showNonsense]="varCategoriesVisible['Splice/Frameshift/Nonsense/Stop Loss']"
 				[showNonCoding]="varCategoriesVisible['Non-Coding']"
 				[showSynonymous]="varCategoriesVisible['Synonymous/Unknown']"
-			></app-geno2mp-gene-table>
+			 />
 		</div>
 	</div>
 </div>
@@ -133,7 +132,7 @@
 
 		<!-- Geno2MP - Variant: variant table -->
 		<div class="col-12 mt-3" *ngIf="searchBy === 'variant' && variantData">
-			<app-geno2mp-variant-table [data]="variantData.hpoProfiles"></app-geno2mp-variant-table>
+			<app-geno2mp-variant-table [data]="variantData.hpoProfiles" />
 		</div>
 	</div>
 </div>

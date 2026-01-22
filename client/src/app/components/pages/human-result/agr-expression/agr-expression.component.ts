@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
@@ -7,7 +7,7 @@ import { take } from 'rxjs/operators';
 import { AGR_EXP_TERMS } from './agr-expression-terms';
 import { Animations } from 'src/app/animations';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
@@ -19,16 +19,17 @@ import { MatTooltip } from '@angular/material/tooltip';
     styleUrls: ['./agr-expression.component.scss'],
     animations: [Animations.toggle],
     imports: [
-        NgIf,
-        MatButton,
-        MatIcon,
-        MatSlideToggle,
-        MatTooltip,
-        NgFor,
-        NgClass,
-    ],
+    NgIf,
+    MatButton,
+    MatIcon,
+    MatSlideToggle,
+    MatTooltip,
+    NgFor
+],
 })
 export class AgrExpressionComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly gene = input<HumanGene>(undefined);
 
 	loading = true;
@@ -39,8 +40,6 @@ export class AgrExpressionComponent implements OnInit {
 	hoverTerm: string | null = null;
 	taxonIdToInfo = TAXONID_TO_INFO;
 	taxonIds = [10090, 10116, 7955, 7227, 6239, 4932, 4896];
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		this.api

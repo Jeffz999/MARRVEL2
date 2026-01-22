@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar />
 
 <div class="container mt-5 pt-5" *ngIf="!hideUpBox" [@toggle]>
 	<div class="row">
@@ -25,7 +25,7 @@
 		</div>
 
 		<div class="col-12 mt-2">
-			<app-multiple-gene-box (searchClick)="search($event)"></app-multiple-gene-box>
+			<app-multiple-gene-box (searchClick)="search($event)" />
 		</div>
 	</div>
 </div>
@@ -59,22 +59,21 @@
 
 		<div class="col-12 mt-3" *ngIf="wholeLoading" [@toggle]>
 			<h5 class="mb-1 text-left">Fetching data from server...</h5>
-			<mat-progress-bar mode="buffer" [value]="(wholeGenesHaveData / genes.length) * 100"></mat-progress-bar>
+			<mat-progress-bar mode="buffer" [value]="(wholeGenesHaveData / genes.length) * 100" />
 		</div>
 
 		<div class="col-12 mt-3">
-			<mat-paginator
-				[length]="genes.length"
+			<mat-paginator [length]="genes.length"
 				[pageSize]="gPerPage"
 				[pageSizeOptions]="[10, 30, 50]"
 				[pageIndex]="curPage"
 				(page)="onPageChange($event)"
-			></mat-paginator>
+			 />
 		</div>
 	</div>
 
 	<div class="overflow-x-scroll">
-		<table class="table border-top min-width-100perc" [ngClass]="{ loading: loading }">
+		<table class="table border-top min-width-100perc" [class.loading]="loading">
 			<thead class="border-top">
 				<tr>
 					<th>&nbsp;</th>
@@ -350,11 +349,10 @@
 		</table>
 	</div>
 
-	<mat-paginator
-		[length]="genes.length"
+	<mat-paginator [length]="genes.length"
 		[pageSize]="gPerPage"
 		[pageSizeOptions]="[10, 30, 50]"
 		[pageIndex]="curPage"
 		(page)="onPageChange($event)"
-	></mat-paginator>
+	 />
 </div>

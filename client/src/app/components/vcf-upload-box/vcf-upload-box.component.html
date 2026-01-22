@@ -49,5 +49,5 @@
 
 <div class="w-100" *ngIf="parsing" [@fadeInOut]>
 	<h5 class="mb-1 text-left">Parsing VCF file... ({{ fileProgress.toFixed(1) }} %)</h5>
-	<mat-progress-bar mode="determinate" [value]="fileProgress"></mat-progress-bar>
+	<mat-progress-bar mode="determinate" [value]="fileProgress" />
 </div>

@@ -35,7 +35,7 @@
 </mat-menu>
 
 <div class="">
-	<div class="graph-popup-container" [ngStyle]="popupContainerStyle">
+	<div class="graph-popup-container" [style]="popupContainerStyle">
 		<div class="graph-popup" [@slideVInOut]="selectedGene1 != null">
 			<div class="p-1 d-inline-flex justify-content-between w-100">
 				<span class="w-100 align-middle pl-2 font-weight-bolder" style="line-height: 40px">
@@ -49,7 +49,7 @@
 					<button mat-icon-button (click)="closePPIDetail()">
 						<mat-icon
 							class="transform-8"
-							[ngClass]="{
+							[class]="{
 								'rotateX-0': selectedGene1 != null,
 								'rotateX-180': !selectedGene1,
 							}"
@@ -91,7 +91,7 @@
 
 	<div id="ppiCyGraph" class="w-100 d-inline-flex" style="height: calc(100vh - 140px)"></div>
 
-	<div class="legend-container overflow-hidden d-inline-flex" [ngClass]="{ opened: legendOpened }">
+	<div class="legend-container overflow-hidden d-inline-flex" [class.opened]="legendOpened">
 		<div class="legend-detail-control d-flex user-select-none" (click)="legendOpened = !legendOpened">
 			<div class="align-self-center icon-wrapper">
 				<mat-icon class="align-self-center">chevron_left</mat-icon>

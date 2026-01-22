@@ -7,7 +7,7 @@ import { CATEGORIES, CAT_TO_ICON } from '../../../../category';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { NgFor, NgIf, NgClass } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-phenotypes',
@@ -15,12 +15,11 @@ import { NgFor, NgIf, NgClass } from '@angular/common';
     styleUrls: ['./phenotypes.component.scss'],
     animations: [Animations.toggle],
     imports: [
-        MatTooltip,
-        MatSlideToggle,
-        NgFor,
-        NgIf,
-        NgClass,
-    ],
+    MatTooltip,
+    MatSlideToggle,
+    NgFor,
+    NgIf
+],
 })
 export class PhenotypesComponent implements OnInit {
 	readonly gene = input<HumanGene>(undefined);

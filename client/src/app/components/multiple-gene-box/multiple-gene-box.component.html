@@ -31,17 +31,16 @@
 	</div>
 
 	<div class="col-12">
-		<div class="autocomplete-wrapper" [ngClass]="{ 'd-none': !showAutocomplete }">
+		<div class="autocomplete-wrapper" [class.d-none]="!showAutocomplete">
 			<div class="autocomplete">
 				<div
 					class="autocomplete-option d-flex align-items-center"
 					*ngFor="let aGene of geneSuggestion; let idx = index"
 				>
-					<mat-checkbox
-						[checked]="aGene.selected"
+					<mat-checkbox [checked]="aGene.selected"
 						color="primary"
 						(change)="toggleGene(aGene)"
-					></mat-checkbox>
+					 />
 
 					<div
 						(click)="toggleGene(aGene)"

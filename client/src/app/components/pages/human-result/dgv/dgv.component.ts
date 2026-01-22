@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -26,6 +26,8 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     ],
 })
 export class DgvComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly variant = input<Variant>(undefined);
 	readonly gene = input<HumanGene>(undefined);
 
@@ -36,8 +38,6 @@ export class DgvComponent implements OnInit {
 	lossCount: number | null = null;
 
 	tableTitle = '';
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		const gene = this.gene();

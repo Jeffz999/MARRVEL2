@@ -10,7 +10,7 @@ import { AGR_SLIM_IDS, AGR_SLIM_ID_TO_NAME } from './agrSlim';
 import { EXP_EVICODES, EVICODE_TO_NAME } from './evidence-code';
 import { TAXONID_TO_INFO } from '../../../../data/model-organisms';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgIf, NgFor } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 
 const TAXONID_TO_NAME = {
@@ -35,25 +35,24 @@ const NAMESPACE_TO_GOID = {
     styleUrls: ['./gene-ontology.component.scss'],
     animations: [Animations.toggle],
     imports: [
-        MatSlideToggle,
-        NgIf,
-        MatTooltip,
-        NgFor,
-        NgClass,
-        MatTable,
-        MatSort,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatSortHeader,
-        MatCellDef,
-        MatCell,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        MatPaginator,
-    ],
+    MatSlideToggle,
+    NgIf,
+    MatTooltip,
+    NgFor,
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatSortHeader,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatPaginator
+],
 })
 export class GeneOntologyComponent implements OnInit, AfterViewInit {
 	readonly gene = input<HumanGene>(undefined);

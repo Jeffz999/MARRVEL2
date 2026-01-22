@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar />
 
 <div class="container mt-5 pt-5" *ngIf="!hideUpBox" [@toggle]>
 	<div class="row">
@@ -9,7 +9,7 @@
 
 	<div class="row mt-5">
 		<div class="col-12">
-			<app-vcf-upload-box (dataChange)="onVariantDataChange($event)"></app-vcf-upload-box>
+			<app-vcf-upload-box (dataChange)="onVariantDataChange($event)" />
 		</div>
 	</div>
 </div>
@@ -55,17 +55,16 @@
 
 		<div class="col-12 mt-3" *ngIf="wholeLoading" [@toggle]>
 			<h5 class="mb-1 text-left">Fetching data from server...</h5>
-			<mat-progress-bar mode="buffer" [value]="(wholeVarsHaveData / variants.length) * 100"></mat-progress-bar>
+			<mat-progress-bar mode="buffer" [value]="(wholeVarsHaveData / variants.length) * 100" />
 		</div>
 
 		<div class="col-12 mt-3">
-			<mat-paginator
-				[length]="variants.length"
+			<mat-paginator [length]="variants.length"
 				[pageSize]="vPerPage"
 				[pageSizeOptions]="[10, 30, 50]"
 				[pageIndex]="curPage"
 				(page)="onPageChange($event)"
-			></mat-paginator>
+			 />
 
 			<mat-table class="w-100" [dataSource]="dataSource">
 				<ng-container matColumnDef="variant">
@@ -382,9 +381,9 @@
 							dbNSFP
 						</div>
 					</div>
-					<mat-header-row class="align-items-stretch"></mat-header-row>
+					<mat-header-row class="align-items-stretch" />
 				</ng-container>
-				<mat-row *matRowDef="let row; columns: displayedColumns" class="align-items-stretch"></mat-row>
+				<mat-row *matRowDef="let row; columns: displayedColumns" class="align-items-stretch" />
 			</mat-table>
 
 			<div *ngIf="loading">
@@ -397,13 +396,12 @@
 				</div>
 			</div>
 
-			<mat-paginator
-				[length]="variants.length"
+			<mat-paginator [length]="variants.length"
 				[pageSize]="vPerPage"
 				[pageSizeOptions]="[10, 30, 50]"
 				[pageIndex]="curPage"
 				(page)="onPageChange($event)"
-			></mat-paginator>
+			 />
 		</div>
 	</div>
 </div>

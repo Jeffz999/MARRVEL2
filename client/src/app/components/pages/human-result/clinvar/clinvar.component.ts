@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
@@ -31,6 +31,9 @@ import { ClinvarVariantsTableComponent } from './clinvar-variants-table/clinvar-
     ],
 })
 export class ClinvarComponent implements OnInit {
+	private api = inject(ApiService);
+	private sanitizer = inject(DomSanitizer);
+
 	readonly gene = input<HumanGene>(undefined);
 	readonly variant = input<Variant>(undefined);
 
@@ -42,11 +45,6 @@ export class ClinvarComponent implements OnInit {
 	sigFourTotal;
 
 	alleleVisible = false;
-
-	constructor(
-		private api: ApiService,
-		private sanitizer: DomSanitizer,
-	) {}
 
 	ngOnInit() {
 		const gene = this.gene();

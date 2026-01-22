@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -44,6 +44,9 @@ import { MatTooltip } from '@angular/material/tooltip';
     ],
 })
 export class BatchComponent implements OnInit {
+	private api = inject(ApiService);
+	private sanitizer = inject(DomSanitizer);
+
 	variants;
 	loading = false;
 
@@ -82,11 +85,6 @@ export class BatchComponent implements OnInit {
 	wholeVarsHaveData = 0;
 	wholeVarsPrepared = 0;
 	tsvWholeDownloadUrl = null;
-
-	constructor(
-		private api: ApiService,
-		private sanitizer: DomSanitizer,
-	) {}
 
 	ngOnInit() {}
 

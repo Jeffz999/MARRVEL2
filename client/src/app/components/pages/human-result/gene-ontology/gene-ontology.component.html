@@ -55,12 +55,12 @@
 			<div
 				class="ribbon-cell ribbon-header-name-cell"
 				*ngFor="let goId of categoryGoIds"
-				[ngClass]="{ other: goIdToName[goId]['other'] }"
+				[class.other]="goIdToName[goId]['other']"
 				(mouseenter)="mouseChange(true, goId)"
 			>
 				<div
 					class="label"
-					[ngClass]="{
+					[class]="{
 						'color-primary': goId === hoverGoId || (selected && goId === selected.goId),
 						'font-weight-bold': selected && goId === selected.goId,
 					}"
@@ -76,12 +76,12 @@
 				class="ribbon-cell-wrapper"
 				*ngFor="let goId of categoryGoIds"
 				(mouseenter)="mouseChange(true, goId)"
-				[ngClass]="{ other: goIdToName[goId]['other'] }"
+				[class.other]="goIdToName[goId]['other']"
 			>
 				<div
 					class="ribbon-cell bg-blue clickable"
 					*ngIf="gos['human']['gos'][goId] && gos['human']['gos'][goId].length"
-					[ngClass]="{
+					[class]="{
 						'col-highlight': goId === hoverGoId,
 						selected: selected && selected.orgName === 'human' && selected.goId === goId,
 					}"
@@ -98,7 +98,7 @@
 				<div
 					class="ribbon-cell"
 					*ngIf="!gos['human']['gos'][goId] || !gos['human']['gos'][goId].length"
-					[ngClass]="{ 'col-highlight': goId === hoverGoId }"
+					[class.col-highlight]="goId === hoverGoId"
 				></div>
 			</div>
 		</div>
@@ -111,13 +111,13 @@
 					<div
 						class="ribbon-cell-wrapper"
 						*ngFor="let goId of categoryGoIds"
-						[ngClass]="{ other: goIdToName[goId]['other'] }"
+						[class.other]="goIdToName[goId]['other']"
 						(mouseenter)="mouseChange(true, goId)"
 					>
 						<div
 							class="ribbon-cell bg-blue clickable"
 							*ngIf="ortholog['gos'][goId] && ortholog['gos'][goId].length"
-							[ngClass]="{
+							[class]="{
 								'col-highlight': goId === hoverGoId,
 								selected:
 									selected &&
@@ -140,7 +140,7 @@
 						<div
 							class="ribbon-cell"
 							*ngIf="!ortholog['gos'][goId] || !ortholog['gos'][goId].length"
-							[ngClass]="{ 'col-highlight': goId === hoverGoId }"
+							[class.col-highlight]="goId === hoverGoId"
 						></div>
 					</div>
 				</div>
@@ -196,5 +196,5 @@
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
-	<mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5"></mat-paginator>
+	<mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="5" />
 </div>

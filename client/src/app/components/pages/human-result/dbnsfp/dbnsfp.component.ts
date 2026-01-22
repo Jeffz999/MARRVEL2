@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { Variant } from './../../../../interfaces/variant';
@@ -25,6 +25,8 @@ import { RankscoreVisualComponent } from './rankscore-visual/rankscore-visual.co
     ],
 })
 export class DbnsfpComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly variant = input<Variant>(undefined);
 
 	loading = false;
@@ -32,7 +34,7 @@ export class DbnsfpComponent implements OnInit {
 	rankAverage: number | null = null;
 	scoresToDisplay: ScoreDisplayConfig[];
 
-	constructor(private api: ApiService) {
+	constructor() {
 		// Initialize scoresToDisplay with imported config and assign score transforms
 		this.scoresToDisplay = DBNSFP_SCORES_CONFIG.map((config) => ({
 			...config,

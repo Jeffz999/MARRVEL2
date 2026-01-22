@@ -1,4 +1,4 @@
-import { Component, OnInit, input } from '@angular/core';
+import { Component, OnInit, input, inject } from '@angular/core';
 
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
@@ -19,12 +19,12 @@ import { GnomADGeneVisualComponent } from './gnom-ad-gene-visual/gnom-ad-gene-vi
     ],
 })
 export class GnomADGeneComponent implements OnInit {
+	private api = inject(ApiService);
+
 	readonly gene = input<HumanGene>(undefined);
 
 	loading = false;
 	data: GnomADGeneSummary;
-
-	constructor(private api: ApiService) {}
 
 	ngOnInit() {
 		const gene = this.gene();

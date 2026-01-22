@@ -1,12 +1,12 @@
-import { Directive, ElementRef, OnChanges, input } from '@angular/core';
+import { Directive, ElementRef, OnChanges, input, inject } from '@angular/core';
 
 @Directive({ selector: '[appUnit]', })
 export class UnitDirective implements OnChanges {
+	private el = inject(ElementRef);
+
 	readonly count = input<number>(undefined);
 	readonly unit = input<string>(undefined);
 	readonly plural = input<string>(undefined);
-
-	constructor(private el: ElementRef) {}
 
 	ngOnChanges() {
 		this.plural = this.plural() || this.unit() + 's';

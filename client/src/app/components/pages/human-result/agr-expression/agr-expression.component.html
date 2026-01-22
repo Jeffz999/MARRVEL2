@@ -67,7 +67,7 @@
 						{{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}
 					</div>
 					<div class="ribbon-cell ribbon-diopt-best-cell text-center">
-						<span [ngClass]="{ 'text-bold-blue': row.bestScore }">
+						<span [class.text-bold-blue]="row.bestScore">
 							{{ row.bestScore ? 'Y' : 'N' }}
 						</span>
 					</div>
@@ -84,7 +84,7 @@
 				<div class="ribbon-cell ribbon-header-name-cell" *ngFor="let term of group">
 					<span
 						class="label"
-						[ngClass]="{
+						[class]="{
 							'color-primary': term === hoverTerm || term === selected,
 							'font-weight-bold': term === selected,
 						}"
@@ -110,13 +110,13 @@
 							<div
 								class="ribbon-cell bg-blue"
 								*ngIf="row.expression[term]"
-								[ngClass]="{ 'col-highlight': term === hoverTerm }"
+								[class.col-highlight]="term === hoverTerm"
 								[matTooltip]="row.symbol + '-' + term + ': ' + row.expression[term]"
 							></div>
 							<div
 								class="ribbon-cell"
 								*ngIf="!row.expression[term]"
-								[ngClass]="{ 'col-highlight': term === hoverTerm }"
+								[class.col-highlight]="term === hoverTerm"
 							></div>
 						</div>
 					</div>
