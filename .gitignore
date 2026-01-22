@@ -47,6 +47,7 @@ dev-db
 
 #docs
 documentation/
+frontend_checklist.md
 
 # pixi environments
 .pixi/*
