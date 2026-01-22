@@ -6,17 +6,15 @@ import { GeneService } from '../../../services/gene.service';
 
 import { HumanGene } from '../../../interfaces/gene';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-human-search',
     templateUrl: './human-search.component.html',
     styleUrls: ['./human-search.component.scss'],
     imports: [
-        NavbarComponent,
-        NgIf,
-        NgFor,
-    ],
+    NavbarComponent
+],
 })
 export class HumanSearchComponent implements OnInit {
 	private route = inject(ActivatedRoute);

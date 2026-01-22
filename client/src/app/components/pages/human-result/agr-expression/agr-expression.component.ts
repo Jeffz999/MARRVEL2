@@ -7,7 +7,7 @@ import { take } from 'rxjs/operators';
 import { AGR_EXP_TERMS } from './agr-expression-terms';
 import { Animations } from 'src/app/animations';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
@@ -19,12 +19,10 @@ import { MatTooltip } from '@angular/material/tooltip';
     styleUrls: ['./agr-expression.component.scss'],
     animations: [Animations.toggle],
     imports: [
-    NgIf,
     MatButton,
     MatIcon,
     MatSlideToggle,
-    MatTooltip,
-    NgFor
+    MatTooltip
 ],
 })
 export class AgrExpressionComponent implements OnInit {

@@ -11,7 +11,7 @@ import { Geno2MPResult } from '../../../../interfaces/data';
 import { Animations } from './../../../../animations';
 import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
 import { HPO_BROAD_TO_CAT } from '../../../../category';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatFormField, MatLabel } from '@angular/material/input';
@@ -26,19 +26,17 @@ import { Geno2mpVariantTableComponent } from './geno2mp-variant-table/geno2mp-va
     styleUrls: ['./geno2mp.component.scss'],
     animations: [Animations.toggleInOut],
     imports: [
-        NgIf,
-        MatButton,
-        MatIcon,
-        MatFormField,
-        MatLabel,
-        MatSelect,
-        MatOption,
-        NgFor,
-        MatSlideToggle,
-        MatTooltip,
-        Geno2mpGeneTableComponent,
-        Geno2mpVariantTableComponent,
-    ],
+    MatButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    MatSlideToggle,
+    MatTooltip,
+    Geno2mpGeneTableComponent,
+    Geno2mpVariantTableComponent
+],
 })
 export class Geno2mpComponent implements OnInit {
 	private api = inject(ApiService);

@@ -1,10 +1,10 @@
 <div class="row">
-	<div class="col-12">
-		<h3 class="d-inline-block align-middle">Approved Drugs and Active Ligands from PHAROS</h3>
-		<a
-			class="d-inline-block ml-3 align-middle"
-			target="_blank"
-			*ngIf="gene()"
+  <div class="col-12">
+    <h3 class="d-inline-block align-middle">Approved Drugs and Active Ligands from PHAROS</h3>
+    @if (gene()) {
+      <a
+        class="d-inline-block ml-3 align-middle"
+        target="_blank"
 			[attr.href]="'https://pharos.nih.gov/targets?q=' + gene().symbol"
 			target="_blank"
 		>
@@ -13,17 +13,22 @@
 				More on PHAROS
 			</button>
 		</a>
+}
 	</div>
 </div>
 
-<div class="mt-3" *ngIf="!loading && (!data || !data.length)" [@toggle]>
+@if (!loading && (!data || !data.length)) {
+<div class="mt-3" [@toggle]>
 	<p class="m-0">No data found.</p>
 </div>
+}
 
-<div class="row" *ngIf="!loading && data && data.length" [@toggle]>
+@if (!loading && data && data.length) {
+<div class="row" [@toggle]>
 	<div class="col-12" #pharosColumn>
 		<mat-accordion class="w-100">
-			<div *ngFor="let target of data; index as idx" class="mt-3">
+			@for (target of data; track target; let idx = $index) {
+<div class="mt-3">
 				<p class="mt-0 mb-2 d-table">
 					<mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
 						>insert_comment</mat-icon
@@ -48,26 +53,36 @@
 					</mat-expansion-panel-header>
 
 					<h3 class="mt-3 mb-3">Approved Drugs ({{ target.drugs ? target.drugs.length || 0 : 0 }})</h3>
-					<div *ngIf="target.drugs && target.drugs.length" style="margin-left: -24px; margin-right: -24px">
+					@if (target.drugs && target.drugs.length) {
+<div style="margin-left: -24px; margin-right: -24px">
 						<app-pharos-ligand-table [ligands]="target.drugs" />
 					</div>
-					<p *ngIf="!target.drugs || !target.drugs.length">
+}
+					@if (!target.drugs || !target.drugs.length) {
+<p>
 						No drug found for {{ target.accession }}/{{ target.name }}
 					</p>
+}
 
 					<h3 class="mt-5 mb-3">Active Ligands ({{ target.ligands ? target.ligands.length || 0 : 0 }})</h3>
-					<div
-						*ngIf="target.ligands && target.ligands.length"
+					@if (target.ligands && target.ligands.length) {
+<div
+					
 						style="margin-left: -24px; margin-right: -24px"
 						class="mb-2"
 					>
 						<app-pharos-ligand-table [ligands]="target.ligands" />
 					</div>
-					<p *ngIf="!target.ligands || !target.ligands.length" class="mt-0 mb-2">
+}
+					@if (!target.ligands || !target.ligands.length) {
+<p class="mt-0 mb-2">
 						No active ligand found for {{ target.accession }}/{{ target.name }}
 					</p>
+}
 				</mat-expansion-panel>
 			</div>
+}
 		</mat-accordion>
 	</div>
 </div>
+}

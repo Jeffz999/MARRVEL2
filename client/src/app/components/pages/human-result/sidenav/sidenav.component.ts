@@ -1,5 +1,5 @@
 import { Component, OnChanges, input, output, model } from "@angular/core";
-import { DOCUMENT, NgIf } from "@angular/common";
+import { DOCUMENT } from "@angular/common";
 import { MatIconButton } from "@angular/material/button";
 import { MatIcon } from "@angular/material/icon";
 import { MatTooltip } from "@angular/material/tooltip";
@@ -8,7 +8,7 @@ import { MatTooltip } from "@angular/material/tooltip";
     selector: "app-sidenav",
     templateUrl: "./sidenav.component.html",
     styleUrls: ["./sidenav.component.scss"],
-    imports: [MatIconButton, MatIcon, NgIf, MatTooltip],
+    imports: [MatIconButton, MatIcon, MatTooltip],
 })
 export class SidenavComponent implements OnChanges {
     readonly gene = input<object | null>(undefined);

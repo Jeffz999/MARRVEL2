@@ -10,7 +10,7 @@ import { PhenotypePopulated } from 'src/app/interfaces/data';
 
 import { CATEGORIES } from 'src/app/category';
 import { Animations } from 'src/app/animations';
-import { NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
@@ -23,13 +23,12 @@ import { BasicDatatableComponent } from '../../../../basic-datatable/basic-datat
     styleUrls: ['./decipher-disease.component.scss'],
     animations: [Animations.toggleInOut],
     imports: [
-        NgIf,
-        MatButton,
-        MatIcon,
-        MatSlideToggle,
-        Geno2mpPhenotypePictogramComponent,
-        BasicDatatableComponent,
-    ],
+    MatButton,
+    MatIcon,
+    MatSlideToggle,
+    Geno2mpPhenotypePictogramComponent,
+    BasicDatatableComponent
+],
 })
 export class DecipherDiseaseComponent implements OnInit {
 	private api = inject(ApiService);

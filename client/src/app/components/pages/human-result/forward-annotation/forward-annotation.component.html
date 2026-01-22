@@ -1,24 +1,31 @@
-<div class="d-flex w-100" *ngIf="candidates" [@toggle]>
-	<div>
-		<span
-			class="d-inline-block mr-2"
-			style="font-weight: 500; font-size: 0.85em; line-height: 1.6; color: rgba(0, 0, 0, 0.6)"
-		>
-			Protein Change
-		</span>
-	</div>
-	<div class="flex-grow-1">
-		<span *ngFor="let cand of candidates" class="d-block annot-wrapper">
-			{{ cand.annot }}
-			(<span *ngFor="let trpt of cand.transcripts" class="trpt-wrapper">
-				<a [attr.href]="trpt.extLink" target="_blank" class="align-middle">{{ trpt.transcriptId }}</a>
-				<span
-					class="badge badge-secondary align-middle ml-1"
-					style="font-size: 0.55rem"
-					*ngIf="trpt.isCanonical"
-					>Ensembl canonical</span
-				> </span
-			>)
-		</span>
-	</div>
-</div>
+@if (candidates) {
+  <div class="d-flex w-100" [@toggle]>
+    <div>
+      <span
+        class="d-inline-block mr-2"
+        style="font-weight: 500; font-size: 0.85em; line-height: 1.6; color: rgba(0, 0, 0, 0.6)"
+        >
+        Protein Change
+      </span>
+    </div>
+    <div class="flex-grow-1">
+      @for (cand of candidates; track cand) {
+        <span class="d-block annot-wrapper">
+          {{ cand.annot }}
+          (@for (trpt of cand.transcripts; track trpt) {
+          <span class="trpt-wrapper">
+            <a [attr.href]="trpt.extLink" target="_blank" class="align-middle">{{ trpt.transcriptId }}</a>
+            @if (trpt.isCanonical) {
+              <span
+                class="badge badge-secondary align-middle ml-1"
+                style="font-size: 0.55rem"
+                >Ensembl canonical</span
+                >
+                } </span
+                >
+                })
+              </span>
+            }
+          </div>
+        </div>
+      }

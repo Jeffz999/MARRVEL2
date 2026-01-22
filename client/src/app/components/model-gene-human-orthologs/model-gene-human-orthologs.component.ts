@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 
@@ -13,14 +13,12 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './model-gene-human-orthologs.component.html',
     styleUrls: ['./model-gene-human-orthologs.component.scss'],
     imports: [
-        NavbarComponent,
-        NgIf,
-        RouterLink,
-        MatTooltip,
-        NgFor,
-        MatIcon,
-        NgClass,
-    ],
+    NavbarComponent,
+    RouterLink,
+    MatTooltip,
+    MatIcon,
+    NgClass
+],
 })
 export class ModelGeneHumanOrthologsComponent implements OnInit {
 	private route = inject(ActivatedRoute);

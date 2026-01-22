@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 
 import { Animations } from './../../../../animations';
-import { NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -14,7 +14,6 @@ import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatabl
     styleUrls: ['./omim.component.scss'],
     animations: [Animations.fadeInOut, Animations.toggleInOut],
     imports: [
-    NgIf,
     MatButton,
     MatIcon,
     MatTooltip,

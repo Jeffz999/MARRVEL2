@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, input, viewChild, output } from '@ang
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
-import { NgIf } from '@angular/common';
+
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
@@ -10,22 +10,21 @@ import { MatTooltip } from '@angular/material/tooltip';
     templateUrl: './protein-domain.component.html',
     styleUrls: ['./protein-domain.component.scss'],
     imports: [
-        NgIf,
-        MatTable,
-        MatSort,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatSortHeader,
-        MatCellDef,
-        MatCell,
-        MatTooltip,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        MatPaginator,
-    ],
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatSortHeader,
+    MatCellDef,
+    MatCell,
+    MatTooltip,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatPaginator
+],
 })
 export class ProteinDomainComponent implements OnInit, AfterViewInit {
 	readonly data = input<DomainData[]>(undefined);

@@ -11,7 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { DbNSFPData } from 'src/app/interfaces/data';
 import { of } from 'rxjs';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import { NgIf, NgFor } from '@angular/common';
+
 import { VcfUploadBoxComponent } from '../../vcf-upload-box/vcf-upload-box.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -23,25 +23,23 @@ import { MatTooltip } from '@angular/material/tooltip';
     styleUrls: ['./batch.component.scss'],
     animations: [Animations.toggleInOut, Animations.fadeInOut],
     imports: [
-        NavbarComponent,
-        NgIf,
-        VcfUploadBoxComponent,
-        MatIcon,
-        MatProgressBar,
-        MatPaginator,
-        MatTable,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatCellDef,
-        MatCell,
-        MatTooltip,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        NgFor,
-    ],
+    NavbarComponent,
+    VcfUploadBoxComponent,
+    MatIcon,
+    MatProgressBar,
+    MatPaginator,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    MatTooltip,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow
+],
 })
 export class BatchComponent implements OnInit {
 	private api = inject(ApiService);

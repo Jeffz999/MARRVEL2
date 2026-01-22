@@ -1,24 +1,26 @@
 <h4>{{ methodName() }}</h4>
 <!--sup>
-  <mat-icon
-    [matTooltip]="methodTooltip"
-  >help</mat-icon>
+<mat-icon
+  [matTooltip]="methodTooltip"
+>help</mat-icon>
 </sup-->
-<span
-	class="text-underline-dashed pred-score"
-	*ngIf="score()"
-	[ngClass]="getColorBin(minValue(), maxValue(), score())"
-	[matTooltip]="scoreTooltip()"
->
-	{{ score() }}
-</span>
-<span
-	class="text-underline-dashed pred-prediction"
-	*ngIf="prediction()"
-	[ngClass]="predictionColorClass()[prediction()]"
-	[matTooltip]="scoreTooltip()"
->
-	{{ prediction() }}
-</span>
+@if (score()) {
+  <span
+    class="text-underline-dashed pred-score"
+    [ngClass]="getColorBin(minValue(), maxValue(), score())"
+    [matTooltip]="scoreTooltip()"
+    >
+    {{ score() }}
+  </span>
+}
+@if (prediction()) {
+  <span
+    class="text-underline-dashed pred-prediction"
+    [ngClass]="predictionColorClass()[prediction()]"
+    [matTooltip]="scoreTooltip()"
+    >
+    {{ prediction() }}
+  </span>
+}
 <span class="label">Rank score:</span>
 <app-rankscore-visual [rankscore]="rankscore()" />

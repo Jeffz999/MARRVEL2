@@ -13,7 +13,7 @@ import { SearchService } from "../../services/search.service";
 import { Animations } from "src/app/animations";
 
 import { Gene, HumanGene } from "src/app/interfaces/gene";
-import { NgIf, NgFor } from "@angular/common";
+
 import { MatRadioGroup, MatRadioButton } from "@angular/material/radio";
 import { MatFormField, MatLabel, MatInput, MatHint, MatError } from "@angular/material/input";
 import { MatIcon } from "@angular/material/icon";
@@ -44,7 +44,6 @@ export class YoutubeDialogComponent {
     MatRadioGroup,
     FormsModule,
     MatRadioButton,
-    NgIf,
     MatFormField,
     MatLabel,
     MatChipGrid,
@@ -57,7 +56,6 @@ export class YoutubeDialogComponent {
     ReactiveFormsModule,
     MatHint,
     MatAutocomplete,
-    NgFor,
     MatOption,
     ModelGeneSearchComponent,
     MatSelect,

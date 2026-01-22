@@ -8,7 +8,7 @@ import { Animations } from '../../../../../animations';
 
 import { HPO_BROAD_TO_CAT } from './../../../../../category';
 import { Geno2mpPhenotypePictogramComponent } from '../geno2mp-phenotype-pictogram/geno2mp-phenotype-pictogram.component';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-geno2mp-variant-table',
@@ -16,23 +16,22 @@ import { NgIf } from '@angular/common';
     styleUrls: ['./geno2mp-variant-table.component.scss'],
     animations: [Animations.slideIn],
     imports: [
-        MatSlideToggle,
-        Geno2mpPhenotypePictogramComponent,
-        NgIf,
-        MatTable,
-        MatSort,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatHeaderCell,
-        MatSortHeader,
-        MatCellDef,
-        MatCell,
-        MatHeaderRowDef,
-        MatHeaderRow,
-        MatRowDef,
-        MatRow,
-        MatPaginator,
-    ],
+    MatSlideToggle,
+    Geno2mpPhenotypePictogramComponent,
+    MatTable,
+    MatSort,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatSortHeader,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatPaginator
+],
 })
 export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 	readonly data = input<any[] | null>(undefined);

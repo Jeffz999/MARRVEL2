@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Gene } from 'src/app/interfaces/gene';
 import { MatFormField, MatLabel, MatInput, MatHint } from '@angular/material/input';
 import { MatSelect, MatOption } from '@angular/material/select';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -15,24 +15,22 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './model-gene-search.component.html',
     styleUrls: ['./model-gene-search.component.scss'],
     imports: [
-        MatFormField,
-        MatLabel,
-        MatSelect,
-        FormsModule,
-        MatOption,
-        NgIf,
-        MatChipGrid,
-        MatChipRow,
-        MatChipRemove,
-        MatIcon,
-        MatInput,
-        MatAutocompleteTrigger,
-        MatChipInput,
-        ReactiveFormsModule,
-        MatAutocomplete,
-        NgFor,
-        MatHint,
-    ],
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    FormsModule,
+    MatOption,
+    MatChipGrid,
+    MatChipRow,
+    MatChipRemove,
+    MatIcon,
+    MatInput,
+    MatAutocompleteTrigger,
+    MatChipInput,
+    ReactiveFormsModule,
+    MatAutocomplete,
+    MatHint
+],
 })
 export class ModelGeneSearchComponent implements OnInit {
 	private api = inject(ApiService);

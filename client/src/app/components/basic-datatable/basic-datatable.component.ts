@@ -4,7 +4,7 @@ import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 import { Animations } from '../../animations';
-import { NgIf, NgFor } from '@angular/common';
+
 import { UnitDirective } from '../../directives/unit.directive';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -18,14 +18,12 @@ import { HighlightSearch } from '../../highlight';
     styleUrls: ['./basic-datatable.component.scss'],
     animations: [Animations.slideIn, Animations.fadeInOut],
     imports: [
-    NgIf,
     UnitDirective,
     MatIconButton,
     MatIcon,
     MatTooltip,
     MatTable,
     MatSort,
-    NgFor,
     MatColumnDef,
     MatHeaderCellDef,
     MatHeaderCell,

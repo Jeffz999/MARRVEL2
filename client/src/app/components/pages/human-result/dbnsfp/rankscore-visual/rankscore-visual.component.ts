@@ -1,11 +1,11 @@
 import { Component, OnInit, input } from '@angular/core';
-import { NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-rankscore-visual',
     templateUrl: './rankscore-visual.component.html',
     styleUrls: ['./rankscore-visual.component.scss'],
-    imports: [NgIf],
+    imports: [],
 })
 export class RankscoreVisualComponent implements OnInit {
 	readonly rankscore = input<number>(undefined);

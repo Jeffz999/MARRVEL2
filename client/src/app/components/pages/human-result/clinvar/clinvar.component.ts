@@ -7,7 +7,7 @@ import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
 
 import { Animations } from '../../../../animations';
-import { NgIf } from '@angular/common';
+
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -21,14 +21,13 @@ import { ClinvarVariantsTableComponent } from './clinvar-variants-table/clinvar-
     styleUrls: ['./clinvar.component.scss'],
     animations: [Animations.toggle],
     imports: [
-        NgIf,
-        MatProgressBar,
-        MatButton,
-        MatIcon,
-        MatTooltip,
-        UnitDirective,
-        ClinvarVariantsTableComponent,
-    ],
+    MatProgressBar,
+    MatButton,
+    MatIcon,
+    MatTooltip,
+    UnitDirective,
+    ClinvarVariantsTableComponent
+],
 })
 export class ClinvarComponent implements OnInit {
 	private api = inject(ApiService);

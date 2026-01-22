@@ -2,7 +2,7 @@ import { Component, OnInit, input, inject } from '@angular/core';
 import { Animations } from 'src/app/animations';
 import { Variant } from 'src/app/interfaces/variant';
 import { ApiService } from 'src/app/services/api.service';
-import { NgIf, NgFor } from '@angular/common';
+
 
 interface TransVarResultCoord {
 	annot: string;
@@ -31,7 +31,7 @@ interface TransVarForwardAnnotResult {
     templateUrl: './forward-annotation.component.html',
     styleUrls: ['./forward-annotation.component.scss'],
     animations: [Animations.toggleInOut],
-    imports: [NgIf, NgFor],
+    imports: [],
 })
 export class ForwardAnnotationComponent implements OnInit {
 	private apiService = inject(ApiService);

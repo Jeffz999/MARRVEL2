@@ -1,6 +1,6 @@
 import { Component, OnInit, input, inject } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import { NgIf } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 
@@ -9,10 +9,9 @@ import { MatTooltip } from '@angular/material/tooltip';
     templateUrl: './pdbe.component.html',
     styleUrls: ['./pdbe.component.scss'],
     imports: [
-        NgIf,
-        MatIcon,
-        MatTooltip,
-    ],
+    MatIcon,
+    MatTooltip
+],
 })
 export class PdbeComponent implements OnInit {
 	private apiService = inject(ApiService);

@@ -6,7 +6,7 @@ import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeader
 import { HumanGene } from '../../../../../interfaces/gene';
 import { Variant } from '../../../../../interfaces/variant';
 import { ClinVarVarinat } from '../../../../../interfaces/data';
-import { NgIf } from '@angular/common';
+
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 import { MatFormField, MatPrefix, MatInput } from '@angular/material/input';
@@ -17,7 +17,6 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './clinvar-variants-table.component.html',
     styleUrls: ['./clinvar-variants-table.component.scss'],
     imports: [
-    NgIf,
     MatSlideToggle,
     FormsModule,
     MatFormField,

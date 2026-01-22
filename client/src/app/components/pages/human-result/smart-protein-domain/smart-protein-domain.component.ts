@@ -6,7 +6,7 @@ import { ProteinDomainPlot } from '../../../../d3/protein-domain-plot';
 import { SmartDomain } from '../../../../interfaces/data';
 import { HumanGene } from '../../../../interfaces/gene';
 import { ApiService } from '../../../../services/api.service';
-import { NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
@@ -15,7 +15,6 @@ import { MatIcon } from '@angular/material/icon';
     templateUrl: './smart-protein-domain.component.html',
     styleUrls: ['./smart-protein-domain.component.scss'],
     imports: [
-    NgIf,
     MatButton,
     MatIcon,
     MatTable,

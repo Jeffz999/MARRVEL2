@@ -8,7 +8,7 @@ import { MULTIGENE_EXAMPLE } from './multiple-genes-example';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 import { MatFormField, MatLabel, MatInput, MatHint } from '@angular/material/input';
 import { MatChipGrid, MatChipRow, MatChipRemove, MatChipInput } from '@angular/material/chips';
-import { NgFor } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatCheckbox } from '@angular/material/checkbox';
 
@@ -21,7 +21,6 @@ import { MatCheckbox } from '@angular/material/checkbox';
     MatFormField,
     MatLabel,
     MatChipGrid,
-    NgFor,
     MatChipRow,
     MatChipRemove,
     MatIcon,

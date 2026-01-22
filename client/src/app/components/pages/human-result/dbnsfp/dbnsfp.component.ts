@@ -6,7 +6,7 @@ import { ApiService } from '../../../../services/api.service';
 import { DbNSFPData, DBNSFP_METHOD_TO_INFO as METHOD_TO_INFO } from 'src/app/interfaces/data';
 import { Animations } from 'src/app/animations';
 import { DBNSFP_SCORES_CONFIG, ScoreDisplayConfig } from './dbnsfp-scores-config';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { RankscoreVisualComponent } from './rankscore-visual/rankscore-visual.component';
@@ -17,12 +17,10 @@ import { RankscoreVisualComponent } from './rankscore-visual/rankscore-visual.co
     styleUrls: ['./dbnsfp.component.scss'],
     animations: [Animations.toggleInOut],
     imports: [
-        NgIf,
-        MatIcon,
-        MatTooltip,
-        NgFor,
-        RankscoreVisualComponent,
-    ],
+    MatIcon,
+    MatTooltip,
+    RankscoreVisualComponent
+],
 })
 export class DbnsfpComponent implements OnInit {
 	private api = inject(ApiService);

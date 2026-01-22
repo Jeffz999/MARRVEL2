@@ -1,167 +1,194 @@
 <div class="text-center" [class.compact]="compact()">
-	<div class="row mb-3" [class.pr-xs-15px]="compact()">
-		<div class="col-12 text-left">
-			<mat-radio-group
-				color="primary"
-				aria-label="Select an option"
-				[(ngModel)]="selectedInputType"
-				(change)="onInputTypeChange($event)"
-				name="inputType"
-			>
-				<mat-radio-button color="primary" value="gene" class="mr-2">Human gene</mat-radio-button>
-				<mat-radio-button color="primary" value="protein" class="mr-2">Human protein</mat-radio-button>
-				<mat-radio-button color="primary" value="modelgene" class="mr-2" *ngIf="!compact()"
-					>Model organism gene</mat-radio-button
-				>
-				<mat-radio-button color="primary" value="vcf" class="mr-2" *ngIf="!compact()"
-					>Upload VCF file</mat-radio-button
-				>
-				<mat-radio-button color="primary" value="multigenes" class="mr-2" *ngIf="!compact()"
-					>Multiple human genes</mat-radio-button
-				>
-			</mat-radio-group>
-		</div>
+  <div class="row mb-3" [class.pr-xs-15px]="compact()">
+    <div class="col-12 text-left">
+      <mat-radio-group
+        color="primary"
+        aria-label="Select an option"
+        [(ngModel)]="selectedInputType"
+        (change)="onInputTypeChange($event)"
+        name="inputType"
+        >
+        <mat-radio-button color="primary" value="gene" class="mr-2">Human gene</mat-radio-button>
+        <mat-radio-button color="primary" value="protein" class="mr-2">Human protein</mat-radio-button>
+        @if (!compact()) {
+          <mat-radio-button color="primary" value="modelgene" class="mr-2"
+            >Model organism gene</mat-radio-button
+            >
+          }
+          @if (!compact()) {
+            <mat-radio-button color="primary" value="vcf" class="mr-2"
+              >Upload VCF file</mat-radio-button
+              >
+            }
+            @if (!compact()) {
+              <mat-radio-button color="primary" value="multigenes" class="mr-2"
+                >Multiple human genes</mat-radio-button
+                >
+              }
+            </mat-radio-group>
+          </div>
 
-		<div
-			class="mt-2"
+          @if (selectedInputType === 'gene') {
+            <div
+              class="mt-2"
 			[class]="{
 				'col-12': !compact(),
 				'col-10 col-lg-5 pr-0': compact(),
 			}"
-			*ngIf="selectedInputType === 'gene'"
-		>
-			<mat-form-field appearance="fill" class="w-100" id="geneInputFormField">
-				<mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
-				<mat-chip-grid #geneChipGrid>
-					<mat-chip-row *ngIf="gene" (removed)="removeGene(gene)">
-						{{ gene.symbol }}
-						<button matChipRemove aria-label="Remove gene">
-							<mat-icon>cancel</mat-icon>
-						</button>
-					</mat-chip-row>
-				</mat-chip-grid>
-				<input
-					matInput
-					#geneInput
-					[formControl]="geneInputCtrl"
-					(keyup)="onGeneInput($event, geneInput.value)"
-					(keyup.enter)="onEnterKey(geneInput.value)"
-					[matAutocomplete]="auto"
-					[matChipInputFor]="geneChipGrid"
-					matChipInputAddOnBlur
-					(matChipInputTokenEnd)="addGene($event)"
-				/>
-				<mat-hint align="start" *ngIf="!compact()"
-					><strong>Please use official HGNC Gene Symbol</strong></mat-hint
-				>
-			</mat-form-field>
+              >
+              <mat-form-field appearance="fill" class="w-100" id="geneInputFormField">
+                <mat-label>Human Gene Symbol (official HGNC symbol)</mat-label>
+                <mat-chip-grid #geneChipGrid>
+                  @if (gene) {
+                    <mat-chip-row (removed)="removeGene(gene)">
+                      {{ gene.symbol }}
+                      <button matChipRemove aria-label="Remove gene">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip-row>
+                  }
+                </mat-chip-grid>
+                <input
+                  matInput
+                  #geneInput
+                  [formControl]="geneInputCtrl"
+                  (keyup)="onGeneInput($event, geneInput.value)"
+                  (keyup.enter)="onEnterKey(geneInput.value)"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="geneChipGrid"
+                  matChipInputAddOnBlur
+                  (matChipInputTokenEnd)="addGene($event)"
+                  />
+                @if (!compact()) {
+                  <mat-hint align="start"
+                    ><strong>Please use official HGNC Gene Symbol</strong></mat-hint
+                    >
+                  }
+                </mat-form-field>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
+                  @for (aGene of geneSuggestion; track aGene; let idx = $index) {
+                    <mat-option [attr.data-index]="idx" [value]="idx">
+                      <span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
+                      <span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
+                      <span class="float-right text-muted">{{ aGene.name }}</span>
+                    </mat-option>
+                  }
+                </mat-autocomplete>
+              </div>
+            }
 
-			<mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
-				<mat-option *ngFor="let aGene of geneSuggestion; let idx = index" [attr.data-index]="idx" [value]="idx">
-					<span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
-					<span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
-					<span class="float-right text-muted">{{ aGene.name }}</span>
-				</mat-option>
-			</mat-autocomplete>
-		</div>
-
-		<div
-			class="mt-2"
+            @if (selectedInputType === 'protein') {
+              <div
+                class="mt-2"
 			[class]="{
 				'col-12': !compact(),
 				'col-10 col-lg-5 pr-0': compact(),
 			}"
-			*ngIf="selectedInputType === 'protein'"
-		>
-			<mat-form-field appearance="fill" class="w-100">
-				<mat-label>Human Protein</mat-label>
-				<input matInput [(ngModel)]="protein" />
-			</mat-form-field>
-		</div>
+                >
+                <mat-form-field appearance="fill" class="w-100">
+                  <mat-label>Human Protein</mat-label>
+                  <input matInput [(ngModel)]="protein" />
+                </mat-form-field>
+              </div>
+            }
 
-		<div
-			class="mt-2"
+            @if (selectedInputType === 'modelgene') {
+              <div
+                class="mt-2"
 			[class]="{
 				'col-12': !compact(),
 				'col-10 col-lg-5 pr-0': compact(),
 			}"
-			*ngIf="selectedInputType === 'modelgene'"
-		>
-			<app-model-gene-search (geneSelected)="onModelGeneSelected($event)" />
-		</div>
+                >
+                <app-model-gene-search (geneSelected)="onModelGeneSelected($event)" />
+              </div>
+            }
 
-		<div
-			class="d-flex"
+            @if (selectedInputType === 'gene') {
+              <div
+                class="d-flex"
 			[class]="{
 				'col-12': !compact(),
 				'col-10 col-lg-5 mt-2 pr-0': compact(),
 			}"
-			*ngIf="selectedInputType === 'gene'"
-		>
-			<mat-form-field class="mr-2">
-				<mat-label>Genome Build</mat-label>
-				<mat-select matNativeControl required [(ngModel)]="genomeBuild">
-					<mat-option value="hg19">hg19</mat-option>
-					<mat-option value="hg38">hg38</mat-option>
-				</mat-select>
-			</mat-form-field>
-			<mat-form-field class="flex-grow-1">
-				<mat-label>Human Variant</mat-label>
-				<input
-					matInput
-					[formControl]="variantInputCtrl"
-					(input)="onVariantInput($event)"
-					(keyup.enter)="onEnterKey()"
-				/>
-				<mat-error *ngIf="!variantInputCtrl.valid"> Please check your variant format. </mat-error>
-			</mat-form-field>
-		</div>
+                >
+                <mat-form-field class="mr-2">
+                  <mat-label>Genome Build</mat-label>
+                  <mat-select matNativeControl required [(ngModel)]="genomeBuild">
+                    <mat-option value="hg19">hg19</mat-option>
+                    <mat-option value="hg38">hg38</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="flex-grow-1">
+                  <mat-label>Human Variant</mat-label>
+                  <input
+                    matInput
+                    [formControl]="variantInputCtrl"
+                    (input)="onVariantInput($event)"
+                    (keyup.enter)="onEnterKey()"
+                    />
+                  @if (!variantInputCtrl.valid) {
+                    <mat-error> Please check your variant format. </mat-error>
+                  }
+                </mat-form-field>
+              </div>
+            }
 
-		<div class="col-12 text-left search-box-example mb-5" *ngIf="!compact()">
-			<mat-hint *ngIf="selectedInputType === 'gene'">
-				Example:
-				<a href="/human/gene/26235/variant/6:99365567T>C">6:99365567 T>C / FBXL4</a>
-				or
-				<a href="/human/variant/6:99365567T>C">6:99365567 T>C</a>
-				or
-				<a href="/human/gene/26235">FBXL4</a>
-				or
-				<a href="/human/variant/NM_012160.3:c.541A>G">NM_012160.3:c.541A>G</a>
-			</mat-hint>
-
-			<mat-hint *ngIf="selectedInputType === 'protein'">
-				Example:
-				<a href="/human/protein/IRF2BPL:p.Pro372Arg">IRF2BPL:p.Pro372Arg</a>,
-				<a href="/human/protein/IRF2BPL:p.P372R">IRF2BPL:p.P372R</a>,
-				<a href="/human/protein/IRF2BPL:p.Gln126*">IRF2BPL:p.Gln126*</a>
-			</mat-hint>
-		</div>
-		<div
+            @if (!compact()) {
+              <div class="col-12 text-left search-box-example mb-5">
+                @if (selectedInputType === 'gene') {
+                  <mat-hint>
+                    Example:
+                    <a href="/human/gene/26235/variant/6:99365567T>C">6:99365567 T>C / FBXL4</a>
+                    or
+                    <a href="/human/variant/6:99365567T>C">6:99365567 T>C</a>
+                    or
+                    <a href="/human/gene/26235">FBXL4</a>
+                    or
+                    <a href="/human/variant/NM_012160.3:c.541A>G">NM_012160.3:c.541A>G</a>
+                  </mat-hint>
+                }
+                @if (selectedInputType === 'protein') {
+                  <mat-hint>
+                    Example:
+                    <a href="/human/protein/IRF2BPL:p.Pro372Arg">IRF2BPL:p.Pro372Arg</a>,
+                    <a href="/human/protein/IRF2BPL:p.P372R">IRF2BPL:p.P372R</a>,
+                    <a href="/human/protein/IRF2BPL:p.Gln126*">IRF2BPL:p.Gln126*</a>
+                  </mat-hint>
+                }
+              </div>
+            }
+            <div
 			[class]="{
 				'col-12 text-center': !compact(),
 				'col-2 pr-0 mt-2 text-left': compact(),
 			}"
-		>
-			<button
-				matButton="filled"
-				color="primary"
-				[class]="{ 'button-compact': compact(), 'button-big': !compact() }"
-				(click)="getResult()"
-				[disabled]="!validateInput()"
-			>
-				<span *ngIf="!compact()">Search</span>
-				<mat-icon *ngIf="compact()">search</mat-icon>
-			</button>
+              >
+              <button
+                matButton="filled"
+                color="primary"
+                [class]="{ 'button-compact': compact(), 'button-big': !compact() }"
+                (click)="getResult()"
+                [disabled]="!validateInput()"
+                >
+                @if (!compact()) {
+                  <span>Search</span>
+                }
+                @if (compact()) {
+                  <mat-icon>search</mat-icon>
+                }
+              </button>
 
-			<button
-				matButton="outlined"
-				class="ml-3 button-big"
-				color="default"
-				*ngIf="!compact()"
-				(click)="openYouTubeDialog()"
-			>
-				Tutorial video
-			</button>
-		</div>
-	</div>
-</div>
+              @if (!compact()) {
+                <button
+                  matButton="outlined"
+                  class="ml-3 button-big"
+                  color="default"
+                  (click)="openYouTubeDialog()"
+                  >
+                  Tutorial video
+                </button>
+              }
+            </div>
+          </div>
+        </div>

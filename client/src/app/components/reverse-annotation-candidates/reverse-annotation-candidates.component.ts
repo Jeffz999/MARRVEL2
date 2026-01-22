@@ -4,17 +4,15 @@ import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { NgIf, NgFor } from '@angular/common';
+
 
 @Component({
     selector: 'app-reverse-annotation-candidates',
     templateUrl: './reverse-annotation-candidates.component.html',
     styleUrls: ['./reverse-annotation-candidates.component.scss'],
     imports: [
-        NavbarComponent,
-        NgIf,
-        NgFor,
-    ],
+    NavbarComponent
+],
 })
 export class ReverseAnnotationCandidatesComponent implements OnInit {
 	private route = inject(ActivatedRoute);

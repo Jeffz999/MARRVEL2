@@ -1,58 +1,82 @@
 <mat-form-field appearance="fill" class="w-100" id="modelGeneFormField">
-	<mat-label>Seleect Model Organism</mat-label>
-	<mat-select [(ngModel)]="taxonId" (selectionChange)="onModelChange()">
-		<mat-option value="10090">Mouse (<span class="font-italic">Mus musculus</span>)</mat-option>
-		<mat-option value="10116">Rat (<span class="font-italic">Rattus norvegicus</span>)</mat-option>
-		<mat-option value="7955">Zebrafish (<span class="font-italic">Danio rerio</span>)</mat-option>
-		<mat-option value="7227" selected>Fly (<span class="font-italic">Drosophila melanogaster</span>)</mat-option>
-		<mat-option value="6239">Worm (<span class="font-italic">Caenorhabditis elegans</span>)</mat-option>
-		<mat-option value="4932">Yeast (<span class="font-italic">Saccharomyces cerevisiae</span>)</mat-option>
-		<mat-option value="4896">Fission Yeast (<span class="font-italic">Schizosaccharomyces pombe</span>)</mat-option>
-		<mat-option value="8364">Western Clawed Frog (<span class="font-italic">Xenopus tropicalis</span>)</mat-option>
-	</mat-select>
+  <mat-label>Seleect Model Organism</mat-label>
+  <mat-select [(ngModel)]="taxonId" (selectionChange)="onModelChange()">
+    <mat-option value="10090">Mouse (<span class="font-italic">Mus musculus</span>)</mat-option>
+    <mat-option value="10116">Rat (<span class="font-italic">Rattus norvegicus</span>)</mat-option>
+    <mat-option value="7955">Zebrafish (<span class="font-italic">Danio rerio</span>)</mat-option>
+    <mat-option value="7227" selected>Fly (<span class="font-italic">Drosophila melanogaster</span>)</mat-option>
+    <mat-option value="6239">Worm (<span class="font-italic">Caenorhabditis elegans</span>)</mat-option>
+    <mat-option value="4932">Yeast (<span class="font-italic">Saccharomyces cerevisiae</span>)</mat-option>
+    <mat-option value="4896">Fission Yeast (<span class="font-italic">Schizosaccharomyces pombe</span>)</mat-option>
+    <mat-option value="8364">Western Clawed Frog (<span class="font-italic">Xenopus tropicalis</span>)</mat-option>
+  </mat-select>
 </mat-form-field>
 
 <mat-form-field appearance="fill" class="w-100" id="geneInputFormField">
-	<mat-label *ngIf="taxonId === '7227'"> Official Gene Symbol (Case sensitive) </mat-label>
-	<mat-label *ngIf="taxonId !== '7227'"> Official Gene Symbol </mat-label>
-	<mat-chip-grid #geneChipGrid aria-label="Model organism gene selected">
-		<mat-chip-row *ngIf="gene" (removed)="removeGene()">
-			{{ gene.symbol }}
-			<button matChipRemove aria-label="Remove gene">
-				<mat-icon>cancel</mat-icon>
-			</button>
-		</mat-chip-row>
-	</mat-chip-grid>
+  @if (taxonId === '7227') {
+    <mat-label> Official Gene Symbol (Case sensitive) </mat-label>
+  }
+  @if (taxonId !== '7227') {
+    <mat-label> Official Gene Symbol </mat-label>
+  }
+  <mat-chip-grid #geneChipGrid aria-label="Model organism gene selected">
+    @if (gene) {
+      <mat-chip-row (removed)="removeGene()">
+        {{ gene.symbol }}
+        <button matChipRemove aria-label="Remove gene">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    }
+  </mat-chip-grid>
 
-	<input
-		matInput
-		#geneInput
-		[formControl]="geneInputCtrl"
-		(input)="onGeneInput($event)"
-		[matAutocomplete]="auto"
-		[matChipInputFor]="geneChipGrid"
-		matChipInputAddOnBlur
-		(matChipInputTokenEnd)="addGene($event)"
-	/>
+  <input
+    matInput
+    #geneInput
+    [formControl]="geneInputCtrl"
+    (input)="onGeneInput($event)"
+    [matAutocomplete]="auto"
+    [matChipInputFor]="geneChipGrid"
+    matChipInputAddOnBlur
+    (matChipInputTokenEnd)="addGene($event)"
+    />
 </mat-form-field>
 
 <mat-autocomplete #auto="matAutocomplete" (optionSelected)="geneAutocompleteSelected($event)">
-	<mat-option *ngFor="let aGene of geneSuggestion; let idx = index" [attr.data-index]="idx" [value]="idx">
-		<span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
-		<span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
-		<span class="float-right text-muted">{{ aGene.name }}</span>
-	</mat-option>
+  @for (aGene of geneSuggestion; track aGene; let idx = $index) {
+    <mat-option [attr.data-index]="idx" [value]="idx">
+      <span class="text-highlight">{{ aGene.symbol.substr(0, geneKeyword.length) }}</span>
+      <span class="ml-0">{{ aGene.symbol.substr(geneKeyword.length) }}</span>
+      <span class="float-right text-muted">{{ aGene.name }}</span>
+    </mat-option>
+  }
 </mat-autocomplete>
 
 <div class="row">
-	<div class="col-12 text-left search-box-example">
-		<mat-hint *ngIf="taxonId === '10090'"> Example: <a href="/model/gene/18129">Notch2</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '10116'"> Example: <a href="/model/gene/29492">Notch2</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '7227'"> Example: <a href="/model/gene/31293">N</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '7955'"> Example: <a href="/model/gene/58065">notch2</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '6239'"> Example: <a href="/model/gene/176282">lin-12</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '4932'"> Example: <a href="/model/gene/852059">ADA2</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '4896'"> Example: <a href="/model/gene/2539869">cdc2</a> </mat-hint>
-		<mat-hint *ngIf="taxonId === '8364'"> Example: <a href="/model/gene/100037842">notch1</a> </mat-hint>
-	</div>
+  <div class="col-12 text-left search-box-example">
+    @if (taxonId === '10090') {
+      <mat-hint> Example: <a href="/model/gene/18129">Notch2</a> </mat-hint>
+    }
+    @if (taxonId === '10116') {
+      <mat-hint> Example: <a href="/model/gene/29492">Notch2</a> </mat-hint>
+    }
+    @if (taxonId === '7227') {
+      <mat-hint> Example: <a href="/model/gene/31293">N</a> </mat-hint>
+    }
+    @if (taxonId === '7955') {
+      <mat-hint> Example: <a href="/model/gene/58065">notch2</a> </mat-hint>
+    }
+    @if (taxonId === '6239') {
+      <mat-hint> Example: <a href="/model/gene/176282">lin-12</a> </mat-hint>
+    }
+    @if (taxonId === '4932') {
+      <mat-hint> Example: <a href="/model/gene/852059">ADA2</a> </mat-hint>
+    }
+    @if (taxonId === '4896') {
+      <mat-hint> Example: <a href="/model/gene/2539869">cdc2</a> </mat-hint>
+    }
+    @if (taxonId === '8364') {
+      <mat-hint> Example: <a href="/model/gene/100037842">notch1</a> </mat-hint>
+    }
+  </div>
 </div>

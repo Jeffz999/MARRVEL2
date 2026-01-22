@@ -1,138 +1,155 @@
 <div class="row">
-	<div class="col-12">
-		<h3 class="d-inline-block align-middle">Geno2MP</h3>
+  <div class="col-12">
+    <h3 class="d-inline-block align-middle">Geno2MP</h3>
 
-		<a
-			class="d-inline-block ml-3 align-middle"
-			*ngIf="searchBy === 'variant' && variant()"
+    @if (searchBy === 'variant' && variant()) {
+      <a
+        class="d-inline-block ml-3 align-middle"
 			href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ variant().chr }}%253A{{ variant().pos }}/chrLoc/{{
 				variant().pos
 			}}/{{ variant().pos }}/{{ variant().chr }}"
-			target="_blank"
-		>
-			<button mat-button color="primary">
-				<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-				More on Geno2MP
-			</button>
-		</a>
-		<a
-			class="d-inline-block ml-3 align-middle"
-			*ngIf="searchBy === 'gene' && gene()"
-			href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ gene().symbol }}/gene/0/0/0"
-			target="_blank"
-		>
-			<button mat-button color="primary">
-				<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-				More on Geno2MP
-			</button>
-		</a>
-	</div>
+        target="_blank"
+        >
+        <button mat-button color="primary">
+          <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+          More on Geno2MP
+        </button>
+      </a>
+    }
+    @if (searchBy === 'gene' && gene()) {
+      <a
+        class="d-inline-block ml-3 align-middle"
+        href="http://geno2mp.gs.washington.edu/Geno2MP/#/gene/{{ gene().symbol }}/gene/0/0/0"
+        target="_blank"
+        >
+        <button mat-button color="primary">
+          <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+          More on Geno2MP
+        </button>
+      </a>
+    }
+  </div>
 </div>
 
-<div class="row mt-3" *ngIf="gene() && variant()">
-	<div class="col-12">
-		<mat-form-field appearance="fill" style="margin-bottom: -1.25em">
-			<mat-label>Search by</mat-label>
-			<mat-select [(value)]="searchBy">
-				<mat-option value="gene" *ngIf="gene()">
-					{{ gene().symbol }}
-				</mat-option>
-				<mat-option value="variant">
-					{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}
-				</mat-option>
-			</mat-select>
-		</mat-form-field>
-	</div>
-</div>
+@if (gene() && variant()) {
+  <div class="row mt-3">
+    <div class="col-12">
+      <mat-form-field appearance="fill" style="margin-bottom: -1.25em">
+        <mat-label>Search by</mat-label>
+        <mat-select [(value)]="searchBy">
+          @if (gene()) {
+            <mat-option value="gene">
+              {{ gene().symbol }}
+            </mat-option>
+          }
+          <mat-option value="variant">
+            {{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+}
 
-<div class="mt-3" *ngIf="searchBy === 'gene' && !loading && (!geneData || !geneData.length)" [@toggle]>
-	<p>No matches found</p>
-</div>
+@if (searchBy === 'gene' && !loading && (!geneData || !geneData.length)) {
+  <div class="mt-3" [@toggle]>
+    <p>No matches found</p>
+  </div>
+}
 
-<div class="mt-3" *ngIf="searchBy === 'gene' && geneData && geneData.length" [@toggle]>
-	<div class="row">
-		<div class="col-12 col-lg-6 pb-1" *ngFor="let idx of [2, 3, 0, 1]">
-			<mat-slide-toggle
-				[checked]="varCategoriesVisible[varCategoryNames[idx]]"
-				(change)="onCategoryChange(varCategoryNames[idx], $event)"
-				color="primary"
-			>
-				{{ varCategoryNames[idx] }}
-				(<strong>{{ geneSummary[idx] }}</strong
-				>&nbsp;<span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
-				profiles)
-			</mat-slide-toggle>
-		</div>
+@if (searchBy === 'gene' && geneData && geneData.length) {
+  <div class="mt-3" [@toggle]>
+    <div class="row">
+      @for (idx of [2, 3, 0, 1]; track idx) {
+        <div class="col-12 col-lg-6 pb-1">
+          <mat-slide-toggle
+            [checked]="varCategoriesVisible[varCategoryNames[idx]]"
+            (change)="onCategoryChange(varCategoryNames[idx], $event)"
+            color="primary"
+            >
+            {{ varCategoryNames[idx] }}
+            (<strong>{{ geneSummary[idx] }}</strong
+            >&nbsp;<span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
+            profiles)
+          </mat-slide-toggle>
+        </div>
+      }
+      <!-- Geno2MP - Gene: variants -->
+      <div class="col-12 mt-3">
+        <app-geno2mp-gene-table [data]="geneData"
+          [showMissense]="varCategoriesVisible['Missense/Other Indel']"
+          [showNonsense]="varCategoriesVisible['Splice/Frameshift/Nonsense/Stop Loss']"
+          [showNonCoding]="varCategoriesVisible['Non-Coding']"
+          [showSynonymous]="varCategoriesVisible['Synonymous/Unknown']"
+          />
+      </div>
+    </div>
+  </div>
+}
 
-		<!-- Geno2MP - Gene: variants -->
-		<div class="col-12 mt-3">
-			<app-geno2mp-gene-table [data]="geneData"
-				[showMissense]="varCategoriesVisible['Missense/Other Indel']"
-				[showNonsense]="varCategoriesVisible['Splice/Frameshift/Nonsense/Stop Loss']"
-				[showNonCoding]="varCategoriesVisible['Non-Coding']"
-				[showSynonymous]="varCategoriesVisible['Synonymous/Unknown']"
-			 />
-		</div>
-	</div>
-</div>
+@if (searchBy === 'variant' && !variantData) {
+  <div class="mt-3" [@toggle]>
+    <p>No matches found</p>
+  </div>
+}
 
-<div class="mt-3" *ngIf="searchBy === 'variant' && !variantData" [@toggle]>
-	<p>No matches found</p>
-</div>
-
-<div class="mt-3" *ngIf="searchBy === 'variant' && variantData" [@toggle]>
-	<!-- Geno2MP - Variant: comment -->
-	<div class="row">
-		<div class="col-12">
-			<p class="mt-0 mb-0 d-table" *ngIf="searchBy === 'variant' && variantData">
-				<mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
-					>insert_comment</mat-icon
-				>
-				<span class="d-table-cell pl-2">
-					<strong
-						>{{ affectedCount }} individuals have {{ variant().chr }}:{{ variant().pos }}
-						{{ variant().ref }}&gt;{{ variant().alt }}</strong
-					>&nbsp;
-					<span *ngIf="phenotypeString.length">
-						and their HPO profiles indicate that their
-						<span class="text-lowercase">{{ phenotypeString }}</span>
-						could be affected </span
-					>.
-				</span>
-			</p>
-		</div>
-	</div>
-
-	<!-- Geno2MP - Variant: summary -->
-	<div class="row summary mt-3">
-		<div class="col-4 col-sm-3 col-lg-2">
-			<span class="label">
-				Number of affected
-				<span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
-				profiles
-			</span>
-			<span class="data">
-				{{ affectedCount }}
-			</span>
-		</div>
-
-		<div class="col-4 col-sm-3 col-lg-2">
-			<span class="label"> Homozygous count </span>
-			<span class="data stick-bottom">
-				{{ variantData.homCount }}
-			</span>
-		</div>
-
-		<div class="col-4 col-sm-3 col-lg-2 min-h-70px">
-			<span class="label"> Functional annotation </span>
-			<span class="data stick-bottom text-capitalize">
-				{{ (variantData.funcAnno || '').replace('-', ' ') }}
-			</span>
-		</div>
-
-		<!-- Geno2MP - Variant: variant table -->
-		<div class="col-12 mt-3" *ngIf="searchBy === 'variant' && variantData">
-			<app-geno2mp-variant-table [data]="variantData.hpoProfiles" />
-		</div>
-	</div>
-</div>
+@if (searchBy === 'variant' && variantData) {
+  <div class="mt-3" [@toggle]>
+    <!-- Geno2MP - Variant: comment -->
+    <div class="row">
+      <div class="col-12">
+        @if (searchBy === 'variant' && variantData) {
+          <p class="mt-0 mb-0 d-table">
+            <mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
+              >insert_comment</mat-icon
+              >
+              <span class="d-table-cell pl-2">
+                <strong
+                  >{{ affectedCount }} individuals have {{ variant().chr }}:{{ variant().pos }}
+                  {{ variant().ref }}&gt;{{ variant().alt }}</strong
+                  >&nbsp;
+                  @if (phenotypeString.length) {
+                    <span>
+                      and their HPO profiles indicate that their
+                      <span class="text-lowercase">{{ phenotypeString }}</span>
+                      could be affected </span
+                      >
+                      }.
+                    </span>
+                  </p>
+                }
+              </div>
+            </div>
+            <!-- Geno2MP - Variant: summary -->
+            <div class="row summary mt-3">
+              <div class="col-4 col-sm-3 col-lg-2">
+                <span class="label">
+                  Number of affected
+                  <span class="text-underline-dashed" matTooltip="Human Phenotype Ontology">HPO</span>
+                  profiles
+                </span>
+                <span class="data">
+                  {{ affectedCount }}
+                </span>
+              </div>
+              <div class="col-4 col-sm-3 col-lg-2">
+                <span class="label"> Homozygous count </span>
+                <span class="data stick-bottom">
+                  {{ variantData.homCount }}
+                </span>
+              </div>
+              <div class="col-4 col-sm-3 col-lg-2 min-h-70px">
+                <span class="label"> Functional annotation </span>
+                <span class="data stick-bottom text-capitalize">
+                  {{ (variantData.funcAnno || '').replace('-', ' ') }}
+                </span>
+              </div>
+              <!-- Geno2MP - Variant: variant table -->
+              @if (searchBy === 'variant' && variantData) {
+                <div class="col-12 mt-3">
+                  <app-geno2mp-variant-table [data]="variantData.hpoProfiles" />
+                </div>
+              }
+            </div>
+          </div>
+        }

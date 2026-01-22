@@ -1,9 +1,9 @@
 <div class="row">
-	<div class="col-12">
-		<h3 class="m-0 d-inline-block align-middle">DECIPHER (Disease)</h3>
-		<a
-			class="m-0 d-inline-block ml-3 align-middle"
-			*ngIf="gene() || variant()"
+  <div class="col-12">
+    <h3 class="m-0 d-inline-block align-middle">DECIPHER (Disease)</h3>
+    @if (gene() || variant()) {
+      <a
+        class="m-0 d-inline-block ml-3 align-middle"
 			[attr.href]="
 				variant()
 					? 'https://www.deciphergenomics.org/search?q=grch37%3A' +
@@ -14,72 +14,85 @@
 						variant().pos
 					: 'https://www.deciphergenomics.org/gene/' + gene().symbol + '/patient-overlap/snvs'
 			"
-			target="_blank"
-		>
-			<button mat-button color="primary">
-				<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-				More on DECIPHER
-			</button>
-		</a>
-	</div>
+        target="_blank"
+        >
+        <button mat-button color="primary">
+          <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+          More on DECIPHER
+        </button>
+      </a>
+    }
+  </div>
 </div>
 
-<div class="mt-3" *ngIf="!loading && (!data || !data.length)" [@toggle]>
-	<p>No DECIPHER Disease group data found.</p>
-</div>
+@if (!loading && (!data || !data.length)) {
+  <div class="mt-3" [@toggle]>
+    <p>No DECIPHER Disease group data found.</p>
+  </div>
+}
 
-<div class="row mt-3" *ngIf="!loading && data && data.length" [@toggle]>
-	<div class="col-12">
-		<mat-slide-toggle
-			[checked]="showSnvs"
-			(change)="onFilterChange('showSnvs', $event.checked)"
-			color="primary"
-			class="mr-2"
-		>
-			Show SNV
-		</mat-slide-toggle>
-
-		<mat-slide-toggle [checked]="showCnvs" (change)="onFilterChange('showCnvs', $event.checked)" color="primary">
-			Show Copy-Number Variants
-		</mat-slide-toggle>
-	</div>
-
-	<div class="col-12 mt-3">
-		<h4 class="my-0">
-			Phenotypes Represented that Involve
-			<span *ngIf="variant()">Chr{{ variant().chr }}:{{ variant().pos }}</span>
-			<span *ngIf="!variant() && gene()">{{ gene().symbol }}</span>
-		</h4>
-	</div>
-
-	<div class="col-12 mt-3" *ngIf="showSnvs && !showCnvs && !hasSnvResult">No SNV result</div>
-
-	<div class="col-12 mt-3" *ngIf="showCnvs || hasSnvResult" [@toggle]>
-		<app-geno2mp-phenotype-pictogram [categoryStatus]="categoryNameToCounts" />
-
-		<div class="mt-3">
-			<button
-				mat-button
-				class="px-0 no-overlay"
-				color="primary"
-				disableRipple="true"
-				(click)="variantTableVisible = !variantTableVisible"
-			>
-				{{ variantTableVisible ? 'Hide variants' : 'Show variants' }}
-				<mat-icon *ngIf="!variantTableVisible">expand_more</mat-icon>
-				<mat-icon *ngIf="variantTableVisible">expand_less</mat-icon>
-			</button>
-		</div>
-
-		<div class="mt-3 w-100" *ngIf="variantTableVisible" [@toggle]>
-			<app-basic-datatable [data]="data ? dataSource.data : []"
-				[title]="tableTitle"
-				unit="variant"
-				[displayedColumns]="displayedColumns"
-				[columnNames]="['Variant', 'Type', 'Pathogenicity', 'Inheritance']"
-				sortActive="Variant"
-				[loading]="loading"
-			 />
-		</div>
-	</div>
-</div>
+@if (!loading && data && data.length) {
+  <div class="row mt-3" [@toggle]>
+    <div class="col-12">
+      <mat-slide-toggle
+        [checked]="showSnvs"
+        (change)="onFilterChange('showSnvs', $event.checked)"
+        color="primary"
+        class="mr-2"
+        >
+        Show SNV
+      </mat-slide-toggle>
+      <mat-slide-toggle [checked]="showCnvs" (change)="onFilterChange('showCnvs', $event.checked)" color="primary">
+        Show Copy-Number Variants
+      </mat-slide-toggle>
+    </div>
+    <div class="col-12 mt-3">
+      <h4 class="my-0">
+        Phenotypes Represented that Involve
+        @if (variant()) {
+          <span>Chr{{ variant().chr }}:{{ variant().pos }}</span>
+        }
+        @if (!variant() && gene()) {
+          <span>{{ gene().symbol }}</span>
+        }
+      </h4>
+    </div>
+    @if (showSnvs && !showCnvs && !hasSnvResult) {
+      <div class="col-12 mt-3">No SNV result</div>
+    }
+    @if (showCnvs || hasSnvResult) {
+      <div class="col-12 mt-3" [@toggle]>
+        <app-geno2mp-phenotype-pictogram [categoryStatus]="categoryNameToCounts" />
+        <div class="mt-3">
+          <button
+            mat-button
+            class="px-0 no-overlay"
+            color="primary"
+            disableRipple="true"
+            (click)="variantTableVisible = !variantTableVisible"
+            >
+            {{ variantTableVisible ? 'Hide variants' : 'Show variants' }}
+            @if (!variantTableVisible) {
+              <mat-icon>expand_more</mat-icon>
+            }
+            @if (variantTableVisible) {
+              <mat-icon>expand_less</mat-icon>
+            }
+          </button>
+        </div>
+        @if (variantTableVisible) {
+          <div class="mt-3 w-100" [@toggle]>
+            <app-basic-datatable [data]="data ? dataSource.data : []"
+              [title]="tableTitle"
+              unit="variant"
+              [displayedColumns]="displayedColumns"
+              [columnNames]="['Variant', 'Type', 'Pathogenicity', 'Inheritance']"
+              sortActive="Variant"
+              [loading]="loading"
+              />
+          </div>
+        }
+      </div>
+    }
+  </div>
+}

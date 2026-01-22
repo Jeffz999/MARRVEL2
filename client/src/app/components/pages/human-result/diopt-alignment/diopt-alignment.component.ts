@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 import { Gene } from './../../../../interfaces/gene';
 import { Animations } from './../../../../animations';
-import { NgIf, NgFor } from '@angular/common';
+
 import { ProteinDomainComponent } from './protein-domain/protein-domain.component';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -20,17 +20,15 @@ import { FormsModule } from '@angular/forms';
     styleUrls: ['./diopt-alignment.component.scss'],
     animations: [Animations.toggleInOut],
     imports: [
-        NgIf,
-        ProteinDomainComponent,
-        MatIcon,
-        MatTooltip,
-        MatButton,
-        MatFormField,
-        MatInput,
-        NgFor,
-        MatSlideToggle,
-        FormsModule,
-    ],
+    ProteinDomainComponent,
+    MatIcon,
+    MatTooltip,
+    MatButton,
+    MatFormField,
+    MatInput,
+    MatSlideToggle,
+    FormsModule
+],
 })
 export class DioptAlignmentComponent implements OnInit {
 	private api = inject(ApiService);

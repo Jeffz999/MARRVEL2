@@ -14,7 +14,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+
 
 const PRIMARY_COLOR = '#7bd0cc';
 const WARN_COLOR = '#e5893e';
@@ -57,8 +57,7 @@ const WARN_COLOR = '#e5893e';
     MatMenu,
     FormsModule,
     MatSlider,
-    MatSliderThumb,
-    NgFor
+    MatSliderThumb
 ],
 })
 export class PpiComponent implements OnInit, AfterViewInit {

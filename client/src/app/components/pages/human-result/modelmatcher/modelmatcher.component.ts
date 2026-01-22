@@ -7,7 +7,7 @@ import { ModelMatcherData } from '../../../../interfaces/data';
 import { TAXONIDS, TAXONID_TO_INFO } from '../../../../data/model-organisms';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';
 import { UnitDirective } from '../../../../directives/unit.directive';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -17,15 +17,13 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     templateUrl: './modelmatcher.component.html',
     styleUrls: ['./modelmatcher.component.scss'],
     imports: [
-        MatButton,
-        MatIcon,
-        NgIf,
-        MatTooltip,
-        UnitDirective,
-        MatProgressBar,
-        NgFor,
-        NgClass,
-    ],
+    MatButton,
+    MatIcon,
+    MatTooltip,
+    UnitDirective,
+    MatProgressBar,
+    NgClass
+],
 })
 export class ModelmatcherComponent implements OnChanges {
 	private mmSvc = inject(ModelmatcherService);

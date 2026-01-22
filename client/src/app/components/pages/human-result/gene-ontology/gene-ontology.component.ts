@@ -10,7 +10,7 @@ import { AGR_SLIM_IDS, AGR_SLIM_ID_TO_NAME } from './agrSlim';
 import { EXP_EVICODES, EVICODE_TO_NAME } from './evidence-code';
 import { TAXONID_TO_INFO } from '../../../../data/model-organisms';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatTooltip } from '@angular/material/tooltip';
 
 const TAXONID_TO_NAME = {
@@ -36,9 +36,7 @@ const NAMESPACE_TO_GOID = {
     animations: [Animations.toggle],
     imports: [
     MatSlideToggle,
-    NgIf,
     MatTooltip,
-    NgFor,
     MatTable,
     MatSort,
     MatColumnDef,

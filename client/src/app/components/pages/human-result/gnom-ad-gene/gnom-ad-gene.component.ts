@@ -2,7 +2,7 @@ import { Component, OnInit, input, inject } from '@angular/core';
 
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
-import { NgIf } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { GnomADGeneVisualComponent } from './gnom-ad-gene-visual/gnom-ad-gene-visual.component';
@@ -12,11 +12,10 @@ import { GnomADGeneVisualComponent } from './gnom-ad-gene-visual/gnom-ad-gene-vi
     templateUrl: './gnom-ad-gene.component.html',
     styleUrls: ['./gnom-ad-gene.component.scss'],
     imports: [
-        NgIf,
-        MatIcon,
-        MatTooltip,
-        GnomADGeneVisualComponent,
-    ],
+    MatIcon,
+    MatTooltip,
+    GnomADGeneVisualComponent
+],
 })
 export class GnomADGeneComponent implements OnInit {
 	private api = inject(ApiService);

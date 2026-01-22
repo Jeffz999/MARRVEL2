@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../../../navbar/navbar.component';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { MultipleGeneBoxComponent } from '../../../multiple-gene-box/multiple-gene-box.component';
@@ -24,7 +24,6 @@ import { MatTooltip } from '@angular/material/tooltip';
     animations: [Animations.toggleInOut],
     imports: [
     NavbarComponent,
-    NgIf,
     MatRadioGroup,
     FormsModule,
     MatRadioButton,
@@ -32,8 +31,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     MatIcon,
     MatProgressBar,
     MatPaginator,
-    MatTooltip,
-    NgFor
+    MatTooltip
 ],
 })
 export class MultipleGenesComponent implements OnInit {

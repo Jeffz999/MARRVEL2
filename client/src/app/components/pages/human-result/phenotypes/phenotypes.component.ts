@@ -7,7 +7,7 @@ import { CATEGORIES, CAT_TO_ICON } from '../../../../category';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { NgFor, NgIf } from '@angular/common';
+
 
 @Component({
     selector: 'app-phenotypes',
@@ -16,9 +16,7 @@ import { NgFor, NgIf } from '@angular/common';
     animations: [Animations.toggle],
     imports: [
     MatTooltip,
-    MatSlideToggle,
-    NgFor,
-    NgIf
+    MatSlideToggle
 ],
 })
 export class PhenotypesComponent implements OnInit {

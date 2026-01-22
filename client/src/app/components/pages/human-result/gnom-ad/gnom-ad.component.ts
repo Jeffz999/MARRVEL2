@@ -4,7 +4,7 @@ import { take } from 'rxjs/operators';
 import { ApiService } from '../../../../services/api.service';
 import { Variant } from '../../../../interfaces/variant';
 import { GnomADVariantData } from 'src/app/interfaces/data';
-import { NgIf } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { UnitDirective } from '../../../../directives/unit.directive';
@@ -14,11 +14,10 @@ import { UnitDirective } from '../../../../directives/unit.directive';
     templateUrl: './gnom-ad.component.html',
     styleUrls: ['./gnom-ad.component.scss'],
     imports: [
-        NgIf,
-        MatIcon,
-        MatTooltip,
-        UnitDirective,
-    ],
+    MatIcon,
+    MatTooltip,
+    UnitDirective
+],
 })
 export class GnomADComponent implements OnInit {
 	private api = inject(ApiService);

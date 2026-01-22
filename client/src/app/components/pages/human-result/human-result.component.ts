@@ -12,7 +12,7 @@ import { Variant } from '../../../interfaces/variant';
 import { Animations } from 'src/app/animations';
 import { MatSelectChange, MatSelect, MatOption } from '@angular/material/select';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
-import { NgIf, NgFor } from '@angular/common';
+
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { MatFormField, MatLabel } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
@@ -51,12 +51,10 @@ import { ScrollTopButtonComponent } from '../../scroll-top-button/scroll-top-but
     styleUrls: ['./human-result.component.scss'],
     animations: [Animations.fadeInOut, Animations.toggleInOut],
     imports: [
-    NgIf,
     NavbarComponent,
     MatFormField,
     MatLabel,
     MatSelect,
-    NgFor,
     MatOption,
     MatButton,
     MatIcon,

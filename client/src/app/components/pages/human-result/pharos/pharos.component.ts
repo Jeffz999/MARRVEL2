@@ -3,7 +3,7 @@ import { Component, OnInit, input, inject } from '@angular/core';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
 import { Animations } from 'src/app/animations';
-import { NgIf, NgFor } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
@@ -16,18 +16,16 @@ import { PharosLigandTableComponent } from './pharos-ligand-table/pharos-ligand-
     styleUrls: ['./pharos.component.scss'],
     animations: [Animations.toggleInOut],
     imports: [
-        NgIf,
-        MatButton,
-        MatIcon,
-        MatAccordion,
-        NgFor,
-        MatTooltip,
-        MatExpansionPanel,
-        MatExpansionPanelHeader,
-        MatExpansionPanelTitle,
-        MatExpansionPanelDescription,
-        PharosLigandTableComponent,
-    ],
+    MatButton,
+    MatIcon,
+    MatAccordion,
+    MatTooltip,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatExpansionPanelDescription,
+    PharosLigandTableComponent
+],
 })
 export class PharosComponent implements OnInit {
 	private api = inject(ApiService);

@@ -6,7 +6,7 @@ import { Animations } from 'src/app/animations';
 import { Router } from '@angular/router';
 import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 import { MatFormField, MatError, MatLabel, MatInput, MatHint } from '@angular/material/input';
-import { NgIf } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
@@ -16,19 +16,18 @@ import { MatProgressBar } from '@angular/material/progress-bar';
     styleUrls: ['./vcf-upload-box.component.scss'],
     animations: [Animations.fadeInOut],
     imports: [
-        MatRadioGroup,
-        FormsModule,
-        MatRadioButton,
-        MatFormField,
-        ReactiveFormsModule,
-        NgIf,
-        MatError,
-        MatLabel,
-        MatInput,
-        MatIcon,
-        MatHint,
-        MatProgressBar,
-    ],
+    MatRadioGroup,
+    FormsModule,
+    MatRadioButton,
+    MatFormField,
+    ReactiveFormsModule,
+    MatError,
+    MatLabel,
+    MatInput,
+    MatIcon,
+    MatHint,
+    MatProgressBar
+],
 })
 export class VcfUploadBoxComponent implements OnInit {
 	private api = inject(ApiService);

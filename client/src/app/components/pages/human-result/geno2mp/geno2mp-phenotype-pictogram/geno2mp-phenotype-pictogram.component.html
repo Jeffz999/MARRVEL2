@@ -1,8 +1,10 @@
-<div class="cat-icon-wrapper" *ngFor="let category of categories">
-	<img
-		class="cat-icon"
-		[class.color-primary]="categoryStatus()[category] > 0"
-		[matTooltip]="category + (categoryStatus()[category] > 0 ? ': ' + categoryStatus()[category] + ' profiles' : '')"
-		src="../../../../../../assets/icons/{{ catToIcon[category] }}.svg"
-	/>
-</div>
+@for (category of categories; track category) {
+  <div class="cat-icon-wrapper">
+    <img
+      class="cat-icon"
+      [class.color-primary]="categoryStatus()[category] > 0"
+      [matTooltip]="category + (categoryStatus()[category] > 0 ? ': ' + categoryStatus()[category] + ' profiles' : '')"
+      src="../../../../../../assets/icons/{{ catToIcon[category] }}.svg"
+      />
+  </div>
+}
