@@ -8,10 +8,10 @@
 	.st0{fill:#69C8BE;}
 </style>
 <defs>
-	
+
 		<inkscape:path-effect  copytype="single_stretched" effect="skeletal" fuse_tolerance="0" hide_knot="false" id="path-effect1432" is_visible="true" lpeversion="1" normal_offset="0" pattern="m 691.27539,1269.043 a 2.3033799,2.3033799 0 0 0 -1.80664,3.6465 c 4.84644,6.7525 7.77335,14.4148 8.78516,22.2421 H 393.95703 a 6.1417323,6.1417323 0 0 0 -6.14258,6.1407 6.1417323,6.1417323 0 0 0 6.14258,6.1425 h 304.30859 c -0.99762,7.8004 -3.91596,15.3783 -8.78124,21.9903 a 2.3033799,2.3033799 0 0 0 2.64843,3.5293 l 80.52344,-29.6172 a 2.3033799,2.3033799 0 0 0 0,-4.3184 l -80.52344,-29.6152 a 2.3033799,2.3033799 0 0 0 -0.73047,-0.1406 2.3033799,2.3033799 0 0 0 -0.12695,0 z" prop_scale="0.26" prop_units="false" scale_y_rel="false" spacing="0" tang_offset="0" vertical_pattern="false">
 		</inkscape:path-effect>
-	
+
 		<inkscape:path-effect  copytype="single_stretched" effect="skeletal" fuse_tolerance="0" hide_knot="false" id="path-effect1339" is_visible="true" lpeversion="1" normal_offset="0" pattern="m 691.27539,1269.043 a 2.3033799,2.3033799 0 0 0 -1.80664,3.6465 c 4.84644,6.7525 7.77335,14.4148 8.78516,22.2421 H 393.95703 a 6.1417323,6.1417323 0 0 0 -6.14258,6.1407 6.1417323,6.1417323 0 0 0 6.14258,6.1425 h 304.30859 c -0.99762,7.8004 -3.91596,15.3783 -8.78124,21.9903 a 2.3033799,2.3033799 0 0 0 2.64843,3.5293 l 80.52344,-29.6172 a 2.3033799,2.3033799 0 0 0 0,-4.3184 l -80.52344,-29.6152 a 2.3033799,2.3033799 0 0 0 -0.73047,-0.1406 2.3033799,2.3033799 0 0 0 -0.12695,0 z" prop_scale="0.26" prop_units="false" scale_y_rel="false" spacing="0" tang_offset="0" vertical_pattern="false">
 		</inkscape:path-effect>
 </defs>

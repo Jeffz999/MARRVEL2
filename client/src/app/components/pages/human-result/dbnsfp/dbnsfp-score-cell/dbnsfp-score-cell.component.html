@@ -5,20 +5,20 @@
   >help</mat-icon>
 </sup-->
 <span
-    class="text-underline-dashed pred-score"
-    *ngIf="score"
-    [ngClass]="getColorBin(minValue, maxValue, score)"
-    [matTooltip]="scoreTooltip"
+	class="text-underline-dashed pred-score"
+	*ngIf="score"
+	[ngClass]="getColorBin(minValue, maxValue, score)"
+	[matTooltip]="scoreTooltip"
 >
-    {{ score }}
+	{{ score }}
 </span>
 <span
-    class="text-underline-dashed pred-prediction"
-    *ngIf="prediction"
-    [ngClass]="predictionColorClass[prediction]"
-    [matTooltip]="scoreTooltip"
+	class="text-underline-dashed pred-prediction"
+	*ngIf="prediction"
+	[ngClass]="predictionColorClass[prediction]"
+	[matTooltip]="scoreTooltip"
 >
-    {{ prediction }}
+	{{ prediction }}
 </span>
 <span class="label">Rank score:</span>
 <app-rankscore-visual [rankscore]="rankscore"></app-rankscore-visual>

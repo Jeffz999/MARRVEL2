@@ -3,22 +3,22 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { DgvComponent } from './dgv.component';
 
 describe('DgvComponent', () => {
-    let component: DgvComponent;
-    let fixture: ComponentFixture<DgvComponent>;
+	let component: DgvComponent;
+	let fixture: ComponentFixture<DgvComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [DgvComponent],
-        }).compileComponents();
-    }));
+	beforeEach(waitForAsync(() => {
+		TestBed.configureTestingModule({
+			declarations: [DgvComponent],
+		}).compileComponents();
+	}));
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(DgvComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+	beforeEach(() => {
+		fixture = TestBed.createComponent(DgvComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

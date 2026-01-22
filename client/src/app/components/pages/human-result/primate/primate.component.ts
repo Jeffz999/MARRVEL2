@@ -8,68 +8,68 @@ import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-    standalone: false,
-    selector: 'app-primate',
-    templateUrl: './primate.component.html',
-    styleUrls: ['./primate.component.scss'],
-    animations: [Animations.toggleInOut],
+	standalone: false,
+	selector: 'app-primate',
+	templateUrl: './primate.component.html',
+	styleUrls: ['./primate.component.scss'],
+	animations: [Animations.toggleInOut],
 })
 export class PrimateComponent implements OnInit {
-    @Input() variant: Variant;
-    @Input() gene: HumanGene;
+	@Input() variant: Variant;
+	@Input() gene: HumanGene;
 
-    searchBy = 'variant';
+	searchBy = 'variant';
 
-    loading = true;
-    data: PrimateData;
-    geneLoading = true;
-    dataByGene: any[];
+	loading = true;
+	data: PrimateData;
+	geneLoading = true;
+	dataByGene: any[];
 
-    constructor(private apiService: ApiService) {}
+	constructor(private apiService: ApiService) {}
 
-    ngOnInit() {
-        if (this.variant) {
-            this.loading = true;
-            this.apiService.getPrimateByVariant(this.variant).subscribe(
-                (res: PrimateData) => {
-                    this.data = res;
-                    this.loading = false;
-                },
-                (err) => {
-                    console.log(err);
-                    this.data = null;
-                    this.loading = false;
-                },
-            );
-        } else {
-            this.searchBy = this.gene ? 'gene' : 'variant';
-            this.data = null;
-            this.loading = false;
-        }
+	ngOnInit() {
+		if (this.variant) {
+			this.loading = true;
+			this.apiService.getPrimateByVariant(this.variant).subscribe(
+				(res: PrimateData) => {
+					this.data = res;
+					this.loading = false;
+				},
+				(err) => {
+					console.log(err);
+					this.data = null;
+					this.loading = false;
+				},
+			);
+		} else {
+			this.searchBy = this.gene ? 'gene' : 'variant';
+			this.data = null;
+			this.loading = false;
+		}
 
-        if (this.gene) {
-            this.geneLoading = true;
-            this.apiService.getPrimateByGene(this.gene).subscribe(
-                (res) => {
-                    this.dataByGene = (res || []).map((e: PrimateData) => {
-                        return {
-                            variant: `${e.chr}:${e.pos} ${e.ref}>${e.alt}`,
-                            alleleCount: e.alleleCount,
-                            alleleNum: e.alleleNum,
-                            alleleFreq: e.alleleFreq,
-                            dataSource: 'HGSC',
-                        };
-                    });
-                    this.geneLoading = false;
-                },
-                (err) => {
-                    console.log(err);
-                    this.dataByGene = [];
-                    this.geneLoading = false;
-                },
-            );
-        } else {
-            this.geneLoading = false;
-        }
-    }
+		if (this.gene) {
+			this.geneLoading = true;
+			this.apiService.getPrimateByGene(this.gene).subscribe(
+				(res) => {
+					this.dataByGene = (res || []).map((e: PrimateData) => {
+						return {
+							variant: `${e.chr}:${e.pos} ${e.ref}>${e.alt}`,
+							alleleCount: e.alleleCount,
+							alleleNum: e.alleleNum,
+							alleleFreq: e.alleleFreq,
+							dataSource: 'HGSC',
+						};
+					});
+					this.geneLoading = false;
+				},
+				(err) => {
+					console.log(err);
+					this.dataByGene = [];
+					this.geneLoading = false;
+				},
+			);
+		} else {
+			this.geneLoading = false;
+		}
+	}
 }

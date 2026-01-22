@@ -5,40 +5,40 @@ import { take } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-    standalone: false,
-    selector: 'app-reverse-annotation-candidates',
-    templateUrl: './reverse-annotation-candidates.component.html',
-    styleUrls: ['./reverse-annotation-candidates.component.scss'],
+	standalone: false,
+	selector: 'app-reverse-annotation-candidates',
+	templateUrl: './reverse-annotation-candidates.component.html',
+	styleUrls: ['./reverse-annotation-candidates.component.scss'],
 })
 export class ReverseAnnotationCandidatesComponent implements OnInit {
-    protein: string;
+	protein: string;
 
-    loading = true;
-    data;
+	loading = true;
+	data;
 
-    constructor(
-        private route: ActivatedRoute,
-        private api: ApiService,
-    ) {}
+	constructor(
+		private route: ActivatedRoute,
+		private api: ApiService,
+	) {}
 
-    ngOnInit() {
-        this.route.params.subscribe((param) => {
-            this.protein = param.protein || null;
+	ngOnInit() {
+		this.route.params.subscribe((param) => {
+			this.protein = param.protein || null;
 
-            this.api
-                .getGenomLocByProteinVar(this.protein)
-                .pipe(take(1))
-                .subscribe(
-                    (res) => {
-                        this.loading = false;
-                        this.data = res;
-                    },
-                    (err) => {
-                        this.loading = false;
-                        this.data = null;
-                        console.log(err);
-                    },
-                );
-        });
-    }
+			this.api
+				.getGenomLocByProteinVar(this.protein)
+				.pipe(take(1))
+				.subscribe(
+					(res) => {
+						this.loading = false;
+						this.data = res;
+					},
+					(err) => {
+						this.loading = false;
+						this.data = null;
+						console.log(err);
+					},
+				);
+		});
+	}
 }

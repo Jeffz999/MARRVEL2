@@ -3,48 +3,47 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-    standalone: false,
-    selector: 'app-pharos-ligand-table',
-    templateUrl: './pharos-ligand-table.component.html',
-    styleUrls: ['./pharos-ligand-table.component.scss'],
+	standalone: false,
+	selector: 'app-pharos-ligand-table',
+	templateUrl: './pharos-ligand-table.component.html',
+	styleUrls: ['./pharos-ligand-table.component.scss'],
 })
 export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewInit {
-    @Input() ligands;
+	@Input() ligands;
 
-    displayedColumns: string[] = ['name', 'structure', 'targetProperties', 'extLink'];
-    dataSource = new MatTableDataSource<any>();
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    idgDevLevTrans = {
-        Tdark: 'Little is known about this target',
-        Tbio: 'No known drugs for this target',
-        Tchem: 'Target has at least one CHEMBL compound',
-        Tclin: 'Target has at least one approved drug',
-    };
+	displayedColumns: string[] = ['name', 'structure', 'targetProperties', 'extLink'];
+	dataSource = new MatTableDataSource<any>();
+	@ViewChild(MatPaginator) paginator: MatPaginator;
+	idgDevLevTrans = {
+		Tdark: 'Little is known about this target',
+		Tbio: 'No known drugs for this target',
+		Tchem: 'Target has at least one CHEMBL compound',
+		Tclin: 'Target has at least one approved drug',
+	};
 
-    constructor() {}
+	constructor() {}
 
-    ngOnInit() {
-        this.dataSource = new MatTableDataSource(
-            this.ligands.map((ligand) => {
-                if (!ligand.targetProperties.length) {
-                    ligand.targetProperties =
-                        ligand.targetProperties != null ? [ligand.targetProperties] : [];
-                }
-                return ligand;
-            }),
-        );
-        this.dataSource.paginator = this.paginator;
-    }
+	ngOnInit() {
+		this.dataSource = new MatTableDataSource(
+			this.ligands.map((ligand) => {
+				if (!ligand.targetProperties.length) {
+					ligand.targetProperties = ligand.targetProperties != null ? [ligand.targetProperties] : [];
+				}
+				return ligand;
+			}),
+		);
+		this.dataSource.paginator = this.paginator;
+	}
 
-    ngOnChanges() {
-        this.dataSource.paginator = this.paginator;
-    }
+	ngOnChanges() {
+		this.dataSource.paginator = this.paginator;
+	}
 
-    ngAfterViewInit() {
-        this.dataSource.paginator = this.paginator;
-    }
+	ngAfterViewInit() {
+		this.dataSource.paginator = this.paginator;
+	}
 
-    encodeForUrl(str: string) {
-        return encodeURIComponent(str);
-    }
+	encodeForUrl(str: string) {
+		return encodeURIComponent(str);
+	}
 }

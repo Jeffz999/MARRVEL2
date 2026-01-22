@@ -7,43 +7,43 @@ import { ModelMatcherData } from '../../../../interfaces/data';
 import { TAXONIDS, TAXONID_TO_INFO } from '../../../../data/model-organisms';
 
 @Component({
-    standalone: false,
-    selector: 'app-modelmatcher',
-    templateUrl: './modelmatcher.component.html',
-    styleUrls: ['./modelmatcher.component.scss'],
+	standalone: false,
+	selector: 'app-modelmatcher',
+	templateUrl: './modelmatcher.component.html',
+	styleUrls: ['./modelmatcher.component.scss'],
 })
 export class ModelmatcherComponent implements OnChanges {
-    @Input() gene!: HumanGene;
-    data?: ModelMatcherData[];
-    loading = true;
+	@Input() gene!: HumanGene;
+	data?: ModelMatcherData[];
+	loading = true;
 
-    taxonIdToInfo = TAXONID_TO_INFO;
+	taxonIdToInfo = TAXONID_TO_INFO;
 
-    constructor(private mmSvc: ModelmatcherService) {}
+	constructor(private mmSvc: ModelmatcherService) {}
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.gene.previousValue !== changes.gene.currentValue) {
-            this.requestData(this.gene.symbol);
-        }
-    }
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes.gene.previousValue !== changes.gene.currentValue) {
+			this.requestData(this.gene.symbol);
+		}
+	}
 
-    requestData(geneSymbol: string) {
-        this.loading = true;
-        this.mmSvc
-            .getScientistsByGeneSymbol(geneSymbol)
-            .toPromise()
-            .then((res: ModelMatcherData[]) => {
-                this.data = (res || []).map((e) => {
-                    if (e.lastName === 'Anonymous Scientist') {
-                        e.lastName = null;
-                    }
-                    return e;
-                });
-                this.loading = false;
-            })
-            .catch((err: unknown) => {
-                this.data = null;
-                this.loading = false;
-            });
-    }
+	requestData(geneSymbol: string) {
+		this.loading = true;
+		this.mmSvc
+			.getScientistsByGeneSymbol(geneSymbol)
+			.toPromise()
+			.then((res: ModelMatcherData[]) => {
+				this.data = (res || []).map((e) => {
+					if (e.lastName === 'Anonymous Scientist') {
+						e.lastName = null;
+					}
+					return e;
+				});
+				this.loading = false;
+			})
+			.catch((err: unknown) => {
+				this.data = null;
+				this.loading = false;
+			});
+	}
 }

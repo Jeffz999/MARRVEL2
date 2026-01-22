@@ -6,4 +6,3 @@ const exacController = require('../controllers/exac.controller');
 router.get('/ExAC/variant/:variant', exacController.findByVariant);
 
 module.exports = router;
-

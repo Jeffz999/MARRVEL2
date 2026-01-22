@@ -1,67 +1,67 @@
 .human-result-sidenav {
-    .actions {
-        width: 100%;
-        flex: 0 0 64px;
-        padding: 0px 16px;
-        background-color: rgb(49, 49, 49);
-        button {
-            color: rgba(255, 255, 255, 0.3);
-            margin-top: 12px;
-        }
-    }
+	.actions {
+		width: 100%;
+		flex: 0 0 64px;
+		padding: 0px 16px;
+		background-color: rgb(49, 49, 49);
+		button {
+			color: rgba(255, 255, 255, 0.3);
+			margin-top: 12px;
+		}
+	}
 
-    .content {
-        padding: 1em 0 0 0;
-        &.opened {
-            padding: 1em 32px 0 32px;
-        }
-    }
+	.content {
+		padding: 1em 0 0 0;
+		&.opened {
+			padding: 1em 32px 0 32px;
+		}
+	}
 }
 
 h4 {
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7em;
-    font-weight: 400;
-    letter-spacing: 0.1rem;
+	text-transform: uppercase;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 0.7em;
+	font-weight: 400;
+	letter-spacing: 0.1rem;
 }
 
 .closed .menu .rest {
-    display: none;
+	display: none;
 }
 .closed h4,
 .closed .input-detail {
-    display: none;
+	display: none;
 }
 
 ul,
 ul.menu {
-    list-style: none;
-    padding: 0;
-    margin-top: 8px;
+	list-style: none;
+	padding: 0;
+	margin-top: 8px;
 }
 .menu li {
-    padding: 0.8em 32px;
-    margin: 0 -32px;
-    min-height: 3em;
-    cursor: pointer;
+	padding: 0.8em 32px;
+	margin: 0 -32px;
+	min-height: 3em;
+	cursor: pointer;
 }
 .opened .menu li:hover {
-    background-color: rgb(49, 49, 49);
+	background-color: rgb(49, 49, 49);
 }
 .closed .menu li {
-    border-radius: 100%;
-    background-color: rgba(0, 0, 0, 0.15);
-    padding: 0.9em;
-    width: 2.7em;
-    min-height: 2.7em;
-    height: 2.7em;
-    text-align: center;
-    line-height: 1;
-    margin: 0 auto 0.3em auto;
-    font-weight: 600;
+	border-radius: 100%;
+	background-color: rgba(0, 0, 0, 0.15);
+	padding: 0.9em;
+	width: 2.7em;
+	min-height: 2.7em;
+	height: 2.7em;
+	text-align: center;
+	line-height: 1;
+	margin: 0 auto 0.3em auto;
+	font-weight: 600;
 }
 .closed .menu li:hover {
-    border-radius: 100%;
-    background-color: rgba(123, 209, 205, 0.15);
+	border-radius: 100%;
+	background-color: rgba(123, 209, 205, 0.15);
 }

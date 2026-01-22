@@ -16,7 +16,10 @@ const dbnsfpResolvers = require('./resolvers/dbnsfp.resolvers');
 const clinvarTypeDefs = readFileSync(path.join(__dirname, 'schemas/clinvar.schema.graphql'), 'utf8');
 const geneTypeDefs = readFileSync(path.join(__dirname, 'schemas/gene.schema.graphql'), 'utf8');
 const dioptTypeDefs = readFileSync(path.join(__dirname, 'schemas/diopt.schema.graphql'), 'utf8');
-const phenotypeOntologyTypeDefs = readFileSync(path.join(__dirname, 'schemas/phenotype-ontology.schema.graphql'), 'utf8');
+const phenotypeOntologyTypeDefs = readFileSync(
+	path.join(__dirname, 'schemas/phenotype-ontology.schema.graphql'),
+	'utf8',
+);
 const pharosTypeDefs = readFileSync(path.join(__dirname, 'schemas/pharos.schema.graphql'), 'utf8');
 const stringTypeDefs = readFileSync(path.join(__dirname, 'schemas/string.schema.graphql'), 'utf8');
 const dbnsfpTypeDefs = readFileSync(path.join(__dirname, 'schemas/dbnsfp.schema.graphql'), 'utf8');
@@ -73,46 +76,46 @@ const schema = buildSchema(typeDefs);
 
 // Create root resolver
 const rootValue = {
-    clinvarByGeneSymbol: clinvarResolvers.findByGeneSymbol,
-    clinvarByGeneEntrezId: clinvarResolvers.findByGeneEntrezId,
-    clinvarByVariant: clinvarResolvers.findByVariant,
-    clinvarCountsByEntrezId: clinvarResolvers.getCountsByEntrezId,
+	clinvarByGeneSymbol: clinvarResolvers.findByGeneSymbol,
+	clinvarByGeneEntrezId: clinvarResolvers.findByGeneEntrezId,
+	clinvarByVariant: clinvarResolvers.findByVariant,
+	clinvarCountsByEntrezId: clinvarResolvers.getCountsByEntrezId,
 
-    geneBySymbol: geneResolvers.findByGeneSymbol,
-    geneByEntrezId: geneResolvers.findByEntrezId,
-    geneByHgncId: geneResolvers.findByHgncId,
-    geneByEnsemblId: geneResolvers.findByEnsemblId,
-    genesByPrefix: geneResolvers.findByPrefix,
-    genesByGenomicLocation: geneResolvers.findByGenomicLocation,
+	geneBySymbol: geneResolvers.findByGeneSymbol,
+	geneByEntrezId: geneResolvers.findByEntrezId,
+	geneByHgncId: geneResolvers.findByHgncId,
+	geneByEnsemblId: geneResolvers.findByEnsemblId,
+	genesByPrefix: geneResolvers.findByPrefix,
+	genesByGenomicLocation: geneResolvers.findByGenomicLocation,
 
-    dioptAlignmentByEntrezId: dioptResolvers.findAlignmentsByEntrezId,
-    dioptDomainsByEntrezId: dioptResolvers.findDomainsByEntrezId,
-    dioptOrthologsByEntrezId: dioptResolvers.findOrthologsByEntrezId,
+	dioptAlignmentByEntrezId: dioptResolvers.findAlignmentsByEntrezId,
+	dioptDomainsByEntrezId: dioptResolvers.findDomainsByEntrezId,
+	dioptOrthologsByEntrezId: dioptResolvers.findOrthologsByEntrezId,
 
-    phenotypeOntologyByPoId: phenotypeOntologyResolvers.findByPoId,
-    phenotypeOntologyByName: phenotypeOntologyResolvers.findByName,
-    phenotypeOntologyByTaxonId: phenotypeOntologyResolvers.findByTaxonId,
-    phenotypeOntologyByNamespace: phenotypeOntologyResolvers.findByNamespace,
-    phenotypeOntologyByCategory: phenotypeOntologyResolvers.findByCategory,
-    phenotypeOntologyByEntrezId: phenotypeOntologyResolvers.findByEntrezId,
-    phenotypeOntologyByGeneSymbol: phenotypeOntologyResolvers.findByGeneSymbol,
+	phenotypeOntologyByPoId: phenotypeOntologyResolvers.findByPoId,
+	phenotypeOntologyByName: phenotypeOntologyResolvers.findByName,
+	phenotypeOntologyByTaxonId: phenotypeOntologyResolvers.findByTaxonId,
+	phenotypeOntologyByNamespace: phenotypeOntologyResolvers.findByNamespace,
+	phenotypeOntologyByCategory: phenotypeOntologyResolvers.findByCategory,
+	phenotypeOntologyByEntrezId: phenotypeOntologyResolvers.findByEntrezId,
+	phenotypeOntologyByGeneSymbol: phenotypeOntologyResolvers.findByGeneSymbol,
 
-    pharosTargetById: pharosResolvers.pharosTargetById,
-    pharosTargetsByIds: pharosResolvers.pharosTargetsByIds,
-    pharosTargetsByGeneEntrezId: pharosResolvers.pharosTargetsByGeneEntrezId,
+	pharosTargetById: pharosResolvers.pharosTargetById,
+	pharosTargetsByIds: pharosResolvers.pharosTargetsByIds,
+	pharosTargetsByGeneEntrezId: pharosResolvers.pharosTargetsByGeneEntrezId,
 
-    stringInteractionsByEntrezId: stringResolvers.stringInteractionsByEntrezId,
+	stringInteractionsByEntrezId: stringResolvers.stringInteractionsByEntrezId,
 
-    dbnsfpByVariant: dbnsfpResolvers.dbnsfpByVariant,
-    dbnsfpByPosition: dbnsfpResolvers.dbnsfpByPosition,
+	dbnsfpByVariant: dbnsfpResolvers.dbnsfpByVariant,
+	dbnsfpByPosition: dbnsfpResolvers.dbnsfpByPosition,
 
-    // Type resolvers
-    PharosTarget: pharosResolvers.PharosTarget,
+	// Type resolvers
+	PharosTarget: pharosResolvers.PharosTarget,
 };
 
 // Create and export the GraphQL handler
 module.exports = createHandler({
-    schema,
-    rootValue,
-    graphiql: process.env.NODE_ENV !== 'production', // Enable GraphiQL in development
+	schema,
+	rootValue,
+	graphiql: process.env.NODE_ENV !== 'production', // Enable GraphiQL in development
 });

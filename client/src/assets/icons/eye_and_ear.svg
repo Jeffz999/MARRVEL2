@@ -8,16 +8,16 @@
 	.st0{fill:#69C8BE;}
 </style>
 <defs>
-	
+
 		<inkscape:path-effect  effect="powerstroke" end_linecap_type="zerowidth" id="path-effect883" interpolator_beta="0" interpolator_type="CentripetalCatmullRom" is_visible="true" linejoin_type="round" lpeversion="1" miter_limit="3.6" offset_points="0.2,0.1322915 | 1.5,0.1322915 | 2.8,0.1322915" scale_width="11" sort_points="true" start_linecap_type="zerowidth">
 		</inkscape:path-effect>
-	
+
 		<inkscape:path-effect  copytype="repeated_stretched" effect="skeletal" fuse_tolerance="0" hide_knot="false" id="path-effect870" is_visible="true" lpeversion="1" normal_offset="3.1" pattern="m 670.97649,89.958336 a 2.2077553,14.174108 0 0 1 -2.20775,14.174104 2.2077553,14.174108 0 0 1 -2.20776,-14.174104 2.2077553,14.174108 0 0 1 2.20776,-14.174108 2.2077553,14.174108 0 0 1 2.20775,14.174108 z" prop_scale="1" prop_units="false" scale_y_rel="false" spacing="0.3" tang_offset="0" vertical_pattern="false">
 		</inkscape:path-effect>
-	
+
 		<inkscape:path-effect  copytype="repeated_stretched" effect="skeletal" fuse_tolerance="0" hide_knot="false" id="path-effect849" is_visible="true" lpeversion="1" normal_offset="3.1" pattern="m 670.97649,89.958336 a 2.2077553,14.174108 0 0 1 -2.20775,14.174104 2.2077553,14.174108 0 0 1 -2.20776,-14.174104 2.2077553,14.174108 0 0 1 2.20776,-14.174108 2.2077553,14.174108 0 0 1 2.20775,14.174108 z" prop_scale="1" prop_units="false" scale_y_rel="false" spacing="0.3" tang_offset="0" vertical_pattern="false">
 		</inkscape:path-effect>
-	
+
 		<inkscape:path-effect  copytype="repeated_stretched" effect="skeletal" fuse_tolerance="0" hide_knot="false" id="path-effect882" is_visible="true" lpeversion="1" normal_offset="0" pattern="m 662.02661,75.370003 h 2.55391 v 29.666917 h -2.55391 z" prop_scale="1.28" prop_units="false" scale_y_rel="false" spacing="1.9" tang_offset="0" vertical_pattern="false">
 		</inkscape:path-effect>
 </defs>

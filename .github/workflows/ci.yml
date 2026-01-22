@@ -56,7 +56,7 @@ jobs:
       - name: Get TransVar reference and annotation files from S3
         run: |
           aws s3 sync s3://${{ secrets.TRANSVAR_REF_BUCKET_NAME }} ${{ secrets.LOCAL_BASE }}/transvar.download
-      
+
       - name: Write env file for docker compose
         run: |
           echo "LOCAL_BASE=${{ secrets.LOCAL_BASE }}" >> .env

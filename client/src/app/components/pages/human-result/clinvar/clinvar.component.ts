@@ -9,85 +9,83 @@ import { Variant } from '../../../../interfaces/variant';
 import { Animations } from '../../../../animations';
 
 @Component({
-    standalone: false,
-    selector: 'app-clinvar',
-    templateUrl: './clinvar.component.html',
-    styleUrls: ['./clinvar.component.scss'],
-    animations: [Animations.toggle],
+	standalone: false,
+	selector: 'app-clinvar',
+	templateUrl: './clinvar.component.html',
+	styleUrls: ['./clinvar.component.scss'],
+	animations: [Animations.toggle],
 })
 export class ClinvarComponent implements OnInit {
-    @Input() gene: HumanGene;
-    @Input() variant: Variant;
+	@Input() gene: HumanGene;
+	@Input() variant: Variant;
 
-    urlSearchTerm: string;
+	urlSearchTerm: string;
 
-    loading = false;
-    data;
-    significance;
-    sigFourTotal;
+	loading = false;
+	data;
+	significance;
+	sigFourTotal;
 
-    alleleVisible = false;
+	alleleVisible = false;
 
-    constructor(
-        private api: ApiService,
-        private sanitizer: DomSanitizer,
-    ) {}
+	constructor(
+		private api: ApiService,
+		private sanitizer: DomSanitizer,
+	) {}
 
-    ngOnInit() {
-        if (this.gene) {
-            if (this.gene.hgncId) {
-                this.urlSearchTerm = this.gene.hgncId + '%5BHGNC+identifier+for+human+gene%5D';
-            } else {
-                this.urlSearchTerm = this.gene.symbol + '%5Bgene%5D';
-            }
-        }
+	ngOnInit() {
+		if (this.gene) {
+			if (this.gene.hgncId) {
+				this.urlSearchTerm = this.gene.hgncId + '%5BHGNC+identifier+for+human+gene%5D';
+			} else {
+				this.urlSearchTerm = this.gene.symbol + '%5Bgene%5D';
+			}
+		}
 
-        this.loading = true;
-        this.api
-            .getClinVarByEntrezId(this.gene.entrezId)
-            .pipe(take(1))
-            .subscribe((res) => {
-                this.significance = {
-                    pathogenic: 0,
-                    'likely pathogenic': 0,
-                    'likely benign': 0,
-                    benign: 0,
-                };
-                for (const item of res) {
-                    item.location = '';
-                    if (item.chr) {
-                        item.location = `Chr${item.chr}:`;
-                    }
-                    if (item.start) {
-                        item.location = item.location + `${item.start}`;
-                    }
-                    if (item.stop && item.start !== item.stop) {
-                        item.location = item.location + `-${item.stop}`;
-                    }
-                    item.significanceText = item.significance.description;
-                    item.reviewStatus = item.significance.reviewStatus;
+		this.loading = true;
+		this.api
+			.getClinVarByEntrezId(this.gene.entrezId)
+			.pipe(take(1))
+			.subscribe((res) => {
+				this.significance = {
+					pathogenic: 0,
+					'likely pathogenic': 0,
+					'likely benign': 0,
+					benign: 0,
+				};
+				for (const item of res) {
+					item.location = '';
+					if (item.chr) {
+						item.location = `Chr${item.chr}:`;
+					}
+					if (item.start) {
+						item.location = item.location + `${item.start}`;
+					}
+					if (item.stop && item.start !== item.stop) {
+						item.location = item.location + `-${item.stop}`;
+					}
+					item.significanceText = item.significance.description;
+					item.reviewStatus = item.significance.reviewStatus;
 
-                    item.significanceText.split(/[\/,]/).forEach((S) => {
-                        S = S.toLowerCase().trim();
-                        if (!(S in this.significance)) {
-                            this.significance[S] = 0;
-                        }
-                        this.significance[S] += 1;
-                    });
-                }
-                this.sigFourTotal =
-                    this.significance['pathogenic'] +
-                    this.significance['likely pathogenic'] +
-                    this.significance['likely benign'] +
-                    this.significance['benign'];
-                this.data = res;
-                this.loading = false;
-            });
-    }
+					item.significanceText.split(/[\/,]/).forEach((S) => {
+						S = S.toLowerCase().trim();
+						if (!(S in this.significance)) {
+							this.significance[S] = 0;
+						}
+						this.significance[S] += 1;
+					});
+				}
+				this.sigFourTotal =
+					this.significance['pathogenic'] +
+					this.significance['likely pathogenic'] +
+					this.significance['likely benign'] +
+					this.significance['benign'];
+				this.data = res;
+				this.loading = false;
+			});
+	}
 
-    getWidthPercStyle(num: number, total: number) {
-        return this.sanitizer.bypassSecurityTrustStyle(
-            `width: ${((num / total) * 100).toFixed(3)}%`,
-        );
-    }
+	getWidthPercStyle(num: number, total: number) {
+		return this.sanitizer.bypassSecurityTrustStyle(`width: ${((num / total) * 100).toFixed(3)}%`);
+	}
 }

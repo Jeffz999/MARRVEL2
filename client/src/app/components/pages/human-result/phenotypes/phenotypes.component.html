@@ -1,233 +1,223 @@
 <h3
-    class="text-underline-dashed"
-    matTooltip="We are currently developing a new feature to display gross phenotypes associated with each human or model organism gene based on information obtained from OMIM and model organism databases. This is still a b-version and any feedback will be appreciated."
+	class="text-underline-dashed"
+	matTooltip="We are currently developing a new feature to display gross phenotypes associated with each human or model organism gene based on information obtained from OMIM and model organism databases. This is still a b-version and any feedback will be appreciated."
 >
-    Phenotypes
-    <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle">
-        Beta
-    </span>
+	Phenotypes
+	<span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle"> Beta </span>
 </h3>
 
 <div class="w-100 my-3">
-    <mat-slide-toggle
-        [checked]="showOnlyBest"
-        (change)="showOnlyBest = !showOnlyBest"
-        color="primary"
-    >
-        Show only best DIOPT<span
-            class="badge badge-secondary"
-            style="margin-left: 2px; font-size: 0.4em; vertical-align: middle"
-            >v8</span
-        >
-        score gene
-    </mat-slide-toggle>
+	<mat-slide-toggle [checked]="showOnlyBest" (change)="showOnlyBest = !showOnlyBest" color="primary">
+		Show only best DIOPT<span
+			class="badge badge-secondary"
+			style="margin-left: 2px; font-size: 0.4em; vertical-align: middle"
+			>v8</span
+		>
+		score gene
+	</mat-slide-toggle>
 </div>
 
 <div class="ribbon ribbon-container" (mouseleave)="mouseoverCat = null">
-    <div style="width: 236px; padding-right: 2px">
-        <div class="ribbon-header-row">
-            <div class="ribbon-cell ribbon-org-icon-cell"></div>
-            <div class="ribbon-cell ribbon-org-name-cell"></div>
-            <div class="ribbon-cell ribbon-gene-symbol-cell">Gene</div>
-            <div class="ribbon-cell ribbon-diopt-score-cell pl-2">DIOPT Score</div>
-            <div class="ribbon-cell ribbon-diopt-best-cell">Best Score</div>
-        </div>
+	<div style="width: 236px; padding-right: 2px">
+		<div class="ribbon-header-row">
+			<div class="ribbon-cell ribbon-org-icon-cell"></div>
+			<div class="ribbon-cell ribbon-org-name-cell"></div>
+			<div class="ribbon-cell ribbon-gene-symbol-cell">Gene</div>
+			<div class="ribbon-cell ribbon-diopt-score-cell pl-2">DIOPT Score</div>
+			<div class="ribbon-cell ribbon-diopt-best-cell">Best Score</div>
+		</div>
 
-        <!-- Ortholog rows (icon, symbol, diopt score info) start -->
-        <div *ngFor="let taxonId of taxonIds">
-            <div *ngFor="let aGenePheno of phenotypes[taxonId]; index as idx">
-                <div
-                    class="ribbon-header-row"
-                    *ngIf="!showOnlyBest || aGenePheno.bestScore"
-                    [@toggle]="!showOnlyBest || aGenePheno.bestScore"
-                >
-                    <div class="ribbon-cell ribbon-org-icon-cell">
-                        <img class="w-100" class="w-100" [attr.src]="taxonIdToInfo[taxonId].icon" />
-                    </div>
-                    <div class="ribbon-cell ribbon-org-name-cell">
-                        {{ taxonIdToInfo[taxonId].name }}
-                    </div>
-                    <div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
-                        <a
-                            [attr.href]="getTermDetailUrl(taxonId, aGenePheno.gene, true)"
-                            target="_blank"
-                            class="text-nowrap mr-1"
-                        >
-                            {{ aGenePheno.gene.symbol }}
-                        </a>
-                        <span class="badge badge-secondary" *ngIf="taxonId === 10090">MGI</span>
-                    </div>
-                    <div class="ribbon-cell ribbon-diopt-score-cell">
-                        <span *ngIf="taxonIdToInfo[taxonId].maxScore">
-                            {{ aGenePheno.score }}/{{ taxonIdToInfo[taxonId].maxScore }}
-                        </span>
-                    </div>
-                    <div class="ribbon-cell ribbon-diopt-best-cell">
-                        <span
-                            *ngIf="taxonIdToInfo[taxonId].maxScore"
-                            [ngClass]="{ 'text-bold-blue': aGenePheno.bestScore }"
-                        >
-                            {{ aGenePheno.bestScore ? 'Y' : 'N' }}
-                        </span>
-                    </div>
-                </div>
-                <div
-                    class="ribbon-header-row"
-                    *ngIf="taxonId === 10090 && (!showOnlyBest || aGenePheno.bestScore)"
-                    [@toggle]="!showOnlyBest || aGenePheno.bestScore"
-                >
-                    <div class="ribbon-cell ribbon-org-icon-cell"></div>
-                    <div class="ribbon-cell ribbon-org-name-cell"></div>
-                    <div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
-                        <a
-                            [attr.href]="
-                                'https://www.mousephenotype.org/data/genes/' + aGenePheno.gene.mgiId
-                            "
-                            target="_blank"
-                            class="text-nowrap mr-1"
-                        >
-                            {{ aGenePheno.gene.symbol }}
-                        </a>
-                        <span class="badge badge-secondary" *ngIf="taxonId === 10090">IMPC</span>
-                    </div>
-                    <div class="ribbon-cell ribbon-diopt-score-cell"></div>
-                    <div class="ribbon-cell ribbon-diopt-best-cell"></div>
-                </div>
-            </div>
-        </div>
-        <!-- Ortholog rows end -->
-    </div>
+		<!-- Ortholog rows (icon, symbol, diopt score info) start -->
+		<div *ngFor="let taxonId of taxonIds">
+			<div *ngFor="let aGenePheno of phenotypes[taxonId]; index as idx">
+				<div
+					class="ribbon-header-row"
+					*ngIf="!showOnlyBest || aGenePheno.bestScore"
+					[@toggle]="!showOnlyBest || aGenePheno.bestScore"
+				>
+					<div class="ribbon-cell ribbon-org-icon-cell">
+						<img class="w-100" class="w-100" [attr.src]="taxonIdToInfo[taxonId].icon" />
+					</div>
+					<div class="ribbon-cell ribbon-org-name-cell">
+						{{ taxonIdToInfo[taxonId].name }}
+					</div>
+					<div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
+						<a
+							[attr.href]="getTermDetailUrl(taxonId, aGenePheno.gene, true)"
+							target="_blank"
+							class="text-nowrap mr-1"
+						>
+							{{ aGenePheno.gene.symbol }}
+						</a>
+						<span class="badge badge-secondary" *ngIf="taxonId === 10090">MGI</span>
+					</div>
+					<div class="ribbon-cell ribbon-diopt-score-cell">
+						<span *ngIf="taxonIdToInfo[taxonId].maxScore">
+							{{ aGenePheno.score }}/{{ taxonIdToInfo[taxonId].maxScore }}
+						</span>
+					</div>
+					<div class="ribbon-cell ribbon-diopt-best-cell">
+						<span
+							*ngIf="taxonIdToInfo[taxonId].maxScore"
+							[ngClass]="{ 'text-bold-blue': aGenePheno.bestScore }"
+						>
+							{{ aGenePheno.bestScore ? 'Y' : 'N' }}
+						</span>
+					</div>
+				</div>
+				<div
+					class="ribbon-header-row"
+					*ngIf="taxonId === 10090 && (!showOnlyBest || aGenePheno.bestScore)"
+					[@toggle]="!showOnlyBest || aGenePheno.bestScore"
+				>
+					<div class="ribbon-cell ribbon-org-icon-cell"></div>
+					<div class="ribbon-cell ribbon-org-name-cell"></div>
+					<div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
+						<a
+							[attr.href]="'https://www.mousephenotype.org/data/genes/' + aGenePheno.gene.mgiId"
+							target="_blank"
+							class="text-nowrap mr-1"
+						>
+							{{ aGenePheno.gene.symbol }}
+						</a>
+						<span class="badge badge-secondary" *ngIf="taxonId === 10090">IMPC</span>
+					</div>
+					<div class="ribbon-cell ribbon-diopt-score-cell"></div>
+					<div class="ribbon-cell ribbon-diopt-best-cell"></div>
+				</div>
+			</div>
+		</div>
+		<!-- Ortholog rows end -->
+	</div>
 
-    <div class="ribbon-scrollable-column-container">
-        <div class="ribbon-header-row">
-            <div class="ribbon-cell ribbon-header-img-cell" *ngFor="let cat of categories">
-                <img
-                    class="w-100"
-                    src="/assets/icons/{{ catNameToIcon[cat.name] }}.svg"
-                    [ngClass]="{ accent: mouseoverCat === cat.name }"
-                    [matTooltip]="cat.name"
-                    (mouseenter)="selectCategory(null, null, cat.name, true)"
-                />
-            </div>
-        </div>
-        <div *ngFor="let taxonId of taxonIds">
-            <div *ngFor="let aGenePheno of phenotypes[taxonId]; index as idx">
-                <div
-                    class="ribbon-row"
-                    *ngIf="!showOnlyBest || aGenePheno.bestScore"
-                    [@toggle]="!showOnlyBest || aGenePheno.bestScore"
-                >
-                    <div class="ribbon-cell-wrapper" *ngFor="let cat of categories">
-                        <div
-                            class="ribbon-cell bg-blue clickable"
-                            *ngIf="
-                                aGenePheno.phenotypes &&
-                                aGenePheno.phenotypes[cat.name] &&
-                                aGenePheno.phenotypes[cat.name].length
-                            "
-                            [matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
-                            (click)="selectCategory(taxonId, idx, cat.name)"
-                            [ngClass]="{
-                                mouseover: cat.name === mouseoverCat,
-                                selected:
-                                    selected &&
-                                    selected.taxonId === taxonId &&
-                                    selected.idx === idx &&
-                                    selected.category === cat.name &&
-                                    !selected.impc,
-                            }"
-                            (mouseenter)="selectCategory(taxonId, null, cat.name, true)"
-                        ></div>
-                        <div
-                            class="ribbon-cell"
-                            *ngIf="
-                                !aGenePheno.phenotypes ||
-                                !aGenePheno.phenotypes[cat.name] ||
-                                !aGenePheno.phenotypes[cat.name].length
-                            "
-                            [ngClass]="{
-                                mouseover: cat.name === mouseoverCat,
-                                'bg-gray': !aGenePheno.phenotypes,
-                            }"
-                            (mouseenter)="selectCategory(taxonId, null, cat.name, true)"
-                        ></div>
-                    </div>
-                </div>
+	<div class="ribbon-scrollable-column-container">
+		<div class="ribbon-header-row">
+			<div class="ribbon-cell ribbon-header-img-cell" *ngFor="let cat of categories">
+				<img
+					class="w-100"
+					src="/assets/icons/{{ catNameToIcon[cat.name] }}.svg"
+					[ngClass]="{ accent: mouseoverCat === cat.name }"
+					[matTooltip]="cat.name"
+					(mouseenter)="selectCategory(null, null, cat.name, true)"
+				/>
+			</div>
+		</div>
+		<div *ngFor="let taxonId of taxonIds">
+			<div *ngFor="let aGenePheno of phenotypes[taxonId]; index as idx">
+				<div
+					class="ribbon-row"
+					*ngIf="!showOnlyBest || aGenePheno.bestScore"
+					[@toggle]="!showOnlyBest || aGenePheno.bestScore"
+				>
+					<div class="ribbon-cell-wrapper" *ngFor="let cat of categories">
+						<div
+							class="ribbon-cell bg-blue clickable"
+							*ngIf="
+								aGenePheno.phenotypes &&
+								aGenePheno.phenotypes[cat.name] &&
+								aGenePheno.phenotypes[cat.name].length
+							"
+							[matTooltip]="aGenePheno.phenotypes[cat.name].length + ' phenotypes'"
+							(click)="selectCategory(taxonId, idx, cat.name)"
+							[ngClass]="{
+								mouseover: cat.name === mouseoverCat,
+								selected:
+									selected &&
+									selected.taxonId === taxonId &&
+									selected.idx === idx &&
+									selected.category === cat.name &&
+									!selected.impc,
+							}"
+							(mouseenter)="selectCategory(taxonId, null, cat.name, true)"
+						></div>
+						<div
+							class="ribbon-cell"
+							*ngIf="
+								!aGenePheno.phenotypes ||
+								!aGenePheno.phenotypes[cat.name] ||
+								!aGenePheno.phenotypes[cat.name].length
+							"
+							[ngClass]="{
+								mouseover: cat.name === mouseoverCat,
+								'bg-gray': !aGenePheno.phenotypes,
+							}"
+							(mouseenter)="selectCategory(taxonId, null, cat.name, true)"
+						></div>
+					</div>
+				</div>
 
-                <!-- IMPC row (only for mouse) -->
-                <div
-                    class="ribbon-row"
-                    *ngIf="taxonId === 10090 && (!showOnlyBest || aGenePheno.bestScore)"
-                    [@toggle]="!showOnlyBest || aGenePheno.bestScore"
-                >
-                    <div class="ribbon-cell-wrapper" *ngFor="let cat of categories">
-                        <div
-                            class="ribbon-cell bg-blue clickable"
-                            *ngIf="
-                                aGenePheno.impcPhenotypes &&
-                                aGenePheno.impcPhenotypes[cat.name] &&
-                                aGenePheno.impcPhenotypes[cat.name].length
-                            "
-                            [matTooltip]="
-                                aGenePheno.impcPhenotypes[cat.name].length + ' phenotypes'
-                            "
-                            (click)="selectCategory(taxonId, idx, cat.name, false, true)"
-                            [ngClass]="{
-                                mouseover: cat.name === mouseoverCat,
-                                selected:
-                                    selected &&
-                                    selected.taxonId === taxonId &&
-                                    selected.idx === idx &&
-                                    selected.category === cat.name &&
-                                    selected.impc,
-                            }"
-                            (mouseenter)="selectCategory(taxonId, null, cat.name, true)"
-                        ></div>
-                        <div
-                            class="ribbon-cell"
-                            *ngIf="
-                                !aGenePheno.impcPhenotypes ||
-                                !aGenePheno.impcPhenotypes[cat.name] ||
-                                !aGenePheno.impcPhenotypes[cat.name].length
-                            "
-                            [ngClass]="{
-                                mouseover: cat.name === mouseoverCat,
-                                'bg-gray': !aGenePheno.impcPhenotypes,
-                            }"
-                            (mouseenter)="selectCategory(taxonId, null, cat.name, true)"
-                        ></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+				<!-- IMPC row (only for mouse) -->
+				<div
+					class="ribbon-row"
+					*ngIf="taxonId === 10090 && (!showOnlyBest || aGenePheno.bestScore)"
+					[@toggle]="!showOnlyBest || aGenePheno.bestScore"
+				>
+					<div class="ribbon-cell-wrapper" *ngFor="let cat of categories">
+						<div
+							class="ribbon-cell bg-blue clickable"
+							*ngIf="
+								aGenePheno.impcPhenotypes &&
+								aGenePheno.impcPhenotypes[cat.name] &&
+								aGenePheno.impcPhenotypes[cat.name].length
+							"
+							[matTooltip]="aGenePheno.impcPhenotypes[cat.name].length + ' phenotypes'"
+							(click)="selectCategory(taxonId, idx, cat.name, false, true)"
+							[ngClass]="{
+								mouseover: cat.name === mouseoverCat,
+								selected:
+									selected &&
+									selected.taxonId === taxonId &&
+									selected.idx === idx &&
+									selected.category === cat.name &&
+									selected.impc,
+							}"
+							(mouseenter)="selectCategory(taxonId, null, cat.name, true)"
+						></div>
+						<div
+							class="ribbon-cell"
+							*ngIf="
+								!aGenePheno.impcPhenotypes ||
+								!aGenePheno.impcPhenotypes[cat.name] ||
+								!aGenePheno.impcPhenotypes[cat.name].length
+							"
+							[ngClass]="{
+								mouseover: cat.name === mouseoverCat,
+								'bg-gray': !aGenePheno.impcPhenotypes,
+							}"
+							(mouseenter)="selectCategory(taxonId, null, cat.name, true)"
+						></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div
-    class="phenotypes-detail mt-3"
-    *ngIf="selected && selected.taxonId && taxonIdToInfo[selected.taxonId].phenoName"
-    [@toggle]
+	class="phenotypes-detail mt-3"
+	*ngIf="selected && selected.taxonId && taxonIdToInfo[selected.taxonId].phenoName"
+	[@toggle]
 >
-    <h4 class="mt-0">
-        {{ taxonIdToInfo[selected.taxonId].phenoName }}
-        Associated with
-        {{ phenotypes[selected.taxonId][selected.idx].gene.symbol }}
-        Related to
-        {{ selected.category }}
-    </h4>
+	<h4 class="mt-0">
+		{{ taxonIdToInfo[selected.taxonId].phenoName }}
+		Associated with
+		{{ phenotypes[selected.taxonId][selected.idx].gene.symbol }}
+		Related to
+		{{ selected.category }}
+	</h4>
 
-    <div class="row mt-3">
-        <div
-            class="col-sm-12 col-md-6 col-lg-4 text-capitalize"
-            *ngFor="
-                let po of phenotypes[selected.taxonId][selected.idx][
-                    selected.impc ? 'impcPhenotypes' : 'phenotypes'
-                ][selected.category]
-            "
-        >
-            <a href="{{ getTermDetailUrl(selected.taxonId, po.id) }}" target="_blank">
-                {{ po.name }}
-            </a>
-        </div>
-    </div>
+	<div class="row mt-3">
+		<div
+			class="col-sm-12 col-md-6 col-lg-4 text-capitalize"
+			*ngFor="
+				let po of phenotypes[selected.taxonId][selected.idx][selected.impc ? 'impcPhenotypes' : 'phenotypes'][
+					selected.category
+				]
+			"
+		>
+			<a href="{{ getTermDetailUrl(selected.taxonId, po.id) }}" target="_blank">
+				{{ po.name }}
+			</a>
+		</div>
+	</div>
 </div>

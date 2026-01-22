@@ -1,24 +1,24 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
-    standalone: false,
-    selector: 'app-scroll-top-button',
-    templateUrl: './scroll-top-button.component.html',
-    styleUrls: ['./scroll-top-button.component.scss'],
+	standalone: false,
+	selector: 'app-scroll-top-button',
+	templateUrl: './scroll-top-button.component.html',
+	styleUrls: ['./scroll-top-button.component.scss'],
 })
 export class ScrollTopButtonComponent implements OnChanges {
-    @Input() right = '12px';
+	@Input() right = '12px';
 
-    constructor() {}
+	constructor() {}
 
-    ngOnChanges() {
-        window.document.getElementById('scroll-to-top').style['right'] = this.right;
-    }
+	ngOnChanges() {
+		window.document.getElementById('scroll-to-top').style['right'] = this.right;
+	}
 
-    scrollToTop() {
-        window.document.getElementById('TOP').scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-        });
-    }
+	scrollToTop() {
+		window.document.getElementById('TOP').scrollIntoView({
+			behavior: 'smooth',
+			block: 'start',
+		});
+	}
 }

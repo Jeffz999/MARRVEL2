@@ -23,29 +23,30 @@ In development mode, GraphiQL playground is available at `/graphiql` for interac
 
 ```graphql
 query GetClinvarByGeneSymbol($symbol: String!) {
-  clinvarByGeneSymbol(symbol: $symbol) {
-    chr
-    start
-    stop
-    ref
-    alt
-    uid
-    condition
-    title
-    significance {
-      description
-      lastEvaluated
-      reviewStatus
-    }
-    band
-  }
+	clinvarByGeneSymbol(symbol: $symbol) {
+		chr
+		start
+		stop
+		ref
+		alt
+		uid
+		condition
+		title
+		significance {
+			description
+			lastEvaluated
+			reviewStatus
+		}
+		band
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "symbol": "BRCA1"
+	"symbol": "BRCA1"
 }
 ```
 
@@ -53,23 +54,24 @@ query GetClinvarByGeneSymbol($symbol: String!) {
 
 ```graphql
 query GetClinvarByGeneEntrezId($entrezId: Int!) {
-  clinvarByGeneEntrezId(entrezId: $entrezId) {
-    chr
-    start
-    stop
-    condition
-    title
-    significance {
-      description
-    }
-  }
+	clinvarByGeneEntrezId(entrezId: $entrezId) {
+		chr
+		start
+		stop
+		condition
+		title
+		significance {
+			description
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 672
+	"entrezId": 672
 }
 ```
 
@@ -77,27 +79,28 @@ query GetClinvarByGeneEntrezId($entrezId: Int!) {
 
 ```graphql
 query GetClinvarByVariant($variant: String!, $build: String) {
-  clinvarByVariant(variant: $variant, build: $build) {
-    chr
-    start
-    stop
-    ref
-    alt
-    condition
-    title
-    significance {
-      description
-      reviewStatus
-    }
-  }
+	clinvarByVariant(variant: $variant, build: $build) {
+		chr
+		start
+		stop
+		ref
+		alt
+		condition
+		title
+		significance {
+			description
+			reviewStatus
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "variant": "17-43094454-A-T",
-  "build": "hg19"
+	"variant": "17-43094454-A-T",
+	"build": "hg19"
 }
 ```
 
@@ -105,19 +108,20 @@ query GetClinvarByVariant($variant: String!, $build: String) {
 
 ```graphql
 query GetClinvarCounts($entrezId: Int!) {
-  clinvarCountsByEntrezId(entrezId: $entrezId) {
-    pathogenic
-    likelyPathogenic
-    likelyBenign
-    benign
-  }
+	clinvarCountsByEntrezId(entrezId: $entrezId) {
+		pathogenic
+		likelyPathogenic
+		likelyBenign
+		benign
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 672
+	"entrezId": 672
 }
 ```
 
@@ -127,31 +131,32 @@ query GetClinvarCounts($entrezId: Int!) {
 
 ```graphql
 query GetGeneBySymbol($symbol: String!, $taxonId: Int!) {
-  geneBySymbol(symbol: $symbol, taxonId: $taxonId) {
-    entrezId
-    symbol
-    name
-    alias
-    taxonId
-    locusType
-    status
-    chr
-    hg19Start
-    hg19Stop
-    xref {
-      ensemblId
-      omimId
-      hgncId
-    }
-  }
+	geneBySymbol(symbol: $symbol, taxonId: $taxonId) {
+		entrezId
+		symbol
+		name
+		alias
+		taxonId
+		locusType
+		status
+		chr
+		hg19Start
+		hg19Stop
+		xref {
+			ensemblId
+			omimId
+			hgncId
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "symbol": "BRCA1",
-  "taxonId": 9606
+	"symbol": "BRCA1",
+	"taxonId": 9606
 }
 ```
 
@@ -159,24 +164,25 @@ query GetGeneBySymbol($symbol: String!, $taxonId: Int!) {
 
 ```graphql
 query GetGeneByEntrezId($entrezId: Int!) {
-  geneByEntrezId(entrezId: $entrezId) {
-    entrezId
-    symbol
-    name
-    alias
-    taxonId
-    xref {
-      ensemblId
-      omimId
-    }
-  }
+	geneByEntrezId(entrezId: $entrezId) {
+		entrezId
+		symbol
+		name
+		alias
+		taxonId
+		xref {
+			ensemblId
+			omimId
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 672
+	"entrezId": 672
 }
 ```
 
@@ -184,19 +190,20 @@ query GetGeneByEntrezId($entrezId: Int!) {
 
 ```graphql
 query GetGeneByHgncId($hgncId: Int!) {
-  geneByHgncId(hgncId: $hgncId) {
-    entrezId
-    symbol
-    name
-    hgncId
-  }
+	geneByHgncId(hgncId: $hgncId) {
+		entrezId
+		symbol
+		name
+		hgncId
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "hgncId": 1100
+	"hgncId": 1100
 }
 ```
 
@@ -204,22 +211,23 @@ query GetGeneByHgncId($hgncId: Int!) {
 
 ```graphql
 query GetGeneByEnsemblId($ensemblId: String!) {
-  geneByEnsemblId(ensemblId: $ensemblId) {
-    entrezId
-    symbol
-    name
-    xref {
-      ensemblId
-      omimId
-    }
-  }
+	geneByEnsemblId(ensemblId: $ensemblId) {
+		entrezId
+		symbol
+		name
+		xref {
+			ensemblId
+			omimId
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "ensemblId": "ENSG00000012048"
+	"ensemblId": "ENSG00000012048"
 }
 ```
 
@@ -227,21 +235,22 @@ query GetGeneByEnsemblId($ensemblId: String!) {
 
 ```graphql
 query GetGenesByPrefix($prefix: String!, $taxonId: Int!, $limit: Int) {
-  genesByPrefix(prefix: $prefix, taxonId: $taxonId, limit: $limit) {
-    entrezId
-    symbol
-    name
-    alias
-  }
+	genesByPrefix(prefix: $prefix, taxonId: $taxonId, limit: $limit) {
+		entrezId
+		symbol
+		name
+		alias
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "prefix": "BRCA",
-  "taxonId": 9606,
-  "limit": 10
+	"prefix": "BRCA",
+	"taxonId": 9606,
+	"limit": 10
 }
 ```
 
@@ -249,24 +258,25 @@ query GetGenesByPrefix($prefix: String!, $taxonId: Int!, $limit: Int) {
 
 ```graphql
 query GetGenesByGenomicLocation($chr: String!, $posStart: Int!, $posStop: Int!, $build: String) {
-  genesByGenomicLocation(chr: $chr, posStart: $posStart, posStop: $posStop, build: $build) {
-    entrezId
-    symbol
-    name
-    chr
-    hg19Start
-    hg19Stop
-  }
+	genesByGenomicLocation(chr: $chr, posStart: $posStart, posStop: $posStop, build: $build) {
+		entrezId
+		symbol
+		name
+		chr
+		hg19Start
+		hg19Stop
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "chr": "17",
-  "posStart": 43000000,
-  "posStop": 44000000,
-  "build": "hg19"
+	"chr": "17",
+	"posStart": 43000000,
+	"posStop": 44000000,
+	"build": "hg19"
 }
 ```
 
@@ -276,21 +286,22 @@ query GetGenesByGenomicLocation($chr: String!, $posStart: Int!, $posStop: Int!, 
 
 ```graphql
 query GetDioptAlignmentByEntrezId($entrezId: Int!) {
-  dioptAlignmentByEntrezId(entrezId: $entrezId) {
-    entrezId
-    data {
-      sequence
-      style
-      position
-    }
-  }
+	dioptAlignmentByEntrezId(entrezId: $entrezId) {
+		entrezId
+		data {
+			sequence
+			style
+			position
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 672
+	"entrezId": 672
 }
 ```
 
@@ -298,23 +309,24 @@ query GetDioptAlignmentByEntrezId($entrezId: Int!) {
 
 ```graphql
 query GetDioptDomainsByEntrezId($entrezId: Int!) {
-  dioptDomainsByEntrezId(entrezId: $entrezId) {
-    entrezId
-    domains {
-      name
-      start
-      end
-      proteinId
-      externalId
-    }
-  }
+	dioptDomainsByEntrezId(entrezId: $entrezId) {
+		entrezId
+		domains {
+			name
+			start
+			end
+			proteinId
+			externalId
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 672
+	"entrezId": 672
 }
 ```
 
@@ -322,30 +334,31 @@ query GetDioptDomainsByEntrezId($entrezId: Int!) {
 
 ```graphql
 query GetDioptOrthologsByEntrezId($entrezId: Int!) {
-  dioptOrthologsByEntrezId(entrezId: $entrezId) {
-    taxonId1
-    entrezId1
-    taxonId2
-    entrezId2
-    score
-    bestScore
-    confidence
-    gene1 {
-      symbol
-    }
-    gene2 {
-      symbol
-      entrezId
-      name
-    }
-  }
+	dioptOrthologsByEntrezId(entrezId: $entrezId) {
+		taxonId1
+		entrezId1
+		taxonId2
+		entrezId2
+		score
+		bestScore
+		confidence
+		gene1 {
+			symbol
+		}
+		gene2 {
+			symbol
+			entrezId
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 672
+	"entrezId": 672
 }
 ```
 
@@ -353,29 +366,30 @@ query GetDioptOrthologsByEntrezId($entrezId: Int!) {
 
 ```graphql
 query GetDioptOrthologsByTaxonId($taxonId1: Int!, $taxonId2: Int!, $limit: Int) {
-  dioptOrthologsByTaxonId(taxonId1: $taxonId1, taxonId2: $taxonId2, limit: $limit) {
-    entrezId1
-    entrezId2
-    score
-    confidence
-    gene1 {
-      symbol
-      entrezId
-    }
-    gene2 {
-      symbol
-      entrezId
-    }
-  }
+	dioptOrthologsByTaxonId(taxonId1: $taxonId1, taxonId2: $taxonId2, limit: $limit) {
+		entrezId1
+		entrezId2
+		score
+		confidence
+		gene1 {
+			symbol
+			entrezId
+		}
+		gene2 {
+			symbol
+			entrezId
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "taxonId1": 9606,
-  "taxonId2": 7227,
-  "limit": 50
+	"taxonId1": 9606,
+	"taxonId2": 7227,
+	"limit": 50
 }
 ```
 
@@ -385,25 +399,26 @@ query GetDioptOrthologsByTaxonId($taxonId1: Int!, $taxonId2: Int!, $limit: Int) 
 
 ```graphql
 query GetPhenotypeOntologyByPoId($poId: String!) {
-  phenotypeOntologyByPoId(poId: $poId) {
-    id
-    name
-    def
-    namespace
-    taxonId
-    is_a
-    categories {
-      id
-      name
-    }
-  }
+	phenotypeOntologyByPoId(poId: $poId) {
+		id
+		name
+		def
+		namespace
+		taxonId
+		is_a
+		categories {
+			id
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "poId": "PO:0000001"
+	"poId": "PO:0000001"
 }
 ```
 
@@ -411,25 +426,26 @@ query GetPhenotypeOntologyByPoId($poId: String!) {
 
 ```graphql
 query GetPhenotypeOntologyByName($name: String!, $limit: Int, $start: Int) {
-  phenotypeOntologyByName(name: $name, limit: $limit, start: $start) {
-    id
-    name
-    def
-    namespace
-    categories {
-      id
-      name
-    }
-  }
+	phenotypeOntologyByName(name: $name, limit: $limit, start: $start) {
+		id
+		name
+		def
+		namespace
+		categories {
+			id
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "name": "leaf",
-  "limit": 10,
-  "start": 0
+	"name": "leaf",
+	"limit": 10,
+	"start": 0
 }
 ```
 
@@ -437,24 +453,25 @@ query GetPhenotypeOntologyByName($name: String!, $limit: Int, $start: Int) {
 
 ```graphql
 query GetPhenotypeOntologyByTaxonId($taxonId: Int!, $limit: Int, $start: Int) {
-  phenotypeOntologyByTaxonId(taxonId: $taxonId, limit: $limit, start: $start) {
-    id
-    name
-    namespace
-    categories {
-      id
-      name
-    }
-  }
+	phenotypeOntologyByTaxonId(taxonId: $taxonId, limit: $limit, start: $start) {
+		id
+		name
+		namespace
+		categories {
+			id
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "taxonId": 3702,
-  "limit": 20,
-  "start": 0
+	"taxonId": 3702,
+	"limit": 20,
+	"start": 0
 }
 ```
 
@@ -462,21 +479,22 @@ query GetPhenotypeOntologyByTaxonId($taxonId: Int!, $limit: Int, $start: Int) {
 
 ```graphql
 query GetPhenotypeOntologyByNamespace($namespace: String!, $limit: Int, $start: Int) {
-  phenotypeOntologyByNamespace(namespace: $namespace, limit: $limit, start: $start) {
-    id
-    name
-    def
-    taxonId
-  }
+	phenotypeOntologyByNamespace(namespace: $namespace, limit: $limit, start: $start) {
+		id
+		name
+		def
+		taxonId
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "namespace": "plant_anatomy",
-  "limit": 30,
-  "start": 0
+	"namespace": "plant_anatomy",
+	"limit": 30,
+	"start": 0
 }
 ```
 
@@ -484,24 +502,25 @@ query GetPhenotypeOntologyByNamespace($namespace: String!, $limit: Int, $start: 
 
 ```graphql
 query GetPhenotypeOntologyByCategory($categoryId: Int!, $limit: Int, $start: Int) {
-  phenotypeOntologyByCategory(categoryId: $categoryId, limit: $limit, start: $start) {
-    id
-    name
-    def
-    categories {
-      id
-      name
-    }
-  }
+	phenotypeOntologyByCategory(categoryId: $categoryId, limit: $limit, start: $start) {
+		id
+		name
+		def
+		categories {
+			id
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "categoryId": 1,
-  "limit": 25,
-  "start": 0
+	"categoryId": 1,
+	"limit": 25,
+	"start": 0
 }
 ```
 
@@ -512,26 +531,26 @@ For queries that support pagination, you can use the `start` and `limit` paramet
 ```graphql
 # Get first 20 results
 query GetFirstPage {
-  phenotypeOntologyByName(name: "leaf", limit: 20, start: 0) {
-    id
-    name
-  }
+	phenotypeOntologyByName(name: "leaf", limit: 20, start: 0) {
+		id
+		name
+	}
 }
 
 # Get next 20 results (page 2)
 query GetSecondPage {
-  phenotypeOntologyByName(name: "leaf", limit: 20, start: 20) {
-    id
-    name
-  }
+	phenotypeOntologyByName(name: "leaf", limit: 20, start: 20) {
+		id
+		name
+	}
 }
 
 # Get third page
 query GetThirdPage {
-  phenotypeOntologyByName(name: "leaf", limit: 20, start: 40) {
-    id
-    name
-  }
+	phenotypeOntologyByName(name: "leaf", limit: 20, start: 40) {
+		id
+		name
+	}
 }
 ```
 
@@ -556,10 +575,10 @@ For easier development and testing, you can use the GraphiQL interface:
 1. **Start the server** in development mode
 2. **Open your browser** to `http://localhost:3000/graphiql`
 3. **Use the interactive interface** to:
-   - Browse the schema documentation
-   - Write and test queries with autocomplete
-   - View query results in real-time
-   - Explore available types and fields
+    - Browse the schema documentation
+    - Write and test queries with autocomplete
+    - View query results in real-time
+    - Explore available types and fields
 
 ### Example GraphiQL Query
 
@@ -567,43 +586,43 @@ You can copy and paste this into the GraphiQL interface:
 
 ```graphql
 {
-  geneBySymbol(symbol: "BRCA1", taxonId: 9606) {
-    entrezId
-    symbol
-    name
-    chr
-    hg19Start
-    hg19Stop
-  }
-  
-  clinvarByGeneSymbol(symbol: "BRCA1") {
-    chr
-    start
-    condition
-    significance {
-      description
-    }
-  }
-  
-  dioptOrthologsByEntrezId(entrezId: 672) {
-    taxonId2
-    entrezId2
-    score
-    confidence
-    gene2 {
-      symbol
-      name
-    }
-  }
-  
-  phenotypeOntologyByName(name: "leaf", limit: 5) {
-    id
-    name
-    namespace
-    categories {
-      name
-    }
-  }
+	geneBySymbol(symbol: "BRCA1", taxonId: 9606) {
+		entrezId
+		symbol
+		name
+		chr
+		hg19Start
+		hg19Stop
+	}
+
+	clinvarByGeneSymbol(symbol: "BRCA1") {
+		chr
+		start
+		condition
+		significance {
+			description
+		}
+	}
+
+	dioptOrthologsByEntrezId(entrezId: 672) {
+		taxonId2
+		entrezId2
+		score
+		confidence
+		gene2 {
+			symbol
+			name
+		}
+	}
+
+	phenotypeOntologyByName(name: "leaf", limit: 5) {
+		id
+		name
+		namespace
+		categories {
+			name
+		}
+	}
 }
 ```
 
@@ -619,6 +638,7 @@ All GraphQL queries return structured error messages in case of failures. Common
 ## Schema Types
 
 ### Clinvar
+
 - `chr`: String! - Chromosome
 - `start`: Int! - Start position
 - `stop`: Int! - Stop position
@@ -631,17 +651,20 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `band`: String - Chromosomal band
 
 ### ClinvarSignificance
+
 - `description`: String - Significance description
 - `lastEvaluated`: String - Last evaluation date
 - `reviewStatus`: String - Review status
 
 ### ClinvarCounts
+
 - `pathogenic`: Int! - Number of pathogenic variants
 - `likelyPathogenic`: Int! - Number of likely pathogenic variants
 - `likelyBenign`: Int! - Number of likely benign variants
 - `benign`: Int! - Number of benign variants
 
 ### Gene
+
 - `taxonId`: Int! - NCBI Taxonomy ID
 - `entrezId`: Int! - Entrez Gene ID
 - `symbol`: String! - Gene symbol
@@ -659,6 +682,7 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `uniprotKBId`: String - UniProt KB ID
 
 ### GeneXref
+
 - `ensemblId`: String - Ensembl ID
 - `omimId`: String - OMIM ID
 - `mgiId`: String - MGI ID
@@ -666,15 +690,18 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `pomBaseId`: String - PomBase ID
 
 ### DioptAlignment
+
 - `entrezId`: Int! - Entrez Gene ID
 - `data`: [DioptAlignmentData] - Alignment data entries
 
 ### DioptAlignmentData
+
 - `sequence`: String - Aligned sequence
 - `style`: [String] - Styling information for alignment visualization
 - `position`: Int - Position in alignment
 
 ### DioptDomain
+
 - `name`: String! - Domain name
 - `start`: String! - Domain start position
 - `end`: String! - Domain end position
@@ -682,10 +709,12 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `externalId`: String - External database identifier
 
 ### DioptDomainSet
+
 - `entrezId`: Int! - Entrez Gene ID
 - `domains`: [DioptDomain!]! - List of domains
 
 ### DioptOrtholog
+
 - `taxonId1`: Int! - Source organism taxonomy ID
 - `entrezId1`: Int! - Source gene Entrez ID
 - `taxonId2`: Int! - Target organism taxonomy ID
@@ -698,6 +727,7 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `gene2`: Gene - Target gene information
 
 ### PhenotypeOntology
+
 - `id`: String! - Phenotype ontology ID (PO ID)
 - `name`: String - Term name
 - `def`: String - Term definition
@@ -707,10 +737,12 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `categories`: [PhenotypeOntologyCategory] - Associated categories
 
 ### PhenotypeOntologyCategory
+
 - `id`: Int - Category identifier
 - `name`: String - Category name
 
 ### PharosTarget
+
 - `id`: Int! - Pharos target identifier
 - `name`: String! - Target name
 - `gene`: String - Associated gene symbol
@@ -727,6 +759,7 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `ligands`: [PharosLigand] - Associated ligands (populated from ligandIds)
 
 ### PharosDrug
+
 - `id`: Int! - Drug identifier
 - `name`: String! - Drug name
 - `description`: String - Drug description
@@ -736,6 +769,7 @@ All GraphQL queries return structured error messages in case of failures. Common
 - `idgDevLevel`: String - IDG development level
 
 ### PharosLigand
+
 - `id`: Int! - Ligand identifier
 - `name`: String! - Ligand name
 - `description`: String - Ligand description
@@ -751,34 +785,36 @@ All GraphQL queries return structured error messages in case of failures. Common
 Find a specific Pharos target by its ID.
 
 **Query:**
+
 ```graphql
-query($id: Int!) {
-  pharosTargetById(id: $id) {
-    id
-    name
-    gene
-    accession
-    description
-    idgFamily
-    idgTDL
-    drugs {
-      id
-      name
-      description
-    }
-    ligands {
-      id
-      name
-      description
-    }
-  }
+query ($id: Int!) {
+	pharosTargetById(id: $id) {
+		id
+		name
+		gene
+		accession
+		description
+		idgFamily
+		idgTDL
+		drugs {
+			id
+			name
+			description
+		}
+		ligands {
+			id
+			name
+			description
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "id": 1234
+	"id": 1234
 }
 ```
 
@@ -787,33 +823,35 @@ query($id: Int!) {
 Find multiple Pharos targets by their IDs with pagination support.
 
 **Query:**
+
 ```graphql
-query($ids: [Int!]!, $limit: Int, $start: Int) {
-  pharosTargetsByIds(ids: $ids, limit: $limit, start: $start) {
-    id
-    name
-    gene
-    accession
-    description
-    idgTDL
-    drugs {
-      id
-      name
-    }
-    ligands {
-      id
-      name
-    }
-  }
+query ($ids: [Int!]!, $limit: Int, $start: Int) {
+	pharosTargetsByIds(ids: $ids, limit: $limit, start: $start) {
+		id
+		name
+		gene
+		accession
+		description
+		idgTDL
+		drugs {
+			id
+			name
+		}
+		ligands {
+			id
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "ids": [1234, 5678, 9012],
-  "limit": 50,
-  "start": 0
+	"ids": [1234, 5678, 9012],
+	"limit": 50,
+	"start": 0
 }
 ```
 
@@ -822,36 +860,38 @@ query($ids: [Int!]!, $limit: Int, $start: Int) {
 Find Pharos targets associated with a specific gene via Entrez ID.
 
 **Query:**
+
 ```graphql
-query($entrezId: Int!, $limit: Int, $start: Int) {
-  pharosTargetsByGeneEntrezId(entrezId: $entrezId, limit: $limit, start: $start) {
-    id
-    name
-    gene
-    accession
-    description
-    idgFamily
-    idgTDL
-    drugs {
-      id
-      name
-      description
-    }
-    ligands {
-      id
-      name
-      description
-    }
-  }
+query ($entrezId: Int!, $limit: Int, $start: Int) {
+	pharosTargetsByGeneEntrezId(entrezId: $entrezId, limit: $limit, start: $start) {
+		id
+		name
+		gene
+		accession
+		description
+		idgFamily
+		idgTDL
+		drugs {
+			id
+			name
+			description
+		}
+		ligands {
+			id
+			name
+			description
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 7157,
-  "limit": 100,
-  "start": 0
+	"entrezId": 7157,
+	"limit": 100,
+	"start": 0
 }
 ```
 
@@ -860,42 +900,45 @@ query($entrezId: Int!, $limit: Int, $start: Int) {
 To get both gene information and associated Pharos targets, use separate queries in a single GraphQL request:
 
 **Query:**
+
 ```graphql
-query($entrezId: Int!) {
-  gene: geneByEntrezId(entrezId: $entrezId) {
-    entrezId
-    symbol
-    name
-    description
-  }
-  
-  pharosTargets: pharosTargetsByGeneEntrezId(entrezId: $entrezId) {
-    id
-    name
-    accession
-    description
-    idgFamily
-    idgTDL
-    drugs {
-      id
-      name
-    }
-    ligands {
-      id
-      name
-    }
-  }
+query ($entrezId: Int!) {
+	gene: geneByEntrezId(entrezId: $entrezId) {
+		entrezId
+		symbol
+		name
+		description
+	}
+
+	pharosTargets: pharosTargetsByGeneEntrezId(entrezId: $entrezId) {
+		id
+		name
+		accession
+		description
+		idgFamily
+		idgTDL
+		drugs {
+			id
+			name
+		}
+		ligands {
+			id
+			name
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "entrezId": 7157
+	"entrezId": 7157
 }
 ```
 
 ### StringInteraction
+
 - `ensemblId1`: String! - First protein Ensembl ID (not gene ID)
 - `ensemblId2`: String! - Second protein Ensembl ID (not gene ID)
 - `experiments`: Int! - Experimental evidence score
@@ -909,24 +952,26 @@ query($entrezId: Int!) {
 Find STRING protein-protein interactions for a protein by its Ensembl protein ID.
 
 **Query:**
+
 ```graphql
-query($ensemblId: String!, $limit: Int, $start: Int) {
-  stringInteractionsByEnsemblId(ensemblId: $ensemblId, limit: $limit, start: $start) {
-    ensemblId1
-    ensemblId2
-    experiments
-    database
-    combExpDb
-  }
+query ($ensemblId: String!, $limit: Int, $start: Int) {
+	stringInteractionsByEnsemblId(ensemblId: $ensemblId, limit: $limit, start: $start) {
+		ensemblId1
+		ensemblId2
+		experiments
+		database
+		combExpDb
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "ensemblId": "ENSP00000000233",
-  "limit": 100,
-  "start": 0
+	"ensemblId": "ENSP00000000233",
+	"limit": 100,
+	"start": 0
 }
 ```
 
@@ -935,27 +980,30 @@ query($ensemblId: String!, $limit: Int, $start: Int) {
 Find the specific STRING interaction between two proteins using their Ensembl protein IDs. This query searches bidirectionally.
 
 **Query:**
+
 ```graphql
-query($ensemblId1: String!, $ensemblId2: String!) {
-  stringInteractionBetweenProteins(ensemblId1: $ensemblId1, ensemblId2: $ensemblId2) {
-    ensemblId1
-    ensemblId2
-    experiments
-    database
-    combExpDb
-  }
+query ($ensemblId1: String!, $ensemblId2: String!) {
+	stringInteractionBetweenProteins(ensemblId1: $ensemblId1, ensemblId2: $ensemblId2) {
+		ensemblId1
+		ensemblId2
+		experiments
+		database
+		combExpDb
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "ensemblId1": "ENSP00000000233",
-  "ensemblId2": "ENSP00000000412"
+	"ensemblId1": "ENSP00000000233",
+	"ensemblId2": "ENSP00000000412"
 }
 ```
 
 ### DbNSFP
+
 - `hg19Chr`: String! - Chromosome (hg19)
 - `hg19Pos`: Int! - Position (hg19)
 - `ref`: String! - Reference allele
@@ -975,6 +1023,7 @@ query($ensemblId1: String!, $ensemblId2: String!) {
 - `symbol`: String - Gene symbol
 
 ### DbNSFPScores
+
 - `SIFT`: PredictionScore - SIFT predictions
 - `SIFT4G`: PredictionScore - SIFT4G predictions
 - `Polyphen2HDIV`: PredictionScore - PolyPhen-2 HumDiv predictions
@@ -991,25 +1040,30 @@ query($ensemblId1: String!, $ensemblId2: String!) {
 - `phyloP470way_mammalian`: ConservationScore - phyloP 470-way mammalian conservation
 
 ### PredictionScore
+
 - `scores`: [Float] - Prediction scores (multiple transcripts)
 - `predictions`: [String] - Prediction categories (multiple transcripts)
 - `rankscore`: Float - Rank score
 
 ### SinglePredictionScore
+
 - `score`: Float - Single prediction score
 - `prediction`: String - Single prediction category
 - `rankscore`: Float - Rank score
 
 ### CADDScore
+
 - `rawScore`: Float - CADD raw score
 - `phred`: Float - CADD Phred score
 - `rankscore`: Float - CADD rank score
 
 ### REVELScore
+
 - `scores`: [Float] - REVEL scores (multiple transcripts)
 - `rankscore`: Float - REVEL rank score
 
 ### ConservationScore
+
 - `score`: Float - Conservation score
 - `rankscore`: Float - Conservation rank score
 
@@ -1020,50 +1074,52 @@ query($ensemblId1: String!, $ensemblId2: String!) {
 Find dbNSFP annotations for a specific variant by chromosome, position, reference, and alternative alleles.
 
 **Query:**
+
 ```graphql
-query($chr: String!, $pos: Int!, $ref: String!, $alt: String!, $build: String) {
-  dbnsfpByVariant(chr: $chr, pos: $pos, ref: $ref, alt: $alt, build: $build) {
-    hg19Chr
-    hg19Pos
-    hg38Chr
-    hg38Pos
-    ref
-    alt
-    symbol
-    rsid
-    scores {
-      SIFT {
-        scores
-        predictions
-        rankscore
-      }
-      CADD {
-        rawScore
-        phred
-        rankscore
-      }
-      REVEL {
-        scores
-        rankscore
-      }
-      AlphaMissense {
-        scores
-        predictions
-        rankscore
-      }
-    }
-  }
+query ($chr: String!, $pos: Int!, $ref: String!, $alt: String!, $build: String) {
+	dbnsfpByVariant(chr: $chr, pos: $pos, ref: $ref, alt: $alt, build: $build) {
+		hg19Chr
+		hg19Pos
+		hg38Chr
+		hg38Pos
+		ref
+		alt
+		symbol
+		rsid
+		scores {
+			SIFT {
+				scores
+				predictions
+				rankscore
+			}
+			CADD {
+				rawScore
+				phred
+				rankscore
+			}
+			REVEL {
+				scores
+				rankscore
+			}
+			AlphaMissense {
+				scores
+				predictions
+				rankscore
+			}
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "chr": "17",
-  "pos": 43094454,
-  "ref": "A",
-  "alt": "T",
-  "build": "hg19"
+	"chr": "17",
+	"pos": 43094454,
+	"ref": "A",
+	"alt": "T",
+	"build": "hg19"
 }
 ```
 
@@ -1072,32 +1128,34 @@ query($chr: String!, $pos: Int!, $ref: String!, $alt: String!, $build: String) {
 Find all dbNSFP variants at a specific genomic position.
 
 **Query:**
+
 ```graphql
-query($chr: String!, $pos: Int!, $build: String, $limit: Int, $start: Int) {
-  dbnsfpByPosition(chr: $chr, pos: $pos, build: $build, limit: $limit, start: $start) {
-    ref
-    alt
-    symbol
-    scores {
-      CADD {
-        phred
-      }
-      REVEL {
-        rankscore
-      }
-    }
-  }
+query ($chr: String!, $pos: Int!, $build: String, $limit: Int, $start: Int) {
+	dbnsfpByPosition(chr: $chr, pos: $pos, build: $build, limit: $limit, start: $start) {
+		ref
+		alt
+		symbol
+		scores {
+			CADD {
+				phred
+			}
+			REVEL {
+				rankscore
+			}
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "chr": "17",
-  "pos": 43094454,
-  "build": "hg19",
-  "limit": 50,
-  "start": 0
+	"chr": "17",
+	"pos": 43094454,
+	"build": "hg19",
+	"limit": 50,
+	"start": 0
 }
 ```
 
@@ -1106,35 +1164,36 @@ query($chr: String!, $pos: Int!, $build: String, $limit: Int, $start: Int) {
 Find dbNSFP annotations for all variants in a specific gene.
 
 **Query:**
+
 ```graphql
-query($symbol: String!, $limit: Int, $start: Int) {
-  dbnsfpByGeneSymbol(symbol: $symbol, limit: $limit, start: $start) {
-    hg19Chr
-    hg19Pos
-    ref
-    alt
-    rsid
-    scores {
-      SIFT {
-        rankscore
-      }
-      Polyphen2HDIV {
-        rankscore
-      }
-      CADD {
-        phred
-      }
-    }
-  }
+query ($symbol: String!, $limit: Int, $start: Int) {
+	dbnsfpByGeneSymbol(symbol: $symbol, limit: $limit, start: $start) {
+		hg19Chr
+		hg19Pos
+		ref
+		alt
+		rsid
+		scores {
+			SIFT {
+				rankscore
+			}
+			Polyphen2HDIV {
+				rankscore
+			}
+			CADD {
+				phred
+			}
+		}
+	}
 }
 ```
 
 **Variables:**
+
 ```json
 {
-  "symbol": "TP53",
-  "limit": 100,
-  "start": 0
+	"symbol": "TP53",
+	"limit": 100,
+	"start": 0
 }
 ```
-

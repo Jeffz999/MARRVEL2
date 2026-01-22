@@ -1,58 +1,48 @@
 <mat-toolbar class="nav">
-    <a class="nav-link home" href="/">
-        <img alt="Home" src="../../../assets/img/marrvel.svg" title="Home" class="nav-logo" />
-    </a>
+	<a class="nav-link home" href="/">
+		<img alt="Home" src="../../../assets/img/marrvel.svg" title="Home" class="nav-logo" />
+	</a>
 
-    <div>
-        <ul role="navigation">
-            <li class="nav-button-item">
-                <a
-                    class="nav-link"
-                    routerLink="/about"
-                    routerLinkActive="active-page"
-                    title="About"
-                >
-                    <span class="nav-link-inner">About</span>
-                </a>
-            </li>
-            <li class="nav-button-item">
-                <a class="nav-link" routerLink="/faq" routerLinkActive="active-page" title="FAQ">
-                    <span class="nav-link-inner">FAQ</span>
-                </a>
-            </li>
-            <li class="nav-button-item">
-                <a
-                    class="nav-link"
-                    href="http://v1.marrvel.org/message"
-                    routerLinkActive="active-page"
-                    title="FAQ"
-                >
-                    <span class="nav-link-inner">Feedback</span>
-                </a>
-            </li>
-            <li class="nav-button-item">
-                <a class="nav-link" href="/doc" routerLinkActive="active-page" title="FAQ">
-                    <span class="nav-link-inner">API</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+	<div>
+		<ul role="navigation">
+			<li class="nav-button-item">
+				<a class="nav-link" routerLink="/about" routerLinkActive="active-page" title="About">
+					<span class="nav-link-inner">About</span>
+				</a>
+			</li>
+			<li class="nav-button-item">
+				<a class="nav-link" routerLink="/faq" routerLinkActive="active-page" title="FAQ">
+					<span class="nav-link-inner">FAQ</span>
+				</a>
+			</li>
+			<li class="nav-button-item">
+				<a class="nav-link" href="http://v1.marrvel.org/message" routerLinkActive="active-page" title="FAQ">
+					<span class="nav-link-inner">Feedback</span>
+				</a>
+			</li>
+			<li class="nav-button-item">
+				<a class="nav-link" href="/doc" routerLinkActive="active-page" title="FAQ">
+					<span class="nav-link-inner">API</span>
+				</a>
+			</li>
+		</ul>
+	</div>
 
-    <span class="flex-spacer"></span>
+	<span class="flex-spacer"></span>
 
-    <button
-        class="nav-search-button d-none d-sm-block"
-        *ngIf="showSearch"
-        mat-icon-button
-        aria-label="Do another search"
-        (click)="searchOpened = !searchOpened"
-    >
-        <mat-icon>search</mat-icon>
-    </button>
+	<button
+		class="nav-search-button d-none d-sm-block"
+		*ngIf="showSearch"
+		mat-icon-button
+		aria-label="Do another search"
+		(click)="searchOpened = !searchOpened"
+	>
+		<mat-icon>search</mat-icon>
+	</button>
 </mat-toolbar>
 
 <div class="nav-search-box d-none d-sm-block" *ngIf="searchOpened" [@toggle]="searchOpened">
-    <div class="container-fluid px-sm-5">
-        <app-search-box [compact]="true"></app-search-box>
-    </div>
+	<div class="container-fluid px-sm-5">
+		<app-search-box [compact]="true"></app-search-box>
+	</div>
 </div>

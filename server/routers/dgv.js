@@ -7,4 +7,3 @@ router.get('/DGV/variant/:variant', dgvController.findByVariant);
 router.get('/DGV/gene/entrezId/:entrezId', dgvController.findByGeneEntrezId);
 
 module.exports = router;
-

@@ -22,14 +22,14 @@ repos:
 
           - id: eslint-client
             name: ESLint Client
-            entry: bash -c 'cd client && npx eslint --fix "$@"' --
+            entry: bash -c 'cd client && npx eslint --fix .'
             language: system
             files: ^client/.*\.(js|ts|html)$
-            pass_filenames: true
+            pass_filenames: false
 
           - id: eslint-server
             name: ESLint Server
-            entry: bash -c 'cd server && npx eslint --fix "$@"' --
+            entry: bash -c 'cd server && npx eslint --fix .'
             language: system
             files: ^server/.*\.js$
-            pass_filenames: true
+            pass_filenames: false

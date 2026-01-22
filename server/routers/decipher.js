@@ -14,4 +14,3 @@ router.get('/DECIPHER/genomloc/:hg19Chr/:hg19Start/:hg19Stop', decipherControlle
 router.get('/DECIPHERDisease/genomloc/:hg19Chr/:hg19Start/:hg19Stop', decipherDiseaseController.findByGenomicLocation);
 
 module.exports = router;
-

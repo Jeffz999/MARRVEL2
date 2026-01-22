@@ -1,39 +1,31 @@
-import {
-    Component,
-    OnInit,
-    Input,
-    Output,
-    EventEmitter,
-    ViewChild,
-    ElementRef,
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-    standalone: false,
-    selector: 'app-filter-input',
-    templateUrl: './filter-input.component.html',
-    styleUrls: ['./filter-input.component.scss'],
+	standalone: false,
+	selector: 'app-filter-input',
+	templateUrl: './filter-input.component.html',
+	styleUrls: ['./filter-input.component.scss'],
 })
 export class FilterInputComponent implements OnInit {
-    @Input() placeholder: string;
-    @Input() value: string;
-    isFocused = false;
-    @Output() keyup: EventEmitter<any> = new EventEmitter();
-    @ViewChild('inputBox', { static: true }) inputBox: ElementRef;
+	@Input() placeholder: string;
+	@Input() value: string;
+	isFocused = false;
+	@Output() keyup: EventEmitter<any> = new EventEmitter();
+	@ViewChild('inputBox', { static: true }) inputBox: ElementRef;
 
-    constructor() {}
+	constructor() {}
 
-    ngOnInit() {
-        if (this.value && this.value !== '') {
-            this.inputBox.nativeElement.value = this.value;
-        }
-    }
+	ngOnInit() {
+		if (this.value && this.value !== '') {
+			this.inputBox.nativeElement.value = this.value;
+		}
+	}
 
-    onKeyup(e) {
-        this.keyup.emit(e);
-    }
+	onKeyup(e) {
+		this.keyup.emit(e);
+	}
 
-    focusInputBox() {
-        this.inputBox.nativeElement.focus();
-    }
+	focusInputBox() {
+		this.inputBox.nativeElement.focus();
+	}
 }

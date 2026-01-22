@@ -1,62 +1,62 @@
 import {
-    Component,
-    OnInit,
-    AfterViewInit,
-    ViewEncapsulation,
-    ViewChild,
-    ElementRef,
-    Renderer2,
-    Input,
+	Component,
+	OnInit,
+	AfterViewInit,
+	ViewEncapsulation,
+	ViewChild,
+	ElementRef,
+	Renderer2,
+	Input,
 } from '@angular/core';
 import * as molstar from 'molstar/build/viewer/molstar';
 
 @Component({
-    standalone: false,
-    selector: 'app-protein-viewer',
-    templateUrl: './protein-viewer.component.html',
-    styleUrls: ['./protein-viewer.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+	standalone: false,
+	selector: 'app-protein-viewer',
+	templateUrl: './protein-viewer.component.html',
+	styleUrls: ['./protein-viewer.component.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
-    @Input() uniprotId: string;
-    viewer;
-    @ViewChild('molstarViewer', { static: true }) molstarViewer: ElementRef;
+	@Input() uniprotId: string;
+	viewer;
+	@ViewChild('molstarViewer', { static: true }) molstarViewer: ElementRef;
 
-    constructor(private renderer: Renderer2) {}
+	constructor(private renderer: Renderer2) {}
 
-    ngOnInit() {}
+	ngOnInit() {}
 
-    ngAfterViewInit() {
-        this.renderer.setStyle(
-            this.molstarViewer.nativeElement,
-            'width',
-            `${document.getElementById('molstar-wrapper').offsetWidth + 300}px`,
-        );
+	ngAfterViewInit() {
+		this.renderer.setStyle(
+			this.molstarViewer.nativeElement,
+			'width',
+			`${document.getElementById('molstar-wrapper').offsetWidth + 300}px`,
+		);
 
-        this.initViwer();
-        const url = `https://alphafold.ebi.ac.uk/files/AF-${this.uniprotId}-F1-model_v1.cif`;
-        this.viewer.loadStructureFromUrl(url);
-    }
+		this.initViwer();
+		const url = `https://alphafold.ebi.ac.uk/files/AF-${this.uniprotId}-F1-model_v1.cif`;
+		this.viewer.loadStructureFromUrl(url);
+	}
 
-    initViwer() {
-        this.viewer = new molstar.Viewer(this.molstarViewer.nativeElement, {
-            layoutIsExpanded: false,
-            layoutShowControls: true,
-            layoutShowRemoteState: true,
-            layoutShowSequence: true,
-            layoutShowLog: false,
-            layoutShowLeftPanel: false,
-            disableAntialiasing: false,
+	initViwer() {
+		this.viewer = new molstar.Viewer(this.molstarViewer.nativeElement, {
+			layoutIsExpanded: false,
+			layoutShowControls: true,
+			layoutShowRemoteState: true,
+			layoutShowSequence: true,
+			layoutShowLog: false,
+			layoutShowLeftPanel: false,
+			disableAntialiasing: false,
 
-            viewportShowExpand: true,
-            viewportShowControls: false,
-            viewportShowSettings: false,
-            viewportShowSelectionMode: false,
-            viewportShowAnimation: false,
-        });
-    }
+			viewportShowExpand: true,
+			viewportShowControls: false,
+			viewportShowSettings: false,
+			viewportShowSelectionMode: false,
+			viewportShowAnimation: false,
+		});
+	}
 
-    /*
+	/*
   async initMolstarPlugin(target: HTMLElement) {
     this.plugin = await createPluginAsync(target, {
         ...DefaultPluginUISpec(),
@@ -84,7 +84,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
   }
   */
 
-    /*
+	/*
   async load({ url, format = 'mmcif', isBinary = false, assemblyId = '' }: LoadParams) {
     await this.plugin.clear();
 
