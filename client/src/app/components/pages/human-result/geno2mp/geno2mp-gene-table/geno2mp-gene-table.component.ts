@@ -1,4 +1,4 @@
-import { Component, OnChanges, ViewChild, AfterViewInit, SimpleChanges, input } from '@angular/core';
+import { Component, OnChanges, AfterViewInit, SimpleChanges, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -36,8 +36,8 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 
 	displayedColumns = ['hg19Chr', 'hg19Pos', 'ref', 'alt', 'nHpoProfiles', 'homCount', 'hetCount', 'funcAnno'];
 	dataSource: MatTableDataSource<Geno2MPResult> = new MatTableDataSource();
-	@ViewChild(MatSort) sort: MatSort;
-	@ViewChild('geno2mpGenePaginator') paginator: MatPaginator;
+	readonly sort = viewChild(MatSort);
+	readonly paginator = viewChild<MatPaginator>('geno2mpGenePaginator');
 
 	hpoProfiles: number;
 	categoriesVisible = {
@@ -50,8 +50,8 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 	constructor() {}
 
 	ngAfterViewInit() {
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -98,8 +98,8 @@ export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 	initDataTable() {
 		this.dataSource = new MatTableDataSource(this.data());
 		this.initFilters();
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	initFilters() {

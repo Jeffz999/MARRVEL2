@@ -3,10 +3,10 @@ import {
   OnInit,
   AfterViewInit,
   ViewEncapsulation,
-  ViewChild,
   ElementRef,
   Renderer2,
-  input
+  input,
+  viewChild
 } from '@angular/core';
 import * as molstar from 'molstar/build/viewer/molstar';
 
@@ -19,7 +19,7 @@ import * as molstar from 'molstar/build/viewer/molstar';
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
 	readonly uniprotId = input<string>(undefined);
 	viewer;
-	@ViewChild('molstarViewer', { static: true }) molstarViewer: ElementRef;
+	readonly molstarViewer = viewChild<ElementRef>('molstarViewer');
 
 	constructor(private renderer: Renderer2) {}
 
@@ -27,7 +27,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit() {
 		this.renderer.setStyle(
-			this.molstarViewer.nativeElement,
+			this.molstarViewer().nativeElement,
 			'width',
 			`${document.getElementById('molstar-wrapper').offsetWidth + 300}px`,
 		);
@@ -38,7 +38,7 @@ export class ProteinViewerComponent implements OnInit, AfterViewInit {
 	}
 
 	initViwer() {
-		this.viewer = new molstar.Viewer(this.molstarViewer.nativeElement, {
+		this.viewer = new molstar.Viewer(this.molstarViewer().nativeElement, {
 			layoutIsExpanded: false,
 			layoutShowControls: true,
 			layoutShowRemoteState: true,

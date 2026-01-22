@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnChanges, input } from '@angular/core';
+import { Component, OnInit, OnChanges, input, viewChild } from '@angular/core';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -50,8 +50,8 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 	displayedColumns: string[] = ['title', 'location', 'condition', 'significance', 'reviewStatus'];
 	dataSource: MatTableDataSource<ClinVarVarinat> = new MatTableDataSource();
 
-	@ViewChild(MatSort, { static: true }) sort: MatSort;
-	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+	readonly sort = viewChild(MatSort);
+	readonly paginator = viewChild(MatPaginator);
 
 	constructor() {}
 
@@ -65,7 +65,7 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 
 	initTable() {
 		this.dataSource = new MatTableDataSource(this.data());
-		this.dataSource.sort = this.sort;
+		this.dataSource.sort = this.sort();
 		this.dataSource.sortData = (data, sort: MatSort) => {
 			return data.sort((a, b) => {
 				const variant = this.variant();
@@ -102,7 +102,7 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 				return 1;
 			});
 		};
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.paginator = this.paginator();
 	}
 
 	onSearchChange(e) {

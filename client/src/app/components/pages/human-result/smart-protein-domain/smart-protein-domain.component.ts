@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, input } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -42,11 +42,11 @@ export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 
 	dataSource: MatTableDataSource<SmartDomain> = new MatTableDataSource();
 	displayedColumns = ['name', 'start', 'end', 'eValue'];
-	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
+	readonly paginator = viewChild(MatPaginator);
+	readonly sort = viewChild(MatSort);
 
 	plot: ProteinDomainPlot;
-	@ViewChild('domainPlotContainer', { static: false }) domainPlotContainer: ElementRef;
+	readonly domainPlotContainer = viewChild<ElementRef>('domainPlotContainer');
 	zoomRatio = 1;
 
 	constructor(private apiService: ApiService) {}
@@ -58,7 +58,7 @@ export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 				this.initTable(this.data);
 				this.loading = false;
 				this.plot = new ProteinDomainPlot('smart-domain', this.data, {
-					width: this.domainPlotContainer.nativeElement.offsetWidth,
+					width: this.domainPlotContainer().nativeElement.offsetWidth,
 				});
 			},
 			error: (err) => {
@@ -77,8 +77,8 @@ export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 		if (data) {
 			this.dataSource = new MatTableDataSource(this.data);
 		}
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	zoom(dr) {

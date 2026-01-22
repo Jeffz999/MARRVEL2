@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, input } from '@angular/core';
+import { Component, OnInit, ElementRef, input, viewChild, output } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 
@@ -12,15 +12,15 @@ export class FilterInputComponent implements OnInit {
 	readonly placeholder = input<string>(undefined);
 	readonly value = input<string>(undefined);
 	isFocused = false;
-	@Output() keyup: EventEmitter<any> = new EventEmitter();
-	@ViewChild('inputBox', { static: true }) inputBox: ElementRef;
+	readonly keyup = output<any>();
+	readonly inputBox = viewChild<ElementRef>('inputBox');
 
 	constructor() {}
 
 	ngOnInit() {
 		const value = this.value();
   if (value && value !== '') {
-			this.inputBox.nativeElement.value = value;
+			this.inputBox().nativeElement.value = value;
 		}
 	}
 
@@ -29,6 +29,6 @@ export class FilterInputComponent implements OnInit {
 	}
 
 	focusInputBox() {
-		this.inputBox.nativeElement.focus();
+		this.inputBox().nativeElement.focus();
 	}
 }

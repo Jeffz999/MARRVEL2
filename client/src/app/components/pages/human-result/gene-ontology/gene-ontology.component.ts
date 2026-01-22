@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -74,8 +74,8 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 	displayedColumns = ['name', 'namespace', 'eviCode', 'references'];
 	dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
-	@ViewChild(MatPaginator) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
+	readonly paginator = viewChild(MatPaginator);
+	readonly sort = viewChild(MatSort);
 
 	constructor() {
 		this.orgNameToIcons = { human: TAXONID_TO_INFO[9606].icon };
@@ -85,8 +85,8 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
+		this.dataSource.paginator = this.paginator();
+		this.dataSource.sort = this.sort();
 	}
 	ngOnInit() {
 		const gene = this.gene();
@@ -205,8 +205,8 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 		const gos = orgName === 'human' ? this.gos[orgName].gos[goId] : this.gos[orgName][idx].gos[goId];
 
 		this.dataSource = new MatTableDataSource(gos);
-		this.dataSource.paginator = this.paginator;
-		this.dataSource.sort = this.sort;
+		this.dataSource.paginator = this.paginator();
+		this.dataSource.sort = this.sort();
 	}
 
 	getRefUrl(refId) {

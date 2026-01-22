@@ -1,4 +1,4 @@
-import { Component, OnChanges, ViewChild, AfterViewInit, input } from '@angular/core';
+import { Component, OnChanges, AfterViewInit, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
@@ -49,8 +49,8 @@ export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 
 	showOnlyAffected = true;
 
-	@ViewChild(MatSort) sort: MatSort;
-	@ViewChild(MatPaginator) paginator: MatPaginator;
+	readonly sort = viewChild(MatSort);
+	readonly paginator = viewChild(MatPaginator);
 
 	constructor() {}
 
@@ -95,13 +95,13 @@ export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 		this.countPhenotypes();
 
 		this.initFilters();
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	ngAfterViewInit() {
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	onCategoryChange(e: MatSlideToggleChange) {

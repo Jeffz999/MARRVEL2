@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Output, EventEmitter, ViewChild, input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, input, viewChild, output } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -30,12 +30,12 @@ import { MatTooltip } from '@angular/material/tooltip';
 export class ProteinDomainComponent implements OnInit, AfterViewInit {
 	readonly data = input<DomainData[]>(undefined);
 
-	@Output() highlight: EventEmitter<any> = new EventEmitter();
+	readonly highlight = output<any>();
 
 	dataSource: MatTableDataSource<DomainData> = new MatTableDataSource();
 	displayedColumns = ['domainName', 'domainStart', 'domainStop', 'domainDescription', 'proteinId'];
-	@ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-	@ViewChild(MatSort) sort: MatSort;
+	readonly paginator = viewChild(MatPaginator);
+	readonly sort = viewChild(MatSort);
 
 	constructor() {}
 
@@ -47,8 +47,8 @@ export class ProteinDomainComponent implements OnInit, AfterViewInit {
 	}
 
 	initTableAcc() {
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 		this.dataSource.sortData = (data: DomainData[], sort: MatSort) => {
 			return data.sort((a: DomainData, b: DomainData) => {
 				const dirMul = sort.direction === 'asc' ? 1 : -1;

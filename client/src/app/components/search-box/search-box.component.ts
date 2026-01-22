@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject, input } from "@angular/core";
+import { Component, OnInit, ElementRef, Inject, input, viewChild } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
@@ -103,8 +103,8 @@ export class SearchBoxComponent implements OnInit {
         ),
     ]);
     geneSuggestion = [];
-    @ViewChild("geneInput") geneInput: ElementRef<HTMLInputElement>;
-    @ViewChild("auto") matAutocomplete: MatAutocomplete;
+    readonly geneInput = viewChild<ElementRef<HTMLInputElement>>("geneInput");
+    readonly matAutocomplete = viewChild<MatAutocomplete>("auto");
 
     constructor(
         private router: Router,
@@ -183,12 +183,12 @@ export class SearchBoxComponent implements OnInit {
         const idx = e.option.value;
         this.gene = this.geneSuggestion[idx];
         this.geneKeyword = "";
-        this.geneInput.nativeElement.value = "";
+        this.geneInput().nativeElement.value = "";
         this.geneInputCtrl.setValue(null);
     }
 
     addGene(e: MatChipInputEvent) {
-        if (!this.matAutocomplete.isOpen) {
+        if (!this.matAutocomplete().isOpen) {
             const input = e.input;
             const value = e.value;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ViewChild, AfterViewInit, input } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
@@ -64,8 +64,8 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
 
 	readonly types = input<boolean[]>(undefined);
 
-	@ViewChild(MatSort) sort: MatSort;
-	@ViewChild(MatPaginator) paginator: MatPaginator;
+	readonly sort = viewChild(MatSort);
+	readonly paginator = viewChild(MatPaginator);
 
 	constructor() {}
 
@@ -100,13 +100,13 @@ export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit
 	ngOnChanges() {
 		this.dataSource = new MatTableDataSource(this.data());
 		this.initFilters();
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	ngAfterViewInit() {
-		this.dataSource.sort = this.sort;
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.sort = this.sort();
+		this.dataSource.paginator = this.paginator();
 	}
 
 	toggleFilters() {

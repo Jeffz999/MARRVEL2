@@ -1,4 +1,4 @@
-import { Component, OnChanges, Output, EventEmitter, input } from '@angular/core';
+import { Component, OnChanges, input, output } from '@angular/core';
 import { DOCUMENT, NgClass, NgIf } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -19,7 +19,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 export class SidenavComponent implements OnChanges {
 	readonly gene = input<object | null>(undefined);
 	readonly variant = input<string | null>(undefined);
-	@Output() change: EventEmitter<any> = new EventEmitter();
+	readonly change = output<any>();
 
 	readonly sidenavOpened = input(true);
 	readonly smallScreen = input(false);

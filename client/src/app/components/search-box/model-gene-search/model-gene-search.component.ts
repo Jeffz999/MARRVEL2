@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, viewChild, output } from '@angular/core';
 import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatChipInputEvent, MatChipGrid, MatChipRow, MatChipRemove, MatChipInput } from '@angular/material/chips';
@@ -35,7 +35,7 @@ import { MatIcon } from '@angular/material/icon';
     ],
 })
 export class ModelGeneSearchComponent implements OnInit {
-	@Output() geneSelected: EventEmitter<Gene> = new EventEmitter();
+	readonly geneSelected = output<Gene>();
 
 	taxonId = '7227';
 
@@ -43,8 +43,8 @@ export class ModelGeneSearchComponent implements OnInit {
 	geneKeyword: string | null;
 	geneInputCtrl = new UntypedFormControl();
 	geneSuggestion = [];
-	@ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
-	@ViewChild('auto', { static: true }) matAutocomplete: MatAutocomplete;
+	readonly geneInput = viewChild<ElementRef<HTMLInputElement>>('geneInput');
+	readonly matAutocomplete = viewChild<MatAutocomplete>('auto');
 
 	constructor(private api: ApiService) {}
 
@@ -72,12 +72,12 @@ export class ModelGeneSearchComponent implements OnInit {
 		this.gene = this.geneSuggestion[idx];
 		this.geneSelected.emit(this.gene);
 		this.geneKeyword = '';
-		this.geneInput.nativeElement.value = '';
+		this.geneInput().nativeElement.value = '';
 		this.geneInputCtrl.setValue(null);
 	}
 
 	addGene(e: MatChipInputEvent) {
-		if (!this.matAutocomplete.isOpen) {
+		if (!this.matAutocomplete().isOpen) {
 			const input = e.input;
 			const value = e.value;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnChanges, input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnChanges, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 import { NgIf, NgFor } from '@angular/common';
@@ -34,7 +34,7 @@ export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewI
 
 	displayedColumns: string[] = ['name', 'structure', 'targetProperties', 'extLink'];
 	dataSource = new MatTableDataSource<any>();
-	@ViewChild(MatPaginator) paginator: MatPaginator;
+	readonly paginator = viewChild(MatPaginator);
 	idgDevLevTrans = {
 		Tdark: 'Little is known about this target',
 		Tbio: 'No known drugs for this target',
@@ -53,15 +53,15 @@ export class PharosLigandTableComponent implements OnInit, OnChanges, AfterViewI
 				return ligand;
 			}),
 		);
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.paginator = this.paginator();
 	}
 
 	ngOnChanges() {
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.paginator = this.paginator();
 	}
 
 	ngAfterViewInit() {
-		this.dataSource.paginator = this.paginator;
+		this.dataSource.paginator = this.paginator();
 	}
 
 	encodeForUrl(str: string) {

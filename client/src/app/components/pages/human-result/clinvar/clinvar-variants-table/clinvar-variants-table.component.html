@@ -6,7 +6,7 @@
 		*ngIf="variant()"
 		[(ngModel)]="showMatchingVarsFirst"
 		color="primary"
-		(change)="sort.sortChange.emit()"
+		(change)="sort().sortChange.emit()"
 		>Show variants contain {{ variant().chr }}:{{ variant().pos }} first</mat-slide-toggle
 	>
 	<mat-form-field appearance="fill" class="no-hint">

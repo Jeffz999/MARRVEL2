@@ -1,4 +1,4 @@
-import { Directive, Output, EventEmitter, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, output } from '@angular/core';
 
 /* tslint:disable:directive-selector */
 @Directive({ selector: '[clickOutside]', })
@@ -6,8 +6,7 @@ import { Directive, Output, EventEmitter, ElementRef, HostListener } from '@angu
 export class ClickOutsideDirective {
 	constructor(private _elementRef: ElementRef) {}
 
-	@Output()
-	public clickOutside = new EventEmitter();
+	public readonly clickOutside = output();
 
 	@HostListener('document:click', ['$event.target'])
 	public onClick(targetElement) {
