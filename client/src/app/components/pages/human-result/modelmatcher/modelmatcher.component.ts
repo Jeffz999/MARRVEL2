@@ -13,17 +13,10 @@ import { UnitDirective } from '../../../../directives/unit.directive';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'app-modelmatcher',
-    templateUrl: './modelmatcher.component.html',
-    styleUrls: ['./modelmatcher.component.scss'],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatTooltip,
-    UnitDirective,
-    MatProgressBar,
-    NgClass
-],
+	selector: 'app-modelmatcher',
+	templateUrl: './modelmatcher.component.html',
+	styleUrls: ['./modelmatcher.component.scss'],
+	imports: [MatButton, MatIcon, MatTooltip, UnitDirective, MatProgressBar, NgClass],
 })
 export class ModelmatcherComponent implements OnChanges {
 	private mmSvc = inject(ModelmatcherService);

@@ -8,8 +8,8 @@ describe('ModelmatcherComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [ModelmatcherComponent],
-}).compileComponents();
+			imports: [ModelmatcherComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

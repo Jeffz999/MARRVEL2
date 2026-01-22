@@ -18,21 +18,21 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'app-multiple-genes',
-    templateUrl: './multiple-genes.component.html',
-    styleUrls: ['./multiple-genes.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    NavbarComponent,
-    MatRadioGroup,
-    FormsModule,
-    MatRadioButton,
-    MultipleGeneBoxComponent,
-    MatIcon,
-    MatProgressBar,
-    MatPaginator,
-    MatTooltip
-],
+	selector: 'app-multiple-genes',
+	templateUrl: './multiple-genes.component.html',
+	styleUrls: ['./multiple-genes.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [
+		NavbarComponent,
+		MatRadioGroup,
+		FormsModule,
+		MatRadioButton,
+		MultipleGeneBoxComponent,
+		MatIcon,
+		MatProgressBar,
+		MatPaginator,
+		MatTooltip,
+	],
 })
 export class MultipleGenesComponent implements OnInit {
 	private api = inject(ApiService);

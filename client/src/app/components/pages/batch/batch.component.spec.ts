@@ -8,8 +8,8 @@ describe('BatchComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [BatchComponent],
-}).compileComponents();
+			imports: [BatchComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

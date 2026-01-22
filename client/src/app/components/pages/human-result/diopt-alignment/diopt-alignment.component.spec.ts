@@ -8,8 +8,8 @@ describe('DioptAlignmentComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [DioptAlignmentComponent],
-}).compileComponents();
+			imports: [DioptAlignmentComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

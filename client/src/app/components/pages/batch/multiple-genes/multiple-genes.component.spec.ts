@@ -8,8 +8,8 @@ describe('MultipleGenesComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [MultipleGenesComponent],
-}).compileComponents();
+			imports: [MultipleGenesComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

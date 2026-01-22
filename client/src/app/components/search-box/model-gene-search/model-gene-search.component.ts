@@ -11,26 +11,26 @@ import { MatSelect, MatOption } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-model-gene-search',
-    templateUrl: './model-gene-search.component.html',
-    styleUrls: ['./model-gene-search.component.scss'],
-    imports: [
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    FormsModule,
-    MatOption,
-    MatChipGrid,
-    MatChipRow,
-    MatChipRemove,
-    MatIcon,
-    MatInput,
-    MatAutocompleteTrigger,
-    MatChipInput,
-    ReactiveFormsModule,
-    MatAutocomplete,
-    MatHint
-],
+	selector: 'app-model-gene-search',
+	templateUrl: './model-gene-search.component.html',
+	styleUrls: ['./model-gene-search.component.scss'],
+	imports: [
+		MatFormField,
+		MatLabel,
+		MatSelect,
+		FormsModule,
+		MatOption,
+		MatChipGrid,
+		MatChipRow,
+		MatChipRemove,
+		MatIcon,
+		MatInput,
+		MatAutocompleteTrigger,
+		MatChipInput,
+		ReactiveFormsModule,
+		MatAutocomplete,
+		MatHint,
+	],
 })
 export class ModelGeneSearchComponent implements OnInit {
 	private api = inject(ApiService);

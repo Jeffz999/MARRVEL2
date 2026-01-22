@@ -8,14 +8,10 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { GnomADGeneVisualComponent } from './gnom-ad-gene-visual/gnom-ad-gene-visual.component';
 
 @Component({
-    selector: 'app-gnom-ad-gene',
-    templateUrl: './gnom-ad-gene.component.html',
-    styleUrls: ['./gnom-ad-gene.component.scss'],
-    imports: [
-    MatIcon,
-    MatTooltip,
-    GnomADGeneVisualComponent
-],
+	selector: 'app-gnom-ad-gene',
+	templateUrl: './gnom-ad-gene.component.html',
+	styleUrls: ['./gnom-ad-gene.component.scss'],
+	imports: [MatIcon, MatTooltip, GnomADGeneVisualComponent],
 })
 export class GnomADGeneComponent implements OnInit {
 	private api = inject(ApiService);
@@ -27,7 +23,7 @@ export class GnomADGeneComponent implements OnInit {
 
 	ngOnInit() {
 		const gene = this.gene();
-  if (gene && gene.entrezId) {
+		if (gene && gene.entrezId) {
 			this.loading = true;
 			this.api.getGnomADGeneByEntrezId(gene.entrezId).subscribe((res) => {
 				this.data = res;

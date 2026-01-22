@@ -1,7 +1,19 @@
 import { Component, OnInit, OnChanges, AfterViewInit, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import {
+	MatTableDataSource,
+	MatTable,
+	MatColumnDef,
+	MatHeaderCellDef,
+	MatHeaderCell,
+	MatCellDef,
+	MatCell,
+	MatHeaderRowDef,
+	MatHeaderRow,
+	MatRowDef,
+	MatRow,
+} from '@angular/material/table';
 
 import { Animations } from '../../animations';
 
@@ -13,31 +25,31 @@ import { FilterInputComponent } from '../filter-input/filter-input.component';
 import { HighlightSearch } from '../../highlight';
 
 @Component({
-    selector: 'app-basic-datatable',
-    templateUrl: './basic-datatable.component.html',
-    styleUrls: ['./basic-datatable.component.scss'],
-    animations: [Animations.slideIn, Animations.fadeInOut],
-    imports: [
-    UnitDirective,
-    MatIconButton,
-    MatIcon,
-    MatTooltip,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatSortHeader,
-    MatCellDef,
-    MatCell,
-    FilterInputComponent,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatPaginator,
-    HighlightSearch
-],
+	selector: 'app-basic-datatable',
+	templateUrl: './basic-datatable.component.html',
+	styleUrls: ['./basic-datatable.component.scss'],
+	animations: [Animations.slideIn, Animations.fadeInOut],
+	imports: [
+		UnitDirective,
+		MatIconButton,
+		MatIcon,
+		MatTooltip,
+		MatTable,
+		MatSort,
+		MatColumnDef,
+		MatHeaderCellDef,
+		MatHeaderCell,
+		MatSortHeader,
+		MatCellDef,
+		MatCell,
+		FilterInputComponent,
+		MatHeaderRowDef,
+		MatHeaderRow,
+		MatRowDef,
+		MatRow,
+		MatPaginator,
+		HighlightSearch,
+	],
 })
 export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit {
 	readonly data = input<any[] | null>(undefined);

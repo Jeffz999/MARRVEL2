@@ -8,8 +8,8 @@ describe('ScrollTopButtonComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [ScrollTopButtonComponent],
-}).compileComponents();
+			imports: [ScrollTopButtonComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

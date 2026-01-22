@@ -6,26 +6,32 @@ import { Animations } from 'src/app/animations';
 
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
+import {
+	MatAccordion,
+	MatExpansionPanel,
+	MatExpansionPanelHeader,
+	MatExpansionPanelTitle,
+	MatExpansionPanelDescription,
+} from '@angular/material/expansion';
 import { MatTooltip } from '@angular/material/tooltip';
 import { PharosLigandTableComponent } from './pharos-ligand-table/pharos-ligand-table.component';
 
 @Component({
-    selector: 'app-pharos',
-    templateUrl: './pharos.component.html',
-    styleUrls: ['./pharos.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatAccordion,
-    MatTooltip,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle,
-    MatExpansionPanelDescription,
-    PharosLigandTableComponent
-],
+	selector: 'app-pharos',
+	templateUrl: './pharos.component.html',
+	styleUrls: ['./pharos.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [
+		MatButton,
+		MatIcon,
+		MatAccordion,
+		MatTooltip,
+		MatExpansionPanel,
+		MatExpansionPanelHeader,
+		MatExpansionPanelTitle,
+		MatExpansionPanelDescription,
+		PharosLigandTableComponent,
+	],
 })
 export class PharosComponent implements OnInit {
 	private api = inject(ApiService);

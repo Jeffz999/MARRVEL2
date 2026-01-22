@@ -8,8 +8,8 @@ describe('ProteinDomainComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [ProteinDomainComponent],
-}).compileComponents();
+			imports: [ProteinDomainComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

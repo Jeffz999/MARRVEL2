@@ -12,15 +12,11 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { RankscoreVisualComponent } from './rankscore-visual/rankscore-visual.component';
 
 @Component({
-    selector: 'app-dbnsfp',
-    templateUrl: './dbnsfp.component.html',
-    styleUrls: ['./dbnsfp.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatIcon,
-    MatTooltip,
-    RankscoreVisualComponent
-],
+	selector: 'app-dbnsfp',
+	templateUrl: './dbnsfp.component.html',
+	styleUrls: ['./dbnsfp.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [MatIcon, MatTooltip, RankscoreVisualComponent],
 })
 export class DbnsfpComponent implements OnInit {
 	private api = inject(ApiService);

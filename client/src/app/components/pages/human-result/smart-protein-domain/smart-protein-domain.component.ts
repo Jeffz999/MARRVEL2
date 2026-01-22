@@ -1,7 +1,19 @@
 import { AfterViewInit, Component, ElementRef, OnInit, input, viewChild, inject } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import {
+	MatTableDataSource,
+	MatTable,
+	MatColumnDef,
+	MatHeaderCellDef,
+	MatHeaderCell,
+	MatCellDef,
+	MatCell,
+	MatHeaderRowDef,
+	MatHeaderRow,
+	MatRowDef,
+	MatRow,
+} from '@angular/material/table';
 import { ProteinDomainPlot } from '../../../../d3/protein-domain-plot';
 import { SmartDomain } from '../../../../interfaces/data';
 import { HumanGene } from '../../../../interfaces/gene';
@@ -11,26 +23,26 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-smart-protein-domain',
-    templateUrl: './smart-protein-domain.component.html',
-    styleUrls: ['./smart-protein-domain.component.scss'],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatSortHeader,
-    MatCellDef,
-    MatCell,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatPaginator
-],
+	selector: 'app-smart-protein-domain',
+	templateUrl: './smart-protein-domain.component.html',
+	styleUrls: ['./smart-protein-domain.component.scss'],
+	imports: [
+		MatButton,
+		MatIcon,
+		MatTable,
+		MatSort,
+		MatColumnDef,
+		MatHeaderCellDef,
+		MatHeaderCell,
+		MatSortHeader,
+		MatCellDef,
+		MatCell,
+		MatHeaderRowDef,
+		MatHeaderRow,
+		MatRowDef,
+		MatRow,
+		MatPaginator,
+	],
 })
 export class SmartProteinDomainComponent implements OnInit, AfterViewInit {
 	private apiService = inject(ApiService);

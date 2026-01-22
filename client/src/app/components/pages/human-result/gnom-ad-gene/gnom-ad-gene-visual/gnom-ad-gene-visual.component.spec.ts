@@ -8,8 +8,8 @@ describe('GnomADGeneVisualComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [GnomADGeneVisualComponent],
-}).compileComponents();
+			imports: [GnomADGeneVisualComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

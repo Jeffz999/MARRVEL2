@@ -4,14 +4,10 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { RankscoreVisualComponent } from '../rankscore-visual/rankscore-visual.component';
 
 @Component({
-    selector: 'app-dbnsfp-score-cell',
-    templateUrl: './dbnsfp-score-cell.component.html',
-    styleUrls: ['./dbnsfp-score-cell.component.scss'],
-    imports: [
-    NgClass,
-    MatTooltip,
-    RankscoreVisualComponent
-],
+	selector: 'app-dbnsfp-score-cell',
+	templateUrl: './dbnsfp-score-cell.component.html',
+	styleUrls: ['./dbnsfp-score-cell.component.scss'],
+	imports: [NgClass, MatTooltip, RankscoreVisualComponent],
 })
 export class DbnsfpScoreCellComponent implements OnInit {
 	readonly methodName = input<string>(undefined);

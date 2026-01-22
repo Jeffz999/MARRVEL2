@@ -8,8 +8,8 @@ describe('OmimComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [OmimComponent],
-}).compileComponents();
+			imports: [OmimComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

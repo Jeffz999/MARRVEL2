@@ -15,7 +15,6 @@ import { GnomADVariantData } from '../interfaces/data';
 export class ApiService {
 	private http = inject(HttpClient);
 
-
 	getGenesBySymbolPrefix(taxonId: number, prefix: string): Observable<any> {
 		prefix = prefix.replace(/\s+/g, ' ');
 		const url = `${environment.apiHost}/data/gene/taxonId/${taxonId}/prefix/${prefix}`;

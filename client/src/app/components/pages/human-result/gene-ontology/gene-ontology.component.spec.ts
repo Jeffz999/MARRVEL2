@@ -8,8 +8,8 @@ describe('GeneOntologyComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [GeneOntologyComponent],
-}).compileComponents();
+			imports: [GeneOntologyComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

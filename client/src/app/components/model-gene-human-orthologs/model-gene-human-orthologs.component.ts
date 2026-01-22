@@ -9,16 +9,10 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-model-gene-human-orthologs',
-    templateUrl: './model-gene-human-orthologs.component.html',
-    styleUrls: ['./model-gene-human-orthologs.component.scss'],
-    imports: [
-    NavbarComponent,
-    RouterLink,
-    MatTooltip,
-    MatIcon,
-    NgClass
-],
+	selector: 'app-model-gene-human-orthologs',
+	templateUrl: './model-gene-human-orthologs.component.html',
+	styleUrls: ['./model-gene-human-orthologs.component.scss'],
+	imports: [NavbarComponent, RouterLink, MatTooltip, MatIcon, NgClass],
 })
 export class ModelGeneHumanOrthologsComponent implements OnInit {
 	private route = inject(ActivatedRoute);

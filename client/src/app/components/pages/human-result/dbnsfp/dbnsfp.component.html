@@ -1,98 +1,93 @@
 <div class="row mb-3">
-  <div class="col-12">
-    <h3 class="d-inline-block align-middle">
-      Variant Functional Prediction Scores of Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{
-      variant().alt
-      }}
-      from dbNSFP
-    </h3>
-  </div>
+	<div class="col-12">
+		<h3 class="d-inline-block align-middle">
+			Variant Functional Prediction Scores of Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{
+				variant().alt
+			}}
+			from dbNSFP
+		</h3>
+	</div>
 
-  @if (!loading && data && rankAverage != null) {
-    <div class="col-12 mt-3" [@toggle]>
-      <div class="d-table comment">
-        <div class="d-table-cell align-top comment-icon-wrapper">
-          <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>
-        </div>
-        <span class="d-table-cell pl-2">
-          For Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}, the average dbNSFP
-          rank score is {{ rankAverage.toFixed(3) }}. This means that Chr{{ variant().chr }}:{{ variant().pos }}
-          {{ variant().ref }}&gt;{{ variant().alt }} is
-          <strong
-            >more likely to be damaging than {{ (rankAverage * 100).toFixed(1) }}% of all possible coding
-            variants</strong
-            >.
-          </span>
-        </div>
-      </div>
-    }
-  </div>
+	@if (!loading && data && rankAverage != null) {
+		<div class="col-12 mt-3" [@toggle]>
+			<div class="d-table comment">
+				<div class="d-table-cell align-top comment-icon-wrapper">
+					<mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>
+				</div>
+				<span class="d-table-cell pl-2">
+					For Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}, the
+					average dbNSFP rank score is {{ rankAverage.toFixed(3) }}. This means that Chr{{ variant().chr }}:{{
+						variant().pos
+					}}
+					{{ variant().ref }}&gt;{{ variant().alt }} is
+					<strong
+						>more likely to be damaging than {{ (rankAverage * 100).toFixed(1) }}% of all possible coding
+						variants</strong
+					>.
+				</span>
+			</div>
+		</div>
+	}
+</div>
 
-  @if (!loading && !data) {
-    <div class="row">
-      <div class="col-12">
-        <p class="m-0">
-          No data found for Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}
-        </p>
-      </div>
-    </div>
-  }
+@if (!loading && !data) {
+	<div class="row">
+		<div class="col-12">
+			<p class="m-0">
+				No data found for Chr{{ variant().chr }}:{{ variant().pos }} {{ variant().ref }}&gt;{{ variant().alt }}
+			</p>
+		</div>
+	</div>
+}
 
-  @if (!loading && data) {
-    <div class="row">
-      <div class="col-12">
-        <table class="mat-table w-100">
-          <thead>
-            <tr class="mat-header-row">
-              <th class="mat-header-cell">Prediction tool</th>
-              <th class="mat-header-cell number nowrap-fit-cell">Score / Prediction</th>
-              <th class="mat-header-cell">
-                <span
-                  class="text-underline-dashed"
-                  matTooltip="The Rank Score is provided by dbNSFP to allow comparison between different scores. It is between 0 and 1 and a score of 0.9 means it is more likely to be damaging than 90% of all potential nsSNVs predicted by that method."
-                  >
-                  dbNSFP Rank Score
-                </span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (scoreConfig of scoresToDisplay; track scoreConfig) {
-              <tr class="mat-row">
-                <td class="mat-cell">
-                  <span class="text-underline-dashed" [matTooltip]="scoreConfig.toolTooltip">
-                    {{ scoreConfig.displayName }}
-                  </span>
-                  @if (scoreConfig.version) {
-                    <span class="ml-1 badge badge-secondary">{{
-                      scoreConfig.version
-                    }}</span>
-                  }
-                </td>
-                <td class="mat-cell number">
-                  @if (hasScoreData(scoreConfig)) {
-                    <span
-                      class="text-underline-dashed"
-                      [matTooltip]="scoreConfig.scoreTooltip"
-                      >
-                      {{ getDisplayScore(scoreConfig) }}
-                    </span>
-                  }
-                  @if (!hasScoreData(scoreConfig)) {
-                    <span class="text-muted">NA</span>
-                  }
-                </td>
-                <td class="mat-cell">
-                  @if (hasScoreData(scoreConfig)) {
-                    <app-rankscore-visual
-                      [rankscore]="getRankScore(scoreConfig)"
-                      />
-                  }
-                </td>
-              </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-    </div>
-  }
+@if (!loading && data) {
+	<div class="row">
+		<div class="col-12">
+			<table class="mat-table w-100">
+				<thead>
+					<tr class="mat-header-row">
+						<th class="mat-header-cell">Prediction tool</th>
+						<th class="mat-header-cell number nowrap-fit-cell">Score / Prediction</th>
+						<th class="mat-header-cell">
+							<span
+								class="text-underline-dashed"
+								matTooltip="The Rank Score is provided by dbNSFP to allow comparison between different scores. It is between 0 and 1 and a score of 0.9 means it is more likely to be damaging than 90% of all potential nsSNVs predicted by that method."
+							>
+								dbNSFP Rank Score
+							</span>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for (scoreConfig of scoresToDisplay; track scoreConfig) {
+						<tr class="mat-row">
+							<td class="mat-cell">
+								<span class="text-underline-dashed" [matTooltip]="scoreConfig.toolTooltip">
+									{{ scoreConfig.displayName }}
+								</span>
+								@if (scoreConfig.version) {
+									<span class="ml-1 badge badge-secondary">{{ scoreConfig.version }}</span>
+								}
+							</td>
+							<td class="mat-cell number">
+								@if (hasScoreData(scoreConfig)) {
+									<span class="text-underline-dashed" [matTooltip]="scoreConfig.scoreTooltip">
+										{{ getDisplayScore(scoreConfig) }}
+									</span>
+								}
+								@if (!hasScoreData(scoreConfig)) {
+									<span class="text-muted">NA</span>
+								}
+							</td>
+							<td class="mat-cell">
+								@if (hasScoreData(scoreConfig)) {
+									<app-rankscore-visual [rankscore]="getRankScore(scoreConfig)" />
+								}
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}

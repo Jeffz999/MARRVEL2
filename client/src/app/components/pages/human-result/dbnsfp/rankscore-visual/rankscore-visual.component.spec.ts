@@ -8,8 +8,8 @@ describe('RankscoreVisualComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [RankscoreVisualComponent],
-}).compileComponents();
+			imports: [RankscoreVisualComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

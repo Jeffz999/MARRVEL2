@@ -3,10 +3,10 @@ import { Component, OnInit, ElementRef, input, viewChild, output } from '@angula
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-filter-input',
-    templateUrl: './filter-input.component.html',
-    styleUrls: ['./filter-input.component.scss'],
-    imports: [MatIcon],
+	selector: 'app-filter-input',
+	templateUrl: './filter-input.component.html',
+	styleUrls: ['./filter-input.component.scss'],
+	imports: [MatIcon],
 })
 export class FilterInputComponent implements OnInit {
 	readonly placeholder = input<string>(undefined);
@@ -19,7 +19,7 @@ export class FilterInputComponent implements OnInit {
 
 	ngOnInit() {
 		const value = this.value();
-  if (value && value !== '') {
+		if (value && value !== '') {
 			this.inputBox().nativeElement.value = value;
 		}
 	}

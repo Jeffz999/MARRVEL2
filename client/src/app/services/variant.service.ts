@@ -14,7 +14,6 @@ import { LiftoverResponse } from '../interfaces/liftover';
 export class VariantService {
 	private http = inject(HttpClient);
 
-
 	parse(variantInput) {
 		const hgvsMatch = new RegExp('^[0-9a-zA-Z_\.]+:c\.[0-9]+(A|C|G|T)+>(A|C|G|T)+$').exec(variantInput);
 		const coordMatch = new RegExp(

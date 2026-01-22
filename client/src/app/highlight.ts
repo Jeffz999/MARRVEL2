@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'highlight', })
+@Pipe({ name: 'highlight' })
 export class HighlightSearch implements PipeTransform {
 	transform(text, search) {
 		text = '' + (text || '');

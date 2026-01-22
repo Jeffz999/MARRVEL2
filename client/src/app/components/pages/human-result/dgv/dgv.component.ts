@@ -13,16 +13,11 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatable.component';
 
 @Component({
-    selector: 'app-dgv',
-    templateUrl: './dgv.component.html',
-    styleUrls: ['./dgv.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatTooltip,
-    BasicDatatableComponent
-],
+	selector: 'app-dgv',
+	templateUrl: './dgv.component.html',
+	styleUrls: ['./dgv.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [MatButton, MatIcon, MatTooltip, BasicDatatableComponent],
 })
 export class DgvComponent implements OnInit {
 	private api = inject(ApiService);
@@ -40,7 +35,7 @@ export class DgvComponent implements OnInit {
 
 	ngOnInit() {
 		const gene = this.gene();
-  if (gene && gene.entrezId) {
+		if (gene && gene.entrezId) {
 			if (this.searchBy === 'gene') {
 				this.loading = true;
 				this.data = null;
@@ -56,7 +51,7 @@ export class DgvComponent implements OnInit {
 			}
 		}
 		const variant = this.variant();
-  if (variant && variant.chr) {
+		if (variant && variant.chr) {
 			if (!gene && this.searchBy === 'gene') {
 				this.searchBy = 'variant';
 			}

@@ -8,8 +8,8 @@ describe('Geno2mpGeneTableComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [Geno2mpGeneTableComponent],
-}).compileComponents();
+			imports: [Geno2mpGeneTableComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

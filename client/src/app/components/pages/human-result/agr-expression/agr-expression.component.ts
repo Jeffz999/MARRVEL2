@@ -14,16 +14,11 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'app-agr-expression',
-    templateUrl: './agr-expression.component.html',
-    styleUrls: ['./agr-expression.component.scss'],
-    animations: [Animations.toggle],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatSlideToggle,
-    MatTooltip
-],
+	selector: 'app-agr-expression',
+	templateUrl: './agr-expression.component.html',
+	styleUrls: ['./agr-expression.component.scss'],
+	animations: [Animations.toggle],
+	imports: [MatButton, MatIcon, MatSlideToggle, MatTooltip],
 })
 export class AgrExpressionComponent implements OnInit {
 	private api = inject(ApiService);

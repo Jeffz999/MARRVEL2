@@ -8,8 +8,8 @@ describe('HumanProteinStructureComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [HumanProteinStructureComponent],
-}).compileComponents();
+			imports: [HumanProteinStructureComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

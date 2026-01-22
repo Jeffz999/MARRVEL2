@@ -1,129 +1,128 @@
 @if (loading) {
-  <mat-progress-bar mode="indeterminate" />
+	<mat-progress-bar mode="indeterminate" />
 }
 @if (!loading) {
-  <div class="row">
-    <div class="col-12">
-      <h3 class="mb-0 d-inline-block align-middle">ClinVar</h3>
-      @if (urlSearchTerm) {
-        <a
-          class="mb-0 d-inline-block ml-3 align-middle"
-				[attr.href]="'https://www.ncbi.nlm.nih.gov/clinvar/?term=' + urlSearchTerm"
-				target="_blank"
-			>
-				<button mat-button color="primary">
-					<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-					More on ClinVar
-				</button>
-			</a>
-}
+	<div class="row">
+		<div class="col-12">
+			<h3 class="mb-0 d-inline-block align-middle">ClinVar</h3>
+			@if (urlSearchTerm) {
+				<a
+					class="mb-0 d-inline-block ml-3 align-middle"
+					[attr.href]="'https://www.ncbi.nlm.nih.gov/clinvar/?term=' + urlSearchTerm"
+					target="_blank"
+				>
+					<button mat-button color="primary">
+						<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+						More on ClinVar
+					</button>
+				</a>
+			}
 
 			@if (data) {
-<p class="mt-3 mb-0 d-table" [@toggle]>
-				<mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
-					>insert_comment</mat-icon
-				>
-				<span class="d-table-cell pl-2">
-					@if (data && data.length > 0) {
-<span>
-						{{ gene().symbol }} has <span appUnit [count]="data.length" unit="reported variant"></span>.
+				<p class="mt-3 mb-0 d-table" [@toggle]>
+					<mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
+						>insert_comment</mat-icon
+					>
+					<span class="d-table-cell pl-2">
+						@if (data && data.length > 0) {
+							<span>
+								{{ gene().symbol }} has
+								<span appUnit [count]="data.length" unit="reported variant"></span>.
+							</span>
+						}
+						@if (significance) {
+							<span>
+								<strong appUnit [count]="significance['pathogenic']" unit="allele"></strong>
+								{{ significance['pathogenic'] > 1 ? 'are' : 'is' }} reported as
+								<strong>pathogenic</strong>, and
+								<strong appUnit [count]="significance['likely pathogenic']" unit="allele"></strong>
+								{{ significance['likely pathogenic'] > 1 ? 'are' : 'is' }} reported as
+								<strong>likely pathogenic</strong>.
+							</span>
+						}
 					</span>
+				</p>
+			}
+		</div>
+	</div>
+	@if (significance && sigFourTotal > 0) {
+		<div class="row summary mt-3" [@toggle]>
+			<div class="col-12">
+				<div class="w-100 bar-chart">
+					@if (significance['pathogenic']) {
+						<div
+							class="bar bg-orange"
+							[attr.style]="getWidthPercStyle(significance['pathogenic'], sigFourTotal)"
+							[matTooltip]="'Pathoogenic: ' + significance['pathogenic'] + ' alleles'"
+						>
+							<div class="bar-label-wrapper">
+								<span class="bar-label">Pathogenic</span>
+								<span class="bar-value">{{ significance['pathogenic'] }}</span>
+							</div>
+						</div>
+					}
+					@if (significance['likely pathogenic']) {
+						<div
+							class="bar bg-orange-light"
+							[attr.style]="getWidthPercStyle(significance['likely pathogenic'], sigFourTotal)"
+							[matTooltip]="'Likely Pathoogenic: ' + significance['likely pathogenic'] + ' alleles'"
+						>
+							<div class="bar-label-wrapper">
+								<span class="bar-label">Likely Pathogenic</span>
+								<span class="bar-value">{{ significance['likely pathogenic'] }}</span>
+							</div>
+						</div>
+					}
+					@if (significance['likely benign']) {
+						<div
+							class="bar bg-blue-light"
+							[attr.style]="getWidthPercStyle(significance['likely benign'], sigFourTotal)"
+							[matTooltip]="'Likely Benign: ' + significance['likely benign'] + ' alleles'"
+						>
+							<div class="bar-label-wrapper">
+								<span class="bar-label">Likely Benign</span>
+								<span class="bar-value">{{ significance['likely benign'] }}</span>
+							</div>
+						</div>
+					}
+					@if (significance['benign']) {
+						<div
+							class="bar bg-blue"
+							[attr.style]="getWidthPercStyle(significance['benign'], sigFourTotal)"
+							[matTooltip]="'Benign: ' + significance['benign'] + ' alleles'"
+						>
+							<div class="bar-label-wrapper">
+								<span class="bar-label">Benign</span>
+								<span class="bar-value">{{ significance['benign'] }}</span>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	}
+	@if (data && data.length > 0) {
+		<div class="row mt-3" [@toggle]>
+			<div class="col-12">
+				<button
+					mat-button
+					class="px-0 no-overlay"
+					color="primary"
+					disableRipple="true"
+					(click)="alleleVisible = !alleleVisible"
+				>
+					{{ alleleVisible ? 'Hide alleles' : 'Show alleles' }}
+					@if (!alleleVisible) {
+						<mat-icon>expand_more</mat-icon>
+					}
+					@if (alleleVisible) {
+						<mat-icon>expand_less</mat-icon>
+					}
+				</button>
+				<div class="mt-2" [@toggle]="alleleVisible">
+					<app-clinvar-variants-table [gene]="gene()" [variant]="variant()" [data]="data" />
+				</div>
+			</div>
+		</div>
+	}
 }
-					@if (significance) {
-<span>
-						<strong appUnit [count]="significance['pathogenic']" unit="allele"></strong>
-						{{ significance['pathogenic'] > 1 ? 'are' : 'is' }} reported as <strong>pathogenic</strong>, and
-                  <strong appUnit [count]="significance['likely pathogenic']" unit="allele"></strong>
-                  {{ significance['likely pathogenic'] > 1 ? 'are' : 'is' }} reported as
-                  <strong>likely pathogenic</strong>.
-                </span>
-              }
-            </span>
-          </p>
-        }
-      </div>
-    </div>
-    @if (significance && sigFourTotal > 0) {
-      <div class="row summary mt-3" [@toggle]>
-        <div class="col-12">
-          <div class="w-100 bar-chart">
-            @if (significance['pathogenic']) {
-              <div
-                class="bar bg-orange"
-                [attr.style]="getWidthPercStyle(significance['pathogenic'], sigFourTotal)"
-                [matTooltip]="'Pathoogenic: ' + significance['pathogenic'] + ' alleles'"
-                >
-                <div class="bar-label-wrapper">
-                  <span class="bar-label">Pathogenic</span>
-                  <span class="bar-value">{{ significance['pathogenic'] }}</span>
-                </div>
-              </div>
-            }
-            @if (significance['likely pathogenic']) {
-              <div
-                class="bar bg-orange-light"
-                [attr.style]="getWidthPercStyle(significance['likely pathogenic'], sigFourTotal)"
-                [matTooltip]="'Likely Pathoogenic: ' + significance['likely pathogenic'] + ' alleles'"
-                >
-                <div class="bar-label-wrapper">
-                  <span class="bar-label">Likely Pathogenic</span>
-                  <span class="bar-value">{{ significance['likely pathogenic'] }}</span>
-                </div>
-              </div>
-            }
-            @if (significance['likely benign']) {
-              <div
-                class="bar bg-blue-light"
-                [attr.style]="getWidthPercStyle(significance['likely benign'], sigFourTotal)"
-                [matTooltip]="'Likely Benign: ' + significance['likely benign'] + ' alleles'"
-                >
-                <div class="bar-label-wrapper">
-                  <span class="bar-label">Likely Benign</span>
-                  <span class="bar-value">{{ significance['likely benign'] }}</span>
-                </div>
-              </div>
-            }
-            @if (significance['benign']) {
-              <div
-                class="bar bg-blue"
-                [attr.style]="getWidthPercStyle(significance['benign'], sigFourTotal)"
-                [matTooltip]="'Benign: ' + significance['benign'] + ' alleles'"
-                >
-                <div class="bar-label-wrapper">
-                  <span class="bar-label">Benign</span>
-                  <span class="bar-value">{{ significance['benign'] }}</span>
-                </div>
-              </div>
-            }
-          </div>
-        </div>
-      </div>
-    }
-    @if (data && data.length > 0) {
-      <div class="row mt-3" [@toggle]>
-        <div class="col-12">
-          <button
-            mat-button
-            class="px-0 no-overlay"
-            color="primary"
-            disableRipple="true"
-            (click)="alleleVisible = !alleleVisible"
-            >
-            {{ alleleVisible ? 'Hide alleles' : 'Show alleles' }}
-            @if (!alleleVisible) {
-              <mat-icon>expand_more</mat-icon>
-            }
-            @if (alleleVisible) {
-              <mat-icon>expand_less</mat-icon>
-            }
-          </button>
-          <div class="mt-2" [@toggle]="alleleVisible">
-            <app-clinvar-variants-table [gene]="gene()"
-              [variant]="variant()"
-              [data]="data"
-              />
-          </div>
-        </div>
-      </div>
-    }
-  }

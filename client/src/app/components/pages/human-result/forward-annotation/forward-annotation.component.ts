@@ -3,7 +3,6 @@ import { Animations } from 'src/app/animations';
 import { Variant } from 'src/app/interfaces/variant';
 import { ApiService } from 'src/app/services/api.service';
 
-
 interface TransVarResultCoord {
 	annot: string;
 	pos: number;
@@ -27,11 +26,11 @@ interface TransVarForwardAnnotResult {
 }
 
 @Component({
-    selector: 'app-forward-annotation',
-    templateUrl: './forward-annotation.component.html',
-    styleUrls: ['./forward-annotation.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [],
+	selector: 'app-forward-annotation',
+	templateUrl: './forward-annotation.component.html',
+	styleUrls: ['./forward-annotation.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [],
 })
 export class ForwardAnnotationComponent implements OnInit {
 	private apiService = inject(ApiService);

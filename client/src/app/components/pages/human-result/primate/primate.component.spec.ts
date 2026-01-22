@@ -8,8 +8,8 @@ describe('PrimateComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [PrimateComponent],
-}).compileComponents();
+			imports: [PrimateComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

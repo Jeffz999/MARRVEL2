@@ -2,36 +2,47 @@ import { Component, OnChanges, AfterViewInit, input, viewChild } from '@angular/
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import {
+	MatTableDataSource,
+	MatTable,
+	MatColumnDef,
+	MatHeaderCellDef,
+	MatHeaderCell,
+	MatCellDef,
+	MatCell,
+	MatHeaderRowDef,
+	MatHeaderRow,
+	MatRowDef,
+	MatRow,
+} from '@angular/material/table';
 
 import { Animations } from '../../../../../animations';
 
 import { HPO_BROAD_TO_CAT } from './../../../../../category';
 import { Geno2mpPhenotypePictogramComponent } from '../geno2mp-phenotype-pictogram/geno2mp-phenotype-pictogram.component';
 
-
 @Component({
-    selector: 'app-geno2mp-variant-table',
-    templateUrl: './geno2mp-variant-table.component.html',
-    styleUrls: ['./geno2mp-variant-table.component.scss'],
-    animations: [Animations.slideIn],
-    imports: [
-    MatSlideToggle,
-    Geno2mpPhenotypePictogramComponent,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatSortHeader,
-    MatCellDef,
-    MatCell,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatPaginator
-],
+	selector: 'app-geno2mp-variant-table',
+	templateUrl: './geno2mp-variant-table.component.html',
+	styleUrls: ['./geno2mp-variant-table.component.scss'],
+	animations: [Animations.slideIn],
+	imports: [
+		MatSlideToggle,
+		Geno2mpPhenotypePictogramComponent,
+		MatTable,
+		MatSort,
+		MatColumnDef,
+		MatHeaderCellDef,
+		MatHeaderCell,
+		MatSortHeader,
+		MatCellDef,
+		MatCell,
+		MatHeaderRowDef,
+		MatHeaderRow,
+		MatRowDef,
+		MatRow,
+		MatPaginator,
+	],
 })
 export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 	readonly data = input<any[] | null>(undefined);

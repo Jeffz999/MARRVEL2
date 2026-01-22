@@ -5,14 +5,11 @@ import { take } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 
-
 @Component({
-    selector: 'app-reverse-annotation-candidates',
-    templateUrl: './reverse-annotation-candidates.component.html',
-    styleUrls: ['./reverse-annotation-candidates.component.scss'],
-    imports: [
-    NavbarComponent
-],
+	selector: 'app-reverse-annotation-candidates',
+	templateUrl: './reverse-annotation-candidates.component.html',
+	styleUrls: ['./reverse-annotation-candidates.component.scss'],
+	imports: [NavbarComponent],
 })
 export class ReverseAnnotationCandidatesComponent implements OnInit {
 	private route = inject(ActivatedRoute);

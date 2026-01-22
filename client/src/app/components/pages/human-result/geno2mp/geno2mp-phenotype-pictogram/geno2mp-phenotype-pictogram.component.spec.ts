@@ -8,8 +8,8 @@ describe('Geno2mpPhenotypePictogramComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [Geno2mpPhenotypePictogramComponent],
-}).compileComponents();
+			imports: [Geno2mpPhenotypePictogramComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

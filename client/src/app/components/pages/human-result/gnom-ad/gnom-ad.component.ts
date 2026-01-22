@@ -10,14 +10,10 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { UnitDirective } from '../../../../directives/unit.directive';
 
 @Component({
-    selector: 'app-gnom-ad',
-    templateUrl: './gnom-ad.component.html',
-    styleUrls: ['./gnom-ad.component.scss'],
-    imports: [
-    MatIcon,
-    MatTooltip,
-    UnitDirective
-],
+	selector: 'app-gnom-ad',
+	templateUrl: './gnom-ad.component.html',
+	styleUrls: ['./gnom-ad.component.scss'],
+	imports: [MatIcon, MatTooltip, UnitDirective],
 })
 export class GnomADComponent implements OnInit {
 	private api = inject(ApiService);
@@ -31,7 +27,7 @@ export class GnomADComponent implements OnInit {
 
 	ngOnInit() {
 		const variant = this.variant();
-  if (variant) {
+		if (variant) {
 			this.loading = true;
 			this.api
 				.getGnomADVaraint(variant)

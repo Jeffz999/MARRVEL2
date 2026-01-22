@@ -15,20 +15,20 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-diopt-alignment',
-    templateUrl: './diopt-alignment.component.html',
-    styleUrls: ['./diopt-alignment.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    ProteinDomainComponent,
-    MatIcon,
-    MatTooltip,
-    MatButton,
-    MatFormField,
-    MatInput,
-    MatSlideToggle,
-    FormsModule
-],
+	selector: 'app-diopt-alignment',
+	templateUrl: './diopt-alignment.component.html',
+	styleUrls: ['./diopt-alignment.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [
+		ProteinDomainComponent,
+		MatIcon,
+		MatTooltip,
+		MatButton,
+		MatFormField,
+		MatInput,
+		MatSlideToggle,
+		FormsModule,
+	],
 })
 export class DioptAlignmentComponent implements OnInit {
 	private api = inject(ApiService);
@@ -69,7 +69,7 @@ export class DioptAlignmentComponent implements OnInit {
 
 	ngOnInit() {
 		const gene = this.gene();
-  if (gene && gene.entrezId) {
+		if (gene && gene.entrezId) {
 			this.loading = true;
 			this.api
 				.getAlignmentByEntrezId(gene.entrezId)

@@ -12,14 +12,10 @@ import { MatIcon } from '@angular/material/icon';
 import { MatRipple } from '@angular/material/core';
 
 @Component({
-    selector: 'app-gtex-boxplot',
-    templateUrl: './gtex-boxplot.component.html',
-    styleUrls: ['./gtex-boxplot.component.scss'],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatRipple
-],
+	selector: 'app-gtex-boxplot',
+	templateUrl: './gtex-boxplot.component.html',
+	styleUrls: ['./gtex-boxplot.component.scss'],
+	imports: [MatButton, MatIcon, MatRipple],
 })
 export class GtexBoxplotComponent implements OnInit {
 	private api = inject(ApiService);

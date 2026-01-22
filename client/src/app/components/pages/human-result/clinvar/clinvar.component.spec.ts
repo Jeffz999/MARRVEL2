@@ -8,8 +8,8 @@ describe('ClinvarComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [ClinvarComponent],
-}).compileComponents();
+			imports: [ClinvarComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

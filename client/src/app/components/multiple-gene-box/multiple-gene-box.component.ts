@@ -13,24 +13,24 @@ import { MatIcon } from '@angular/material/icon';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
-    selector: 'app-multiple-gene-box',
-    templateUrl: './multiple-gene-box.component.html',
-    styleUrls: ['./multiple-gene-box.component.scss'],
-    imports: [
-    ClickOutsideDirective,
-    MatFormField,
-    MatLabel,
-    MatChipGrid,
-    MatChipRow,
-    MatChipRemove,
-    MatIcon,
-    MatInput,
-    FormsModule,
-    MatChipInput,
-    ReactiveFormsModule,
-    MatHint,
-    MatCheckbox
-],
+	selector: 'app-multiple-gene-box',
+	templateUrl: './multiple-gene-box.component.html',
+	styleUrls: ['./multiple-gene-box.component.scss'],
+	imports: [
+		ClickOutsideDirective,
+		MatFormField,
+		MatLabel,
+		MatChipGrid,
+		MatChipRow,
+		MatChipRemove,
+		MatIcon,
+		MatInput,
+		FormsModule,
+		MatChipInput,
+		ReactiveFormsModule,
+		MatHint,
+		MatCheckbox,
+	],
 })
 export class MultipleGeneBoxComponent implements OnInit {
 	private api = inject(ApiService);

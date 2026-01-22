@@ -9,7 +9,6 @@ import { HumanGene } from '../interfaces/gene';
 export class SearchService {
 	private router = inject(Router);
 
-
 	redirect(
 		inputType?: 'gene' | 'protein',
 		gene?: HumanGene,

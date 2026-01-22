@@ -18,17 +18,11 @@ import { Geno2mpPhenotypePictogramComponent } from '../../geno2mp/geno2mp-phenot
 import { BasicDatatableComponent } from '../../../../basic-datatable/basic-datatable.component';
 
 @Component({
-    selector: 'app-decipher-disease',
-    templateUrl: './decipher-disease.component.html',
-    styleUrls: ['./decipher-disease.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatSlideToggle,
-    Geno2mpPhenotypePictogramComponent,
-    BasicDatatableComponent
-],
+	selector: 'app-decipher-disease',
+	templateUrl: './decipher-disease.component.html',
+	styleUrls: ['./decipher-disease.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [MatButton, MatIcon, MatSlideToggle, Geno2mpPhenotypePictogramComponent, BasicDatatableComponent],
 })
 export class DecipherDiseaseComponent implements OnInit {
 	private api = inject(ApiService);
@@ -58,7 +52,7 @@ export class DecipherDiseaseComponent implements OnInit {
 	getData() {
 		this.loading = true;
 		const variant = this.variant();
-  const task = variant
+		const task = variant
 			? this.api.getDECIPHERDiseaseByVariant(variant)
 			: this.api.getDECIPHERDiseaseByGenomLoc(this.gene().chr, this.gene().hg19Start, this.gene().hg19Stop);
 		task.pipe(take(1)).subscribe(
@@ -78,7 +72,7 @@ export class DecipherDiseaseComponent implements OnInit {
 	setTableTitle() {
 		this.tableTitle = `Detailed Information of `;
 		const variant = this.variant();
-  if (variant) {
+		if (variant) {
 			if (this.showSnvs) {
 				this.tableTitle += `Single-Nucleotide Variant ${variant.chr}:${variant.pos} ${variant.ref}>${variant.alt}`;
 				if (this.showCnvs) {

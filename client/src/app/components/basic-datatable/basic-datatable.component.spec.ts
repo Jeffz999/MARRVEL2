@@ -8,8 +8,8 @@ describe('BasicDatatableComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [BasicDatatableComponent],
-}).compileComponents();
+			imports: [BasicDatatableComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

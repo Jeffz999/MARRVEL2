@@ -8,8 +8,8 @@ describe('ModelGeneHumanOrthologsComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [ModelGeneHumanOrthologsComponent],
-}).compileComponents();
+			imports: [ModelGeneHumanOrthologsComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

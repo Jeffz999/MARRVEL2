@@ -15,50 +15,52 @@ import { MatIcon } from '@angular/material/icon';
 import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 
-
 const PRIMARY_COLOR = '#7bd0cc';
 const WARN_COLOR = '#e5893e';
 
 @Component({
-    selector: 'app-ppi',
-    templateUrl: './ppi.component.html',
-    styleUrls: ['./ppi.component.scss'],
-    animations: [
-        trigger('slideInOut', [
-            state('true', style({
-                width: '300px',
-            })),
-            state('false', style({
-                overflow: 'hidden',
-                width: '0px',
-                padding: 0,
-            })),
-            transition('in => out', animate('400ms ease-in-out')),
-            transition('out => in', animate('400ms ease-in-out')),
-        ]),
-        trigger('slideVInOut', [
-            state('true', style({
-                height: 'auto',
-            })),
-            state('false', style({
-                overflow: 'hidden',
-                height: '0px',
-                padding: 0,
-            })),
-            transition('in => out', animate('400ms ease-in-out')),
-            transition('out => in', animate('400ms ease-in-out')),
-        ]),
-    ],
-    imports: [
-    MatIconButton,
-    MatTooltip,
-    MatIcon,
-    MatMenuTrigger,
-    MatMenu,
-    FormsModule,
-    MatSlider,
-    MatSliderThumb
-],
+	selector: 'app-ppi',
+	templateUrl: './ppi.component.html',
+	styleUrls: ['./ppi.component.scss'],
+	animations: [
+		trigger('slideInOut', [
+			state(
+				'true',
+				style({
+					width: '300px',
+				}),
+			),
+			state(
+				'false',
+				style({
+					overflow: 'hidden',
+					width: '0px',
+					padding: 0,
+				}),
+			),
+			transition('in => out', animate('400ms ease-in-out')),
+			transition('out => in', animate('400ms ease-in-out')),
+		]),
+		trigger('slideVInOut', [
+			state(
+				'true',
+				style({
+					height: 'auto',
+				}),
+			),
+			state(
+				'false',
+				style({
+					overflow: 'hidden',
+					height: '0px',
+					padding: 0,
+				}),
+			),
+			transition('in => out', animate('400ms ease-in-out')),
+			transition('out => in', animate('400ms ease-in-out')),
+		]),
+	],
+	imports: [MatIconButton, MatTooltip, MatIcon, MatMenuTrigger, MatMenu, FormsModule, MatSlider, MatSliderThumb],
 })
 export class PpiComponent implements OnInit, AfterViewInit {
 	readonly gene = input<HumanGene>(undefined);
@@ -118,7 +120,7 @@ export class PpiComponent implements OnInit, AfterViewInit {
 		this.cy.remove('node');
 
 		const gene = this.gene();
-  if (!this.cy.getElementById(this.gene().symbol).isNode()) {
+		if (!this.cy.getElementById(this.gene().symbol).isNode()) {
 			// adding present gene
 			this.cy.add([
 				{

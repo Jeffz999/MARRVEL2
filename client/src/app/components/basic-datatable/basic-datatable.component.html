@@ -1,96 +1,101 @@
 <div class="d-table w-100">
-  <div class="d-table-cell title">
-    @if (title() && !loading()) {
-      <h4 [@fadeInOut]>
-        {{ title() }}
-        (<span appUnit [count]="data() && data().length ? data().length : 0" [unit]="unit()"></span>)
-      </h4>
-    }
-  </div>
-  @if (data() && data().length && !loading()) {
-    <div class="d-table-cell text-right">
-      <button mat-icon-button [color]="showFilters ? 'primary' : ''" (click)="toggleFilters()">
-        <mat-icon aria-label="Toggle filter" matTooltip="Toggle filter" matTooltipPosition="above">
-          filter_list
-        </mat-icon>
-      </button>
-    </div>
-  }
+	<div class="d-table-cell title">
+		@if (title() && !loading()) {
+			<h4 [@fadeInOut]>
+				{{ title() }}
+				(<span appUnit [count]="data() && data().length ? data().length : 0" [unit]="unit()"></span>)
+			</h4>
+		}
+	</div>
+	@if (data() && data().length && !loading()) {
+		<div class="d-table-cell text-right">
+			<button mat-icon-button [color]="showFilters ? 'primary' : ''" (click)="toggleFilters()">
+				<mat-icon aria-label="Toggle filter" matTooltip="Toggle filter" matTooltipPosition="above">
+					filter_list
+				</mat-icon>
+			</button>
+		</div>
+	}
 </div>
 
 <div class="mt-1 contents">
-  @if (!loading() && displayedColumns() && displayedColumns().length && data() && data().length) {
-    <div [@fadeInOut]>
-      <table
-        class="w-100"
-        mat-table
-        [dataSource]="dataSource"
-        matSort
-        [matSortActive]="sortActive()"
-        [matSortDirection]="sortDirection()"
-        disableClear
-        >
-        <!-- data column -->
-        @for (colId of displayedColumns(); track colId; let idx = $index) {
-          <ng-container [matColumnDef]="colId">
-            <th
-              mat-header-cell
-              *matHeaderCellDef
-              mat-sort-header
-              [class.number]="types() && types()[idx] && (types()[idx] === 'int' || types()[idx] === 'float')"
-              >
-              {{ columnNames()[idx] }}
-            </th>
-            <td
-              mat-cell
-              *matCellDef="let element"
-              [class.text-right]="types() && types()[idx] && (types()[idx] === 'int' || types()[idx] === 'float')"
-              >
-              @if (url() && url()[idx]) {
-                <a
-                  href="{{ urlPrefixes()[idx] || '' }}{{ element[colId] }}{{ urlPostfixes()[idx] || '' }}"
-                  target="_blank"
-                  [innerHTML]="element[colId] | highlight: filtersToApply[colId]"
-                ></a>
-              }
-              @if ((!url() || !url()[idx]) && (!types() || !types()[idx])) {
-                <span
-                  [innerHTML]="element[colId] | highlight: filtersToApply[colId]"
-                ></span>
-              }
-              @if (types() && types()[idx] === 'float') {
-                <span>
-                  {{ toFixed(element[colId]) | highlight: filtersToApply[colId] }}
-                </span>
-              }
-              @if (types() && types()[idx] === 'int') {
-                <span>
-                  {{ element[colId] || '0' | highlight: filtersToApply[colId] }}
-                </span>
-              }
-            </td>
-          </ng-container>
-        }
-        <!-- filter columns -->
-        @for (fColId of filtersColumns; track fColId; let idx = $index) {
-          <ng-container [matColumnDef]="fColId">
-            <th mat-header-cell *matHeaderCellDef class="filter-cell">
-              <app-filter-input [placeholder]="columnNames()[idx]"
-                [value]="filtersToApply[displayedColumns()[idx]]"
-                (keyup)="filter(displayedColumns()[idx], $event.target.value)"
-                />
-            </th>
-          </ng-container>
-        }
-        <tr mat-header-row *matHeaderRowDef="showFilters ? filtersColumns : displayedColumns()" [@slideIn]></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
-      </table>
-      <mat-paginator [length]="data().length || 0" [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" />
-    </div>
-  }
-  @if (data() && !data().length) {
-    <div [@fadeInOut]>
-      <p>No {{ unit().toLowerCase() || 'data' }} found</p>
-    </div>
-  }
+	@if (!loading() && displayedColumns() && displayedColumns().length && data() && data().length) {
+		<div [@fadeInOut]>
+			<table
+				class="w-100"
+				mat-table
+				[dataSource]="dataSource"
+				matSort
+				[matSortActive]="sortActive()"
+				[matSortDirection]="sortDirection()"
+				disableClear
+			>
+				<!-- data column -->
+				@for (colId of displayedColumns(); track colId; let idx = $index) {
+					<ng-container [matColumnDef]="colId">
+						<th
+							mat-header-cell
+							*matHeaderCellDef
+							mat-sort-header
+							[class.number]="
+								types() && types()[idx] && (types()[idx] === 'int' || types()[idx] === 'float')
+							"
+						>
+							{{ columnNames()[idx] }}
+						</th>
+						<td
+							mat-cell
+							*matCellDef="let element"
+							[class.text-right]="
+								types() && types()[idx] && (types()[idx] === 'int' || types()[idx] === 'float')
+							"
+						>
+							@if (url() && url()[idx]) {
+								<a
+									href="{{ urlPrefixes()[idx] || '' }}{{ element[colId] }}{{
+										urlPostfixes()[idx] || ''
+									}}"
+									target="_blank"
+									[innerHTML]="element[colId] | highlight: filtersToApply[colId]"
+								></a>
+							}
+							@if ((!url() || !url()[idx]) && (!types() || !types()[idx])) {
+								<span [innerHTML]="element[colId] | highlight: filtersToApply[colId]"></span>
+							}
+							@if (types() && types()[idx] === 'float') {
+								<span>
+									{{ toFixed(element[colId]) | highlight: filtersToApply[colId] }}
+								</span>
+							}
+							@if (types() && types()[idx] === 'int') {
+								<span>
+									{{ element[colId] || '0' | highlight: filtersToApply[colId] }}
+								</span>
+							}
+						</td>
+					</ng-container>
+				}
+				<!-- filter columns -->
+				@for (fColId of filtersColumns; track fColId; let idx = $index) {
+					<ng-container [matColumnDef]="fColId">
+						<th mat-header-cell *matHeaderCellDef class="filter-cell">
+							<app-filter-input
+								[placeholder]="columnNames()[idx]"
+								[value]="filtersToApply[displayedColumns()[idx]]"
+								(keyup)="filter(displayedColumns()[idx], $event.target.value)"
+							/>
+						</th>
+					</ng-container>
+				}
+				<tr mat-header-row *matHeaderRowDef="showFilters ? filtersColumns : displayedColumns()" [@slideIn]></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns()"></tr>
+			</table>
+			<mat-paginator [length]="data().length || 0" [pageSizeOptions]="[5, 10, 20]" [pageSize]="10" />
+		</div>
+	}
+	@if (data() && !data().length) {
+		<div [@fadeInOut]>
+			<p>No {{ unit().toLowerCase() || 'data' }} found</p>
+		</div>
+	}
 </div>

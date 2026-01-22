@@ -16,18 +16,11 @@ import { UnitDirective } from '../../../../directives/unit.directive';
 import { ClinvarVariantsTableComponent } from './clinvar-variants-table/clinvar-variants-table.component';
 
 @Component({
-    selector: 'app-clinvar',
-    templateUrl: './clinvar.component.html',
-    styleUrls: ['./clinvar.component.scss'],
-    animations: [Animations.toggle],
-    imports: [
-    MatProgressBar,
-    MatButton,
-    MatIcon,
-    MatTooltip,
-    UnitDirective,
-    ClinvarVariantsTableComponent
-],
+	selector: 'app-clinvar',
+	templateUrl: './clinvar.component.html',
+	styleUrls: ['./clinvar.component.scss'],
+	animations: [Animations.toggle],
+	imports: [MatProgressBar, MatButton, MatIcon, MatTooltip, UnitDirective, ClinvarVariantsTableComponent],
 })
 export class ClinvarComponent implements OnInit {
 	private api = inject(ApiService);
@@ -47,7 +40,7 @@ export class ClinvarComponent implements OnInit {
 
 	ngOnInit() {
 		const gene = this.gene();
-  if (gene) {
+		if (gene) {
 			if (gene.hgncId) {
 				this.urlSearchTerm = gene.hgncId + '%5BHGNC+identifier+for+human+gene%5D';
 			} else {

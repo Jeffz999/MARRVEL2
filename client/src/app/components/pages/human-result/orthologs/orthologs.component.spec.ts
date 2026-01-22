@@ -8,8 +8,8 @@ describe('OrthologsComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [OrthologsComponent],
-}).compileComponents();
+			imports: [OrthologsComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

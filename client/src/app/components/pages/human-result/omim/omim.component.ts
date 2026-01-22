@@ -9,17 +9,11 @@ import { UnitDirective } from '../../../../directives/unit.directive';
 import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatable.component';
 
 @Component({
-    selector: 'app-omim',
-    templateUrl: './omim.component.html',
-    styleUrls: ['./omim.component.scss'],
-    animations: [Animations.fadeInOut, Animations.toggleInOut],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatTooltip,
-    UnitDirective,
-    BasicDatatableComponent
-],
+	selector: 'app-omim',
+	templateUrl: './omim.component.html',
+	styleUrls: ['./omim.component.scss'],
+	animations: [Animations.fadeInOut, Animations.toggleInOut],
+	imports: [MatButton, MatIcon, MatTooltip, UnitDirective, BasicDatatableComponent],
 })
 export class OmimComponent {
 	readonly gene = input(undefined);

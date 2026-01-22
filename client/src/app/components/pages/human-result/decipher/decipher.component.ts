@@ -13,16 +13,11 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatable.component';
 
 @Component({
-    selector: 'app-decipher',
-    templateUrl: './decipher.component.html',
-    styleUrls: ['./decipher.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatTooltip,
-    BasicDatatableComponent
-],
+	selector: 'app-decipher',
+	templateUrl: './decipher.component.html',
+	styleUrls: ['./decipher.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [MatButton, MatIcon, MatTooltip, BasicDatatableComponent],
 })
 export class DECIPHERComponent implements OnInit {
 	private api = inject(ApiService);
@@ -42,7 +37,7 @@ export class DECIPHERComponent implements OnInit {
 	requestData() {
 		this.loading = true;
 		const gene = this.gene();
-  const task = gene
+		const task = gene
 			? this.api.getDECIPHERByGenomLoc(gene.chr, gene.hg19Start, gene.hg19Stop)
 			: this.api.getDECIPHERByVariant(this.variant());
 		task.pipe(take(1)).subscribe((res: DECIPHERData[]) => {

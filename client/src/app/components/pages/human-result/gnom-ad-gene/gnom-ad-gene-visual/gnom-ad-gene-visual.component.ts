@@ -1,11 +1,10 @@
 import { Component, OnInit, input } from '@angular/core';
 
-
 @Component({
-    selector: 'app-gnom-ad-gene-visual',
-    templateUrl: './gnom-ad-gene-visual.component.html',
-    styleUrls: ['./gnom-ad-gene-visual.component.scss'],
-    imports: [],
+	selector: 'app-gnom-ad-gene-visual',
+	templateUrl: './gnom-ad-gene-visual.component.html',
+	styleUrls: ['./gnom-ad-gene-visual.component.scss'],
+	imports: [],
 })
 export class GnomADGeneVisualComponent implements OnInit {
 	readonly oeLower = input(undefined);

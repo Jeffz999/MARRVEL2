@@ -1,540 +1,528 @@
 @if (geneLoading) {
-  <div class="loading-fullscreen">Loading ... {{ geneLoading }}</div>
+	<div class="loading-fullscreen">Loading ... {{ geneLoading }}</div>
 }
 
 <div class="d-flex" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh">
-  <div
-    class="sidenav-content flex-grow-1 flex-column d-flex"
-    [class]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
-    >
-    <div>
-      <app-navbar showSearch="true" showMenuButton="true" />
-    </div>
-    <div class="flex-grow-1" style="overflow-x: hidden; overflow-y: auto">
-      <div id="TOP"></div>
-      @if (gene !== null || variant) {
-        <div class="container-fluid py-5 px-md-5">
-          <!-- Gene, Input information starts -->
-          <div class="row">
-            <div class="col-12">
-              @if (!proteinInput) {
-                <div class="title">
-                  @if (geneEntrezId && gene) {
-                    <h1>{{ gene.symbol }}</h1>
-                  }
-                  @if (geneEntrezId && variant) {
-                    <h1>&nbsp;/&nbsp;</h1>
-                  }
-                  @if (variant) {
-                    <h1>{{ variantString }}</h1>
-                  }
-                  @if (variantInput && variantInput.indexOf(':c.') != -1) {
-                    <h1>
-                      &nbsp;({{ variantInput }})
-                    </h1>
-                  }
-                </div>
-              }
-              @if (hg38Variant) {
-                <div class="subtitle">
-                  <h4>
-                    <span class="label">hg38</span>
-                    Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }} {{ hg38Variant.ref }}&gt;{{
-                    hg38Variant.alt
-                    }}
-                  </h4>
-                </div>
-              }
-              @if (proteinInput) {
-                <div class="title">
-                  <h1 class="d-block">{{ proteinInput }}</h1>
-                  @if (gene) {
-                    <h4 class="d-inline-block" style="font-weight: 300; font-size: 0.95em">
-                      <span class="label">Gene</span>{{ gene.symbol }}
-                    </h4>
-                  }
-                  @if (variant) {
-                    <h4 class="d-inline-block ml-3" style="font-weight: 300; font-size: 0.95em">
-                      <span class="label">Variant</span>{{ variantString }}
-                    </h4>
-                  }
-                </div>
-              }
-            </div>
-            @if (geneCandidates && geneCandidates.length) {
-              <div class="col-12 mt-3">
-                <mat-form-field appearance="fill" style="margin-bottom: -1.25em">
-                  <mat-label>Genes contain Chr{{ variant.chr }}:{{ variant.pos }}</mat-label>
-                  <mat-select [value]="gene" (selectionChange)="onGeneSelectionChange($event)">
-                    @for (aGene of geneCandidates; track aGene) {
-                      <mat-option [value]="aGene">
-                        {{ aGene.symbol }}
-                      </mat-option>
-                    }
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            }
-            <div class="col-12 subtitle mt-3" [@toggle]>
-              @if (variant) {
-                <ng-container class="d-inline-block">
-                  <a
-                    class="d-inline mr-2"
-                    target="_blank"
-								[attr.href]="
-									'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' +
-									variant.chr +
-									':' +
-									variant.pos
-								"
-                    >
-                    <button matButton="filled" color="primary" class="mb-1 compact">
-                      <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                      UCSC Genome Browser
-                    </button>
-                  </a>
-                </ng-container>
-              }
-              @if (!variant && gene && gene.hg19Start && gene.hg19Stop) {
-                <ng-container
-                  class="d-inline-block"
-                  >
-                  <a
-                    class="d-inline mr-2"
-                    target="_blank"
-								[attr.href]="
-									'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' +
-									gene.chr +
-									'%3A' +
-									gene.hg19Start +
-									'-' +
-									gene.hg19Stop
-								"
-                    >
-                    <button matButton="filled" color="primary" class="mb-1 compact">
-                      <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                      UCSC Genome Browser
-                    </button>
-                  </a>
-                </ng-container>
-              }
-              @if (gene) {
-                <ng-container class="d-inline-block">
-                  @if (gene.hgncId) {
-                    <a
-                      class="d-inline mr-2"
-                      target="_blank"
-								[attr.href]="
-									'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene.hgncId
-								"
-                      >
-                      <button matButton="filled" color="primary" class="mb-1 compact">
-                        <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                        HGNC
-                      </button>
-                    </a>
-                  }
-                  <a
-                    class="d-inline mr-2"
-                    target="_blank"
-                    [attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId"
-                    >
-                    <button matButton="filled" color="primary" class="mb-1 compact">
-                      <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                      NCBI Gene
-                    </button>
-                  </a>
-                  <a
-                    class="d-inline mr-2"
-                    target="_blank"
-								[attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol"
-							>
-								<button matButton="filled" color="primary" class="mb-1 compact">
-									<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-									MyGene2
-								</button>
-							</a>
+	<div
+		class="sidenav-content flex-grow-1 flex-column d-flex"
+		[class]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
+	>
+		<div>
+			<app-navbar showSearch="true" showMenuButton="true" />
+		</div>
+		<div class="flex-grow-1" style="overflow-x: hidden; overflow-y: auto">
+			<div id="TOP"></div>
+			@if (gene !== null || variant) {
+				<div class="container-fluid py-5 px-md-5">
+					<!-- Gene, Input information starts -->
+					<div class="row">
+						<div class="col-12">
+							@if (!proteinInput) {
+								<div class="title">
+									@if (geneEntrezId && gene) {
+										<h1>{{ gene.symbol }}</h1>
+									}
+									@if (geneEntrezId && variant) {
+										<h1>&nbsp;/&nbsp;</h1>
+									}
+									@if (variant) {
+										<h1>{{ variantString }}</h1>
+									}
+									@if (variantInput && variantInput.indexOf(':c.') != -1) {
+										<h1>&nbsp;({{ variantInput }})</h1>
+									}
+								</div>
+							}
+							@if (hg38Variant) {
+								<div class="subtitle">
+									<h4>
+										<span class="label">hg38</span>
+										Chr{{ hg38Variant.chr }}:{{ hg38Variant.pos }} {{ hg38Variant.ref }}&gt;{{
+											hg38Variant.alt
+										}}
+									</h4>
+								</div>
+							}
+							@if (proteinInput) {
+								<div class="title">
+									<h1 class="d-block">{{ proteinInput }}</h1>
+									@if (gene) {
+										<h4 class="d-inline-block" style="font-weight: 300; font-size: 0.95em">
+											<span class="label">Gene</span>{{ gene.symbol }}
+										</h4>
+									}
+									@if (variant) {
+										<h4 class="d-inline-block ml-3" style="font-weight: 300; font-size: 0.95em">
+											<span class="label">Variant</span>{{ variantString }}
+										</h4>
+									}
+								</div>
+							}
+						</div>
+						@if (geneCandidates && geneCandidates.length) {
+							<div class="col-12 mt-3">
+								<mat-form-field appearance="fill" style="margin-bottom: -1.25em">
+									<mat-label>Genes contain Chr{{ variant.chr }}:{{ variant.pos }}</mat-label>
+									<mat-select [value]="gene" (selectionChange)="onGeneSelectionChange($event)">
+										@for (aGene of geneCandidates; track aGene) {
+											<mat-option [value]="aGene">
+												{{ aGene.symbol }}
+											</mat-option>
+										}
+									</mat-select>
+								</mat-form-field>
+							</div>
+						}
+						<div class="col-12 subtitle mt-3" [@toggle]>
+							@if (variant) {
+								<ng-container class="d-inline-block">
+									<a
+										class="d-inline mr-2"
+										target="_blank"
+										[attr.href]="
+											'http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' +
+											variant.chr +
+											':' +
+											variant.pos
+										"
+									>
+										<button matButton="filled" color="primary" class="mb-1 compact">
+											<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+											UCSC Genome Browser
+										</button>
+									</a>
+								</ng-container>
+							}
+							@if (!variant && gene && gene.hg19Start && gene.hg19Stop) {
+								<ng-container class="d-inline-block">
+									<a
+										class="d-inline mr-2"
+										target="_blank"
+										[attr.href]="
+											'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg19&position=chr' +
+											gene.chr +
+											'%3A' +
+											gene.hg19Start +
+											'-' +
+											gene.hg19Stop
+										"
+									>
+										<button matButton="filled" color="primary" class="mb-1 compact">
+											<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+											UCSC Genome Browser
+										</button>
+									</a>
+								</ng-container>
+							}
+							@if (gene) {
+								<ng-container class="d-inline-block">
+									@if (gene.hgncId) {
+										<a
+											class="d-inline mr-2"
+											target="_blank"
+											[attr.href]="
+												'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' +
+												gene.hgncId
+											"
+										>
+											<button matButton="filled" color="primary" class="mb-1 compact">
+												<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+												HGNC
+											</button>
+										</a>
+									}
+									<a
+										class="d-inline mr-2"
+										target="_blank"
+										[attr.href]="'https://www.ncbi.nlm.nih.gov/gene/' + gene.entrezId"
+									>
+										<button matButton="filled" color="primary" class="mb-1 compact">
+											<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+											NCBI Gene
+										</button>
+									</a>
+									<a
+										class="d-inline mr-2"
+										target="_blank"
+										[attr.href]="'https://mygene2.org/MyGene2/variantsbygene?gene=' + gene.symbol"
+									>
+										<button matButton="filled" color="primary" class="mb-1 compact">
+											<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+											MyGene2
+										</button>
+									</a>
 
-							@if (gene.xref?.ensemblId?.length) {
-<a
-								class="d-inline mr-2"
-								target="_blank"
-							
-								[attr.href]="
-									'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' +
-									gene.xref.ensemblId
-								"
-							>
-								<button matButton="filled" color="primary" class="mb-1 compact">
-									<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-									Ensembl
-								</button>
-							</a>
-}
+									@if (gene.xref?.ensemblId?.length) {
+										<a
+											class="d-inline mr-2"
+											target="_blank"
+											[attr.href]="
+												'https://useast.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=' +
+												gene.xref.ensemblId
+											"
+										>
+											<button matButton="filled" color="primary" class="mb-1 compact">
+												<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+												Ensembl
+											</button>
+										</a>
+									}
 
-							@if (gene.uniprotKBId && gene.uniprotKBId.length) {
-<a
-								class="d-inline mr-2"
-								target="_blank"
-							
-								[attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId"
-                      >
-                      <button matButton="filled" color="primary" class="mb-1 compact">
-                        <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                        Uniprot
-                      </button>
-                    </a>
-                  }
-                  <a
-                    class="d-inline mr-2"
-                    target="_blank"
-								[attr.href]="
-									'https://cellxgene.cziscience.com/gene-expression?ver=2&genes=' + gene.symbol
-								"
-                    >
-                    <button matButton="filled" color="primary" class="mb-1 compact">
-                      <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                      CZ CELLxGENE Discover
-                    </button>
-                  </a>
-                  @if (gene.xref?.ensemblId) {
-                    <a
-                      class="d-inline mr-2"
-                      target="_blank"
-                      [attr.href]="'https://www.proteinatlas.org/' + gene.uniprotKBId"
-                      >
-                      <button matButton="filled" color="primary" class="mb-1 compact">
-                        <mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
-                        The Human Protein Atlas
-                      </button>
-                    </a>
-                  }
-                </ng-container>
-              }
-            </div>
-            @if (gene) {
-              <div class="col-12 subtitle mt-2" [@toggle]>
-                <h4>
-                  <span class="label">Gene Name</span>
-                  {{ gene.name }}
-                </h4>
-                @if (gene['alias']) {
-                  <h4 [@toggle]>
-                    <span class="label">Gene Aliases</span>
-                    {{ gene.alias.join(', ') }}
-                  </h4>
-                }
-              </div>
-            }
-            @if (variant) {
-              <div class="col-12">
-                <app-forward-annotation [variant]="variant" />
-              </div>
-            }
-            @if (gene && gene.entrezSummary) {
-              <div class="col-12 mt-3" [@toggle]>
-                <h4 class="m-0 title">Entrez Summary of {{ gene.symbol }}</h4>
-                <p class="mt-3 mb-0">{{ gene.entrezSummary }}</p>
-              </div>
-            }
-          </div>
-          <!-- Gene, Input information ends -->
-          <!-- OMIM starts -->
-          @if (geneLoading || gene) {
-            <div class="row section mt-5" id="OMIM" [@toggle]>
-              <div class="col-12" [class.skeleton]="omimLoading">
-                <h2 class="mb-1 text-uppercase">Disease Data</h2>
-                @if (gene) {
-                  <app-omim [gene]="gene" [loading]="omimLoading" [data]="omimData" />
-                }
-              </div>
-            </div>
-          }
-          <!-- OMIM ends -->
-          <!-- dbNSFP starts -->
-          @if (!geneLoading && variant) {
-            <div class="row section mt-5" id="DbNSFP" [@toggle]>
-              <div class="col-12">
-                <h2 class="mb-1 text-uppercase">Disease Data</h2>
-                <app-dbnsfp [variant]="variant" />
-              </div>
-            </div>
-          }
-          <!-- dbNSFP ends -->
-          <!-- ClinVar starts -->
-          @if (!geneLoading && gene) {
-            <div class="row section mt-5" id="ClinVar" [@toggle]>
-              <div class="col-12">
-                <h2 class="mb-1 text-uppercase">Disease Data</h2>
-                <app-clinvar [gene]="gene" [variant]="variant" />
-              </div>
-            </div>
-          }
-          <!-- ClinVar ends -->
-          <!-- Geno2MP starts -->
-          @if (!geneLoading) {
-            <div class="row section mt-5" id="Geno2MP" [@toggle]>
-              <div class="col-12">
-                <h2 class="mb-1 text-uppercase">Disease Data</h2>
-                <app-geno2mp [gene]="gene" [variant]="variant" />
-              </div>
-            </div>
-          }
-          <!-- Geno2MP ends -->
-          <!-- DECIPHER starts -->
-          @if (!geneLoading) {
-            <div class="row section mt-5" id="DECIPHER" [@toggle]>
-              <div class="col-12">
-                <h2 class="mb-1 text-uppercase">Disease Data</h2>
-                <app-decipher-disease [gene]="gene" [variant]="variant" />
-              </div>
-            </div>
-          }
-          <!-- DECIPHER ends -->
-          <mat-divider class="mt-5" />
-          <!-- gnomAD starts -->
-          <div class="row section mt-5" id="GnomAD">
-            <div class="col-12">
-              <h2 class="mb-1 text-uppercase">Control Data</h2>
-              <h3 class="mb-0">gnomAD</h3>
-            </div>
-            <!-- gnomAD variant -->
-            @if (variant) {
-              <div class="col-12 mt-3" [@toggle]>
-                <h4 class="mt-0 mb-3 d-inline-block align-middle">
-                  Population Allele Frequencies of {{ variantString }} from gnomAD
-                </h4>
-                <a
-                  class="mb-3 d-inline-block ml-3 align-middle"
-							href="https://gnomad.broadinstitute.org/variant/{{ variant.chr }}-{{ variant.pos }}-{{
-								variant.ref
-							}}-{{ variant.alt }}?dataset=gnomad_r2_1"
-                  target="_blank"
-                  >
-                  <button mat-button color="primary">
-                    <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                    More on gnomAD
-                  </button>
-                </a>
-                <app-gnom-ad [variant]="variant" />
-              </div>
-            }
-            <!-- gnomAD gene -->
-            @if (!geneLoading && gene) {
-              <div class="col-12 mt-3" [@toggle]>
-                <h4 class="mt-0 mb-3 d-inline-block align-middle">
-                  Control Population Summary of {{ gene.symbol }} from gnomAD
-                </h4>
-                @if (gene && gene.xref && gene.xref.ensemblId) {
-                  <a
-                    class="mb-3 d-inline-block ml-3 align-middle"
-                    href="https://gnomad.broadinstitute.org/gene/{{ gene.xref.ensemblId }}?dataset=gnomad_r2_1"
-                    target="_blank"
-                    >
-                    <button mat-button color="primary">
-                      <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                      More on gnomAD
-                    </button>
-                  </a>
-                }
-                <app-gnom-ad-gene [gene]="gene" />
-              </div>
-            }
-          </div>
-          <!-- gnomAD ends -->
-          <!-- DGV starts -->
-          @if (!geneLoading && gene) {
-            <div class="row section mt-5" id="DGV" [@toggle]>
-              <div class="col-12">
-                <h2 class="mb-1 text-uppercase">Control Data</h2>
-                @if (gene) {
-                  <app-dgv [gene]="gene" />
-                }
-              </div>
-            </div>
-          }
-          <!-- DGV ends -->
-          <!-- DECIPHER Control starts -->
-          @if (!geneLoading && gene) {
-            <div class="row section mt-5" id="DECIPHER-Control" [@toggle]>
-              <div class="col-12">
-                <h2 class="mb-1 text-uppercase">Control Data</h2>
-                <app-decipher [variant]="variant" [gene]="gene" />
-              </div>
-            </div>
-          }
-          <!-- DECIPHER Control ends -->
-          <!-- DIOPT Ortholog starts -->
-          <div class="row section" id="orthologs">
-            @if (!geneLoading && gene && !orthologsLoading) {
-              <div class="col-12 mt-5" [@toggle]>
-                <app-orthologs [gene]="gene" [data]="orthologs" />
-              </div>
-            }
-          </div>
-          <!-- DIOPT Ortholog ends -->
-          @if (!geneLoading && gene) {
-            <div class="row section mt-5" id="expression" [@toggle]>
-              <div class="col-12">
-                <app-gtex-boxplot [gene]="gene" />
-              </div>
-              <div class="col-12 mt-5">
-                <app-agr-expression [gene]="gene" />
-              </div>
-            </div>
-          }
-          @if (!geneLoading && gene && !orthologsLoading) {
-            <div
-              class="row section mt-5"
-              id="phenotypes"
-              [@toggle]
-              >
-              <div class="col-12">
-                <app-phenotypes [gene]="gene" [orthologs]="orthologs" />
-              </div>
-            </div>
-          }
-          @if (!geneLoading && gene && !orthologsLoading) {
-            <div
-              class="row section mt-5"
-              id="gene-ontology"
-              [@toggle]
-              >
-              <div class="col-12">
-                <h3 class="m-0">Gene Ontology</h3>
-                @if (gene) {
-                  <app-gene-ontology [gene]="gene" [orthologs]="orthologs" />
-                }
-              </div>
-            </div>
-          }
-          <div class="row section mt-5" id="primate" [@toggle]>
-            <div class="col-12">
-              @if (!geneLoading) {
-                <app-primate [variant]="variant" [gene]="gene" />
-              }
-            </div>
-          </div>
-          @if (!geneLoading && gene) {
-            <div [@toggle]>
-              <div class="row section mt-5" id="alignment">
-                <!-- SMART Domain starts -->
-                <div class="col-12">
-                  <app-smart-protein-domain [gene]="gene" />
-                </div>
-                <!-- SMART Domain ends -->
-                <!-- Alignment starts -->
-                @if (!smallScreen) {
-                  <div class="col-12 mt-5">
-                    <app-diopt-alignment [gene]="gene" />
-                  </div>
-                }
-              </div>
-              <!-- Alignment ends -->
-              <!-- PPI starts -->
-              <div class="row section mt-5" id="ppi">
-                <div class="col-12">
-                  <h3 class="m-0">
-                    Protein Interactions
-                    <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle">
-                      Beta
-                    </span>
-                  </h3>
-                  @if (ppiLoading) {
-                    <mat-progress-bar mode="indeterminate" class="w-100" />
-                  }
-                  @if (!ppiLoading && ppiData && ppiData.length) {
-                    <app-ppi [gene]="gene"
-                      [data]="ppiData"
-                      />
-                  }
-                  @if (!ppiLoading && (!ppiData || !ppiData.length)) {
-                    <p>
-                      No protein interaction data available
-                    </p>
-                  }
-                </div>
-              </div>
-              <!-- PPI ends -->
-              <!-- Protein structure starts -->
-              @if (!smallScreen) {
-                <div class="row section mt-5" id="protein-structure">
-                  <div class="col-12">
-                    <h3 class="mt-0 d-block">Human Protein Structure</h3>
-                  </div>
-                  <div class="col-12 mt-3">
-                    <app-pdbe [entrezId]="gene.entrezId" />
-                  </div>
-                  <!-- Alphafold starts -->
-                  <div class="col-12">
-                    <h4 class="mt-0 mb-3 d-inline-block">
-                      Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
-                      <span class="badge badge-primary ml-1" style="font-size: 0.4em; vertical-align: middle">
-                        Beta
-                      </span>
-                    </h4>
-                    @if (gene.uniprotKBId && gene.uniprotKBId.length) {
-                      <a
-                        class="d-inline-block align-middle"
-                        [attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
-                        target="_blank"
-                        >
-                        <button mat-button color="primary">
-                          <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-                          More on AlphaFold Protein Structure Database
-                        </button>
-                      </a>
-                    }
-                  </div>
-                  <div class="col-12 mt-3">
-                    @if (gene.uniprotKBId && gene.uniprotKBId.length) {
-                      <app-human-protein-structure
-                        [uniprotId]="gene.uniprotKBId"
-                        />
-                    }
-                    @if (!gene.uniprotKBId || !gene.uniprotKBId.length) {
-                      <p>No protein structure available</p>
-                    }
-                  </div>
-                  <!-- Alphafold ends -->
-                </div>
-              }
-              <!-- Protein structure ends -->
-              <!-- Pharos starts -->
-              <div class="row section mt-5" id="pharos">
-                <div class="col-12">
-                  <app-pharos [gene]="gene" />
-                </div>
-              </div>
-              <!-- pharos control ends -->
-              <!-- Collaboration starts -->
-              <div class="row section mt-5" id="modelmatcher">
-                <div class="col-12">
-                  @if (!geneLoading) {
-                    <app-modelmatcher [gene]="gene" />
-                  }
-                </div>
-              </div>
-              <!-- Collaboration ends -->
-            </div>
-          }
-        </div>
-      }
-    </div>
-  </div>
-  @if (!smallScreen) {
-    <div
-      class="sidenav-container"
-      [class]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }"
-      >
-      <app-sidenav [variant]="variantString"
-        [gene]="gene"
-        [sidenavOpened]="sidenavOpened"
-        (change)="toggleSidenav($event)"
-        [smallScreen]="smallScreen"
-        />
-    </div>
-  }
+									@if (gene.uniprotKBId && gene.uniprotKBId.length) {
+										<a
+											class="d-inline mr-2"
+											target="_blank"
+											[attr.href]="'https://www.uniprot.org/uniprotkb/' + gene.uniprotKBId"
+										>
+											<button matButton="filled" color="primary" class="mb-1 compact">
+												<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+												Uniprot
+											</button>
+										</a>
+									}
+									<a
+										class="d-inline mr-2"
+										target="_blank"
+										[attr.href]="
+											'https://cellxgene.cziscience.com/gene-expression?ver=2&genes=' +
+											gene.symbol
+										"
+									>
+										<button matButton="filled" color="primary" class="mb-1 compact">
+											<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+											CZ CELLxGENE Discover
+										</button>
+									</a>
+									@if (gene.xref?.ensemblId) {
+										<a
+											class="d-inline mr-2"
+											target="_blank"
+											[attr.href]="'https://www.proteinatlas.org/' + gene.uniprotKBId"
+										>
+											<button matButton="filled" color="primary" class="mb-1 compact">
+												<mat-icon class="ml-0 mr-1 icon-18px">open_in_new</mat-icon>
+												The Human Protein Atlas
+											</button>
+										</a>
+									}
+								</ng-container>
+							}
+						</div>
+						@if (gene) {
+							<div class="col-12 subtitle mt-2" [@toggle]>
+								<h4>
+									<span class="label">Gene Name</span>
+									{{ gene.name }}
+								</h4>
+								@if (gene['alias']) {
+									<h4 [@toggle]>
+										<span class="label">Gene Aliases</span>
+										{{ gene.alias.join(', ') }}
+									</h4>
+								}
+							</div>
+						}
+						@if (variant) {
+							<div class="col-12">
+								<app-forward-annotation [variant]="variant" />
+							</div>
+						}
+						@if (gene && gene.entrezSummary) {
+							<div class="col-12 mt-3" [@toggle]>
+								<h4 class="m-0 title">Entrez Summary of {{ gene.symbol }}</h4>
+								<p class="mt-3 mb-0">{{ gene.entrezSummary }}</p>
+							</div>
+						}
+					</div>
+					<!-- Gene, Input information ends -->
+					<!-- OMIM starts -->
+					@if (geneLoading || gene) {
+						<div class="row section mt-5" id="OMIM" [@toggle]>
+							<div class="col-12" [class.skeleton]="omimLoading">
+								<h2 class="mb-1 text-uppercase">Disease Data</h2>
+								@if (gene) {
+									<app-omim [gene]="gene" [loading]="omimLoading" [data]="omimData" />
+								}
+							</div>
+						</div>
+					}
+					<!-- OMIM ends -->
+					<!-- dbNSFP starts -->
+					@if (!geneLoading && variant) {
+						<div class="row section mt-5" id="DbNSFP" [@toggle]>
+							<div class="col-12">
+								<h2 class="mb-1 text-uppercase">Disease Data</h2>
+								<app-dbnsfp [variant]="variant" />
+							</div>
+						</div>
+					}
+					<!-- dbNSFP ends -->
+					<!-- ClinVar starts -->
+					@if (!geneLoading && gene) {
+						<div class="row section mt-5" id="ClinVar" [@toggle]>
+							<div class="col-12">
+								<h2 class="mb-1 text-uppercase">Disease Data</h2>
+								<app-clinvar [gene]="gene" [variant]="variant" />
+							</div>
+						</div>
+					}
+					<!-- ClinVar ends -->
+					<!-- Geno2MP starts -->
+					@if (!geneLoading) {
+						<div class="row section mt-5" id="Geno2MP" [@toggle]>
+							<div class="col-12">
+								<h2 class="mb-1 text-uppercase">Disease Data</h2>
+								<app-geno2mp [gene]="gene" [variant]="variant" />
+							</div>
+						</div>
+					}
+					<!-- Geno2MP ends -->
+					<!-- DECIPHER starts -->
+					@if (!geneLoading) {
+						<div class="row section mt-5" id="DECIPHER" [@toggle]>
+							<div class="col-12">
+								<h2 class="mb-1 text-uppercase">Disease Data</h2>
+								<app-decipher-disease [gene]="gene" [variant]="variant" />
+							</div>
+						</div>
+					}
+					<!-- DECIPHER ends -->
+					<mat-divider class="mt-5" />
+					<!-- gnomAD starts -->
+					<div class="row section mt-5" id="GnomAD">
+						<div class="col-12">
+							<h2 class="mb-1 text-uppercase">Control Data</h2>
+							<h3 class="mb-0">gnomAD</h3>
+						</div>
+						<!-- gnomAD variant -->
+						@if (variant) {
+							<div class="col-12 mt-3" [@toggle]>
+								<h4 class="mt-0 mb-3 d-inline-block align-middle">
+									Population Allele Frequencies of {{ variantString }} from gnomAD
+								</h4>
+								<a
+									class="mb-3 d-inline-block ml-3 align-middle"
+									href="https://gnomad.broadinstitute.org/variant/{{ variant.chr }}-{{
+										variant.pos
+									}}-{{ variant.ref }}-{{ variant.alt }}?dataset=gnomad_r2_1"
+									target="_blank"
+								>
+									<button mat-button color="primary">
+										<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+										More on gnomAD
+									</button>
+								</a>
+								<app-gnom-ad [variant]="variant" />
+							</div>
+						}
+						<!-- gnomAD gene -->
+						@if (!geneLoading && gene) {
+							<div class="col-12 mt-3" [@toggle]>
+								<h4 class="mt-0 mb-3 d-inline-block align-middle">
+									Control Population Summary of {{ gene.symbol }} from gnomAD
+								</h4>
+								@if (gene && gene.xref && gene.xref.ensemblId) {
+									<a
+										class="mb-3 d-inline-block ml-3 align-middle"
+										href="https://gnomad.broadinstitute.org/gene/{{
+											gene.xref.ensemblId
+										}}?dataset=gnomad_r2_1"
+										target="_blank"
+									>
+										<button mat-button color="primary">
+											<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+											More on gnomAD
+										</button>
+									</a>
+								}
+								<app-gnom-ad-gene [gene]="gene" />
+							</div>
+						}
+					</div>
+					<!-- gnomAD ends -->
+					<!-- DGV starts -->
+					@if (!geneLoading && gene) {
+						<div class="row section mt-5" id="DGV" [@toggle]>
+							<div class="col-12">
+								<h2 class="mb-1 text-uppercase">Control Data</h2>
+								@if (gene) {
+									<app-dgv [gene]="gene" />
+								}
+							</div>
+						</div>
+					}
+					<!-- DGV ends -->
+					<!-- DECIPHER Control starts -->
+					@if (!geneLoading && gene) {
+						<div class="row section mt-5" id="DECIPHER-Control" [@toggle]>
+							<div class="col-12">
+								<h2 class="mb-1 text-uppercase">Control Data</h2>
+								<app-decipher [variant]="variant" [gene]="gene" />
+							</div>
+						</div>
+					}
+					<!-- DECIPHER Control ends -->
+					<!-- DIOPT Ortholog starts -->
+					<div class="row section" id="orthologs">
+						@if (!geneLoading && gene && !orthologsLoading) {
+							<div class="col-12 mt-5" [@toggle]>
+								<app-orthologs [gene]="gene" [data]="orthologs" />
+							</div>
+						}
+					</div>
+					<!-- DIOPT Ortholog ends -->
+					@if (!geneLoading && gene) {
+						<div class="row section mt-5" id="expression" [@toggle]>
+							<div class="col-12">
+								<app-gtex-boxplot [gene]="gene" />
+							</div>
+							<div class="col-12 mt-5">
+								<app-agr-expression [gene]="gene" />
+							</div>
+						</div>
+					}
+					@if (!geneLoading && gene && !orthologsLoading) {
+						<div class="row section mt-5" id="phenotypes" [@toggle]>
+							<div class="col-12">
+								<app-phenotypes [gene]="gene" [orthologs]="orthologs" />
+							</div>
+						</div>
+					}
+					@if (!geneLoading && gene && !orthologsLoading) {
+						<div class="row section mt-5" id="gene-ontology" [@toggle]>
+							<div class="col-12">
+								<h3 class="m-0">Gene Ontology</h3>
+								@if (gene) {
+									<app-gene-ontology [gene]="gene" [orthologs]="orthologs" />
+								}
+							</div>
+						</div>
+					}
+					<div class="row section mt-5" id="primate" [@toggle]>
+						<div class="col-12">
+							@if (!geneLoading) {
+								<app-primate [variant]="variant" [gene]="gene" />
+							}
+						</div>
+					</div>
+					@if (!geneLoading && gene) {
+						<div [@toggle]>
+							<div class="row section mt-5" id="alignment">
+								<!-- SMART Domain starts -->
+								<div class="col-12">
+									<app-smart-protein-domain [gene]="gene" />
+								</div>
+								<!-- SMART Domain ends -->
+								<!-- Alignment starts -->
+								@if (!smallScreen) {
+									<div class="col-12 mt-5">
+										<app-diopt-alignment [gene]="gene" />
+									</div>
+								}
+							</div>
+							<!-- Alignment ends -->
+							<!-- PPI starts -->
+							<div class="row section mt-5" id="ppi">
+								<div class="col-12">
+									<h3 class="m-0">
+										Protein Interactions
+										<span
+											class="badge badge-primary ml-1"
+											style="font-size: 0.4em; vertical-align: middle"
+										>
+											Beta
+										</span>
+									</h3>
+									@if (ppiLoading) {
+										<mat-progress-bar mode="indeterminate" class="w-100" />
+									}
+									@if (!ppiLoading && ppiData && ppiData.length) {
+										<app-ppi [gene]="gene" [data]="ppiData" />
+									}
+									@if (!ppiLoading && (!ppiData || !ppiData.length)) {
+										<p>No protein interaction data available</p>
+									}
+								</div>
+							</div>
+							<!-- PPI ends -->
+							<!-- Protein structure starts -->
+							@if (!smallScreen) {
+								<div class="row section mt-5" id="protein-structure">
+									<div class="col-12">
+										<h3 class="mt-0 d-block">Human Protein Structure</h3>
+									</div>
+									<div class="col-12 mt-3">
+										<app-pdbe [entrezId]="gene.entrezId" />
+									</div>
+									<!-- Alphafold starts -->
+									<div class="col-12">
+										<h4 class="mt-0 mb-3 d-inline-block">
+											Protein Structure Prediction from AlphaFold for {{ gene.symbol }}
+											<span
+												class="badge badge-primary ml-1"
+												style="font-size: 0.4em; vertical-align: middle"
+											>
+												Beta
+											</span>
+										</h4>
+										@if (gene.uniprotKBId && gene.uniprotKBId.length) {
+											<a
+												class="d-inline-block align-middle"
+												[attr.href]="'https://alphafold.ebi.ac.uk/entry/' + gene.uniprotKBId"
+												target="_blank"
+											>
+												<button mat-button color="primary">
+													<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+													More on AlphaFold Protein Structure Database
+												</button>
+											</a>
+										}
+									</div>
+									<div class="col-12 mt-3">
+										@if (gene.uniprotKBId && gene.uniprotKBId.length) {
+											<app-human-protein-structure [uniprotId]="gene.uniprotKBId" />
+										}
+										@if (!gene.uniprotKBId || !gene.uniprotKBId.length) {
+											<p>No protein structure available</p>
+										}
+									</div>
+									<!-- Alphafold ends -->
+								</div>
+							}
+							<!-- Protein structure ends -->
+							<!-- Pharos starts -->
+							<div class="row section mt-5" id="pharos">
+								<div class="col-12">
+									<app-pharos [gene]="gene" />
+								</div>
+							</div>
+							<!-- pharos control ends -->
+							<!-- Collaboration starts -->
+							<div class="row section mt-5" id="modelmatcher">
+								<div class="col-12">
+									@if (!geneLoading) {
+										<app-modelmatcher [gene]="gene" />
+									}
+								</div>
+							</div>
+							<!-- Collaboration ends -->
+						</div>
+					}
+				</div>
+			}
+		</div>
+	</div>
+	@if (!smallScreen) {
+		<div class="sidenav-container" [class]="{ 'sidenav-opened': sidenavOpened, 'sidenav-closed': !sidenavOpened }">
+			<app-sidenav
+				[variant]="variantString"
+				[gene]="gene"
+				[sidenavOpened]="sidenavOpened"
+				(change)="toggleSidenav($event)"
+				[smallScreen]="smallScreen"
+			/>
+		</div>
+	}
 </div>
 
 <app-scroll-top-button [right]="sidenavOpened ? '262px' : '84px'" />

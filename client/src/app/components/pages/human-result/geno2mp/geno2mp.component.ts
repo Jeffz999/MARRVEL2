@@ -21,22 +21,22 @@ import { Geno2mpGeneTableComponent } from './geno2mp-gene-table/geno2mp-gene-tab
 import { Geno2mpVariantTableComponent } from './geno2mp-variant-table/geno2mp-variant-table.component';
 
 @Component({
-    selector: 'app-geno2mp',
-    templateUrl: './geno2mp.component.html',
-    styleUrls: ['./geno2mp.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    MatSlideToggle,
-    MatTooltip,
-    Geno2mpGeneTableComponent,
-    Geno2mpVariantTableComponent
-],
+	selector: 'app-geno2mp',
+	templateUrl: './geno2mp.component.html',
+	styleUrls: ['./geno2mp.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [
+		MatButton,
+		MatIcon,
+		MatFormField,
+		MatLabel,
+		MatSelect,
+		MatOption,
+		MatSlideToggle,
+		MatTooltip,
+		Geno2mpGeneTableComponent,
+		Geno2mpVariantTableComponent,
+	],
 })
 export class Geno2mpComponent implements OnInit {
 	private api = inject(ApiService);
@@ -74,10 +74,10 @@ export class Geno2mpComponent implements OnInit {
 
 	ngOnInit() {
 		const variant = this.variant();
-  this.searchBy = variant && variant.chr ? 'variant' : 'gene';
+		this.searchBy = variant && variant.chr ? 'variant' : 'gene';
 
 		const gene = this.gene();
-  if (gene) {
+		if (gene) {
 			this.loading = true;
 			this.api
 				.getGeno2MPByGeneEntrezId(gene.entrezId)
@@ -99,7 +99,7 @@ export class Geno2mpComponent implements OnInit {
 		}
 
 		const variantValue = this.variant();
-  if (variantValue && variantValue.chr) {
+		if (variantValue && variantValue.chr) {
 			this.loading = true;
 			this.api
 				.getGeno2MPByVariant(variantValue)

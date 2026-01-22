@@ -1,88 +1,89 @@
 <div class="row">
-  <div class="col-12">
-    <h3 class="d-inline-block align-middle">Approved Drugs and Active Ligands from PHAROS</h3>
-    @if (gene()) {
-      <a
-        class="d-inline-block ml-3 align-middle"
-        target="_blank"
-			[attr.href]="'https://pharos.nih.gov/targets?q=' + gene().symbol"
-			target="_blank"
-		>
-			<button mat-button color="primary">
-				<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-				More on PHAROS
-			</button>
-		</a>
-}
+	<div class="col-12">
+		<h3 class="d-inline-block align-middle">Approved Drugs and Active Ligands from PHAROS</h3>
+		@if (gene()) {
+			<a
+				class="d-inline-block ml-3 align-middle"
+				target="_blank"
+				[attr.href]="'https://pharos.nih.gov/targets?q=' + gene().symbol"
+				target="_blank"
+			>
+				<button mat-button color="primary">
+					<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+					More on PHAROS
+				</button>
+			</a>
+		}
 	</div>
 </div>
 
 @if (!loading && (!data || !data.length)) {
-<div class="mt-3" [@toggle]>
-	<p class="m-0">No data found.</p>
-</div>
+	<div class="mt-3" [@toggle]>
+		<p class="m-0">No data found.</p>
+	</div>
 }
 
 @if (!loading && data && data.length) {
-<div class="row" [@toggle]>
-	<div class="col-12" #pharosColumn>
-		<mat-accordion class="w-100">
-			@for (target of data; track target; let idx = $index) {
-<div class="mt-3">
-				<p class="mt-0 mb-2 d-table">
-					<mat-icon class="d-table-cell align-top" matTooltip="MARRVEL's comment" matTooltipPosition="above"
-						>insert_comment</mat-icon
-					>
-					<span class="d-table-cell pl-2">
-						<strong>{{ getDevTrans(target.idgTDL, target.name) }}.</strong>
-						There are {{ (target.drugs || []).length || 0 }} approved drugs and
-						{{ (target.ligands || []).length }} active ligands found for this target.
-					</span>
-				</p>
+	<div class="row" [@toggle]>
+		<div class="col-12" #pharosColumn>
+			<mat-accordion class="w-100">
+				@for (target of data; track target; let idx = $index) {
+					<div class="mt-3">
+						<p class="mt-0 mb-2 d-table">
+							<mat-icon
+								class="d-table-cell align-top"
+								matTooltip="MARRVEL's comment"
+								matTooltipPosition="above"
+								>insert_comment</mat-icon
+							>
+							<span class="d-table-cell pl-2">
+								<strong>{{ getDevTrans(target.idgTDL, target.name) }}.</strong>
+								There are {{ (target.drugs || []).length || 0 }} approved drugs and
+								{{ (target.ligands || []).length }} active ligands found for this target.
+							</span>
+						</p>
 
-				<mat-expansion-panel [expanded]="idx === 0" class="w-100">
-					<mat-expansion-panel-header>
-						<mat-panel-title> {{ target.accession }}/{{ target.name }} </mat-panel-title>
-						<mat-panel-description>
-							{{ target.idgFamily }},&nbsp;
-							<span class="text-underline-dashed" [matTooltip]="idgDevLevTrans[target.idgTDL]">
-								{{ target.idgTDL }} </span
-							>, {{ (target.drugs || []).length || 0 }} approved drugs and
-							{{ (target.ligands || []).length }} active ligands found
-						</mat-panel-description>
-					</mat-expansion-panel-header>
+						<mat-expansion-panel [expanded]="idx === 0" class="w-100">
+							<mat-expansion-panel-header>
+								<mat-panel-title> {{ target.accession }}/{{ target.name }} </mat-panel-title>
+								<mat-panel-description>
+									{{ target.idgFamily }},&nbsp;
+									<span class="text-underline-dashed" [matTooltip]="idgDevLevTrans[target.idgTDL]">
+										{{ target.idgTDL }} </span
+									>, {{ (target.drugs || []).length || 0 }} approved drugs and
+									{{ (target.ligands || []).length }} active ligands found
+								</mat-panel-description>
+							</mat-expansion-panel-header>
 
-					<h3 class="mt-3 mb-3">Approved Drugs ({{ target.drugs ? target.drugs.length || 0 : 0 }})</h3>
-					@if (target.drugs && target.drugs.length) {
-<div style="margin-left: -24px; margin-right: -24px">
-						<app-pharos-ligand-table [ligands]="target.drugs" />
+							<h3 class="mt-3 mb-3">
+								Approved Drugs ({{ target.drugs ? target.drugs.length || 0 : 0 }})
+							</h3>
+							@if (target.drugs && target.drugs.length) {
+								<div style="margin-left: -24px; margin-right: -24px">
+									<app-pharos-ligand-table [ligands]="target.drugs" />
+								</div>
+							}
+							@if (!target.drugs || !target.drugs.length) {
+								<p>No drug found for {{ target.accession }}/{{ target.name }}</p>
+							}
+
+							<h3 class="mt-5 mb-3">
+								Active Ligands ({{ target.ligands ? target.ligands.length || 0 : 0 }})
+							</h3>
+							@if (target.ligands && target.ligands.length) {
+								<div style="margin-left: -24px; margin-right: -24px" class="mb-2">
+									<app-pharos-ligand-table [ligands]="target.ligands" />
+								</div>
+							}
+							@if (!target.ligands || !target.ligands.length) {
+								<p class="mt-0 mb-2">
+									No active ligand found for {{ target.accession }}/{{ target.name }}
+								</p>
+							}
+						</mat-expansion-panel>
 					</div>
-}
-					@if (!target.drugs || !target.drugs.length) {
-<p>
-						No drug found for {{ target.accession }}/{{ target.name }}
-					</p>
-}
-
-					<h3 class="mt-5 mb-3">Active Ligands ({{ target.ligands ? target.ligands.length || 0 : 0 }})</h3>
-					@if (target.ligands && target.ligands.length) {
-<div
-					
-						style="margin-left: -24px; margin-right: -24px"
-						class="mb-2"
-					>
-						<app-pharos-ligand-table [ligands]="target.ligands" />
-					</div>
-}
-					@if (!target.ligands || !target.ligands.length) {
-<p class="mt-0 mb-2">
-						No active ligand found for {{ target.accession }}/{{ target.name }}
-					</p>
-}
-				</mat-expansion-panel>
-			</div>
-}
-		</mat-accordion>
+				}
+			</mat-accordion>
+		</div>
 	</div>
-</div>
 }

@@ -6,16 +6,10 @@ import { MailchimpComponent } from '../../mailchimp/mailchimp.component';
 import { FooterComponent } from '../../footer/footer.component';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    imports: [
-        NavbarComponent,
-        MatIcon,
-        SearchBoxComponent,
-        MailchimpComponent,
-        FooterComponent,
-    ],
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss'],
+	imports: [NavbarComponent, MatIcon, SearchBoxComponent, MailchimpComponent, FooterComponent],
 })
 export class HomeComponent implements OnInit {
 	constructor() {}

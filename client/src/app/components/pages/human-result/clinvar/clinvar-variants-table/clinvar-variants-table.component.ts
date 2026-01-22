@@ -1,7 +1,19 @@
 import { Component, OnInit, OnChanges, input, viewChild } from '@angular/core';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import {
+	MatTableDataSource,
+	MatTable,
+	MatColumnDef,
+	MatHeaderCellDef,
+	MatHeaderCell,
+	MatCellDef,
+	MatCell,
+	MatHeaderRowDef,
+	MatHeaderRow,
+	MatRowDef,
+	MatRow,
+} from '@angular/material/table';
 
 import { HumanGene } from '../../../../../interfaces/gene';
 import { Variant } from '../../../../../interfaces/variant';
@@ -13,30 +25,30 @@ import { MatFormField, MatPrefix, MatInput } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
-    selector: 'app-clinvar-variants-table',
-    templateUrl: './clinvar-variants-table.component.html',
-    styleUrls: ['./clinvar-variants-table.component.scss'],
-    imports: [
-    MatSlideToggle,
-    FormsModule,
-    MatFormField,
-    MatIcon,
-    MatPrefix,
-    MatInput,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatSortHeader,
-    MatCellDef,
-    MatCell,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatPaginator
-],
+	selector: 'app-clinvar-variants-table',
+	templateUrl: './clinvar-variants-table.component.html',
+	styleUrls: ['./clinvar-variants-table.component.scss'],
+	imports: [
+		MatSlideToggle,
+		FormsModule,
+		MatFormField,
+		MatIcon,
+		MatPrefix,
+		MatInput,
+		MatTable,
+		MatSort,
+		MatColumnDef,
+		MatHeaderCellDef,
+		MatHeaderCell,
+		MatSortHeader,
+		MatCellDef,
+		MatCell,
+		MatHeaderRowDef,
+		MatHeaderRow,
+		MatRowDef,
+		MatRow,
+		MatPaginator,
+	],
 })
 export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 	readonly gene = input<HumanGene>(undefined);
@@ -67,11 +79,11 @@ export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 		this.dataSource.sortData = (data, sort: MatSort) => {
 			return data.sort((a, b) => {
 				const variant = this.variant();
-    const aMatching = variant && a.start <= variant.pos && variant.pos <= a.stop;
+				const aMatching = variant && a.start <= variant.pos && variant.pos <= a.stop;
 				const variantValue = this.variant();
-    const bMatching = variantValue && b.start <= variantValue.pos && variantValue.pos <= b.stop;
+				const bMatching = variantValue && b.start <= variantValue.pos && variantValue.pos <= b.stop;
 				const variantVal = this.variant();
-    if (variantVal) {
+				if (variantVal) {
 					// Exact match
 					if (a.start === a.stop && a.start === variantVal.pos) {
 						return -1;

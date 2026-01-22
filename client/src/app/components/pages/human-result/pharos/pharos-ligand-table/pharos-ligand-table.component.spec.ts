@@ -8,8 +8,8 @@ describe('PharosLigandTableComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [PharosLigandTableComponent],
-}).compileComponents();
+			imports: [PharosLigandTableComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

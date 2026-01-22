@@ -7,14 +7,11 @@ import { GeneService } from '../../../services/gene.service';
 import { HumanGene } from '../../../interfaces/gene';
 import { NavbarComponent } from '../../navbar/navbar.component';
 
-
 @Component({
-    selector: 'app-human-search',
-    templateUrl: './human-search.component.html',
-    styleUrls: ['./human-search.component.scss'],
-    imports: [
-    NavbarComponent
-],
+	selector: 'app-human-search',
+	templateUrl: './human-search.component.html',
+	styleUrls: ['./human-search.component.scss'],
+	imports: [NavbarComponent],
 })
 export class HumanSearchComponent implements OnInit {
 	private route = inject(ActivatedRoute);

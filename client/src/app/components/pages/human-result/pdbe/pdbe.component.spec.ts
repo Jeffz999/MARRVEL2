@@ -8,8 +8,8 @@ describe('PdbeComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [PdbeComponent],
-}).compileComponents();
+			imports: [PdbeComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

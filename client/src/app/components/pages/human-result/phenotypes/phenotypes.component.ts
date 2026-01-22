@@ -8,16 +8,12 @@ import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
-
 @Component({
-    selector: 'app-phenotypes',
-    templateUrl: './phenotypes.component.html',
-    styleUrls: ['./phenotypes.component.scss'],
-    animations: [Animations.toggle],
-    imports: [
-    MatTooltip,
-    MatSlideToggle
-],
+	selector: 'app-phenotypes',
+	templateUrl: './phenotypes.component.html',
+	styleUrls: ['./phenotypes.component.scss'],
+	animations: [Animations.toggle],
+	imports: [MatTooltip, MatSlideToggle],
 })
 export class PhenotypesComponent implements OnInit {
 	readonly gene = input<HumanGene>(undefined);
@@ -38,7 +34,7 @@ export class PhenotypesComponent implements OnInit {
 
 	ngOnInit() {
 		const gene = this.gene();
-  if (gene) {
+		if (gene) {
 			this.phenotypes[9606] = this.phenotypes[9606] || [{ gene: gene, bestScore: true, phenotypes: null }];
 			if (gene.phenotypes && gene.phenotypes.length && gene.phenotypes[0].id) {
 				this.phenotypes[9606][0].phenotypes = {};
@@ -60,7 +56,7 @@ export class PhenotypesComponent implements OnInit {
 		}
 
 		const orthologs = this.orthologs();
-  if (orthologs && orthologs.length) {
+		if (orthologs && orthologs.length) {
 			for (const ortholog of orthologs) {
 				let relExists = false;
 				const taxonId = ortholog['taxonId2'];

@@ -5,13 +5,10 @@ import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'app-pdbe',
-    templateUrl: './pdbe.component.html',
-    styleUrls: ['./pdbe.component.scss'],
-    imports: [
-    MatIcon,
-    MatTooltip
-],
+	selector: 'app-pdbe',
+	templateUrl: './pdbe.component.html',
+	styleUrls: ['./pdbe.component.scss'],
+	imports: [MatIcon, MatTooltip],
 })
 export class PdbeComponent implements OnInit {
 	private apiService = inject(ApiService);

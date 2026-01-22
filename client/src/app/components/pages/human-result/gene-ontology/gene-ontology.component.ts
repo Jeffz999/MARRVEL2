@@ -1,7 +1,19 @@
 import { Component, OnInit, AfterViewInit, input, viewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortHeader } from '@angular/material/sort';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import {
+	MatTableDataSource,
+	MatTable,
+	MatColumnDef,
+	MatHeaderCellDef,
+	MatHeaderCell,
+	MatCellDef,
+	MatCell,
+	MatHeaderRowDef,
+	MatHeaderRow,
+	MatRowDef,
+	MatRow,
+} from '@angular/material/table';
 
 import { Animations } from '../../../../animations';
 
@@ -30,27 +42,27 @@ const NAMESPACE_TO_GOID = {
 };
 
 @Component({
-    selector: 'app-gene-ontology',
-    templateUrl: './gene-ontology.component.html',
-    styleUrls: ['./gene-ontology.component.scss'],
-    animations: [Animations.toggle],
-    imports: [
-    MatSlideToggle,
-    MatTooltip,
-    MatTable,
-    MatSort,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatSortHeader,
-    MatCellDef,
-    MatCell,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatPaginator
-],
+	selector: 'app-gene-ontology',
+	templateUrl: './gene-ontology.component.html',
+	styleUrls: ['./gene-ontology.component.scss'],
+	animations: [Animations.toggle],
+	imports: [
+		MatSlideToggle,
+		MatTooltip,
+		MatTable,
+		MatSort,
+		MatColumnDef,
+		MatHeaderCellDef,
+		MatHeaderCell,
+		MatSortHeader,
+		MatCellDef,
+		MatCell,
+		MatHeaderRowDef,
+		MatHeaderRow,
+		MatRowDef,
+		MatRow,
+		MatPaginator,
+	],
 })
 export class GeneOntologyComponent implements OnInit, AfterViewInit {
 	readonly gene = input<HumanGene>(undefined);
@@ -87,7 +99,7 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 	}
 	ngOnInit() {
 		const gene = this.gene();
-  if (gene) {
+		if (gene) {
 			this.gos = this.gos || {};
 			this.gos['human'] = { gos: {} };
 			if (gene.gos) {
@@ -103,7 +115,7 @@ export class GeneOntologyComponent implements OnInit, AfterViewInit {
 			}
 		}
 		const orthologs = this.orthologs();
-  if (orthologs && orthologs.length) {
+		if (orthologs && orthologs.length) {
 			this.visHeight = 200;
 			this.visHeightOnlyBest = 200;
 			this.gos = this.gos || {};

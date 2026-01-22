@@ -1,11 +1,10 @@
 import { Component, OnInit, input } from '@angular/core';
 
-
 @Component({
-    selector: 'app-rankscore-visual',
-    templateUrl: './rankscore-visual.component.html',
-    styleUrls: ['./rankscore-visual.component.scss'],
-    imports: [],
+	selector: 'app-rankscore-visual',
+	templateUrl: './rankscore-visual.component.html',
+	styleUrls: ['./rankscore-visual.component.scss'],
+	imports: [],
 })
 export class RankscoreVisualComponent implements OnInit {
 	readonly rankscore = input<number>(undefined);

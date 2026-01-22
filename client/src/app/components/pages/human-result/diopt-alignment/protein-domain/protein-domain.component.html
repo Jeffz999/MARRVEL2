@@ -1,50 +1,51 @@
 @if (data() && data().length) {
-  <table
-    class="w-100 mt-3"
-    mat-table
-    [dataSource]="dataSource"
-    matSort
-    matSortActive="domainStart"
-    matSortDirection="asc"
-    >
-    <ng-container matColumnDef="domainName">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Name</th>
-      <td mat-cell *matCellDef="let element">
-        <a
-          (click)="onDomainClick(element.domainStart, element.domainStop)"
-          matTooltip="Click to highlight on protein alignment"
-          >
-          {{ element.domainName }}
-        </a>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="domainStart">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Start</th>
-      <td mat-cell *matCellDef="let element">{{ element.domainStart }}</td>
-    </ng-container>
-    <ng-container matColumnDef="domainStop">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Stop</th>
-      <td mat-cell *matCellDef="let element">{{ element.domainStop }}</td>
-    </ng-container>
-    <ng-container matColumnDef="domainDescription">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Description</th>
-      <td mat-cell *matCellDef="let element">{{ element.domainDescription }}</td>
-    </ng-container>
-    <ng-container matColumnDef="proteinId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Protein ID</th>
-      <td mat-cell *matCellDef="let element">
-        <a [attr.href]="'https://www.ncbi.nlm.nih.gov/protein/' + element.proteinId" target="_blank">
-          {{ element.proteinId }}
-        </a>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+	<table
+		class="w-100 mt-3"
+		mat-table
+		[dataSource]="dataSource"
+		matSort
+		matSortActive="domainStart"
+		matSortDirection="asc"
+	>
+		<ng-container matColumnDef="domainName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Name</th>
+			<td mat-cell *matCellDef="let element">
+				<a
+					(click)="onDomainClick(element.domainStart, element.domainStop)"
+					matTooltip="Click to highlight on protein alignment"
+				>
+					{{ element.domainName }}
+				</a>
+			</td>
+		</ng-container>
+		<ng-container matColumnDef="domainStart">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Start</th>
+			<td mat-cell *matCellDef="let element">{{ element.domainStart }}</td>
+		</ng-container>
+		<ng-container matColumnDef="domainStop">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Stop</th>
+			<td mat-cell *matCellDef="let element">{{ element.domainStop }}</td>
+		</ng-container>
+		<ng-container matColumnDef="domainDescription">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Domain Description</th>
+			<td mat-cell *matCellDef="let element">{{ element.domainDescription }}</td>
+		</ng-container>
+		<ng-container matColumnDef="proteinId">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header>Protein ID</th>
+			<td mat-cell *matCellDef="let element">
+				<a [attr.href]="'https://www.ncbi.nlm.nih.gov/protein/' + element.proteinId" target="_blank">
+					{{ element.proteinId }}
+				</a>
+			</td>
+		</ng-container>
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+	</table>
 }
 
-<mat-paginator class="protein-domain"
-  [pageSizeOptions]="[5, 10, 20, data().length]"
-  [pageSize]="10"
-  [length]="data().length || 0"
-  />
+<mat-paginator
+	class="protein-domain"
+	[pageSizeOptions]="[5, 10, 20, data().length]"
+	[pageSize]="10"
+	[length]="data().length || 0"
+/>

@@ -8,8 +8,8 @@ describe('SmartProteinDomainComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [SmartProteinDomainComponent],
-}).compileComponents();
+			imports: [SmartProteinDomainComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

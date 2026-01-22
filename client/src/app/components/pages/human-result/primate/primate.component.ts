@@ -14,19 +14,11 @@ import { MatSelect, MatOption } from '@angular/material/select';
 import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatable.component';
 
 @Component({
-    selector: 'app-primate',
-    templateUrl: './primate.component.html',
-    styleUrls: ['./primate.component.scss'],
-    animations: [Animations.toggleInOut],
-    imports: [
-    MatTooltip,
-    MatIcon,
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    BasicDatatableComponent
-],
+	selector: 'app-primate',
+	templateUrl: './primate.component.html',
+	styleUrls: ['./primate.component.scss'],
+	animations: [Animations.toggleInOut],
+	imports: [MatTooltip, MatIcon, MatFormField, MatLabel, MatSelect, MatOption, BasicDatatableComponent],
 })
 export class PrimateComponent implements OnInit {
 	private apiService = inject(ApiService);
@@ -43,7 +35,7 @@ export class PrimateComponent implements OnInit {
 
 	ngOnInit() {
 		const variant = this.variant();
-  if (variant) {
+		if (variant) {
 			this.loading = true;
 			this.apiService.getPrimateByVariant(variant).subscribe(
 				(res: PrimateData) => {
@@ -63,7 +55,7 @@ export class PrimateComponent implements OnInit {
 		}
 
 		const gene = this.gene();
-  if (gene) {
+		if (gene) {
 			this.geneLoading = true;
 			this.apiService.getPrimateByGene(gene).subscribe(
 				(res) => {

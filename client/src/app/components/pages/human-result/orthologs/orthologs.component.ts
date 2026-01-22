@@ -11,15 +11,10 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'app-orthologs',
-    templateUrl: './orthologs.component.html',
-    styleUrls: ['./orthologs.component.scss'],
-    imports: [
-    MatButton,
-    MatIcon,
-    MatSlideToggle,
-    MatTooltip
-],
+	selector: 'app-orthologs',
+	templateUrl: './orthologs.component.html',
+	styleUrls: ['./orthologs.component.scss'],
+	imports: [MatButton, MatIcon, MatSlideToggle, MatTooltip],
 })
 export class OrthologsComponent implements OnInit {
 	readonly gene = input<HumanGene>(undefined);
@@ -41,7 +36,7 @@ export class OrthologsComponent implements OnInit {
 
 	ngOnInit() {
 		const data = this.data();
-  if (data && data.length) {
+		if (data && data.length) {
 			for (const row of data) {
 				this.taxonIdToOrthologs[row.taxonId2].push(row);
 			}

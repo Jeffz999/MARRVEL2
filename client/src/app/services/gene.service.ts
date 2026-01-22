@@ -12,7 +12,6 @@ import { environment } from '../../environments/environment';
 export class GeneService {
 	private http = inject(HttpClient);
 
-
 	searchBySymbol(keyword: string, taxonId?: number): Observable<any> {
 		const url = `${environment.apiHost}/data/gene/search`;
 		const params: any = { symbol: keyword };

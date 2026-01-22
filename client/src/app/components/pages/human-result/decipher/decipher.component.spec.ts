@@ -8,8 +8,8 @@ describe('DECIPHERComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [DECIPHERComponent],
-}).compileComponents();
+			imports: [DECIPHERComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

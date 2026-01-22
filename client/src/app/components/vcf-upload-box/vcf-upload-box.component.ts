@@ -1,6 +1,12 @@
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit, output, inject } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+	UntypedFormBuilder,
+	UntypedFormGroup,
+	UntypedFormControl,
+	FormsModule,
+	ReactiveFormsModule,
+} from '@angular/forms';
 
 import { Animations } from 'src/app/animations';
 import { Router } from '@angular/router';
@@ -11,23 +17,23 @@ import { MatIcon } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-    selector: 'app-vcf-upload-box',
-    templateUrl: './vcf-upload-box.component.html',
-    styleUrls: ['./vcf-upload-box.component.scss'],
-    animations: [Animations.fadeInOut],
-    imports: [
-    MatRadioGroup,
-    FormsModule,
-    MatRadioButton,
-    MatFormField,
-    ReactiveFormsModule,
-    MatError,
-    MatLabel,
-    MatInput,
-    MatIcon,
-    MatHint,
-    MatProgressBar
-],
+	selector: 'app-vcf-upload-box',
+	templateUrl: './vcf-upload-box.component.html',
+	styleUrls: ['./vcf-upload-box.component.scss'],
+	animations: [Animations.fadeInOut],
+	imports: [
+		MatRadioGroup,
+		FormsModule,
+		MatRadioButton,
+		MatFormField,
+		ReactiveFormsModule,
+		MatError,
+		MatLabel,
+		MatInput,
+		MatIcon,
+		MatHint,
+		MatProgressBar,
+	],
 })
 export class VcfUploadBoxComponent implements OnInit {
 	private api = inject(ApiService);

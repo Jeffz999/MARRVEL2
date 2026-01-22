@@ -1,5 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import {
+	MatTableDataSource,
+	MatTable,
+	MatColumnDef,
+	MatHeaderCellDef,
+	MatHeaderCell,
+	MatCellDef,
+	MatCell,
+	MatHeaderRowDef,
+	MatHeaderRow,
+	MatRowDef,
+	MatRow,
+} from '@angular/material/table';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -18,28 +30,28 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-    selector: 'app-batch',
-    templateUrl: './batch.component.html',
-    styleUrls: ['./batch.component.scss'],
-    animations: [Animations.toggleInOut, Animations.fadeInOut],
-    imports: [
-    NavbarComponent,
-    VcfUploadBoxComponent,
-    MatIcon,
-    MatProgressBar,
-    MatPaginator,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatCellDef,
-    MatCell,
-    MatTooltip,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow
-],
+	selector: 'app-batch',
+	templateUrl: './batch.component.html',
+	styleUrls: ['./batch.component.scss'],
+	animations: [Animations.toggleInOut, Animations.fadeInOut],
+	imports: [
+		NavbarComponent,
+		VcfUploadBoxComponent,
+		MatIcon,
+		MatProgressBar,
+		MatPaginator,
+		MatTable,
+		MatColumnDef,
+		MatHeaderCellDef,
+		MatHeaderCell,
+		MatCellDef,
+		MatCell,
+		MatTooltip,
+		MatHeaderRowDef,
+		MatHeaderRow,
+		MatRowDef,
+		MatRow,
+	],
 })
 export class BatchComponent implements OnInit {
 	private api = inject(ApiService);

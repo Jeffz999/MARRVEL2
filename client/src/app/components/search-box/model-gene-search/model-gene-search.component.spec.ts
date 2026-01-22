@@ -8,8 +8,8 @@ describe('ModelGeneSearchComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [ModelGeneSearchComponent],
-}).compileComponents();
+			imports: [ModelGeneSearchComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {

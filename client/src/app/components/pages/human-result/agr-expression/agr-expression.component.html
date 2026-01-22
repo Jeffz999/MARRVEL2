@@ -1,146 +1,152 @@
 <div class="w-100">
-  <h3 class="m-0 d-inline-block align-middle">
-    Expression of DIOPT Ortholog Genes of {{ gene() ? gene().symbol : '' }}
-    from AGR
-  </h3>
-  @if (gene() && gene().hgncId) {
-    <a
-      class="mb-3 d-inline-block ml-3 align-middle"
-      [attr.href]="'https://www.alliancegenome.org/gene/HGNC:' + gene().hgncId"
-      target="_blank"
-      >
-      <button mat-button color="primary">
-        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-        More on AGR
-      </button>
-    </a>
-  }
+	<h3 class="m-0 d-inline-block align-middle">
+		Expression of DIOPT Ortholog Genes of {{ gene() ? gene().symbol : '' }}
+		from AGR
+	</h3>
+	@if (gene() && gene().hgncId) {
+		<a
+			class="mb-3 d-inline-block ml-3 align-middle"
+			[attr.href]="'https://www.alliancegenome.org/gene/HGNC:' + gene().hgncId"
+			target="_blank"
+		>
+			<button mat-button color="primary">
+				<mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+				More on AGR
+			</button>
+		</a>
+	}
 </div>
 
 <div class="w-100 mt-3">
-  <mat-slide-toggle [checked]="showOnlyBest" (change)="showOnlyBest = !showOnlyBest" color="primary">
-    Show only best DIOPT<span
-    class="badge badge-secondary"
-    style="margin-left: 2px; font-size: 0.4em; vertical-align: middle"
-    >v8</span
-    >
-    score gene
-  </mat-slide-toggle>
+	<mat-slide-toggle [checked]="showOnlyBest" (change)="showOnlyBest = !showOnlyBest" color="primary">
+		Show only best DIOPT<span
+			class="badge badge-secondary"
+			style="margin-left: 2px; font-size: 0.4em; vertical-align: middle"
+			>v8</span
+		>
+		score gene
+	</mat-slide-toggle>
 </div>
 
 @if (data) {
-  <div class="ribbon-shrink ribbon-container agr">
-    <!-- MO icons, gene symbol, DIOPT score, best score column container -->
-    <div style="width: 180px">
-      <div class="ribbon-header-row" style="height: 177px; display: flex; align-items: flex-end">
-        <div class="ribbon-cell ribbon-org-icon-cell"></div>
-        <div class="ribbon-cell ribbon-gene-symbol-cell">Gene</div>
-        <div class="ribbon-cell ribbon-diopt-score-cell">DIOPT Score</div>
-        <div class="ribbon-cell ribbon-diopt-best-cell text-left pl-2">Best Score</div>
-      </div>
-      <!-- Human search term row -->
-      <div class="ribbon-header-row mt-1" style="width: 180px">
-        <div class="ribbon-cell ribbon-org-icon-cell">
-          <img [attr.src]="taxonIdToInfo[9606].icon" matTooltip="Human" />
-        </div>
-        <div class="ribbon-cell ribbon-gene-symbol-cell">
-          <a
-            [attr.href]="'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene().hgncId"
-            target="_blank"
-            class="text-nowrap"
-            >
-            {{ gene().symbol }}
-          </a>
-        </div>
-      </div>
-      <!-- MO rows -->
-      @for (taxonId of taxonIds; track taxonId) {
-        <div class="">
-          @for (row of data[taxonId]; track row) {
-            <div class="">
-              @if (!showOnlyBest || row.bestScore) {
-                <div class="ribbon-header-row" style="width: 180px" [@toggle]>
-                  <div class="ribbon-cell ribbon-org-icon-cell">
-                    <img [attr.src]="taxonIdToInfo[taxonId].icon" [matTooltip]="taxonIdToInfo[taxonId].name" />
-                  </div>
-                  <div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
-                    <a [attr.href]="row.url" target="_blank" class="text-nowrap">{{ row.symbol }}</a>
-                  </div>
-                  <div class="ribbon-cell ribbon-diopt-score-cell text-right">
-                    {{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}
-                  </div>
-                  <div class="ribbon-cell ribbon-diopt-best-cell text-center">
-                    <span [class.text-bold-blue]="row.bestScore">
-                      {{ row.bestScore ? 'Y' : 'N' }}
-                    </span>
-                  </div>
-                </div>
-              }
-            </div>
-          }
-        </div>
-      }
-    </div>
-    <!-- Expression term columns container -->
-    <div class="ribbon-scrollable-column-container">
-      <!-- Exp term header -->
-      <div class="ribbon-header-row" style="width: 1080px; margin-left: 2px">
-        @for (group of expressionTerms; track group) {
-          <div class="ribbon-col-group">
-            @for (term of group; track term) {
-              <div class="ribbon-cell ribbon-header-name-cell">
-                <span
-                  class="label"
-						[class]="{
-							'color-primary': term === hoverTerm || term === selected,
-							'font-weight-bold': term === selected,
-						}"
-                  >
-                  {{ term }}
-                </span>
-              </div>
-            }
-          </div>
-        }
-      </div>
-      <!-- Exp term body -->
-      <div class="ribbon-row mt-1" style="width: 1080px"><!-- human search term row --></div>
-      @for (taxonId of taxonIds; track taxonId) {
-        <div>
-          @for (row of data[taxonId]; track row) {
-            <div>
-              @if (!showOnlyBest || row.bestScore) {
-                <div class="ribbon-row" style="width: 1080px" [@toggle]>
-                  @for (group of expressionTerms; track group) {
-                    <div
-                      class="ribbon-col-group"
-                      (mouseleave)="mouseChange(null)"
-                      >
-                      @for (term of group; track term) {
-                        <div class="ribbon-cell-wrapper" (mouseenter)="mouseChange(term)">
-                          @if (row.expression[term]) {
-                            <div
-                              class="ribbon-cell bg-blue"
-                              [class.col-highlight]="term === hoverTerm"
-                              [matTooltip]="row.symbol + '-' + term + ': ' + row.expression[term]"
-                            ></div>
-                          }
-                          @if (!row.expression[term]) {
-                            <div
-                              class="ribbon-cell"
-                              [class.col-highlight]="term === hoverTerm"
-                            ></div>
-                          }
-                        </div>
-                      }
-                    </div>
-                  }
-                </div>
-              }
-            </div>
-          }
-        </div>
-      }
-    </div>
-  </div>
+	<div class="ribbon-shrink ribbon-container agr">
+		<!-- MO icons, gene symbol, DIOPT score, best score column container -->
+		<div style="width: 180px">
+			<div class="ribbon-header-row" style="height: 177px; display: flex; align-items: flex-end">
+				<div class="ribbon-cell ribbon-org-icon-cell"></div>
+				<div class="ribbon-cell ribbon-gene-symbol-cell">Gene</div>
+				<div class="ribbon-cell ribbon-diopt-score-cell">DIOPT Score</div>
+				<div class="ribbon-cell ribbon-diopt-best-cell text-left pl-2">Best Score</div>
+			</div>
+			<!-- Human search term row -->
+			<div class="ribbon-header-row mt-1" style="width: 180px">
+				<div class="ribbon-cell ribbon-org-icon-cell">
+					<img [attr.src]="taxonIdToInfo[9606].icon" matTooltip="Human" />
+				</div>
+				<div class="ribbon-cell ribbon-gene-symbol-cell">
+					<a
+						[attr.href]="
+							'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/HGNC:' + gene().hgncId
+						"
+						target="_blank"
+						class="text-nowrap"
+					>
+						{{ gene().symbol }}
+					</a>
+				</div>
+			</div>
+			<!-- MO rows -->
+			@for (taxonId of taxonIds; track taxonId) {
+				<div class="">
+					@for (row of data[taxonId]; track row) {
+						<div class="">
+							@if (!showOnlyBest || row.bestScore) {
+								<div class="ribbon-header-row" style="width: 180px" [@toggle]>
+									<div class="ribbon-cell ribbon-org-icon-cell">
+										<img
+											[attr.src]="taxonIdToInfo[taxonId].icon"
+											[matTooltip]="taxonIdToInfo[taxonId].name"
+										/>
+									</div>
+									<div class="ribbon-cell ribbon-gene-symbol-cell overflow-hidden">
+										<a [attr.href]="row.url" target="_blank" class="text-nowrap">{{
+											row.symbol
+										}}</a>
+									</div>
+									<div class="ribbon-cell ribbon-diopt-score-cell text-right">
+										{{ row.score }}/{{ taxonIdToInfo[row.taxonId].maxScore }}
+									</div>
+									<div class="ribbon-cell ribbon-diopt-best-cell text-center">
+										<span [class.text-bold-blue]="row.bestScore">
+											{{ row.bestScore ? 'Y' : 'N' }}
+										</span>
+									</div>
+								</div>
+							}
+						</div>
+					}
+				</div>
+			}
+		</div>
+		<!-- Expression term columns container -->
+		<div class="ribbon-scrollable-column-container">
+			<!-- Exp term header -->
+			<div class="ribbon-header-row" style="width: 1080px; margin-left: 2px">
+				@for (group of expressionTerms; track group) {
+					<div class="ribbon-col-group">
+						@for (term of group; track term) {
+							<div class="ribbon-cell ribbon-header-name-cell">
+								<span
+									class="label"
+									[class]="{
+										'color-primary': term === hoverTerm || term === selected,
+										'font-weight-bold': term === selected,
+									}"
+								>
+									{{ term }}
+								</span>
+							</div>
+						}
+					</div>
+				}
+			</div>
+			<!-- Exp term body -->
+			<div class="ribbon-row mt-1" style="width: 1080px"><!-- human search term row --></div>
+			@for (taxonId of taxonIds; track taxonId) {
+				<div>
+					@for (row of data[taxonId]; track row) {
+						<div>
+							@if (!showOnlyBest || row.bestScore) {
+								<div class="ribbon-row" style="width: 1080px" [@toggle]>
+									@for (group of expressionTerms; track group) {
+										<div class="ribbon-col-group" (mouseleave)="mouseChange(null)">
+											@for (term of group; track term) {
+												<div class="ribbon-cell-wrapper" (mouseenter)="mouseChange(term)">
+													@if (row.expression[term]) {
+														<div
+															class="ribbon-cell bg-blue"
+															[class.col-highlight]="term === hoverTerm"
+															[matTooltip]="
+																row.symbol + '-' + term + ': ' + row.expression[term]
+															"
+														></div>
+													}
+													@if (!row.expression[term]) {
+														<div
+															class="ribbon-cell"
+															[class.col-highlight]="term === hoverTerm"
+														></div>
+													}
+												</div>
+											}
+										</div>
+									}
+								</div>
+							}
+						</div>
+					}
+				</div>
+			}
+		</div>
+	</div>
 }

@@ -8,8 +8,8 @@ describe('PpiComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-    imports: [PpiComponent],
-}).compileComponents();
+			imports: [PpiComponent],
+		}).compileComponents();
 	}));
 
 	beforeEach(() => {
