@@ -1,199 +1,205 @@
-@import "../styles/variables";
+@import '../styles/variables';
 
-.ribbon, .ribbon-shrink {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
+.ribbon,
+.ribbon-shrink {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
 
-  .ribbon-scrollable-column-container {
-    overflow-x: auto;
-    height: fit-content;
-    padding-bottom: 8px;
-  }
-  .ribbon-cell.selected {
-    transform: translate(-1px, -1px);
-    box-shadow: 1px 1px 3px #afafaf;
-    filter: brightness(1.05);
-    transition: linear;
-  }
-  .ribbon-cell.bg-blue:hover {
-    background-color: #66c6be;
-    filter: brightness(1.05) !important;
-    transition: linear;
-  }
-  .ribbon-row:hover .ribbon-cell-wrapper,
-  .ribbon-cell-wrapper.mouseover {
-    filter: brightness(0.95);
-  }
+    .ribbon-scrollable-column-container {
+        overflow-x: auto;
+        height: fit-content;
+        padding-bottom: 8px;
+    }
+    .ribbon-cell.selected {
+        transform: translate(-1px, -1px);
+        box-shadow: 1px 1px 3px #afafaf;
+        filter: brightness(1.05);
+        transition: linear;
+    }
+    .ribbon-cell.bg-blue:hover {
+        background-color: #66c6be;
+        filter: brightness(1.05) !important;
+        transition: linear;
+    }
+    .ribbon-row:hover .ribbon-cell-wrapper,
+    .ribbon-cell-wrapper.mouseover {
+        filter: brightness(0.95);
+    }
 }
 
 .ribbon {
-  .ribbon-header-row, .ribbon-row {
-    height: 26px;
-  }
-  .ribbon-row {
-    .ribbon-cell-wrapper {
-      width: 26px;
-      height: 26px;
-      padding: 1px;
+    .ribbon-header-row,
+    .ribbon-row {
+        height: 26px;
     }
-    .ribbon-cell {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  .ribbon-header-row {
-    .ribbon-cell {
-      width: 26px;
-      height: 26px;
-      display: flex;
-
-      &.ribbon-header-img-cell {
-        align-items: center;
-        justify-content: center;
-        img {
-          width: 24px;
-          height: 24px;
-          margin: 1px;
-          filter: grayscale(1) brightness(1);
+    .ribbon-row {
+        .ribbon-cell-wrapper {
+            width: 26px;
+            height: 26px;
+            padding: 1px;
         }
-      }
-      &.ribbon-gene-symbol-cell {
-        width: 90px !important;
-      }
+        .ribbon-cell {
+            width: 24px;
+            height: 24px;
+        }
     }
-  }
+    .ribbon-header-row {
+        .ribbon-cell {
+            width: 26px;
+            height: 26px;
+            display: flex;
+
+            &.ribbon-header-img-cell {
+                align-items: center;
+                justify-content: center;
+                img {
+                    width: 24px;
+                    height: 24px;
+                    margin: 1px;
+                    filter: grayscale(1) brightness(1);
+                }
+            }
+            &.ribbon-gene-symbol-cell {
+                width: 90px !important;
+            }
+        }
+    }
 }
 
 .ribbon-shrink {
-  .ribbon-row {
-    height: 20px;
-    .ribbon-cell-wrapper {
-      width: 20px;
-      height: 20px;
-    }
-    .ribbon-cell {
-      width: 18px;
-      height: 18px;
-      margin: 1px;
-      &.ribbon-header-img-cell img {
-        width: 20px;
+    .ribbon-row {
         height: 20px;
-        filter: grayscale(100%);
-        -webkit-filter: grayscale(100%);
-        transition: linear 0.2s;
-        -webkit-transition: linear 0.2s;
-        &.accent {
-          filter: grayscale(0%) !important;
-          -webkit-filter: grayscale(0%) !important;
-          opacity: 1 !important;
-          transition: linear 0.2s;
-          -webkit-transition: linear 0.2s;
+        .ribbon-cell-wrapper {
+            width: 20px;
+            height: 20px;
         }
-      }
+        .ribbon-cell {
+            width: 18px;
+            height: 18px;
+            margin: 1px;
+            &.ribbon-header-img-cell img {
+                width: 20px;
+                height: 20px;
+                filter: grayscale(100%);
+                -webkit-filter: grayscale(100%);
+                transition: linear 0.2s;
+                -webkit-transition: linear 0.2s;
+                &.accent {
+                    filter: grayscale(0%) !important;
+                    -webkit-filter: grayscale(0%) !important;
+                    opacity: 1 !important;
+                    transition: linear 0.2s;
+                    -webkit-transition: linear 0.2s;
+                }
+            }
+        }
     }
-  }
-  .ribbon-header-row {
-    height: 20px;
-    .ribbon-cell {
-      width: 20px;
-      height: 20px;
-      &.ribbon-gene-symbol-cell {
-        width: 70px !important;
-      }
-      &.ribbon-org-icon-cell {
-        width: 20px;
+    .ribbon-header-row {
         height: 20px;
-        img {
-          width: 18px;
-          height: 18px;
+        .ribbon-cell {
+            width: 20px;
+            height: 20px;
+            &.ribbon-gene-symbol-cell {
+                width: 70px !important;
+            }
+            &.ribbon-org-icon-cell {
+                width: 20px;
+                height: 20px;
+                img {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+            &.ribbon-header-name-cell {
+                & > .label {
+                    display: block;
+                    text-transform: capitalize;
+                    transform: rotate(-45deg);
+                    -webkit-transform: rotate(-45deg);
+                    white-space: nowrap;
+                }
+            }
         }
-      }
-      &.ribbon-header-name-cell {
-        & > .label {
-          display: block;
-          text-transform: capitalize;
-          transform: rotate(-45deg);
-          -webkit-transform: rotate(-45deg);
-          white-space: nowrap;
-        }
-      }
     }
-  }
 }
 
-.ribbon-col-group, .ribbon-cell-wrapper, .ribbon-cell {
-  display: inline-block;
-  align-items: center;
+.ribbon-col-group,
+.ribbon-cell-wrapper,
+.ribbon-cell {
+    display: inline-block;
+    align-items: center;
 }
 .ribbon-col-group:not(:last-child),
 .ribbon-cell-wrapper.other,
 .ribbon-cell.other {
-  margin-right: 11px;
+    margin-right: 11px;
 }
 
 .agr .ribbon-scrollable-column-container {
-  padding-top: 156px;
+    padding-top: 156px;
 }
-.ribbon, .ribbon-shrink {
-  .ribbon-header-row > .ribbon-cell {
-    font-size: 12px;
-  }
-  .ribbon-header-row, ribbon-row {
-    .ribbon-header-name-cell {
-      display: inline-block !important;
+.ribbon,
+.ribbon-shrink {
+    .ribbon-header-row > .ribbon-cell {
+        font-size: 12px;
     }
-  }
-  .ribbon-header-row,
-  .ribbon-row {
-    display: flex;
-
-    .ribbon-cell.clickable:hover {
-      cursor: pointer;
-    }
-  }
-  .ribbon-header-row {
-    align-items: center;
-    .ribbon-cell {
-      font-size: 12px;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      &.ribbon-org-icon-cell {
-        padding: 1px;
-        img {
-          opacity: 0.35;
+    .ribbon-header-row,
+    ribbon-row {
+        .ribbon-header-name-cell {
+            display: inline-block !important;
         }
-      }
-      &.ribbon-org-name-cell {
-        width: 50px !important;
-      }
-      &.ribbon-gene-symbol-cell {
-        padding-left: 0.25rem;
-      }
-      &.ribbon-diopt-score-cell {
-        width: 50px !important;
-        text-align: right;
-        justify-content: end;
-      }
-      &.ribbon-diopt-best-cell {
-        width: 40px !important;
-        text-align: center;
-        justify-content: center;
-      }
     }
-  }
+    .ribbon-header-row,
+    .ribbon-row {
+        display: flex;
 
-  .ribbon-row {
-    .ribbon-cell {
-      background-color: #f3f3f3;
-      border-radius: 2px;
-      &.bg-blue {
-        background-color: $primary !important;
-      }
-      &.bg-gray {
-        background-color: #aaa !important;
-      }
+        .ribbon-cell.clickable:hover {
+            cursor: pointer;
+        }
     }
-  }
+    .ribbon-header-row {
+        align-items: center;
+        .ribbon-cell {
+            font-size: 12px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            &.ribbon-org-icon-cell {
+                padding: 1px;
+                img {
+                    opacity: 0.35;
+                }
+            }
+            &.ribbon-org-name-cell {
+                width: 50px !important;
+            }
+            &.ribbon-gene-symbol-cell {
+                padding-left: 0.25rem;
+            }
+            &.ribbon-diopt-score-cell {
+                width: 50px !important;
+                text-align: right;
+                justify-content: end;
+            }
+            &.ribbon-diopt-best-cell {
+                width: 40px !important;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    }
+
+    .ribbon-row {
+        .ribbon-cell {
+            background-color: #f3f3f3;
+            border-radius: 2px;
+            &.bg-blue {
+                background-color: $primary !important;
+            }
+            &.bg-gray {
+                background-color: #aaa !important;
+            }
+        }
+    }
 }

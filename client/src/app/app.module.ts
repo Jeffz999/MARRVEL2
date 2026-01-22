@@ -82,7 +82,7 @@ import { OrthologsComponent } from './components/pages/human-result/orthologs/or
 import { YoutubeDialogComponent } from './components/search-box/search-box.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { ClinvarVariantsTableComponent } from './components/pages/human-result/clinvar/clinvar-variants-table/clinvar-variants-table.component';
-import { ProteinViewerComponent} from './components/protein-viewer/protein-viewer.component';
+import { ProteinViewerComponent } from './components/protein-viewer/protein-viewer.component';
 import { HumanProteinStructureComponent } from './components/pages/human-result/human-protein-structure/human-protein-structure.component';
 import { PdbeComponent } from './components/pages/human-result/pdbe/pdbe.component';
 import { ForwardAnnotationComponent } from './components/pages/human-result/forward-annotation/forward-annotation.component';
@@ -151,7 +151,7 @@ import { HumanSearchComponent } from './components/pages/human-search/human-sear
         SmartProteinDomainComponent,
         ModelmatcherComponent,
         PpiComponent,
-        HumanSearchComponent
+        HumanSearchComponent,
     ],
     imports: [
         BrowserModule,
@@ -182,7 +182,7 @@ import { HumanSearchComponent } from './components/pages/human-search/human-sear
         MatCheckboxModule,
         MatRippleModule,
         MatSliderModule,
-        MatMenuModule
+        MatMenuModule,
     ],
     exports: [
         MatButtonModule,
@@ -208,9 +208,9 @@ import { HumanSearchComponent } from './components/pages/human-search/human-sear
         MatRippleModule,
         MatSliderModule,
         MatMenuModule,
-        HighlightSearch
+        HighlightSearch,
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -7,96 +7,91 @@ import { ApiService } from '../../services/api.service';
 import { MULTIGENE_EXAMPLE } from './multiple-genes-example';
 
 @Component({
-  standalone: false,
-  selector: 'app-multiple-gene-box',
-  templateUrl: './multiple-gene-box.component.html',
-  styleUrls: ['./multiple-gene-box.component.scss'],
+    standalone: false,
+    selector: 'app-multiple-gene-box',
+    templateUrl: './multiple-gene-box.component.html',
+    styleUrls: ['./multiple-gene-box.component.scss'],
 })
 export class MultipleGeneBoxComponent implements OnInit {
-  genes: object[] = [];
+    genes: object[] = [];
 
-  geneKeyword = '';
-  geneInputCtrl = new UntypedFormControl();
-  geneSuggestion = [];
-  selectedEntrezIds = {};
-  @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  showAutocomplete = false;
+    geneKeyword = '';
+    geneInputCtrl = new UntypedFormControl();
+    geneSuggestion = [];
+    selectedEntrezIds = {};
+    @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
+    @ViewChild('auto') matAutocomplete: MatAutocomplete;
+    showAutocomplete = false;
 
-  @Output() searchClick: EventEmitter< any > = new EventEmitter();
+    @Output() searchClick: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-    private api: ApiService
-  ) { }
+    constructor(private api: ApiService) {}
 
-  ngOnInit() {
-  }
+    ngOnInit() {}
 
-  onGeneInput(e) {
-    this.showAutocomplete = true;
-    this.geneKeyword = e.target.value;
-    if (this.geneKeyword) {
-      this.api.getGenesBySymbolPrefix(9606, this.geneKeyword)
-        .subscribe((res) => {
-          this.geneSuggestion = res.map(gene => {
-            gene.selected = (this.selectedEntrezIds[gene.entrezId] === true);
-            return gene;
-          });
-        });
-    } else {
-      this.geneSuggestion = [];
-    }
-  }
-
-  closeAutocomplete() {
-    this.showAutocomplete = false;
-  }
-
-  toggleGene(aGene) {
-    if (aGene.selected) {
-      this.removeGene(aGene);
-    } else {
-      this.addGene(aGene);
-    }
-  }
-
-  addGene(aGene) {
-    this.selectedEntrezIds[aGene.entrezId] = true;
-    this.genes.push(aGene);
-    aGene.selected = true;
-  }
-
-  removeGene(targetGene) {
-    let targetIdx = -1;
-    for (let i = 0; i < this.genes.length; ++i) {
-      const gene = this.genes[i];
-      if (targetGene['entrezId'] === gene['entrezId']) {
-        targetIdx = i;
-        break;
-      }
+    onGeneInput(e) {
+        this.showAutocomplete = true;
+        this.geneKeyword = e.target.value;
+        if (this.geneKeyword) {
+            this.api.getGenesBySymbolPrefix(9606, this.geneKeyword).subscribe((res) => {
+                this.geneSuggestion = res.map((gene) => {
+                    gene.selected = this.selectedEntrezIds[gene.entrezId] === true;
+                    return gene;
+                });
+            });
+        } else {
+            this.geneSuggestion = [];
+        }
     }
 
-    if (targetIdx >= 0) {
-      this.genes.splice(targetIdx, 1);
+    closeAutocomplete() {
+        this.showAutocomplete = false;
     }
-    targetGene.selected = false;
-    this.selectedEntrezIds[targetGene.entrezId] = false;
-    for (const gene of this.geneSuggestion) {
-      if (gene.entrezId === targetGene.entrezId) {
-        gene.selected = false;
-      }
+
+    toggleGene(aGene) {
+        if (aGene.selected) {
+            this.removeGene(aGene);
+        } else {
+            this.addGene(aGene);
+        }
     }
-  }
 
-  validateInput() {
-    return this.genes.length > 0;
-  }
+    addGene(aGene) {
+        this.selectedEntrezIds[aGene.entrezId] = true;
+        this.genes.push(aGene);
+        aGene.selected = true;
+    }
 
-  search() {
-    this.searchClick.emit(this.genes);
-  }
-  searchExample() {
-    this.searchClick.emit(MULTIGENE_EXAMPLE);
-  }
+    removeGene(targetGene) {
+        let targetIdx = -1;
+        for (let i = 0; i < this.genes.length; ++i) {
+            const gene = this.genes[i];
+            if (targetGene['entrezId'] === gene['entrezId']) {
+                targetIdx = i;
+                break;
+            }
+        }
 
+        if (targetIdx >= 0) {
+            this.genes.splice(targetIdx, 1);
+        }
+        targetGene.selected = false;
+        this.selectedEntrezIds[targetGene.entrezId] = false;
+        for (const gene of this.geneSuggestion) {
+            if (gene.entrezId === targetGene.entrezId) {
+                gene.selected = false;
+            }
+        }
+    }
+
+    validateInput() {
+        return this.genes.length > 0;
+    }
+
+    search() {
+        this.searchClick.emit(this.genes);
+    }
+    searchExample() {
+        this.searchClick.emit(MULTIGENE_EXAMPLE);
+    }
 }

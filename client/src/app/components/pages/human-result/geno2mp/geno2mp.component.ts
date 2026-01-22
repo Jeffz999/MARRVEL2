@@ -13,108 +13,116 @@ import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
 import { HPO_BROAD_TO_CAT } from '../../../../category';
 
 @Component({
-  standalone: false,
-  selector: 'app-geno2mp',
-  templateUrl: './geno2mp.component.html',
-  styleUrls: ['./geno2mp.component.scss'],
-  animations: [ Animations.toggleInOut ]
+    standalone: false,
+    selector: 'app-geno2mp',
+    templateUrl: './geno2mp.component.html',
+    styleUrls: ['./geno2mp.component.scss'],
+    animations: [Animations.toggleInOut],
 })
 export class Geno2mpComponent implements OnInit {
-  @Input() variant: Variant | null;
-  @Input() gene: HumanGene | null;
+    @Input() variant: Variant | null;
+    @Input() gene: HumanGene | null;
 
-  searchBy = 'gene';
+    searchBy = 'gene';
 
-  loading = false;
-  variantData: Geno2MPResult;
-  geneData: Geno2MPResult[];
+    loading = false;
+    variantData: Geno2MPResult;
+    geneData: Geno2MPResult[];
 
-  phenotypes: object;
-  phenotypeString: string;
+    phenotypes: object;
+    phenotypeString: string;
 
-  // For variant data
-  includeRelated = false;
-  affectedCount = 0;
+    // For variant data
+    includeRelated = false;
+    affectedCount = 0;
 
-  // For gene data
-  geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
-  varCategoryNames = [ 'Non-Coding', 'Synonymous/Unknown', 'Missense/Other Indel', 'Splice/Frameshift/Nonsense/Stop Loss' ];
-  varCategoriesVisible = {
-    'Non-Coding': false,
-    'Synonymous/Unknown': false,
-    'Missense/Other Indel': true,
-    'Splice/Frameshift/Nonsense/Stop Loss': true
-  };
+    // For gene data
+    geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
+    varCategoryNames = [
+        'Non-Coding',
+        'Synonymous/Unknown',
+        'Missense/Other Indel',
+        'Splice/Frameshift/Nonsense/Stop Loss',
+    ];
+    varCategoriesVisible = {
+        'Non-Coding': false,
+        'Synonymous/Unknown': false,
+        'Missense/Other Indel': true,
+        'Splice/Frameshift/Nonsense/Stop Loss': true,
+    };
 
-  constructor(
-    private api: ApiService
-  ) { }
+    constructor(private api: ApiService) {}
 
-  ngOnInit() {
-    this.searchBy = this.variant && this.variant.chr ? 'variant' : 'gene';
+    ngOnInit() {
+        this.searchBy = this.variant && this.variant.chr ? 'variant' : 'gene';
 
-    if (this.gene) {
-      this.loading = true;
-      this.api.getGeno2MPByGeneEntrezId(this.gene.entrezId)
-        .pipe(take(1))
-        .subscribe((res: Geno2MPResult[]) => {
-          res = res || [];
-          this.geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
-          for (let i = 0; i < res.length; ++i) {
-            const catNum = FUNCANNO_TO_CAT_NUM[res[i].funcAnno];
-            res[i]['categoryNum'] = catNum;
-            res[i]['category'] = CAT_NUM_TO_CAT_NAME[catNum];
-            res[i]['nHpoProfiles'] = res[i].hpoProfiles.length;
+        if (this.gene) {
+            this.loading = true;
+            this.api
+                .getGeno2MPByGeneEntrezId(this.gene.entrezId)
+                .pipe(take(1))
+                .subscribe((res: Geno2MPResult[]) => {
+                    res = res || [];
+                    this.geneSummary = { 0: 0, 1: 0, 2: 0, 3: 0 };
+                    for (let i = 0; i < res.length; ++i) {
+                        const catNum = FUNCANNO_TO_CAT_NUM[res[i].funcAnno];
+                        res[i]['categoryNum'] = catNum;
+                        res[i]['category'] = CAT_NUM_TO_CAT_NAME[catNum];
+                        res[i]['nHpoProfiles'] = res[i].hpoProfiles.length;
 
-            this.geneSummary[catNum] += res[i].hpoProfiles.length;
-          }
-          this.geneData = res;
-          this.loading = false;
-        });
-    }
-
-    if (this.variant && this.variant.chr) {
-      this.loading = true;
-      this.api.getGeno2MPByVariant(this.variant)
-        .pipe(take(1))
-        .subscribe((res: Geno2MPResult) => {
-          if (res && res.hpoProfiles) {
-            for (let i = 0; i < res.hpoProfiles.length; ++i) {
-              res.hpoProfiles[i]['broadTerm'] = res.hpoProfiles[i].broad.hpoTerm || '';
-              res.hpoProfiles[i]['mediumTerm'] = res.hpoProfiles[i].medium.hpoTerm || '';
-              res.hpoProfiles[i]['narrowTerm'] = res.hpoProfiles[i].narrow.hpoTerm || '';
-            }
-          }
-          this.variantData = res;
-          this.loading = false;
-          this.countPhenotypes([ this.variantData ]);
-        });
-    }
-  }
-
-  countPhenotypes(variants: Geno2MPResult[]) {
-    this.affectedCount = 0;
-    const phenotypes = {};
-    if (variants && variants.length) {
-      for (const variant of variants) {
-        if (variant && variant.hpoProfiles) {
-          for (const hpoProfile of variant.hpoProfiles) {
-            if (hpoProfile.affectedStatus === 'affected') {
-              ++this.affectedCount;
-              for (const hpoId of hpoProfile.broad.hpoIds) {
-                const catName = HPO_BROAD_TO_CAT[hpoId];
-                phenotypes[catName] = (phenotypes[catName] || 0) + 1;
-              }
-            }
-          }
+                        this.geneSummary[catNum] += res[i].hpoProfiles.length;
+                    }
+                    this.geneData = res;
+                    this.loading = false;
+                });
         }
-      }
-    }
-    this.phenotypes = phenotypes;
-    this.phenotypeString = Object.keys(this.phenotypes).join(', ');
-  }
 
-  onCategoryChange(catName, e: MatSlideToggleChange) {
-    this.varCategoriesVisible[catName] = e.checked;
-  }
+        if (this.variant && this.variant.chr) {
+            this.loading = true;
+            this.api
+                .getGeno2MPByVariant(this.variant)
+                .pipe(take(1))
+                .subscribe((res: Geno2MPResult) => {
+                    if (res && res.hpoProfiles) {
+                        for (let i = 0; i < res.hpoProfiles.length; ++i) {
+                            res.hpoProfiles[i]['broadTerm'] =
+                                res.hpoProfiles[i].broad.hpoTerm || '';
+                            res.hpoProfiles[i]['mediumTerm'] =
+                                res.hpoProfiles[i].medium.hpoTerm || '';
+                            res.hpoProfiles[i]['narrowTerm'] =
+                                res.hpoProfiles[i].narrow.hpoTerm || '';
+                        }
+                    }
+                    this.variantData = res;
+                    this.loading = false;
+                    this.countPhenotypes([this.variantData]);
+                });
+        }
+    }
+
+    countPhenotypes(variants: Geno2MPResult[]) {
+        this.affectedCount = 0;
+        const phenotypes = {};
+        if (variants && variants.length) {
+            for (const variant of variants) {
+                if (variant && variant.hpoProfiles) {
+                    for (const hpoProfile of variant.hpoProfiles) {
+                        if (hpoProfile.affectedStatus === 'affected') {
+                            ++this.affectedCount;
+                            for (const hpoId of hpoProfile.broad.hpoIds) {
+                                const catName = HPO_BROAD_TO_CAT[hpoId];
+                                phenotypes[catName] = (phenotypes[catName] || 0) + 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        this.phenotypes = phenotypes;
+        this.phenotypeString = Object.keys(this.phenotypes).join(', ');
+    }
+
+    onCategoryChange(catName, e: MatSlideToggleChange) {
+        this.varCategoriesVisible[catName] = e.checked;
+    }
 }

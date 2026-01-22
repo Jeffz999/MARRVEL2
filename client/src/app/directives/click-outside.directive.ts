@@ -2,23 +2,21 @@ import { Directive, Output, EventEmitter, ElementRef, HostListener } from '@angu
 
 /* tslint:disable:directive-selector */
 @Directive({
-  standalone: false,
-  selector: '[clickOutside]'
+    standalone: false,
+    selector: '[clickOutside]',
 })
 /* tslint:enable:directive-selector */
 export class ClickOutsideDirective {
+    constructor(private _elementRef: ElementRef) {}
 
-  constructor(private _elementRef: ElementRef) { }
+    @Output()
+    public clickOutside = new EventEmitter();
 
-  @Output()
-  public clickOutside = new EventEmitter();
-
-  @HostListener('document:click', ['$event.target'])
-  public onClick(targetElement) {
-    const clickedInside = this._elementRef.nativeElement.contains(targetElement);
-    if (!clickedInside) {
-      this.clickOutside.emit(null);
+    @HostListener('document:click', ['$event.target'])
+    public onClick(targetElement) {
+        const clickedInside = this._elementRef.nativeElement.contains(targetElement);
+        if (!clickedInside) {
+            this.clickOutside.emit(null);
+        }
     }
-  }
-
 }

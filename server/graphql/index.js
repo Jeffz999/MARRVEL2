@@ -19,5 +19,5 @@
  */
 
 module.exports = {
-  handler: require('./graphqlHandler'),
+    handler: require('./graphqlHandler'),
 };

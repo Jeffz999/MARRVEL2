@@ -1,80 +1,80 @@
 @import 'src/styles/variables';
 
 .summary .label {
-  font-size: 0.85em;
+    font-size: 0.85em;
 }
 .summary .data {
-  display: block;
-  padding-top: 0.2em;
-  font-weight: 400;
-  font-size: 1.8em;
+    display: block;
+    padding-top: 0.2em;
+    font-weight: 400;
+    font-size: 1.8em;
 }
 
 .stick-bottom {
-  position: absolute;
-  left: 16px;
-  bottom: 0px;
+    position: absolute;
+    left: 16px;
+    bottom: 0px;
 }
 
 .bar-chart {
-  height: 48px;
+    height: 48px;
 }
 .bar-chart .bar {
-  display: inline-flex;
-  margin: 0;
-  text-align: center;
-  height: 100%;
-  vertical-align: middle;
-  // overflow: hidden;
-  -webkit-box-pack: center !important;
-  justify-content: center !important;
-  -webkit-box-align: center !important;
-  align-items: center !important;
+    display: inline-flex;
+    margin: 0;
+    text-align: center;
+    height: 100%;
+    vertical-align: middle;
+    // overflow: hidden;
+    -webkit-box-pack: center !important;
+    justify-content: center !important;
+    -webkit-box-align: center !important;
+    align-items: center !important;
 }
 .bar-label-wrapper {
-  height: fit-content;
-  display: flex;
-  -webkit-box-align: center !important;
-  align-items: center !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-box-direction: normal !important;
-  flex-direction: column !important;
-  overflow: hidden;
+    height: fit-content;
+    display: flex;
+    -webkit-box-align: center !important;
+    align-items: center !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+    flex-direction: column !important;
+    overflow: hidden;
 }
 .bar-chart .bar:not(:last-child) {
-  border-right: solid 4px #ffffff;
+    border-right: solid 4px #ffffff;
 }
 .bar-chart .bar .bar-label,
 .bar-chart .bar .bar-value {
-  display: flex;
-  text-align: center;
-  z-index: 8888;
+    display: flex;
+    text-align: center;
+    z-index: 8888;
 }
 .bar-chart .bar .bar-label {
-  font-size: 0.7em;
-  line-height: 1em;
-  padding-top: 0.35em;
+    font-size: 0.7em;
+    line-height: 1em;
+    padding-top: 0.35em;
 }
 .bar-chart .bar .bar-value {
-  font-size: 1.2em;
-  font-weight: 500;
+    font-size: 1.2em;
+    font-weight: 500;
 }
 
 .bg-blue {
-  background-color: $primary-700;
+    background-color: $primary-700;
 }
 
 .bg-blue-light {
-  background-color: $primary-2;
+    background-color: $primary-2;
 }
 
 .bg-orange-light {
-  background-color: $accent-2;
+    background-color: $accent-2;
 }
 
 .bg-orange {
-  background-color: $accent;
+    background-color: $accent;
 }
 .bg-gray {
-  background-color: #eee;
+    background-color: #eee;
 }

@@ -8,82 +8,79 @@ import { Point } from 'src/app/d3/interfaces';
 import { GroupedBoxplot } from 'src/app/d3/grouped-boxplot';
 
 @Component({
-  standalone: false,
-  selector: 'app-gtex-boxplot',
-  templateUrl: './gtex-boxplot.component.html',
-  styleUrls: ['./gtex-boxplot.component.scss']
+    standalone: false,
+    selector: 'app-gtex-boxplot',
+    templateUrl: './gtex-boxplot.component.html',
+    styleUrls: ['./gtex-boxplot.component.scss'],
 })
 export class GtexBoxplotComponent implements OnInit {
-  @Input() gene: HumanGene;
-  points: Point[];
+    @Input() gene: HumanGene;
+    points: Point[];
 
-  boxplot: GroupedBoxplot;
-  width = 1024;
-  height = 480;
+    boxplot: GroupedBoxplot;
+    width = 1024;
+    height = 480;
 
-  organs;
-  organLabelColors;
-  organVisibility = [];
+    organs;
+    organLabelColors;
+    organVisibility = [];
 
-  constructor(
-    private api: ApiService
-  ) { }
+    constructor(private api: ApiService) {}
 
-  ngOnInit() {
-    this.api.getGtexByEntrezId(this.gene.entrezId)
-      .pipe(take(1))
-      .subscribe(res => {
-        this.points = this.parseData(res['data']);
-        this.boxplot = new GroupedBoxplot(this.points,
-          {
-            width: this.width, height: this.height,
-            x: { label: 'Tissues', },
-            y: { label: 'TPM' }
-          }
-        );
+    ngOnInit() {
+        this.api
+            .getGtexByEntrezId(this.gene.entrezId)
+            .pipe(take(1))
+            .subscribe((res) => {
+                this.points = this.parseData(res['data']);
+                this.boxplot = new GroupedBoxplot(this.points, {
+                    width: this.width,
+                    height: this.height,
+                    x: { label: 'Tissues' },
+                    y: { label: 'TPM' },
+                });
 
-        this.organLabelColors = [];
-        this.organVisibility = [];
-        for (const organ of this.organs) {
-          this.organLabelColors.push(this.boxplot.getGroupColor(organ));
-          this.organVisibility.push(true);
-        }
-      });
-  }
-
-  toggleOrgan(organIdx) {
-    this.boxplot.toggleGroup(this.organs[organIdx]);
-    this.organVisibility[organIdx] = !this.organVisibility[organIdx];
-  }
-
-  toggleAll(action: 'show' | 'hide') {
-    const targetVis = action === 'show' ? true : false;
-    for (let i = 0; i < this.organs.length; ++i) {
-      if (this.organVisibility[i] !== targetVis) {
-        this.boxplot.toggleGroup(this.organs[i]);
-        this.organVisibility[i] = targetVis;
-      }
+                this.organLabelColors = [];
+                this.organVisibility = [];
+                for (const organ of this.organs) {
+                    this.organLabelColors.push(this.boxplot.getGroupColor(organ));
+                    this.organVisibility.push(true);
+                }
+            });
     }
-  }
 
-  parseData(data) {
-    const formatted = [];
-
-    const organs = Object.keys(data);
-    this.organs = organs;
-    for (const organName of organs) {
-      const tissues = Object.keys(data[organName]);
-      for (const tissueName of tissues) {
-        for (const value of data[organName][tissueName]) {
-          formatted.push({
-            x: tissueName,
-            y: value,
-            group: organName
-          });
-        }
-      }
+    toggleOrgan(organIdx) {
+        this.boxplot.toggleGroup(this.organs[organIdx]);
+        this.organVisibility[organIdx] = !this.organVisibility[organIdx];
     }
-    return formatted;
-  }
 
+    toggleAll(action: 'show' | 'hide') {
+        const targetVis = action === 'show' ? true : false;
+        for (let i = 0; i < this.organs.length; ++i) {
+            if (this.organVisibility[i] !== targetVis) {
+                this.boxplot.toggleGroup(this.organs[i]);
+                this.organVisibility[i] = targetVis;
+            }
+        }
+    }
+
+    parseData(data) {
+        const formatted = [];
+
+        const organs = Object.keys(data);
+        this.organs = organs;
+        for (const organName of organs) {
+            const tissues = Object.keys(data[organName]);
+            for (const tissueName of tissues) {
+                for (const value of data[organName][tissueName]) {
+                    formatted.push({
+                        x: tissueName,
+                        y: value,
+                        group: organName,
+                    });
+                }
+            }
+        }
+        return formatted;
+    }
 }

@@ -12,37 +12,49 @@
 
 // Material 3 theming - use cyan palette as primary (closest to your brand color)
 html {
-  color-scheme: light;
-  
-  @include mat.theme((
-    color: (
-      primary: mat.$cyan-palette,
-      tertiary: mat.$orange-palette,
-      theme-type: light,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+    color-scheme: light;
+
+    @include mat.theme(
+        (
+            color: (
+                primary: mat.$cyan-palette,
+                tertiary: mat.$orange-palette,
+                theme-type: light,
+            ),
+            typography: Roboto,
+            density: 0,
+        )
+    );
 }
 
 // Dark theme support
 .MARRVEL-dark-theme {
-  color-scheme: dark;
-  
-  a, .link-primary {
-    color: var(--mat-sys-primary);
-    text-decoration: none;
-    cursor: pointer;
-  }
-  a:hover, a:active, .link-primary:hover, .link-primary:active {
-    color: var(--mat-sys-primary-container);
-    text-decoration: underline;
-    cursor: pointer;
-  }
-  .color-primary {
-    color: var(--mat-sys-primary);
-  }
-  body, p, h1, h2, h3, h4, h5 { 
-    color: rgba(255,255,255, 0.4); 
-  }
+    color-scheme: dark;
+
+    a,
+    .link-primary {
+        color: var(--mat-sys-primary);
+        text-decoration: none;
+        cursor: pointer;
+    }
+    a:hover,
+    a:active,
+    .link-primary:hover,
+    .link-primary:active {
+        color: var(--mat-sys-primary-container);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .color-primary {
+        color: var(--mat-sys-primary);
+    }
+    body,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        color: rgba(255, 255, 255, 0.4);
+    }
 }

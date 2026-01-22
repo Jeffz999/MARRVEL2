@@ -1,13 +1,14 @@
-.filter-cell, td.mat-cell {
-  padding-right: 24px;
+.filter-cell,
+td.mat-cell {
+    padding-right: 24px;
 }
 
-@media(max-width: 768px) {
-  td.mat-cell {
-    word-break: break-all;
-  }
+@media (max-width: 768px) {
+    td.mat-cell {
+        word-break: break-all;
+    }
 }
 
 .number {
-  text-align: right;
+    text-align: right;
 }

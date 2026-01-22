@@ -3,23 +3,22 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Geno2mpGeneTableComponent } from './geno2mp-gene-table.component';
 
 describe('Geno2mpGeneTableComponent', () => {
-  let component: Geno2mpGeneTableComponent;
-  let fixture: ComponentFixture<Geno2mpGeneTableComponent>;
+    let component: Geno2mpGeneTableComponent;
+    let fixture: ComponentFixture<Geno2mpGeneTableComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ Geno2mpGeneTableComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [Geno2mpGeneTableComponent],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(Geno2mpGeneTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(Geno2mpGeneTableComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

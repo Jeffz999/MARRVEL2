@@ -14,6 +14,8 @@ module.exports = [
             'build/**',
             'coverage/**',
             '.nyc_output/**',
+            '.DS_Store',
+            'Thumbs.db',
         ],
     },
     {

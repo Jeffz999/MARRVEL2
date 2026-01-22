@@ -7,81 +7,76 @@ import { ApiService } from 'src/app/services/api.service';
 import { Gene } from 'src/app/interfaces/gene';
 
 @Component({
-  standalone: false,
-  selector: 'app-model-gene-search',
-  templateUrl: './model-gene-search.component.html',
-  styleUrls: ['./model-gene-search.component.scss']
+    standalone: false,
+    selector: 'app-model-gene-search',
+    templateUrl: './model-gene-search.component.html',
+    styleUrls: ['./model-gene-search.component.scss'],
 })
 export class ModelGeneSearchComponent implements OnInit {
-  @Output() geneSelected: EventEmitter< Gene > = new EventEmitter();
+    @Output() geneSelected: EventEmitter<Gene> = new EventEmitter();
 
-  taxonId = '7227';
+    taxonId = '7227';
 
-  gene: Gene | null;
-  geneKeyword: string | null;
-  geneInputCtrl = new UntypedFormControl();
-  geneSuggestion = [];
-  @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', { static: true }) matAutocomplete: MatAutocomplete;
+    gene: Gene | null;
+    geneKeyword: string | null;
+    geneInputCtrl = new UntypedFormControl();
+    geneSuggestion = [];
+    @ViewChild('geneInput', { static: true }) geneInput: ElementRef<HTMLInputElement>;
+    @ViewChild('auto', { static: true }) matAutocomplete: MatAutocomplete;
 
-  constructor(private api: ApiService) { }
+    constructor(private api: ApiService) {}
 
-  ngOnInit() {
-  }
+    ngOnInit() {}
 
-  onModelChange() {
-    this.removeGene();
-    this.geneSuggestion = [];
-    this.geneInputCtrl.setValue(null);
-  }
-
-  onGeneInput(e) {
-    this.geneKeyword = e.target.value;
-    if (this.geneKeyword) {
-      this.api.getGenesBySymbolPrefix(+this.taxonId, this.geneKeyword)
-        .subscribe((res) => {
-          this.geneSuggestion = res;
-        });
-    } else {
-      this.geneSuggestion = [];
+    onModelChange() {
+        this.removeGene();
+        this.geneSuggestion = [];
+        this.geneInputCtrl.setValue(null);
     }
-  }
 
-  geneAutocompleteSelected(e: MatAutocompleteSelectedEvent) {
-    const idx = e.option.value;
-    this.gene = this.geneSuggestion[idx];
-    this.geneSelected.emit(this.gene);
-    this.geneKeyword = '';
-    this.geneInput.nativeElement.value = '';
-    this.geneInputCtrl.setValue(null);
-  }
+    onGeneInput(e) {
+        this.geneKeyword = e.target.value;
+        if (this.geneKeyword) {
+            this.api.getGenesBySymbolPrefix(+this.taxonId, this.geneKeyword).subscribe((res) => {
+                this.geneSuggestion = res;
+            });
+        } else {
+            this.geneSuggestion = [];
+        }
+    }
 
-  addGene(e: MatChipInputEvent) {
-    if (!this.matAutocomplete.isOpen) {
-      const input = e.input;
-      const value = e.value;
-
-      if (value) {
-        this.gene = this.geneSuggestion[value];
-
+    geneAutocompleteSelected(e: MatAutocompleteSelectedEvent) {
+        const idx = e.option.value;
+        this.gene = this.geneSuggestion[idx];
         this.geneSelected.emit(this.gene);
-      }
-
-      if (input) {
-        input.value = '';
-      }
-      this.geneKeyword = '';
-      this.geneInputCtrl.setValue(null);
-      this.geneSuggestion = [];
+        this.geneKeyword = '';
+        this.geneInput.nativeElement.value = '';
+        this.geneInputCtrl.setValue(null);
     }
-  }
-  removeGene() {
-    this.gene = null;
-    this.geneKeyword = '';
 
-    this.geneSelected.emit(null);
-  }
+    addGene(e: MatChipInputEvent) {
+        if (!this.matAutocomplete.isOpen) {
+            const input = e.input;
+            const value = e.value;
 
+            if (value) {
+                this.gene = this.geneSuggestion[value];
 
+                this.geneSelected.emit(this.gene);
+            }
 
+            if (input) {
+                input.value = '';
+            }
+            this.geneKeyword = '';
+            this.geneInputCtrl.setValue(null);
+            this.geneSuggestion = [];
+        }
+    }
+    removeGene() {
+        this.gene = null;
+        this.geneKeyword = '';
+
+        this.geneSelected.emit(null);
+    }
 }

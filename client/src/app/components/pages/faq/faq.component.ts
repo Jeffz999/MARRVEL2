@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  standalone: false,
-  selector: 'app-faq',
-  templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.scss']
+    standalone: false,
+    selector: 'app-faq',
+    templateUrl: './faq.component.html',
+    styleUrls: ['./faq.component.scss'],
 })
 export class FaqComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
+    ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  scrollTo(id: string) {
-    window.document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
+    scrollTo(id: string) {
+        window.document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }

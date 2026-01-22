@@ -1,51 +1,85 @@
 <div class="row">
-  <div class="col-12">
-    <h3 class="d-inline-block align-middle">DECIPHER (Control)</h3>
-    <a class="d-inline-block ml-3 align-middle"
-      *ngIf="gene || variant"
-      [attr.href]="gene?
-      'https://www.deciphergenomics.org/gene/' + gene.symbol
-      :
-      'https://www.deciphergenomics.org/search?q=grch37%3A' + variant.chr + '%3A' + variant.pos + '-' + variant.pos
-      "
-      target="_blank"
-    >
-      <button mat-button color="primary">
-        <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
-        More on DECIPHER
-      </button>
-    </a>
-  </div>
+    <div class="col-12">
+        <h3 class="d-inline-block align-middle">DECIPHER (Control)</h3>
+        <a
+            class="d-inline-block ml-3 align-middle"
+            *ngIf="gene || variant"
+            [attr.href]="
+                gene
+                    ? 'https://www.deciphergenomics.org/gene/' + gene.symbol
+                    : 'https://www.deciphergenomics.org/search?q=grch37%3A' +
+                      variant.chr +
+                      '%3A' +
+                      variant.pos +
+                      '-' +
+                      variant.pos
+            "
+            target="_blank"
+        >
+            <button mat-button color="primary">
+                <mat-icon class="mr-1 icon-18px">open_in_new</mat-icon>
+                More on DECIPHER
+            </button>
+        </a>
+    </div>
 </div>
 
 <div class="row" *ngIf="!loading && data && data.length">
-  <div class="col-12 mt-3" *ngIf="!loading && data && delCount != null" [@toggle]>
-    <div class="d-table comment">
-      <div class="d-table-cell align-top comment-icon-wrapper">
-        <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above">insert_comment</mat-icon>
-      </div>
+    <div class="col-12 mt-3" *ngIf="!loading && data && delCount != null" [@toggle]>
+        <div class="d-table comment">
+            <div class="d-table-cell align-top comment-icon-wrapper">
+                <mat-icon matTooltip="MARRVEL's comment" matTooltipPosition="above"
+                    >insert_comment</mat-icon
+                >
+            </div>
 
-      <span class="d-table-cell pl-2" *ngIf="gene">
-        There are <strong>{{ delCount }} control</strong> individuals with <strong>deletion of copy number variants</strong>
-        that contain&nbsp;<strong><span *ngIf="gene">{{ gene.symbol }}</span><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span></strong>.
-        If many control individuals are missing one or more copies of <span *ngIf="gene">{{ gene.symbol }}</span><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span>,
-        then it is unlikely that deletion of <span *ngIf="gene">{{ gene.symbol }}</span><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span> will cause a disease.
-      </span>
+            <span class="d-table-cell pl-2" *ngIf="gene">
+                There are <strong>{{ delCount }} control</strong> individuals with
+                <strong>deletion of copy number variants</strong> that contain&nbsp;<strong
+                    ><span *ngIf="gene">{{ gene.symbol }}</span
+                    ><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span></strong
+                >. If many control individuals are missing one or more copies of
+                <span *ngIf="gene">{{ gene.symbol }}</span
+                ><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span
+                >, then it is unlikely that deletion of <span *ngIf="gene">{{ gene.symbol }}</span
+                ><span *ngIf="!gene">Chr{{ variant.chr }}:{{ variant.pos }}</span> will cause a
+                disease.
+            </span>
+        </div>
     </div>
-  </div>
 
-  <div class="mt-2 col-12">
-    <app-basic-datatable
-      [title]="'Common Copy Number Variants of ' + (!gene ? variant.chr + ':' + variant.pos : gene.symbol) + ' from DECIPER'"
-      [data]="data"
-      [displayedColumns]="['position', 'size', 'freq', 'delObs', 'dupObs', 'sampleSize', 'study']"
-      [columnNames]="['Position', 'Size', 'Frequency', 'Deletion', 'Duplication', 'Sample Size', 'Study']"
-    ></app-basic-datatable>
-  </div>
+    <div class="mt-2 col-12">
+        <app-basic-datatable
+            [title]="
+                'Common Copy Number Variants of ' +
+                (!gene ? variant.chr + ':' + variant.pos : gene.symbol) +
+                ' from DECIPER'
+            "
+            [data]="data"
+            [displayedColumns]="[
+                'position',
+                'size',
+                'freq',
+                'delObs',
+                'dupObs',
+                'sampleSize',
+                'study',
+            ]"
+            [columnNames]="[
+                'Position',
+                'Size',
+                'Frequency',
+                'Deletion',
+                'Duplication',
+                'Sample Size',
+                'Study',
+            ]"
+        ></app-basic-datatable>
+    </div>
 </div>
 
 <div class="row mt-3" *ngIf="!loading && (!data || data.length == 0)">
-  <div class="col-12">
-    <p class="text-muted my-0">There were no matches found</p>
-  </div>
+    <div class="col-12">
+        <p class="text-muted my-0">There were no matches found</p>
+    </div>
 </div>
