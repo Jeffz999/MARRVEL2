@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Animations } from 'src/app/animations';
 import { Variant } from 'src/app/interfaces/variant';
 import { ApiService } from 'src/app/services/api.service';
+import { NgIf, NgFor } from '@angular/common';
 
 interface TransVarResultCoord {
 	annot: string;
@@ -26,11 +27,11 @@ interface TransVarForwardAnnotResult {
 }
 
 @Component({
-	standalone: false,
-	selector: 'app-forward-annotation',
-	templateUrl: './forward-annotation.component.html',
-	styleUrls: ['./forward-annotation.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-forward-annotation',
+    templateUrl: './forward-annotation.component.html',
+    styleUrls: ['./forward-annotation.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [NgIf, NgFor],
 })
 export class ForwardAnnotationComponent implements OnInit {
 	@Input() variant: Variant;

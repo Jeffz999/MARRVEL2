@@ -2,12 +2,21 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
+import { NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { GnomADGeneVisualComponent } from './gnom-ad-gene-visual/gnom-ad-gene-visual.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-gnom-ad-gene',
-	templateUrl: './gnom-ad-gene.component.html',
-	styleUrls: ['./gnom-ad-gene.component.scss'],
+    selector: 'app-gnom-ad-gene',
+    templateUrl: './gnom-ad-gene.component.html',
+    styleUrls: ['./gnom-ad-gene.component.scss'],
+    imports: [
+        NgIf,
+        MatIcon,
+        MatTooltip,
+        GnomADGeneVisualComponent,
+    ],
 })
 export class GnomADGeneComponent implements OnInit {
 	@Input() gene: HumanGene;

@@ -1,17 +1,44 @@
 import { Component, OnInit, Input, ViewChild, OnChanges } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 import { HumanGene } from '../../../../../interfaces/gene';
 import { Variant } from '../../../../../interfaces/variant';
 import { ClinVarVarinat } from '../../../../../interfaces/data';
+import { NgIf, NgClass } from '@angular/common';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
+import { MatFormField, MatPrefix, MatInput } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	standalone: false,
-	selector: 'app-clinvar-variants-table',
-	templateUrl: './clinvar-variants-table.component.html',
-	styleUrls: ['./clinvar-variants-table.component.scss'],
+    selector: 'app-clinvar-variants-table',
+    templateUrl: './clinvar-variants-table.component.html',
+    styleUrls: ['./clinvar-variants-table.component.scss'],
+    imports: [
+        NgIf,
+        MatSlideToggle,
+        FormsModule,
+        MatFormField,
+        MatIcon,
+        MatPrefix,
+        MatInput,
+        MatTable,
+        MatSort,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatSortHeader,
+        MatCellDef,
+        MatCell,
+        NgClass,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+    ],
 })
 export class ClinvarVariantsTableComponent implements OnInit, OnChanges {
 	@Input() gene: HumanGene;

@@ -8,8 +8,8 @@ describe('PhenotypesComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [PhenotypesComponent],
-		}).compileComponents();
+    imports: [PhenotypesComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

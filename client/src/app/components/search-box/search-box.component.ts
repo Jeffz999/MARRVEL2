@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UntypedFormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipGrid, MatChipRow, MatChipRemove, MatChipInput } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 import { ApiService } from '../../services/api.service';
@@ -13,11 +13,17 @@ import { SearchService } from '../../services/search.service';
 import { Animations } from 'src/app/animations';
 
 import { Gene, HumanGene } from 'src/app/interfaces/gene';
+import { NgClass, NgIf, NgFor } from '@angular/common';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { MatFormField, MatLabel, MatInput, MatHint, MatError } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
+import { MatOption, MatSelect } from '@angular/material/select';
+import { ModelGeneSearchComponent } from './model-gene-search/model-gene-search.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-	standalone: false,
-	selector: 'app-youtube-dialog',
-	templateUrl: 'youtube-dialog.html',
+    selector: 'app-youtube-dialog',
+    templateUrl: 'youtube-dialog.html',
 })
 export class YoutubeDialogComponent {
 	constructor(
@@ -31,11 +37,35 @@ export class YoutubeDialogComponent {
 }
 
 @Component({
-	standalone: false,
-	selector: 'app-search-box',
-	templateUrl: './search-box.component.html',
-	styleUrls: ['./search-box.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-search-box',
+    templateUrl: './search-box.component.html',
+    styleUrls: ['./search-box.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgClass,
+        MatRadioGroup,
+        FormsModule,
+        MatRadioButton,
+        NgIf,
+        MatFormField,
+        MatLabel,
+        MatChipGrid,
+        MatChipRow,
+        MatChipRemove,
+        MatIcon,
+        MatInput,
+        MatAutocompleteTrigger,
+        MatChipInput,
+        ReactiveFormsModule,
+        MatHint,
+        MatAutocomplete,
+        NgFor,
+        MatOption,
+        ModelGeneSearchComponent,
+        MatSelect,
+        MatError,
+        MatButton,
+    ],
 })
 export class SearchBoxComponent implements OnInit {
 	@Input() compact = false;

@@ -1,15 +1,31 @@
 import { Component, Input, OnChanges, ViewChild, AfterViewInit, SimpleChanges } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 import { Geno2MPResult } from '../../../../../interfaces/data';
+import { NgIf } from '@angular/common';
 
 @Component({
-	standalone: false,
-	selector: 'app-geno2mp-gene-table',
-	templateUrl: './geno2mp-gene-table.component.html',
-	styleUrls: ['./geno2mp-gene-table.component.scss'],
+    selector: 'app-geno2mp-gene-table',
+    templateUrl: './geno2mp-gene-table.component.html',
+    styleUrls: ['./geno2mp-gene-table.component.scss'],
+    imports: [
+        NgIf,
+        MatTable,
+        MatSort,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatSortHeader,
+        MatCellDef,
+        MatCell,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+    ],
 })
 export class Geno2mpGeneTableComponent implements OnChanges, AfterViewInit {
 	@Input() data: any[] | null;

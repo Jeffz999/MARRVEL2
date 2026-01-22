@@ -4,12 +4,21 @@ import { take } from 'rxjs/operators';
 import { ApiService } from '../../../../services/api.service';
 import { Variant } from '../../../../interfaces/variant';
 import { GnomADVariantData } from 'src/app/interfaces/data';
+import { NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { UnitDirective } from '../../../../directives/unit.directive';
 
 @Component({
-	standalone: false,
-	selector: 'app-gnom-ad',
-	templateUrl: './gnom-ad.component.html',
-	styleUrls: ['./gnom-ad.component.scss'],
+    selector: 'app-gnom-ad',
+    templateUrl: './gnom-ad.component.html',
+    styleUrls: ['./gnom-ad.component.scss'],
+    imports: [
+        NgIf,
+        MatIcon,
+        MatTooltip,
+        UnitDirective,
+    ],
 })
 export class GnomADComponent implements OnInit {
 	@Input() variant: Variant;

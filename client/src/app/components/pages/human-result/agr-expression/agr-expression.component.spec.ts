@@ -8,8 +8,8 @@ describe('AgrExpressionComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [AgrExpressionComponent],
-		}).compileComponents();
+    imports: [AgrExpressionComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

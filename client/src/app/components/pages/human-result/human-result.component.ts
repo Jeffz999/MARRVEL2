@@ -10,15 +10,85 @@ import { HumanGene } from '../../../interfaces/gene';
 import { Variant } from '../../../interfaces/variant';
 
 import { Animations } from 'src/app/animations';
-import { MatSelectChange } from '@angular/material/select';
+import { MatSelectChange, MatSelect, MatOption } from '@angular/material/select';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { MatFormField, MatLabel } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { ForwardAnnotationComponent } from './forward-annotation/forward-annotation.component';
+import { OmimComponent } from './omim/omim.component';
+import { DbnsfpComponent } from './dbnsfp/dbnsfp.component';
+import { ClinvarComponent } from './clinvar/clinvar.component';
+import { Geno2mpComponent } from './geno2mp/geno2mp.component';
+import { DecipherDiseaseComponent } from './decipher/decipher-disease/decipher-disease.component';
+import { MatDivider } from '@angular/material/divider';
+import { GnomADComponent } from './gnom-ad/gnom-ad.component';
+import { GnomADGeneComponent } from './gnom-ad-gene/gnom-ad-gene.component';
+import { DgvComponent } from './dgv/dgv.component';
+import { DECIPHERComponent } from './decipher/decipher.component';
+import { OrthologsComponent } from './orthologs/orthologs.component';
+import { GtexBoxplotComponent } from './gtex-boxplot/gtex-boxplot.component';
+import { AgrExpressionComponent } from './agr-expression/agr-expression.component';
+import { PhenotypesComponent } from './phenotypes/phenotypes.component';
+import { GeneOntologyComponent } from './gene-ontology/gene-ontology.component';
+import { PrimateComponent } from './primate/primate.component';
+import { SmartProteinDomainComponent } from './smart-protein-domain/smart-protein-domain.component';
+import { DioptAlignmentComponent } from './diopt-alignment/diopt-alignment.component';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { PpiComponent } from './ppi/ppi.component';
+import { PdbeComponent } from './pdbe/pdbe.component';
+import { HumanProteinStructureComponent } from './human-protein-structure/human-protein-structure.component';
+import { PharosComponent } from './pharos/pharos.component';
+import { ModelmatcherComponent } from './modelmatcher/modelmatcher.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { ScrollTopButtonComponent } from '../../scroll-top-button/scroll-top-button.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-human-result',
-	templateUrl: './human-result.component.html',
-	styleUrls: ['./human-result.component.scss'],
-	animations: [Animations.fadeInOut, Animations.toggleInOut],
+    selector: 'app-human-result',
+    templateUrl: './human-result.component.html',
+    styleUrls: ['./human-result.component.scss'],
+    animations: [Animations.fadeInOut, Animations.toggleInOut],
+    imports: [
+        NgIf,
+        NgClass,
+        NavbarComponent,
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        NgFor,
+        MatOption,
+        MatButton,
+        MatIcon,
+        ForwardAnnotationComponent,
+        OmimComponent,
+        DbnsfpComponent,
+        ClinvarComponent,
+        Geno2mpComponent,
+        DecipherDiseaseComponent,
+        MatDivider,
+        GnomADComponent,
+        GnomADGeneComponent,
+        DgvComponent,
+        DECIPHERComponent,
+        OrthologsComponent,
+        GtexBoxplotComponent,
+        AgrExpressionComponent,
+        PhenotypesComponent,
+        GeneOntologyComponent,
+        PrimateComponent,
+        SmartProteinDomainComponent,
+        DioptAlignmentComponent,
+        MatProgressBar,
+        PpiComponent,
+        PdbeComponent,
+        HumanProteinStructureComponent,
+        PharosComponent,
+        ModelmatcherComponent,
+        SidenavComponent,
+        ScrollTopButtonComponent,
+    ],
 })
 export class HumanResultComponent implements OnInit, AfterViewInit {
 	geneLoading = true;

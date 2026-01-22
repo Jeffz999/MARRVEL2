@@ -8,8 +8,8 @@ describe('ForwardAnnotationComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [ForwardAnnotationComponent],
-		}).compileComponents();
+    imports: [ForwardAnnotationComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

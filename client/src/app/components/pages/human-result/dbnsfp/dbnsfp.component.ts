@@ -6,13 +6,23 @@ import { ApiService } from '../../../../services/api.service';
 import { DbNSFPData, DBNSFP_METHOD_TO_INFO as METHOD_TO_INFO } from 'src/app/interfaces/data';
 import { Animations } from 'src/app/animations';
 import { DBNSFP_SCORES_CONFIG, ScoreDisplayConfig } from './dbnsfp-scores-config';
+import { NgIf, NgFor } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { RankscoreVisualComponent } from './rankscore-visual/rankscore-visual.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-dbnsfp',
-	templateUrl: './dbnsfp.component.html',
-	styleUrls: ['./dbnsfp.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-dbnsfp',
+    templateUrl: './dbnsfp.component.html',
+    styleUrls: ['./dbnsfp.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgIf,
+        MatIcon,
+        MatTooltip,
+        NgFor,
+        RankscoreVisualComponent,
+    ],
 })
 export class DbnsfpComponent implements OnInit {
 	@Input() variant: Variant;

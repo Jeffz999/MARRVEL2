@@ -5,13 +5,32 @@ import { take } from 'rxjs/operators';
 import { ApiService } from 'src/app/services/api.service';
 import { Gene } from './../../../../interfaces/gene';
 import { Animations } from './../../../../animations';
+import { NgIf, NgFor } from '@angular/common';
+import { ProteinDomainComponent } from './protein-domain/protein-domain.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatButton } from '@angular/material/button';
+import { MatFormField, MatInput } from '@angular/material/input';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-	standalone: false,
-	selector: 'app-diopt-alignment',
-	templateUrl: './diopt-alignment.component.html',
-	styleUrls: ['./diopt-alignment.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-diopt-alignment',
+    templateUrl: './diopt-alignment.component.html',
+    styleUrls: ['./diopt-alignment.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgIf,
+        ProteinDomainComponent,
+        MatIcon,
+        MatTooltip,
+        MatButton,
+        MatFormField,
+        MatInput,
+        NgFor,
+        MatSlideToggle,
+        FormsModule,
+    ],
 })
 export class DioptAlignmentComponent implements OnInit {
 	@Input() gene: Gene;

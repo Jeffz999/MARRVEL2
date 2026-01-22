@@ -1,14 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	standalone: false,
-	selector: 'app-model-gene-human-orthologs',
-	templateUrl: './model-gene-human-orthologs.component.html',
-	styleUrls: ['./model-gene-human-orthologs.component.scss'],
+    selector: 'app-model-gene-human-orthologs',
+    templateUrl: './model-gene-human-orthologs.component.html',
+    styleUrls: ['./model-gene-human-orthologs.component.scss'],
+    imports: [
+        NavbarComponent,
+        NgIf,
+        RouterLink,
+        MatTooltip,
+        NgFor,
+        MatIcon,
+        NgClass,
+    ],
 })
 export class ModelGeneHumanOrthologsComponent implements OnInit {
 	entrezId: number | null;

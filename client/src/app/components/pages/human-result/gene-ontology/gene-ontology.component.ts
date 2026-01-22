@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 import { Animations } from '../../../../animations';
 
@@ -9,6 +9,9 @@ import { HumanGene } from '../../../../interfaces/gene';
 import { AGR_SLIM_IDS, AGR_SLIM_ID_TO_NAME } from './agrSlim';
 import { EXP_EVICODES, EVICODE_TO_NAME } from './evidence-code';
 import { TAXONID_TO_INFO } from '../../../../data/model-organisms';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 const TAXONID_TO_NAME = {
 	10090: 'mouse',
@@ -27,11 +30,30 @@ const NAMESPACE_TO_GOID = {
 };
 
 @Component({
-	standalone: false,
-	selector: 'app-gene-ontology',
-	templateUrl: './gene-ontology.component.html',
-	styleUrls: ['./gene-ontology.component.scss'],
-	animations: [Animations.toggle],
+    selector: 'app-gene-ontology',
+    templateUrl: './gene-ontology.component.html',
+    styleUrls: ['./gene-ontology.component.scss'],
+    animations: [Animations.toggle],
+    imports: [
+        MatSlideToggle,
+        NgIf,
+        MatTooltip,
+        NgFor,
+        NgClass,
+        MatTable,
+        MatSort,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatSortHeader,
+        MatCellDef,
+        MatCell,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+    ],
 })
 export class GeneOntologyComponent implements OnInit, AfterViewInit {
 	@Input() gene: HumanGene;

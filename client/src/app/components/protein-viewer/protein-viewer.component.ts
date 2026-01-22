@@ -11,11 +11,10 @@ import {
 import * as molstar from 'molstar/build/viewer/molstar';
 
 @Component({
-	standalone: false,
-	selector: 'app-protein-viewer',
-	templateUrl: './protein-viewer.component.html',
-	styleUrls: ['./protein-viewer.component.scss'],
-	encapsulation: ViewEncapsulation.None,
+    selector: 'app-protein-viewer',
+    templateUrl: './protein-viewer.component.html',
+    styleUrls: ['./protein-viewer.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProteinViewerComponent implements OnInit, AfterViewInit {
 	@Input() uniprotId: string;

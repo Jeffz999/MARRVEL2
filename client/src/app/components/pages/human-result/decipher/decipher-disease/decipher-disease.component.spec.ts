@@ -8,8 +8,8 @@ describe('DecipherDiseaseComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [DecipherDiseaseComponent],
-		}).compileComponents();
+    imports: [DecipherDiseaseComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

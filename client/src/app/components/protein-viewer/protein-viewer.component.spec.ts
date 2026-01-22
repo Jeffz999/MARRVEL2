@@ -8,8 +8,8 @@ describe('ProteinViewerComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [ProteinViewerComponent],
-		}).compileComponents();
+    imports: [ProteinViewerComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

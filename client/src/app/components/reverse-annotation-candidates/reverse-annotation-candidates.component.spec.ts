@@ -8,8 +8,8 @@ describe('ReverseAnnotationCandidatesComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [ReverseAnnotationCandidatesComponent],
-		}).compileComponents();
+    imports: [ReverseAnnotationCandidatesComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

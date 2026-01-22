@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { MatSliderChange } from '@angular/material/slider';
+import { MatSliderChange, MatSlider, MatSliderThumb } from '@angular/material/slider';
 
 import cytoscape from 'cytoscape';
 import dagre from 'cytoscape-dagre';
@@ -9,53 +9,59 @@ cytoscape.use(dagre);
 import { HumanGene } from '../../../../interfaces/gene';
 import { NODE_CONFIG, EDGE_CONFIG } from './config';
 import { Animations } from '../../../../animations';
+import { MatIconButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
+import { FormsModule } from '@angular/forms';
+import { NgStyle, NgClass, NgFor } from '@angular/common';
 
 const PRIMARY_COLOR = '#7bd0cc';
 const WARN_COLOR = '#e5893e';
 
 @Component({
-	standalone: false,
-	selector: 'app-ppi',
-	templateUrl: './ppi.component.html',
-	styleUrls: ['./ppi.component.scss'],
-	animations: [
-		trigger('slideInOut', [
-			state(
-				'true',
-				style({
-					width: '300px',
-				}),
-			),
-			state(
-				'false',
-				style({
-					overflow: 'hidden',
-					width: '0px',
-					padding: 0,
-				}),
-			),
-			transition('in => out', animate('400ms ease-in-out')),
-			transition('out => in', animate('400ms ease-in-out')),
-		]),
-		trigger('slideVInOut', [
-			state(
-				'true',
-				style({
-					height: 'auto',
-				}),
-			),
-			state(
-				'false',
-				style({
-					overflow: 'hidden',
-					height: '0px',
-					padding: 0,
-				}),
-			),
-			transition('in => out', animate('400ms ease-in-out')),
-			transition('out => in', animate('400ms ease-in-out')),
-		]),
-	],
+    selector: 'app-ppi',
+    templateUrl: './ppi.component.html',
+    styleUrls: ['./ppi.component.scss'],
+    animations: [
+        trigger('slideInOut', [
+            state('true', style({
+                width: '300px',
+            })),
+            state('false', style({
+                overflow: 'hidden',
+                width: '0px',
+                padding: 0,
+            })),
+            transition('in => out', animate('400ms ease-in-out')),
+            transition('out => in', animate('400ms ease-in-out')),
+        ]),
+        trigger('slideVInOut', [
+            state('true', style({
+                height: 'auto',
+            })),
+            state('false', style({
+                overflow: 'hidden',
+                height: '0px',
+                padding: 0,
+            })),
+            transition('in => out', animate('400ms ease-in-out')),
+            transition('out => in', animate('400ms ease-in-out')),
+        ]),
+    ],
+    imports: [
+        MatIconButton,
+        MatTooltip,
+        MatIcon,
+        MatMenuTrigger,
+        MatMenu,
+        FormsModule,
+        MatSlider,
+        MatSliderThumb,
+        NgStyle,
+        NgClass,
+        NgFor,
+    ],
 })
 export class PpiComponent implements OnInit, AfterViewInit {
 	@Input() gene: HumanGene;

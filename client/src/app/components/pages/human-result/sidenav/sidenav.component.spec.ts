@@ -8,8 +8,8 @@ describe('SidenavComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [SidenavComponent],
-		}).compileComponents();
+    imports: [SidenavComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

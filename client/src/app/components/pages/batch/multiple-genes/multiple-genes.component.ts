@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { Observable, forkJoin } from 'rxjs';
 import { take, first } from 'rxjs/operators';
 
@@ -8,13 +8,34 @@ import { ApiService } from 'src/app/services/api.service';
 
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../../../navbar/navbar.component';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
+import { MultipleGeneBoxComponent } from '../../../multiple-gene-box/multiple-gene-box.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-	standalone: false,
-	selector: 'app-multiple-genes',
-	templateUrl: './multiple-genes.component.html',
-	styleUrls: ['./multiple-genes.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-multiple-genes',
+    templateUrl: './multiple-genes.component.html',
+    styleUrls: ['./multiple-genes.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NavbarComponent,
+        NgIf,
+        MatRadioGroup,
+        FormsModule,
+        MatRadioButton,
+        MultipleGeneBoxComponent,
+        MatIcon,
+        MatProgressBar,
+        MatPaginator,
+        NgClass,
+        MatTooltip,
+        NgFor,
+    ],
 })
 export class MultipleGenesComponent implements OnInit {
 	genes;

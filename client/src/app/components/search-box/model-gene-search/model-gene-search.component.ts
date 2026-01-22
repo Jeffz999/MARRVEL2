@@ -1,16 +1,38 @@
 import { Component, OnInit, Output, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
-import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MatChipInputEvent, MatChipGrid, MatChipRow, MatChipRemove, MatChipInput } from '@angular/material/chips';
 
 import { ApiService } from 'src/app/services/api.service';
 import { Gene } from 'src/app/interfaces/gene';
+import { MatFormField, MatLabel, MatInput, MatHint } from '@angular/material/input';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { NgIf, NgFor } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	standalone: false,
-	selector: 'app-model-gene-search',
-	templateUrl: './model-gene-search.component.html',
-	styleUrls: ['./model-gene-search.component.scss'],
+    selector: 'app-model-gene-search',
+    templateUrl: './model-gene-search.component.html',
+    styleUrls: ['./model-gene-search.component.scss'],
+    imports: [
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        FormsModule,
+        MatOption,
+        NgIf,
+        MatChipGrid,
+        MatChipRow,
+        MatChipRemove,
+        MatIcon,
+        MatInput,
+        MatAutocompleteTrigger,
+        MatChipInput,
+        ReactiveFormsModule,
+        MatAutocomplete,
+        NgFor,
+        MatHint,
+    ],
 })
 export class ModelGeneSearchComponent implements OnInit {
 	@Output() geneSelected: EventEmitter<Gene> = new EventEmitter();

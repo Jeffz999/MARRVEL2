@@ -6,12 +6,24 @@ import { ApiService } from 'src/app/services/api.service';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { Point } from 'src/app/d3/interfaces';
 import { GroupedBoxplot } from 'src/app/d3/grouped-boxplot';
+import { NgIf, NgFor, NgStyle, NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatRipple } from '@angular/material/core';
 
 @Component({
-	standalone: false,
-	selector: 'app-gtex-boxplot',
-	templateUrl: './gtex-boxplot.component.html',
-	styleUrls: ['./gtex-boxplot.component.scss'],
+    selector: 'app-gtex-boxplot',
+    templateUrl: './gtex-boxplot.component.html',
+    styleUrls: ['./gtex-boxplot.component.scss'],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatRipple,
+        NgFor,
+        NgStyle,
+        NgClass,
+    ],
 })
 export class GtexBoxplotComponent implements OnInit {
 	@Input() gene: HumanGene;

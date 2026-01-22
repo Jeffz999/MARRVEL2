@@ -4,12 +4,25 @@ import { HumanGene } from 'src/app/interfaces/gene';
 import { DIOPTOrtholog } from 'src/app/interfaces/data';
 
 import { TAXONIDS, TAXONID_TO_INFO } from 'src/app/data/model-organisms';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-	standalone: false,
-	selector: 'app-orthologs',
-	templateUrl: './orthologs.component.html',
-	styleUrls: ['./orthologs.component.scss'],
+    selector: 'app-orthologs',
+    templateUrl: './orthologs.component.html',
+    styleUrls: ['./orthologs.component.scss'],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatSlideToggle,
+        MatTooltip,
+        NgFor,
+        NgClass,
+    ],
 })
 export class OrthologsComponent implements OnInit {
 	@Input() gene: HumanGene;

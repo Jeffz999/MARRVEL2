@@ -6,13 +6,24 @@ import { ApiService } from '../../../../services/api.service';
 import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
 import { Animations } from 'src/app/animations';
+import { NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatable.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-dgv',
-	templateUrl: './dgv.component.html',
-	styleUrls: ['./dgv.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-dgv',
+    templateUrl: './dgv.component.html',
+    styleUrls: ['./dgv.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatTooltip,
+        BasicDatatableComponent,
+    ],
 })
 export class DgvComponent implements OnInit {
 	@Input() variant: Variant;

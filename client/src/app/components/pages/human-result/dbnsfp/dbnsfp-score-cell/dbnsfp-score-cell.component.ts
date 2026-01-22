@@ -1,10 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NgIf, NgClass } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
+import { RankscoreVisualComponent } from '../rankscore-visual/rankscore-visual.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-dbnsfp-score-cell',
-	templateUrl: './dbnsfp-score-cell.component.html',
-	styleUrls: ['./dbnsfp-score-cell.component.scss'],
+    selector: 'app-dbnsfp-score-cell',
+    templateUrl: './dbnsfp-score-cell.component.html',
+    styleUrls: ['./dbnsfp-score-cell.component.scss'],
+    imports: [
+        NgIf,
+        NgClass,
+        MatTooltip,
+        RankscoreVisualComponent,
+    ],
 })
 export class DbnsfpScoreCellComponent implements OnInit {
 	@Input() methodName: string;

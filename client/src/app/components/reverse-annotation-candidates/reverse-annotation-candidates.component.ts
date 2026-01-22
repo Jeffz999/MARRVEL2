@@ -3,12 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from 'src/app/services/api.service';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-	standalone: false,
-	selector: 'app-reverse-annotation-candidates',
-	templateUrl: './reverse-annotation-candidates.component.html',
-	styleUrls: ['./reverse-annotation-candidates.component.scss'],
+    selector: 'app-reverse-annotation-candidates',
+    templateUrl: './reverse-annotation-candidates.component.html',
+    styleUrls: ['./reverse-annotation-candidates.component.scss'],
+    imports: [
+        NavbarComponent,
+        NgIf,
+        NgFor,
+    ],
 })
 export class ReverseAnnotationCandidatesComponent implements OnInit {
 	protein: string;

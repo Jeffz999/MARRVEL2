@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-	standalone: false,
-	selector: 'app-gnom-ad-gene-visual',
-	templateUrl: './gnom-ad-gene-visual.component.html',
-	styleUrls: ['./gnom-ad-gene-visual.component.scss'],
+    selector: 'app-gnom-ad-gene-visual',
+    templateUrl: './gnom-ad-gene-visual.component.html',
+    styleUrls: ['./gnom-ad-gene-visual.component.scss'],
+    imports: [NgIf, NgClass],
 })
 export class GnomADGeneVisualComponent implements OnInit {
 	@Input() oeLower;

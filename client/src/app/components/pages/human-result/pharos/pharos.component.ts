@@ -3,13 +3,31 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HumanGene } from 'src/app/interfaces/gene';
 import { ApiService } from 'src/app/services/api.service';
 import { Animations } from 'src/app/animations';
+import { NgIf, NgFor } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription } from '@angular/material/expansion';
+import { MatTooltip } from '@angular/material/tooltip';
+import { PharosLigandTableComponent } from './pharos-ligand-table/pharos-ligand-table.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-pharos',
-	templateUrl: './pharos.component.html',
-	styleUrls: ['./pharos.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-pharos',
+    templateUrl: './pharos.component.html',
+    styleUrls: ['./pharos.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatAccordion,
+        NgFor,
+        MatTooltip,
+        MatExpansionPanel,
+        MatExpansionPanelHeader,
+        MatExpansionPanelTitle,
+        MatExpansionPanelDescription,
+        PharosLigandTableComponent,
+    ],
 })
 export class PharosComponent implements OnInit {
 	@Input() gene: HumanGene;

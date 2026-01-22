@@ -1,16 +1,34 @@
 import { ApiService } from './../../services/api.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Animations } from 'src/app/animations';
 import { Router } from '@angular/router';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
+import { MatFormField, MatError, MatLabel, MatInput, MatHint } from '@angular/material/input';
+import { NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
-	standalone: false,
-	selector: 'app-vcf-upload-box',
-	templateUrl: './vcf-upload-box.component.html',
-	styleUrls: ['./vcf-upload-box.component.scss'],
-	animations: [Animations.fadeInOut],
+    selector: 'app-vcf-upload-box',
+    templateUrl: './vcf-upload-box.component.html',
+    styleUrls: ['./vcf-upload-box.component.scss'],
+    animations: [Animations.fadeInOut],
+    imports: [
+        MatRadioGroup,
+        FormsModule,
+        MatRadioButton,
+        MatFormField,
+        ReactiveFormsModule,
+        NgIf,
+        MatError,
+        MatLabel,
+        MatInput,
+        MatIcon,
+        MatHint,
+        MatProgressBar,
+    ],
 })
 export class VcfUploadBoxComponent implements OnInit {
 	selectedInputType = 'vcf';

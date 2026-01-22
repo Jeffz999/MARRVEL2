@@ -1,9 +1,6 @@
 import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
 
-@Directive({
-	standalone: false,
-	selector: '[appUnit]',
-})
+@Directive({ selector: '[appUnit]', })
 export class UnitDirective implements OnChanges {
 	@Input() count: number;
 	@Input() unit: string;

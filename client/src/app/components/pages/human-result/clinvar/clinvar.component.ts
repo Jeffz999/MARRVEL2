@@ -7,13 +7,28 @@ import { HumanGene } from '../../../../interfaces/gene';
 import { Variant } from '../../../../interfaces/variant';
 
 import { Animations } from '../../../../animations';
+import { NgIf } from '@angular/common';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { UnitDirective } from '../../../../directives/unit.directive';
+import { ClinvarVariantsTableComponent } from './clinvar-variants-table/clinvar-variants-table.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-clinvar',
-	templateUrl: './clinvar.component.html',
-	styleUrls: ['./clinvar.component.scss'],
-	animations: [Animations.toggle],
+    selector: 'app-clinvar',
+    templateUrl: './clinvar.component.html',
+    styleUrls: ['./clinvar.component.scss'],
+    animations: [Animations.toggle],
+    imports: [
+        NgIf,
+        MatProgressBar,
+        MatButton,
+        MatIcon,
+        MatTooltip,
+        UnitDirective,
+        ClinvarVariantsTableComponent,
+    ],
 })
 export class ClinvarComponent implements OnInit {
 	@Input() gene: HumanGene;

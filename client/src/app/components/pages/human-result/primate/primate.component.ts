@@ -6,13 +6,28 @@ import { Variant } from 'src/app/interfaces/variant';
 import { Animations } from 'src/app/animations';
 
 import { ApiService } from 'src/app/services/api.service';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
+import { MatFormField, MatLabel } from '@angular/material/input';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { BasicDatatableComponent } from '../../../basic-datatable/basic-datatable.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-primate',
-	templateUrl: './primate.component.html',
-	styleUrls: ['./primate.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-primate',
+    templateUrl: './primate.component.html',
+    styleUrls: ['./primate.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        MatTooltip,
+        MatIcon,
+        NgIf,
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        MatOption,
+        BasicDatatableComponent,
+    ],
 })
 export class PrimateComponent implements OnInit {
 	@Input() variant: Variant;

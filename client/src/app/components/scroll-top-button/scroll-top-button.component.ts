@@ -1,10 +1,12 @@
 import { Component, Input, OnChanges } from '@angular/core';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	standalone: false,
-	selector: 'app-scroll-top-button',
-	templateUrl: './scroll-top-button.component.html',
-	styleUrls: ['./scroll-top-button.component.scss'],
+    selector: 'app-scroll-top-button',
+    templateUrl: './scroll-top-button.component.html',
+    styleUrls: ['./scroll-top-button.component.scss'],
+    imports: [MatMiniFabButton, MatIcon],
 })
 export class ScrollTopButtonComponent implements OnChanges {
 	@Input() right = '12px';

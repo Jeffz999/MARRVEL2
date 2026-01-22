@@ -7,13 +7,26 @@ import { take } from 'rxjs/operators';
 import { AGR_EXP_TERMS } from './agr-expression-terms';
 import { Animations } from 'src/app/animations';
 import { TAXONID_TO_INFO } from 'src/app/data/model-organisms';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-	standalone: false,
-	selector: 'app-agr-expression',
-	templateUrl: './agr-expression.component.html',
-	styleUrls: ['./agr-expression.component.scss'],
-	animations: [Animations.toggle],
+    selector: 'app-agr-expression',
+    templateUrl: './agr-expression.component.html',
+    styleUrls: ['./agr-expression.component.scss'],
+    animations: [Animations.toggle],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatSlideToggle,
+        MatTooltip,
+        NgFor,
+        NgClass,
+    ],
 })
 export class AgrExpressionComponent implements OnInit {
 	@Input() gene: HumanGene;

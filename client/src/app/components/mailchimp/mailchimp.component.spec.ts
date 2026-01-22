@@ -8,8 +8,8 @@ describe('MailchimpComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [MailchimpComponent],
-		}).compileComponents();
+    imports: [MailchimpComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

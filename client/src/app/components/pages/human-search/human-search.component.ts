@@ -5,12 +5,18 @@ import { SearchService } from '../../../services/search.service';
 import { GeneService } from '../../../services/gene.service';
 
 import { HumanGene } from '../../../interfaces/gene';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-	standalone: false,
-	selector: 'app-human-search',
-	templateUrl: './human-search.component.html',
-	styleUrls: ['./human-search.component.scss'],
+    selector: 'app-human-search',
+    templateUrl: './human-search.component.html',
+    styleUrls: ['./human-search.component.scss'],
+    imports: [
+        NavbarComponent,
+        NgIf,
+        NgFor,
+    ],
 })
 export class HumanSearchComponent implements OnInit {
 	keyword?: string;

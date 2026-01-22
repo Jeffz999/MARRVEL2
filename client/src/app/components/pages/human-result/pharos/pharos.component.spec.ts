@@ -8,8 +8,8 @@ describe('PharosComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [PharosComponent],
-		}).compileComponents();
+    imports: [PharosComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

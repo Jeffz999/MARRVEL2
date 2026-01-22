@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Observable, forkJoin } from 'rxjs';
@@ -10,13 +10,38 @@ import { Animations } from 'src/app/animations';
 import { ApiService } from 'src/app/services/api.service';
 import { DbNSFPData } from 'src/app/interfaces/data';
 import { of } from 'rxjs';
+import { NavbarComponent } from '../../navbar/navbar.component';
+import { NgIf, NgFor } from '@angular/common';
+import { VcfUploadBoxComponent } from '../../vcf-upload-box/vcf-upload-box.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-	standalone: false,
-	selector: 'app-batch',
-	templateUrl: './batch.component.html',
-	styleUrls: ['./batch.component.scss'],
-	animations: [Animations.toggleInOut, Animations.fadeInOut],
+    selector: 'app-batch',
+    templateUrl: './batch.component.html',
+    styleUrls: ['./batch.component.scss'],
+    animations: [Animations.toggleInOut, Animations.fadeInOut],
+    imports: [
+        NavbarComponent,
+        NgIf,
+        VcfUploadBoxComponent,
+        MatIcon,
+        MatProgressBar,
+        MatPaginator,
+        MatTable,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatCellDef,
+        MatCell,
+        MatTooltip,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        NgFor,
+    ],
 })
 export class BatchComponent implements OnInit {
 	variants;

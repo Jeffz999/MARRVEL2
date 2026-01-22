@@ -1,16 +1,38 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocomplete, MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { ApiService } from '../../services/api.service';
 
 import { MULTIGENE_EXAMPLE } from './multiple-genes-example';
+import { ClickOutsideDirective } from '../../directives/click-outside.directive';
+import { MatFormField, MatLabel, MatInput, MatHint } from '@angular/material/input';
+import { MatChipGrid, MatChipRow, MatChipRemove, MatChipInput } from '@angular/material/chips';
+import { NgFor, NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
-	standalone: false,
-	selector: 'app-multiple-gene-box',
-	templateUrl: './multiple-gene-box.component.html',
-	styleUrls: ['./multiple-gene-box.component.scss'],
+    selector: 'app-multiple-gene-box',
+    templateUrl: './multiple-gene-box.component.html',
+    styleUrls: ['./multiple-gene-box.component.scss'],
+    imports: [
+        ClickOutsideDirective,
+        MatFormField,
+        MatLabel,
+        MatChipGrid,
+        NgFor,
+        MatChipRow,
+        MatChipRemove,
+        MatIcon,
+        MatInput,
+        FormsModule,
+        MatChipInput,
+        ReactiveFormsModule,
+        MatHint,
+        NgClass,
+        MatCheckbox,
+    ],
 })
 export class MultipleGeneBoxComponent implements OnInit {
 	genes: object[] = [];

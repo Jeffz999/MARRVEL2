@@ -1,13 +1,31 @@
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { NgIf } from '@angular/common';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-	standalone: false,
-	selector: 'app-protein-domain',
-	templateUrl: './protein-domain.component.html',
-	styleUrls: ['./protein-domain.component.scss'],
+    selector: 'app-protein-domain',
+    templateUrl: './protein-domain.component.html',
+    styleUrls: ['./protein-domain.component.scss'],
+    imports: [
+        NgIf,
+        MatTable,
+        MatSort,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatSortHeader,
+        MatCellDef,
+        MatCell,
+        MatTooltip,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+    ],
 })
 export class ProteinDomainComponent implements OnInit, AfterViewInit {
 	@Input() data: DomainData[];

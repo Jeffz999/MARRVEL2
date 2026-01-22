@@ -8,8 +8,8 @@ describe('DbnsfpScoreCellComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [DbnsfpScoreCellComponent],
-		}).compileComponents();
+    imports: [DbnsfpScoreCellComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

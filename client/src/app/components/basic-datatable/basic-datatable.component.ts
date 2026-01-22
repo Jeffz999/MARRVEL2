@@ -1,16 +1,46 @@
 import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 import { Animations } from '../../animations';
+import { NgIf, NgFor, NgClass } from '@angular/common';
+import { UnitDirective } from '../../directives/unit.directive';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { FilterInputComponent } from '../filter-input/filter-input.component';
+import { HighlightSearch } from '../../highlight';
 
 @Component({
-	standalone: false,
-	selector: 'app-basic-datatable',
-	templateUrl: './basic-datatable.component.html',
-	styleUrls: ['./basic-datatable.component.scss'],
-	animations: [Animations.slideIn, Animations.fadeInOut],
+    selector: 'app-basic-datatable',
+    templateUrl: './basic-datatable.component.html',
+    styleUrls: ['./basic-datatable.component.scss'],
+    animations: [Animations.slideIn, Animations.fadeInOut],
+    imports: [
+        NgIf,
+        UnitDirective,
+        MatIconButton,
+        MatIcon,
+        MatTooltip,
+        MatTable,
+        MatSort,
+        NgFor,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatSortHeader,
+        NgClass,
+        MatCellDef,
+        MatCell,
+        FilterInputComponent,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+        HighlightSearch,
+    ],
 })
 export class BasicDatatableComponent implements OnInit, OnChanges, AfterViewInit {
 	@Input() data: any[] | null;

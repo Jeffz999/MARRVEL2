@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-	standalone: false,
-	selector: 'app-filter-input',
-	templateUrl: './filter-input.component.html',
-	styleUrls: ['./filter-input.component.scss'],
+    selector: 'app-filter-input',
+    templateUrl: './filter-input.component.html',
+    styleUrls: ['./filter-input.component.scss'],
+    imports: [NgClass, MatIcon],
 })
 export class FilterInputComponent implements OnInit {
 	@Input() placeholder: string;

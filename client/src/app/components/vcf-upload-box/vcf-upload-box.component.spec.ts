@@ -8,8 +8,8 @@ describe('VcfUploadBoxComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [VcfUploadBoxComponent],
-		}).compileComponents();
+    imports: [VcfUploadBoxComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

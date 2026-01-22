@@ -10,13 +10,26 @@ import { PhenotypePopulated } from 'src/app/interfaces/data';
 
 import { CATEGORIES } from 'src/app/category';
 import { Animations } from 'src/app/animations';
+import { NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { Geno2mpPhenotypePictogramComponent } from '../../geno2mp/geno2mp-phenotype-pictogram/geno2mp-phenotype-pictogram.component';
+import { BasicDatatableComponent } from '../../../../basic-datatable/basic-datatable.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-decipher-disease',
-	templateUrl: './decipher-disease.component.html',
-	styleUrls: ['./decipher-disease.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-decipher-disease',
+    templateUrl: './decipher-disease.component.html',
+    styleUrls: ['./decipher-disease.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatSlideToggle,
+        Geno2mpPhenotypePictogramComponent,
+        BasicDatatableComponent,
+    ],
 })
 export class DecipherDiseaseComponent implements OnInit {
 	@Input() gene: HumanGene;

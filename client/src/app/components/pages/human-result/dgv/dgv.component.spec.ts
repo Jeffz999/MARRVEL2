@@ -8,8 +8,8 @@ describe('DgvComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [DgvComponent],
-		}).compileComponents();
+    imports: [DgvComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

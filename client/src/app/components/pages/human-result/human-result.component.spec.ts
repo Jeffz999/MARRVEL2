@@ -8,8 +8,8 @@ describe('SearchComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [HumanResultComponent],
-		}).compileComponents();
+    imports: [HumanResultComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

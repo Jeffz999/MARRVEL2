@@ -1,19 +1,38 @@
 import { Component, Input, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
 
 import { Animations } from '../../../../../animations';
 
 import { HPO_BROAD_TO_CAT } from './../../../../../category';
+import { Geno2mpPhenotypePictogramComponent } from '../geno2mp-phenotype-pictogram/geno2mp-phenotype-pictogram.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-	standalone: false,
-	selector: 'app-geno2mp-variant-table',
-	templateUrl: './geno2mp-variant-table.component.html',
-	styleUrls: ['./geno2mp-variant-table.component.scss'],
-	animations: [Animations.slideIn],
+    selector: 'app-geno2mp-variant-table',
+    templateUrl: './geno2mp-variant-table.component.html',
+    styleUrls: ['./geno2mp-variant-table.component.scss'],
+    animations: [Animations.slideIn],
+    imports: [
+        MatSlideToggle,
+        Geno2mpPhenotypePictogramComponent,
+        NgIf,
+        MatTable,
+        MatSort,
+        MatColumnDef,
+        MatHeaderCellDef,
+        MatHeaderCell,
+        MatSortHeader,
+        MatCellDef,
+        MatCell,
+        MatHeaderRowDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatRow,
+        MatPaginator,
+    ],
 })
 export class Geno2mpVariantTableComponent implements OnChanges, AfterViewInit {
 	@Input() data: any[] | null;

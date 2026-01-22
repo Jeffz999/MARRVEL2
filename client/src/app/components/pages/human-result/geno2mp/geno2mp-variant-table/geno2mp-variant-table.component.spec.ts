@@ -8,8 +8,8 @@ describe('Geno2mpVariantTableComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [Geno2mpVariantTableComponent],
-		}).compileComponents();
+    imports: [Geno2mpVariantTableComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

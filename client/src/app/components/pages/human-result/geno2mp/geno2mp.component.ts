@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges, OnInit } from '@angular/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange, MatSlideToggle } from '@angular/material/slide-toggle';
 import { take } from 'rxjs/operators';
 
 import { ApiService } from '../../../../services/api.service';
@@ -11,13 +11,34 @@ import { Geno2MPResult } from '../../../../interfaces/data';
 import { Animations } from './../../../../animations';
 import { FUNCANNO_TO_CAT_NUM, CAT_NUM_TO_CAT_NAME } from './categories';
 import { HPO_BROAD_TO_CAT } from '../../../../category';
+import { NgIf, NgFor } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatFormField, MatLabel } from '@angular/material/input';
+import { MatSelect, MatOption } from '@angular/material/select';
+import { MatTooltip } from '@angular/material/tooltip';
+import { Geno2mpGeneTableComponent } from './geno2mp-gene-table/geno2mp-gene-table.component';
+import { Geno2mpVariantTableComponent } from './geno2mp-variant-table/geno2mp-variant-table.component';
 
 @Component({
-	standalone: false,
-	selector: 'app-geno2mp',
-	templateUrl: './geno2mp.component.html',
-	styleUrls: ['./geno2mp.component.scss'],
-	animations: [Animations.toggleInOut],
+    selector: 'app-geno2mp',
+    templateUrl: './geno2mp.component.html',
+    styleUrls: ['./geno2mp.component.scss'],
+    animations: [Animations.toggleInOut],
+    imports: [
+        NgIf,
+        MatButton,
+        MatIcon,
+        MatFormField,
+        MatLabel,
+        MatSelect,
+        MatOption,
+        NgFor,
+        MatSlideToggle,
+        MatTooltip,
+        Geno2mpGeneTableComponent,
+        Geno2mpVariantTableComponent,
+    ],
 })
 export class Geno2mpComponent implements OnInit {
 	@Input() variant: Variant | null;

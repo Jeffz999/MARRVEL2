@@ -8,8 +8,8 @@ describe('GtexBoxplotComponent', () => {
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [GtexBoxplotComponent],
-		}).compileComponents();
+    imports: [GtexBoxplotComponent],
+}).compileComponents();
 	}));
 
 	beforeEach(() => {

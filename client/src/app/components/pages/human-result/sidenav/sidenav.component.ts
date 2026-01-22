@@ -1,11 +1,20 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgClass, NgIf } from '@angular/common';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
-	standalone: false,
-	selector: 'app-sidenav',
-	templateUrl: './sidenav.component.html',
-	styleUrls: ['./sidenav.component.scss'],
+    selector: 'app-sidenav',
+    templateUrl: './sidenav.component.html',
+    styleUrls: ['./sidenav.component.scss'],
+    imports: [
+        MatIconButton,
+        MatIcon,
+        NgClass,
+        NgIf,
+        MatTooltip,
+    ],
 })
 export class SidenavComponent implements OnChanges {
 	@Input() gene: object | null;
