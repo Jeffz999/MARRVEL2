@@ -1,4 +1,4 @@
-@import '../styles/variables';
+@use '../styles/variables';
 
 .ribbon,
 .ribbon-shrink {
@@ -195,7 +195,7 @@
 			background-color: #f3f3f3;
 			border-radius: 2px;
 			&.bg-blue {
-				background-color: $primary !important;
+				background-color: variables.$primary !important;
 			}
 			&.bg-gray {
 				background-color: #aaa !important;
