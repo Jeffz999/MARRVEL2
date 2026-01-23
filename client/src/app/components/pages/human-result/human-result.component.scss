@@ -1,7 +1,6 @@
-@use '../../../../../node_modules/bootstrap/scss/functions';
-@use '../../../../../node_modules/bootstrap/scss/variables';
-@use '../../../../../node_modules/bootstrap/scss/mixins';
-@use "bootstrap/scss/mixins/breakpoints";
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins/breakpoints';
 
 .result-page-wrapper {
 	width: 100vw;
@@ -46,10 +45,10 @@ h2 {
 }
 .label {
 	font-weight: 500;
-	uuuuuumargin-right: 0.5em;
+	margin-right: 0.5em;
 }
 
-@include breakpoints.media-breakpoint-down(sm) {
+@include media-breakpoint-down(sm) {
 	.sidenav,
 	.mat-sidenav {
 		width: 0px !important;
