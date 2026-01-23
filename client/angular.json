@@ -15,22 +15,24 @@
 			},
 			"architect": {
 				"build": {
-					"builder": "@angular-devkit/build-angular:browser",
+					"builder": "@angular-devkit/build-angular:application",
 					"options": {
 						"outputPath": "dist/MARRVEL",
 						"index": "src/index.html",
-						"main": "src/main.ts",
-						"polyfills": "src/polyfills.ts",
+						"browser": "src/main.ts",
+						"polyfills": ["src/polyfills.ts"],
 						"tsConfig": "src/tsconfig.app.json",
 						"assets": ["src/favicon.ico", "src/assets"],
 						"styles": ["src/styles.scss", "node_modules/molstar/build/viewer/molstar.css"],
 						"scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
 						"stylePreprocessorOptions": {
-							"includePaths": ["node_modules"]
+							"includePaths": ["node_modules", "."],
+							"sass": {
+								"silenceDeprecations": ["import", "global-builtin"]
+							}
 						},
-						"vendorChunk": true,
+						"allowedCommonJsDependencies": ["cytoscape-dagre", "molstar"],
 						"extractLicenses": false,
-						"buildOptimizer": false,
 						"sourceMap": true,
 						"optimization": false,
 						"namedChunks": true
@@ -62,8 +64,6 @@
 							"sourceMap": false,
 							"namedChunks": false,
 							"extractLicenses": true,
-							"vendorChunk": false,
-							"buildOptimizer": true,
 							"budgets": [
 								{
 									"type": "initial",
